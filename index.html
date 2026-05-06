@@ -416,6 +416,7 @@
   .accordion.open { border-color: #c7d2fe; box-shadow: 0 2px 12px rgba(75,63,190,0.08); }
   .accordion.acc-google.open { border-color: #fde68a; box-shadow: 0 2px 12px rgba(66,133,244,0.08); }
   .accordion.acc-dns.open    { border-color: #d1d5db; }
+  .accordion.acc-net.open    { border-color: #e9d5ff; box-shadow: 0 2px 12px rgba(139,92,246,0.08); }
   .accordion.acc-health.open { border-color: #6ee7b7; box-shadow: 0 2px 12px rgba(16,185,129,0.08); }
 
   .accordion-hdr {
@@ -433,6 +434,7 @@
   .accordion-hdr:hover { background: #fafbff; }
   .accordion.open .accordion-hdr { background: #fafbff; }
   .accordion.acc-google.open .accordion-hdr { background: #fffdf5; }
+  .accordion.acc-net.open    .accordion-hdr { background: #fdf4ff; }
   .accordion.acc-health.open .accordion-hdr { background: #f9fffe; }
 
   .accordion-hdr-left {
@@ -459,6 +461,7 @@
   }
   .accordion.acc-google .acc-badge { background: #fef3c7; color: #b45309; }
   .accordion.acc-dns    .acc-badge { background: #f3f4f6; color: var(--muted); }
+  .accordion.acc-net    .acc-badge { background: #f3e8ff; color: #7c3aed; }
   .accordion.acc-health .acc-badge { background: #dcfce7; color: #15803d; }
 
   .acc-chevron {
@@ -469,6 +472,7 @@
   }
   .accordion.open .acc-chevron { transform: rotate(180deg); color: var(--blue); }
   .accordion.acc-google.open .acc-chevron { color: var(--google); }
+  .accordion.acc-net.open    .acc-chevron { color: #7c3aed; }
   .accordion.acc-health.open  .acc-chevron { color: #10b981; }
 
   .accordion-body {
@@ -481,6 +485,7 @@
   }
   .accordion.open .accordion-body { display: flex; }
   .accordion.acc-google.open .accordion-body { border-top-color: #fde68a; }
+  .accordion.acc-net.open    .accordion-body { border-top-color: #e9d5ff; }
   .accordion.acc-health.open .accordion-body { border-top-color: #a7f3d0; }
 
   /* ── Data rows ── */
@@ -660,6 +665,7 @@
         <div class="p-step" id="step-health"><span class="p-step-icon">🛡️</span><span>Sécurité domaine…</span></div>
         <div class="p-step" id="step-others"><span class="p-step-icon">🔍</span><span>Autres tenants…</span></div>
         <div class="p-step" id="step-dup">   <span class="p-step-icon">⚠️</span><span>Doublon MSA…</span></div>
+        <div class="p-step" id="step-net">   <span class="p-step-icon">🏢</span><span>Hébergeur domaine…</span></div>
       </div>
 
       <div class="error-box" id="errorBox"></div>
@@ -710,6 +716,7 @@
       health: { active:'Vérification DKIM/DMARC…', done:'Sécurité analysée ✓', fail:'Sécurité — Partiel' },
       others: { active:'Détection services…', done:'Autres services ✓', fail:'Services — Partiel' },
       dup:    { active:'Vérification doublon MSA…', done:'Doublon vérifié ✓', fail:'Doublon — Non vérifié' },
+      net:    { active:'Interrogation RDAP/Whois…', done:'Hébergeur identifié ✓', fail:'Hébergeur — Non trouvé' },
     };
     const key = id.replace('step-', '');
     if (map[key] && map[key][state]) el.querySelector('span:last-child').textContent = map[key][state];
@@ -839,7 +846,82 @@
     return t;
   }
 
-  /* ─── Domaines Microsoft grand public (MSA) ─── */
+  /* ─── Registrar / Hébergeur domaine ─── */
+  async function checkRegistrar(domain) {
+    // Extract TLD+1 for RDAP (e.g. sub.example.com -> example.com)
+    const parts = domain.split('.');
+    const apex = parts.length >= 2 ? parts.slice(-2).join('.') : domain;
+
+    const result = { registrar: null, nameservers: [], createdDate: null, expiresDate: null, updatedDate: null, status: [], registrantOrg: null, rdapUrl: null };
+
+    // 1. Try RDAP via IANA bootstrap
+    try {
+      const bootstrap = await fetchJson(`https://data.iana.org/rdap/dns.json`);
+      if (bootstrap?.services) {
+        const tld = apex.split('.').pop().toLowerCase();
+        let rdapBase = null;
+        for (const [tlds, urls] of bootstrap.services) {
+          if (tlds.includes(tld) && urls.length > 0) { rdapBase = urls[0]; break; }
+        }
+        if (rdapBase) {
+          const url = `${rdapBase.replace(/\/$/, '')}/domain/${apex}`;
+          result.rdapUrl = url;
+          const data = await fetchJson(url);
+          if (data) {
+            // Registrar
+            const reg = (data.entities || []).find(e => (e.roles || []).includes('registrar'));
+            if (reg) {
+              const vcard = reg.vcardArray?.[1] || [];
+              const fn = vcard.find(v => v[0] === 'fn');
+              result.registrar = fn ? fn[3] : (reg.publicIds?.[0]?.identifier || null);
+            }
+            // Nameservers
+            result.nameservers = (data.nameservers || []).map(ns => ns.ldhName).filter(Boolean);
+            // Dates
+            for (const ev of data.events || []) {
+              if (ev.eventAction === 'registration') result.createdDate = ev.eventDate?.slice(0,10) || null;
+              if (ev.eventAction === 'expiration')    result.expiresDate = ev.eventDate?.slice(0,10) || null;
+              if (ev.eventAction === 'last changed')  result.updatedDate = ev.eventDate?.slice(0,10) || null;
+            }
+            // Status
+            result.status = (data.status || []).slice(0, 4);
+            // Registrant org
+            const registrant = (data.entities || []).find(e => (e.roles || []).includes('registrant'));
+            if (registrant) {
+              const vc = registrant.vcardArray?.[1] || [];
+              const org = vc.find(v => v[0] === 'org');
+              const fn2 = vc.find(v => v[0] === 'fn');
+              result.registrantOrg = org ? org[3] : (fn2 ? fn2[3] : null);
+            }
+          }
+        }
+      }
+    } catch {}
+
+    // 2. Fallback: rdap.org public proxy
+    if (!result.registrar && !result.nameservers.length) {
+      try {
+        const d = await fetchJson(`https://rdap.org/domain/${apex}`);
+        if (d) {
+          const reg = (d.entities || []).find(e => (e.roles || []).includes('registrar'));
+          if (reg) {
+            const vcard = reg.vcardArray?.[1] || [];
+            const fn = vcard.find(v => v[0] === 'fn');
+            result.registrar = fn ? fn[3] : null;
+          }
+          if (!result.nameservers.length)
+            result.nameservers = (d.nameservers || []).map(ns => ns.ldhName).filter(Boolean);
+          if (!result.createdDate)
+            for (const ev of d.events || []) {
+              if (ev.eventAction === 'registration') result.createdDate = ev.eventDate?.slice(0,10) || null;
+              if (ev.eventAction === 'expiration')    result.expiresDate = ev.eventDate?.slice(0,10) || null;
+            }
+        }
+      } catch {}
+    }
+
+    return result;
+  }
   const MSA_DOMAINS = new Set([
     'outlook.com','outlook.fr','outlook.be','outlook.es','outlook.de','outlook.it',
     'outlook.co.uk','outlook.jp','outlook.pt','outlook.dk','outlook.at','outlook.ch',
@@ -953,7 +1035,7 @@
     btnArrow.style.display = 'none';
     spinner.style.display = 'block';
     progressList.style.display = 'flex';
-    ['ms','google','dns','health','others','dup'].forEach(k => setStep('step-'+k, 'pending'));
+    ['ms','google','dns','health','others','dup','net'].forEach(k => setStep('step-'+k, 'pending'));
 
     try {
       setStep('step-ms','active');
@@ -981,6 +1063,10 @@
       setStep('step-dup','active');
       const dup = isEmail ? await checkDuplicate(raw.trim()) : null;
       setStep('step-dup','done');
+
+      setStep('step-net','active');
+      const netInfo = await checkRegistrar(domain);
+      setStep('step-net', netInfo.registrar || netInfo.nameservers.length ? 'done' : 'fail');
 
       progressList.style.display = 'none';
 
@@ -1097,6 +1183,32 @@
       if (dnsRows.length) {
         grid.appendChild(makeAccordion({ id:'acc-dns', cls:'acc-dns', icon:'🌐', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge:dnsRows.length+' entrées', open:false,
           build: b => dnsRows.forEach(([l,v]) => addRow(b,l,v)) }));
+      }
+
+      // Net / Registrar
+      const netRows = [
+        netInfo.registrar                && ['Registrar (hébergeur)',  netInfo.registrar],
+        netInfo.registrantOrg            && ['Organisation',           netInfo.registrantOrg],
+        netInfo.nameservers.length       && ['Serveurs de noms',       netInfo.nameservers.join('\n')],
+        netInfo.createdDate              && ['Date de création',       netInfo.createdDate],
+        netInfo.expiresDate              && ['Date d\'expiration',     netInfo.expiresDate],
+        netInfo.updatedDate              && ['Dernière mise à jour',   netInfo.updatedDate],
+        netInfo.status.length            && ['Statut domaine',         netInfo.status.join(', ')],
+      ].filter(Boolean);
+      if (netRows.length) {
+        const netBadge = netInfo.registrar || netRows.length + ' infos';
+        grid.appendChild(makeAccordion({ id:'acc-net', cls:'acc-net', icon:'🏢', title:'Informations réseau', sub:'Registrar · NS · WHOIS/RDAP', badge: typeof netBadge === 'string' ? netBadge : netRows.length+' infos', open:true,
+          build: b => {
+            netRows.forEach(([l,v]) => addRow(b,l,v));
+            if (netInfo.rdapUrl) {
+              const lnk = document.createElement('a');
+              lnk.className = 'mxtoolbox-link'; lnk.style.borderColor = '#e9d5ff'; lnk.style.color = '#7c3aed'; lnk.style.background = '#fdf4ff';
+              lnk.href = netInfo.rdapUrl; lnk.target = '_blank'; lnk.rel = 'noopener';
+              lnk.innerHTML = `🔗 Données RDAP brutes — <strong>${domain}</strong>`;
+              b.appendChild(lnk);
+            }
+          }
+        }));
       }
 
       // Health (closed by default, full width)
