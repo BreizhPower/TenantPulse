@@ -1031,11 +1031,7 @@ function exportReport(){
   lines.push('  RAPPORT DIAGNOSTIC MICROSOFT 365');
   lines.push('  Tech RUN MW N1 — '+new Date(r.analysedAt).toLocaleString('fr-FR'));
   lines.push('');lines.push(' DOMAINE : '+r.domain);lines.push('');
-  lines.push('MICROSOFT 365:');
   if(r.microsoft&&r.microsoft.tenantId){
-    lines.push('Tenant ID     : '+r.microsoft.tenantId);
-    lines.push('Valide        : '+(r.microsoft.tenantValid?'✅ Oui':'❌ Non'));
-    lines.push('Confiance     : '+r.tenantConfidence+'%');
     if(r.microsoft.namespaceType)lines.push('Namespace     : '+r.microsoft.namespaceType);
     if(r.microsoft.cloudInstance)lines.push('Cloud         : '+r.microsoft.cloudInstance);
     if(r.microsoft.federationType)lines.push('Fédération    : '+r.microsoft.federationType);
