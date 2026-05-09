@@ -9,9 +9,7 @@
   (function () {
     const favicon = document.getElementById('favicon');
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
-    const apply = (isDark) => {
-      favicon.href = isDark ? 'TP.png' : 'DarkTP.png';
-    };
+    const apply = (isDark) => { favicon.href = isDark ? 'TP.png' : 'DarkTP.png'; };
     apply(mql.matches);
     mql.addEventListener('change', (e) => apply(e.matches));
   })();
@@ -202,7 +200,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 .dup-alert.info .dup-title{color:#bae6fd}
 .dup-desc{font-size:10px;font-weight:600;color:rgba(255,255,255,.6);line-height:1.5}
 
-/* PILLS */
 .pills-block{display:flex;flex-direction:column;gap:6px}
 .pills-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
 .pills-row{display:flex;flex-wrap:wrap;gap:5px}
@@ -212,7 +209,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .pill.on{background:#1a2e1a;color:#86efac;border-color:#4a7c4a}
 .svc-logo{width:14px;height:14px;object-fit:contain;display:inline-block;vertical-align:middle;border-radius:3px}
 
-/* RESULT CARDS */
 .result-card{background:var(--surface);border:1.5px solid var(--border);border-radius:11px;overflow:hidden;cursor:pointer;transition:border-color .2s,box-shadow .2s,background .25s;user-select:none}
 .result-card:hover{border-color:#c7d2fe;box-shadow:0 2px 12px rgba(75,63,190,.1)}
 .result-card.selected{border-color:var(--blue);box-shadow:0 0 0 2px rgba(75,63,190,.2)}
@@ -249,7 +245,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 .card-chevron{font-size:10px;color:var(--muted);transition:transform .2s}
 .result-card.selected .card-chevron,.result-card.sel-google .card-chevron,.result-card.sel-health .card-chevron,.result-card.sel-host .card-chevron,.result-card.sel-dns .card-chevron{transform:rotate(90deg)}
 
-/* RIGHT PANEL */
 .detail-panel{width:0;flex-shrink:0;overflow:hidden;transition:width .28s cubic-bezier(.4,0,.2,1),background .25s;background:var(--surface);border-left:1px solid var(--border);position:sticky;top:52px;height:calc(100vh - 52px);display:flex;flex-direction:column}
 .detail-panel.open{width:var(--panel-w)}
 .panel-head{padding:14px 16px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-shrink:0}
@@ -258,7 +253,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 .panel-close:hover{background:var(--row)}
 .panel-body{flex:1;overflow-y:auto;padding:14px 16px 20px;display:flex;flex-direction:column;gap:10px;min-width:var(--panel-w)}
 
-/* DATA ROWS */
 .d-row{background:var(--row);border:1.5px solid var(--border);border-radius:7px;padding:9px 11px;transition:background .25s}
 .d-row.hi-google{border-color:#bfdbfe;background:#fffbeb}
 [data-theme="dark"] .d-row.hi-google{background:#1e1a00;border-color:#92781a}
@@ -275,13 +269,11 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .dkim-sel-badge.absent{background:var(--row);color:var(--muted)}
 .dkim-val{font-size:10px;font-weight:600;color:var(--soft);word-break:break-all;font-family:'Courier New',monospace;line-height:1.4}
 
-/* HOST */
 .host-summary{display:flex;align-items:center;gap:12px;padding:12px 13px;border-radius:9px;background:var(--row);border:1.5px solid var(--border)}
 .host-logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#f9a8d4,#c084fc);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
 .host-name{font-size:13.5px;font-weight:800;color:var(--text)}
 .host-sub{font-size:10px;font-weight:600;color:var(--soft);margin-top:2px}
 
-/* HEALTH */
 .score-block{display:flex;align-items:center;gap:14px;padding:12px 13px;border-radius:9px;border:1.5px solid var(--border);margin-bottom:2px}
 .score-ring{position:relative;width:52px;height:52px;flex-shrink:0}
 .score-ring svg{width:52px;height:52px;transform:rotate(-90deg)}
@@ -319,12 +311,10 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .ext-link:hover{background:#2a2860}
 .panel-section-title{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:4px;margin-bottom:-2px}
 
-/* FOOTER */
 footer{background:var(--surface);border-top:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;justify-content:center;transition:background .25s}
 .powered{font-size:11px;font-weight:700;color:var(--soft)}
 .powered span{color:var(--blue);font-weight:800}
 
-/* Collapsible */
 .msa-check-block{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
 .collapsible-btn{width:100%;background:var(--row);border:1.5px solid var(--border);border-radius:9px;padding:9px 13px;font-family:'Nunito',sans-serif;font-size:11.5px;font-weight:800;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .15s;text-align:left}
 .collapsible-btn:hover{border-color:var(--blue);background:var(--acc-hover)}
@@ -350,7 +340,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 [data-theme="dark"] .msa-result-row.warn{background:#2a2010;border-color:#92781a;color:#fcd34d}
 [data-theme="dark"] .msa-result-row.err{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
 
-/* History */
 .history-empty{font-size:10.5px;font-weight:600;color:var(--muted);text-align:center;padding:10px 0;font-style:italic}
 .history-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;border:1.5px solid var(--border);background:var(--row);margin-bottom:5px;cursor:pointer;transition:all .15s;position:relative}
 .history-item:hover{border-color:#c7d2fe;background:var(--acc-hover)}
@@ -389,7 +378,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
   </a>
   <div class="nav-right">
     <div class="nav-badge">v0.5</div>
-
     <div class="nav-dropdown" id="mainDropdown">
       <button class="nav-drop-btn" onclick="toggleDropdown()">
         <img src="option.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> Options <span class="drop-arrow">▾</span>
@@ -425,7 +413,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
         </div>
       </div>
     </div>
-
     <div class="proxy-detail-overlay" id="proxyOverlay" onclick="hideProxyDetail()">
       <div class="proxy-detail-panel" id="proxyDetailPanel" onclick="event.stopPropagation()">
         <div class="proxy-detail-back" onclick="hideProxyDetail()">‹ Retour</div>
@@ -438,8 +425,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 </nav>
 
 <div class="app">
-
-  <!-- LEFT -->
   <aside class="sidebar">
     <div class="sb-head">
       <h1>Diagnostic <span>Microsoft 365</span> & sécurité</h1>
@@ -452,7 +437,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
       </div>
       <label class="flabel">Endpoint OpenID Microsoft 365</label>
       <div class="ep-preview" id="endpointPreview">https://login.microsoftonline.com/<span class="domain">domaine.com</span>/.well-known/openid-configuration</div>
-
       <div class="btn-row">
         <button class="btn-go" id="checkBtnFast" onclick="checkFast()">
           <span id="btnFastText"><img src="LOUPE.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Tenant ID</span>
@@ -467,32 +451,25 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
         <div class="btn-hint">Rapide — ID MS + DNS de base</div>
         <div class="btn-hint">Complet — WHOIS · doublon MSA · sécurité</div>
       </div>
-
       <button class="btn-export" id="exportBtn" onclick="exportReport()">📋 Copier le rapport</button>
-
       <div class="prog-list" id="progList">
-        <!-- MODIFIÉ : emoji fenêtre remplacé par Microsoft.png -->
-        <div class="p-step" id="step-ms"><span class="p-step-icon"><img src="Microsoft.png" width="14" height="14" alt="Microsoft" style="display:inline-block;vertical-align:middle;flex-shrink:0;"></span><span class="p-step-label">Microsoft 365…</span><button class="p-step-cancel" onclick="cancelStep('ms')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('ms')" title="Relancer">↺ Relancer</button></div>
-        <div class="p-step" id="step-google"><span class="p-step-icon">🔵</span><span class="p-step-label">Google Workspace…</span><button class="p-step-cancel" onclick="cancelStep('google')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('google')" title="Relancer">↺ Relancer</button></div>
-        <div class="p-step" id="step-dns"><span class="p-step-icon">🌐</span><span class="p-step-label">DNS…</span><button class="p-step-cancel" onclick="cancelStep('dns')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('dns')" title="Relancer">↺ Relancer</button></div>
-        <div class="p-step" id="step-health"><span class="p-step-icon">🛡️</span><span class="p-step-label">Sécurité…</span><button class="p-step-cancel" onclick="cancelStep('health')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('health')" title="Relancer">↺ Relancer</button></div>
-        <div class="p-step" id="step-others"><span class="p-step-icon">🔍</span><span class="p-step-label">Autres services…</span><button class="p-step-cancel" onclick="cancelStep('others')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('others')" title="Relancer">↺ Relancer</button></div>
-        <div class="p-step" id="step-dup"><span class="p-step-icon">⚠️</span><span class="p-step-label">Doublon MSA…</span><button class="p-step-cancel" onclick="cancelStep('dup')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('dup')" title="Relancer">↺ Relancer</button></div>
-        <div class="p-step" id="step-host"><span class="p-step-icon">🏠</span><span class="p-step-label">Hébergeur…</span><button class="p-step-cancel" onclick="cancelStep('host')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('host')" title="Relancer">↺ Relancer</button></div>
+        <div class="p-step" id="step-ms"><span class="p-step-icon"><img src="Microsoft.png" width="14" height="14" alt="Microsoft" style="display:inline-block;vertical-align:middle;flex-shrink:0;"></span><span class="p-step-label">Microsoft 365…</span><button class="p-step-cancel" onclick="cancelStep('ms')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('ms')">↺ Relancer</button></div>
+        <div class="p-step" id="step-google"><span class="p-step-icon">🔵</span><span class="p-step-label">Google Workspace…</span><button class="p-step-cancel" onclick="cancelStep('google')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('google')">↺ Relancer</button></div>
+        <div class="p-step" id="step-dns"><span class="p-step-icon">🌐</span><span class="p-step-label">DNS…</span><button class="p-step-cancel" onclick="cancelStep('dns')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('dns')">↺ Relancer</button></div>
+        <div class="p-step" id="step-health"><span class="p-step-icon">🛡️</span><span class="p-step-label">Sécurité…</span><button class="p-step-cancel" onclick="cancelStep('health')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('health')">↺ Relancer</button></div>
+        <div class="p-step" id="step-others"><span class="p-step-icon">🔍</span><span class="p-step-label">Autres services…</span><button class="p-step-cancel" onclick="cancelStep('others')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('others')">↺ Relancer</button></div>
+        <div class="p-step" id="step-dup"><span class="p-step-icon">⚠️</span><span class="p-step-label">Doublon MSA…</span><button class="p-step-cancel" onclick="cancelStep('dup')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('dup')">↺ Relancer</button></div>
+        <div class="p-step" id="step-host"><span class="p-step-icon">🏠</span><span class="p-step-label">Hébergeur…</span><button class="p-step-cancel" onclick="cancelStep('host')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('host')">↺ Relancer</button></div>
       </div>
       <div class="err-box" id="errBox"></div>
 
-      <!-- MSA manual check -->
       <div class="msa-check-block">
-        <!-- MODIFIÉ : emoji fenêtre remplacé par Microsoft.png dans le bouton collapsible -->
         <button class="collapsible-btn" onclick="toggleCollapsible('msaBody','msaArrow')">
           <span style="display:inline-flex;align-items:center;gap:6px;"><img src="Microsoft.png" width="16" height="16" alt="Microsoft" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> Vérification manuelle MSA</span>
           <span class="coll-arrow" id="msaArrow">▾</span>
         </button>
         <div class="collapsible-body" id="msaBody">
-          <a id="btnMsa" href="https://login.live.com/login.srf" target="_blank" rel="noopener" class="btn-msa">
-            🔗 Ouvrir login.live.com
-          </a>
+          <a id="btnMsa" href="https://login.live.com/login.srf" target="_blank" rel="noopener" class="btn-msa">🔗 Ouvrir login.live.com</a>
           <div class="msa-procedure">
             <div class="msa-step"><div class="msa-step-num">1</div><span>Cliquez le bouton ci-dessus en <strong>navigation privée</strong> (Ctrl+Maj+N)</span></div>
             <div class="msa-step"><div class="msa-step-num">2</div><span>Entrez l'e-mail à vérifier, tapez un mot de passe <strong>volontairement faux</strong> (ex: <code style="background:var(--border);padding:1px 4px;border-radius:3px;font-size:9.5px">A1b2c3!</code>)</span></div>
@@ -506,7 +483,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
         </div>
       </div>
 
-      <!-- History -->
       <div class="msa-check-block" style="margin-top:0">
         <button class="collapsible-btn" onclick="toggleCollapsible('historyBody','historyArrow')">
           <span>🕐 Historique des Tenant ID</span>
@@ -520,7 +496,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
     </div>
   </aside>
 
-  <!-- CENTER -->
   <main class="center" id="centerCol">
     <div class="empty-state">
       <div class="empty-state-icon">🔍</div>
@@ -529,7 +504,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
     </div>
   </main>
 
-  <!-- RIGHT PANEL -->
   <aside class="detail-panel" id="detailPanel">
     <div class="panel-head">
       <span class="panel-title" id="panelTitle">Détails</span>
@@ -537,385 +511,479 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
     </div>
     <div class="panel-body" id="panelBody"></div>
   </aside>
-
 </div>
 
 <footer><div class="powered">Powered by <span>Tech RUN MW N1</span> Engineer (Au SMIC)</div></footer>
 
 <script>
-// ── Proxy data — APIs officielles uniquement, aucun proxy tiers ──
-const PROXY_DATA={
-  dnsgoogle:{title:'dns.google',desc:'API DNS-over-HTTPS de Google (DoH). Utilisée pour résoudre MX, SPF, DKIM, DMARC, DNSSEC, BIMI et MTA-STS. Aucune donnée personnelle transmise — seulement le nom de domaine.',url:'https://dns.google/resolve'},
-  rdap:{title:'rdap.org',desc:'Service RDAP public (Registration Data Access Protocol). Utilisé pour récupérer les données WHOIS : registrar, serveurs NS, dates de création/expiration. Lecture seule.',url:'https://rdap.org/domain/'},
-  mslogin:{title:'login.microsoftonline.com',desc:'Endpoint public officiel Microsoft. Utilisé pour détecter le Tenant ID (OpenID Connect), le type de compte (pro/MSA) et valider le GUID du tenant.',url:'https://login.microsoftonline.com/common/.well-known/openid-configuration'},
+const PROXY_DATA = {
+  dnsgoogle: {title:'dns.google', desc:'API DNS-over-HTTPS de Google (DoH). Utilisée pour résoudre MX, SPF, DKIM, DMARC, DNSSEC, BIMI et MTA-STS. Aucune donnée personnelle transmise — seulement le nom de domaine.', url:'https://dns.google/resolve'},
+  rdap:      {title:'rdap.org',   desc:'Service RDAP public (Registration Data Access Protocol). Utilisé pour récupérer les données WHOIS : registrar, serveurs NS, dates de création/expiration. Lecture seule.', url:'https://rdap.org/domain/'},
+  mslogin:   {title:'login.microsoftonline.com', desc:'Endpoint public officiel Microsoft. Utilisé pour détecter le Tenant ID (OpenID Connect), le type de compte (pro/MSA) et valider le GUID du tenant.', url:'https://login.microsoftonline.com/common/.well-known/openid-configuration'},
 };
 
 // ── Dropdown ──
-function toggleDropdown(){
-  const d=document.getElementById('mainDropdown');
-  d.classList.toggle('open');
-  if(!d.classList.contains('open'))hideProxyDetail();
+function toggleDropdown() {
+  document.getElementById('mainDropdown').classList.toggle('open');
 }
-document.addEventListener('click',function(e){
-  const d=document.getElementById('mainDropdown');
-  const ov=document.getElementById('proxyOverlay');
-  if(!d.contains(e.target)&&!ov.contains(e.target)){d.classList.remove('open');hideProxyDetail();}
+document.addEventListener('click', e => {
+  const d = document.getElementById('mainDropdown');
+  const ov = document.getElementById('proxyOverlay');
+  if (!d.contains(e.target) && !ov.contains(e.target)) {
+    d.classList.remove('open');
+    hideProxyDetail();
+  }
 });
-function showProxyDetail(key){
-  const p=PROXY_DATA[key];if(!p)return;
-  const panel=document.getElementById('proxyDetailPanel');
-  const overlay=document.getElementById('proxyOverlay');
-  document.getElementById('pdTitle').textContent=p.title;
-  document.getElementById('pdDesc').textContent=p.desc;
-  document.getElementById('pdUrl').textContent=p.url;
-  const menu=document.getElementById('dropMenu');
-  const rect=menu.getBoundingClientRect();
-  panel.style.top=rect.top+'px';
-  panel.style.right=(window.innerWidth-rect.left+8)+'px';
-  panel.style.left='auto';
-  overlay.classList.add('open');
+function showProxyDetail(key) {
+  const p = PROXY_DATA[key]; if (!p) return;
+  document.getElementById('pdTitle').textContent = p.title;
+  document.getElementById('pdDesc').textContent  = p.desc;
+  document.getElementById('pdUrl').textContent   = p.url;
+  const menu  = document.getElementById('dropMenu');
+  const panel = document.getElementById('proxyDetailPanel');
+  const rect  = menu.getBoundingClientRect();
+  panel.style.top   = rect.top + 'px';
+  panel.style.right = (window.innerWidth - rect.left + 8) + 'px';
+  panel.style.left  = 'auto';
+  document.getElementById('proxyOverlay').classList.add('open');
   panel.classList.add('open');
 }
-function hideProxyDetail(){
+function hideProxyDetail() {
   document.getElementById('proxyDetailPanel').classList.remove('open');
   document.getElementById('proxyOverlay').classList.remove('open');
 }
 
 // ── Dark mode ──
-function syncDarkUI(isDark){
-  document.getElementById('darkLabel').textContent=isDark?'Mode clair':'Mode sombre';
-  document.getElementById('darkSwitch').classList.toggle('on',isDark);
+function syncDarkUI(isDark) {
+  document.getElementById('darkLabel').textContent = isDark ? 'Mode clair' : 'Mode sombre';
+  document.getElementById('darkSwitch').classList.toggle('on', isDark);
 }
-function toggleDark(){
-  const h=document.documentElement,isDark=h.getAttribute('data-theme')==='dark';
-  h.setAttribute('data-theme',isDark?'light':'dark');
+function toggleDark() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
   syncDarkUI(!isDark);
 }
-(function(){
-  const isDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if(isDark)document.documentElement.setAttribute('data-theme','dark');
+(function () {
+  const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (isDark) document.documentElement.setAttribute('data-theme', 'dark');
   syncDarkUI(isDark);
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{
-    document.documentElement.setAttribute('data-theme',e.matches?'dark':'light');
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
     syncDarkUI(e.matches);
   });
 })();
 
 // ── Collapsible ──
-function toggleCollapsible(bodyId,arrowId){
-  const body=document.getElementById(bodyId),arrow=document.getElementById(arrowId);
-  const isOpen=body.classList.contains('open');
-  body.classList.toggle('open',!isOpen);
-  arrow.classList.toggle('open',!isOpen);
+function toggleCollapsible(bodyId, arrowId) {
+  const body  = document.getElementById(bodyId);
+  const arrow = document.getElementById(arrowId);
+  const open  = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  arrow.classList.toggle('open', !open);
 }
 
 // ── History ──
-const HISTORY_KEY='tenantIdHistory_v1';
-function loadHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');}catch{return[];}}
-function saveHistory(items){try{localStorage.setItem(HISTORY_KEY,JSON.stringify(items));}catch{}}
-function addToHistory(domain,tenantId){
-  if(!tenantId)return;
-  let items=loadHistory();
-  items=items.filter(i=>i.domain!==domain);
-  items.unshift({domain,tenantId,at:Date.now()});
-  items=items.slice(0,7);
-  saveHistory(items);
+const HISTORY_KEY = 'tenantIdHistory_v1';
+function loadHistory()        { try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch { return []; } }
+function saveHistory(items)   { try { localStorage.setItem(HISTORY_KEY, JSON.stringify(items)); } catch {} }
+function addToHistory(domain, tenantId) {
+  if (!tenantId) return;
+  let items = loadHistory().filter(i => i.domain !== domain);
+  items.unshift({ domain, tenantId, at: Date.now() });
+  saveHistory(items.slice(0, 7));
   renderHistory();
 }
-function clearHistory(){saveHistory([]);renderHistory();}
-function relativeTime(ts){
-  const diff=Math.floor((Date.now()-ts)/1000);
-  if(diff<60)return'À l\'instant';
-  if(diff<3600)return Math.floor(diff/60)+'min';
-  if(diff<86400)return Math.floor(diff/3600)+'h';
-  return Math.floor(diff/86400)+'j';
+function clearHistory() { saveHistory([]); renderHistory(); }
+function relativeTime(ts) {
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 60)    return "À l'instant";
+  if (s < 3600)  return Math.floor(s / 60)   + 'min';
+  if (s < 86400) return Math.floor(s / 3600)  + 'h';
+  return Math.floor(s / 86400) + 'j';
 }
-function renderHistory(){
-  const list=document.getElementById('historyList');
-  if(!list)return;
-  const items=loadHistory();
-  if(!items.length){list.innerHTML='<div class="history-empty">Aucune analyse effectuée</div>';return;}
-  /* MODIFIÉ : emoji fenêtre remplacé par Microsoft.png dans les items d'historique */
-  list.innerHTML=items.map((item,i)=>{
-    const shortGuid=item.tenantId?item.tenantId.slice(0,8)+'…':'—';
-    return`<div class="history-item" onclick="loadFromHistory('${item.domain}','${item.tenantId||''}',${i})">
+function renderHistory() {
+  const list  = document.getElementById('historyList'); if (!list) return;
+  const items = loadHistory();
+  if (!items.length) { list.innerHTML = '<div class="history-empty">Aucune analyse effectuée</div>'; return; }
+  list.innerHTML = items.map((item, i) => {
+    const shortGuid = item.tenantId ? item.tenantId.slice(0, 8) + '…' : '—';
+    return `<div class="history-item" onclick="loadFromHistory('${item.domain}','${item.tenantId||''}',${i})">
       <span class="history-item-icon"><img src='Microsoft.png' width='14' height='14' alt='Microsoft' style='display:inline-block;vertical-align:middle;flex-shrink:0;'></span>
       <div style="flex:1;min-width:0"><div class="history-item-domain">${item.domain}</div><div class="history-item-guid">${shortGuid}</div></div>
       <span class="history-item-time">${relativeTime(item.at)}</span>
-      <button class="history-item-copy" onclick="event.stopPropagation();copyHistoryGuid('${item.tenantId}',this)" title="Copier le Tenant ID complet">📋</button>
+      <button class="history-item-copy" onclick="event.stopPropagation();copyHistoryGuid('${item.tenantId}',this)">📋</button>
     </div>`;
   }).join('');
 }
-function loadFromHistory(domain){
-  emailInput.value=domain;
+function loadFromHistory(domain) {
+  emailInput.value = domain;
   emailInput.dispatchEvent(new Event('input'));
   checkFast();
 }
-function copyHistoryGuid(guid,btn){
-  navigator.clipboard.writeText(guid).then(()=>{btn.textContent='✅';setTimeout(()=>{btn.textContent='📋';},1500);});
+function copyHistoryGuid(guid, btn) {
+  navigator.clipboard.writeText(guid).then(() => { btn.textContent = '✅'; setTimeout(() => { btn.textContent = '📋'; }, 1500); });
 }
-window.addEventListener('load',renderHistory);
+window.addEventListener('load', renderHistory);
 
 // ── Panel ──
-let openCardId=null;
-let lastReport=null;
-let currentState={domain:null,ms:null,dns:null,goog:null,health:null,others:null,dup:null,host:null,fastDone:false,fullDone:false};
+let openCardId = null;
+let lastReport = null;
+let currentState = { domain:null, ms:null, dns:null, goog:null, health:null, others:null, dup:null, host:null, fastDone:false, fullDone:false };
 
-function openPanel(id,title,buildFn){
-  const panel=document.getElementById('detailPanel'),body=document.getElementById('panelBody'),titleEl=document.getElementById('panelTitle');
-  document.querySelectorAll('.result-card').forEach(c=>c.className=c.className.replace(/\bsel-\w+\b|\bselected\b/g,'').trim());
-  if(openCardId===id){openCardId=null;panel.classList.remove('open');return;}
-  openCardId=id;
-  const card=document.getElementById('card-'+id);
-  if(card)card.classList.add(card.dataset.selClass||'selected');
-  titleEl.textContent=title;body.innerHTML='';buildFn(body);panel.classList.add('open');
+function openPanel(id, title, buildFn) {
+  const panel   = document.getElementById('detailPanel');
+  const body    = document.getElementById('panelBody');
+  const titleEl = document.getElementById('panelTitle');
+  document.querySelectorAll('.result-card').forEach(c => c.className = c.className.replace(/\bsel-\w+\b|\bselected\b/g, '').trim());
+  if (openCardId === id) { openCardId = null; panel.classList.remove('open'); return; }
+  openCardId = id;
+  const card = document.getElementById('card-' + id);
+  if (card) card.classList.add(card.dataset.selClass || 'selected');
+  titleEl.textContent = title;
+  body.innerHTML = '';
+  buildFn(body);
+  panel.classList.add('open');
 }
-function closePanel(){
+function closePanel() {
   document.getElementById('detailPanel').classList.remove('open');
-  document.querySelectorAll('.result-card').forEach(c=>c.className=c.className.replace(/\bsel-\w+\b|\bselected\b/g,'').trim());
-  openCardId=null;
+  document.querySelectorAll('.result-card').forEach(c => c.className = c.className.replace(/\bsel-\w+\b|\bselected\b/g, '').trim());
+  openCardId = null;
 }
 
 // ── Input ──
-const emailInput=document.getElementById('emailInput');
-function extractDomain(val){val=val.trim();if(val.startsWith('@'))val=val.slice(1);if(val.includes('@'))val=val.split('@').pop();return val.toLowerCase().trim();}
-emailInput.addEventListener('input',()=>{
-  const d=extractDomain(emailInput.value)||'domaine.com';
-  document.getElementById('endpointPreview').innerHTML=`https://login.microsoftonline.com/<span class="domain">${d}</span>/.well-known/openid-configuration`;
-  const raw=emailInput.value.trim();
-  const btnMsa=document.getElementById('btnMsa');
-  btnMsa.href=raw.includes('@')?`https://login.live.com/login.srf?login_hint=${encodeURIComponent(raw)}`:'https://login.live.com/login.srf';
+const emailInput = document.getElementById('emailInput');
+function extractDomain(val) {
+  val = val.trim();
+  if (val.startsWith('@')) val = val.slice(1);
+  if (val.includes('@'))   val = val.split('@').pop();
+  return val.toLowerCase().trim();
+}
+emailInput.addEventListener('input', () => {
+  const d = extractDomain(emailInput.value) || 'domaine.com';
+  document.getElementById('endpointPreview').innerHTML = `https://login.microsoftonline.com/<span class="domain">${d}</span>/.well-known/openid-configuration`;
+  const raw    = emailInput.value.trim();
+  const btnMsa = document.getElementById('btnMsa');
+  btnMsa.href  = raw.includes('@') ? `https://login.live.com/login.srf?login_hint=${encodeURIComponent(raw)}` : 'https://login.live.com/login.srf';
 });
-emailInput.addEventListener('keydown',e=>{if(e.key==='Enter')checkFast();});
+emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') checkFast(); });
 
 // ── Step helpers ──
-const stepControllers={};
-const stepRetryFns={};
-
-function setStep(id,state,label){
-  const el=document.getElementById(id);if(!el)return;
-  el.className='p-step '+state;
-  const map={ms:{active:'Interrogation Microsoft 365…',done:'Microsoft 365 ✓',fail:'Microsoft 365 — Non trouvé',timeout:'Microsoft 365 — Annulé'},google:{active:'Interrogation Google…',done:'Google Workspace ✓',fail:'Google — Non détecté',timeout:'Google — Annulé'},dns:{active:'Récupération DNS…',done:'DNS ✓',fail:'DNS — Vide',timeout:'DNS — Annulé'},health:{active:'Vérification DKIM/DMARC…',done:'Sécurité analysée ✓',fail:'Sécurité — Partiel',timeout:'Sécurité — Annulé'},others:{active:'Détection services…',done:'Autres services ✓',fail:'Services — Partiel',timeout:'Services — Annulé'},dup:{active:'Vérification doublon MSA…',done:'Doublon vérifié ✓',fail:'Doublon — Non vérifié',timeout:'Doublon MSA — Annulé'},host:{active:'Recherche hébergeur (WHOIS)…',done:'Hébergeur trouvé ✓',fail:'Hébergeur — Non trouvé',timeout:'Hébergeur — Annulé'}};
-  const key=id.replace('step-','');
-  const lbl=label||(map[key]?.[state]);
-  if(lbl){const labelEl=el.querySelector('.p-step-label');if(labelEl)labelEl.textContent=lbl;}
+const stepControllers = {};
+const stepRetryFns    = {};
+const STEP_LABELS = {
+  ms:     { active:'Interrogation Microsoft 365…', done:'Microsoft 365 ✓',   fail:'Microsoft 365 — Non trouvé',   timeout:'Microsoft 365 — Annulé' },
+  google: { active:'Interrogation Google…',        done:'Google Workspace ✓', fail:'Google — Non détecté',         timeout:'Google — Annulé' },
+  dns:    { active:'Récupération DNS…',            done:'DNS ✓',              fail:'DNS — Vide',                   timeout:'DNS — Annulé' },
+  health: { active:'Vérification DKIM/DMARC…',    done:'Sécurité analysée ✓',fail:'Sécurité — Partiel',           timeout:'Sécurité — Annulé' },
+  others: { active:'Détection services…',          done:'Autres services ✓',  fail:'Services — Partiel',           timeout:'Services — Annulé' },
+  dup:    { active:'Vérification doublon MSA…',    done:'Doublon vérifié ✓',  fail:'Doublon — Non vérifié',        timeout:'Doublon MSA — Annulé' },
+  host:   { active:'Recherche hébergeur (WHOIS)…', done:'Hébergeur trouvé ✓', fail:'Hébergeur — Non trouvé',       timeout:'Hébergeur — Annulé' },
+};
+function setStep(id, state, label) {
+  const el = document.getElementById(id); if (!el) return;
+  el.className = 'p-step ' + state;
+  const key    = id.replace('step-', '');
+  const lbl    = label || STEP_LABELS[key]?.[state];
+  if (lbl) { const labelEl = el.querySelector('.p-step-label'); if (labelEl) labelEl.textContent = lbl; }
 }
-function showSteps(ids){
-  document.querySelectorAll('.p-step').forEach(el=>el.style.display='none');
-  ids.forEach(id=>{const el=document.getElementById('step-'+id);if(el)el.style.display='flex';});
-  document.getElementById('progList').style.display='flex';
+function showSteps(ids) {
+  document.querySelectorAll('.p-step').forEach(el => el.style.display = 'none');
+  ids.forEach(id => { const el = document.getElementById('step-' + id); if (el) el.style.display = 'flex'; });
+  document.getElementById('progList').style.display = 'flex';
 }
-function cancelStep(key){
-  const ctrl=stepControllers[key];
-  if(ctrl){ctrl.abort();delete stepControllers[key];}
-  setStep('step-'+key,'timeout');
+function cancelStep(key) {
+  const ctrl = stepControllers[key];
+  if (ctrl) { ctrl.abort(); delete stepControllers[key]; }
+  setStep('step-' + key, 'timeout');
 }
-async function retryStep(key){
-  const fn=stepRetryFns[key];
-  if(!fn)return;
-  setStep('step-'+key,'active');
-  try{await fn();}catch(e){setStep('step-'+key,'timeout');}
-}
-async function fetchJsonC(url,key,timeout=10000){
-  const ctrl=new AbortController();
-  stepControllers[key]=ctrl;
-  const tid=setTimeout(()=>ctrl.abort(),timeout);
-  try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);delete stepControllers[key];if(!r.ok)return null;return await r.json();}
-  catch{clearTimeout(tid);delete stepControllers[key];return null;}
-}
-async function fetchTextC(url,key,timeout=10000){
-  const ctrl=new AbortController();
-  stepControllers[key]=ctrl;
-  const tid=setTimeout(()=>ctrl.abort(),timeout);
-  try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);delete stepControllers[key];if(!r.ok)return null;return await r.text();}
-  catch{clearTimeout(tid);delete stepControllers[key];return null;}
-}
-function extractGuid(s){if(!s)return null;const m=s.match(/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i);return m?m[1]:null;}
-async function fetchJson(url,timeout=9000){const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),timeout);try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);if(!r.ok)return null;return await r.json();}catch{clearTimeout(tid);return null;}}
-async function fetchText(url,timeout=9000){const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),timeout);try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);if(!r.ok)return null;return await r.text();}catch{clearTimeout(tid);return null;}}
-async function dnsQuery(name,type){const d=await fetchJson(`https://dns.google/resolve?name=${encodeURIComponent(name)}&type=${type}`);return d?(d.Answer||[]):[]}
-
-const MS_GENERIC_GUIDS=new Set(['9188040d-6c67-4c5b-b112-36a304b66dad','f8cdef31-a31e-4b4a-93e4-5f571e91255a','2f4a9838-26b7-47ee-be60-cfe0807d0ea7']);
-
-async function validateTenantGuid(guid){
-  try{const r=await fetchJson(`https://login.microsoftonline.com/${guid}/.well-known/openid-configuration`,6000);if(!r)return false;const issuer=r.issuer||'';if(!issuer.includes(guid))return false;if(MS_GENERIC_GUIDS.has(guid.toLowerCase()))return false;return true;}catch{return false;}
-}
-function computeConfidence(ms){
-  if(!ms)return 0;let score=0;
-  if(ms.tenantId)score+=40;if(ms.tenantValid)score+=30;if(ms.issuer)score+=15;if(ms.tokenEndpoint)score+=10;if(ms.namespaceType&&ms.namespaceType!=='Unknown')score+=5;
-  return Math.min(score,100);
+async function retryStep(key) {
+  const fn = stepRetryFns[key]; if (!fn) return;
+  setStep('step-' + key, 'active');
+  try { await fn(); } catch { setStep('step-' + key, 'timeout'); }
 }
 
-async function checkMicrosoft(domain){
-  let tenantId=null,realmData=null,oidcData=null,tenantValid=false;
-  const realm=await fetchJsonC(`https://login.microsoftonline.com/common/userrealm/?user=check@${domain}&api-version=2.1`,'ms',8000);
-  if(realm&&realm.account_type&&realm.account_type!=='Unknown')realmData=realm;
-  if(realmData?.NameSpaceType==='Consumer'||realmData?.account_type?.toLowerCase()==='consumer')return null;
-  const direct=await fetchJsonC(`https://login.microsoftonline.com/${domain}/.well-known/openid-configuration`,'ms',8000);
-  if(direct){const c=extractGuid(direct.issuer)||extractGuid(direct.token_endpoint)||extractGuid(direct.authorization_endpoint);if(c&&!MS_GENERIC_GUIDS.has(c.toLowerCase())&&direct.issuer?.includes(c)){oidcData=direct;tenantId=c;tenantValid=true;}}
-  if(!tenantId){
-    try{const x=await fetchTextC(`https://login.microsoftonline.com/${domain}/federationmetadata/2007-06/federationmetadata.xml`,'ms',8000);if(x){const c=extractGuid(x);if(c&&!MS_GENERIC_GUIDS.has(c.toLowerCase())){const v=await validateTenantGuid(c);if(v){tenantId=c;tenantValid=true;}}}}catch{}
+// ── Fetch helpers ──
+async function fetchWithAbort(url, key, timeout, isJson) {
+  const ctrl = new AbortController();
+  stepControllers[key] = ctrl;
+  const tid = setTimeout(() => ctrl.abort(), timeout);
+  try {
+    const r = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(tid); delete stepControllers[key];
+    if (!r.ok) return null;
+    return isJson ? await r.json() : await r.text();
+  } catch { clearTimeout(tid); delete stepControllers[key]; return null; }
+}
+const fetchJsonC = (url, key, t=10000) => fetchWithAbort(url, key, t, true);
+const fetchTextC = (url, key, t=10000) => fetchWithAbort(url, key, t, false);
+
+async function fetchJson(url, timeout=9000) {
+  const ctrl = new AbortController();
+  const tid  = setTimeout(() => ctrl.abort(), timeout);
+  try { const r = await fetch(url, { signal: ctrl.signal }); clearTimeout(tid); if (!r.ok) return null; return await r.json(); }
+  catch { clearTimeout(tid); return null; }
+}
+async function dnsQuery(name, type) {
+  const d = await fetchJson(`https://dns.google/resolve?name=${encodeURIComponent(name)}&type=${type}`);
+  return d ? (d.Answer || []) : [];
+}
+
+function extractGuid(s) {
+  if (!s) return null;
+  const m = s.match(/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i);
+  return m ? m[1] : null;
+}
+
+const MS_GENERIC_GUIDS = new Set(['9188040d-6c67-4c5b-b112-36a304b66dad','f8cdef31-a31e-4b4a-93e4-5f571e91255a','2f4a9838-26b7-47ee-be60-cfe0807d0ea7']);
+
+async function validateTenantGuid(guid) {
+  try {
+    const r = await fetchJson(`https://login.microsoftonline.com/${guid}/.well-known/openid-configuration`, 6000);
+    if (!r) return false;
+    if (!r.issuer?.includes(guid)) return false;
+    return !MS_GENERIC_GUIDS.has(guid.toLowerCase());
+  } catch { return false; }
+}
+
+function computeConfidence(ms) {
+  if (!ms) return 0;
+  let score = 0;
+  if (ms.tenantId)                                   score += 40;
+  if (ms.tenantValid)                                score += 30;
+  if (ms.issuer)                                     score += 15;
+  if (ms.tokenEndpoint)                              score += 10;
+  if (ms.namespaceType && ms.namespaceType !== 'Unknown') score += 5;
+  return Math.min(score, 100);
+}
+
+// ── Core checks ──
+async function checkMicrosoft(domain) {
+  let tenantId = null, realmData = null, oidcData = null, tenantValid = false;
+  const realm = await fetchJsonC(`https://login.microsoftonline.com/common/userrealm/?user=check@${domain}&api-version=2.1`, 'ms', 8000);
+  if (realm?.account_type && realm.account_type !== 'Unknown') realmData = realm;
+  if (realmData?.NameSpaceType === 'Consumer' || realmData?.account_type?.toLowerCase() === 'consumer') return null;
+  const direct = await fetchJsonC(`https://login.microsoftonline.com/${domain}/.well-known/openid-configuration`, 'ms', 8000);
+  if (direct) {
+    const c = extractGuid(direct.issuer) || extractGuid(direct.token_endpoint) || extractGuid(direct.authorization_endpoint);
+    if (c && !MS_GENERIC_GUIDS.has(c.toLowerCase()) && direct.issuer?.includes(c)) { oidcData = direct; tenantId = c; tenantValid = true; }
   }
-  if(tenantId&&!tenantValid){tenantValid=await validateTenantGuid(tenantId);if(!tenantValid)tenantId=null;}
-  const isPro=realmData&&realmData.NameSpaceType!=='Consumer'&&realmData.account_type?.toLowerCase()!=='consumer';
-  if(tenantId||isPro)return{tenantId,tenantValid,namespaceType:realmData?.NameSpaceType||null,federationType:realmData?.federation_protocol||null,cloudInstance:realmData?.cloud_instance_name||'microsoftonline.com',issuer:oidcData?.issuer||null,tokenEndpoint:oidcData?.token_endpoint||null,authorizationEndpoint:oidcData?.authorization_endpoint||null,userInfoEndpoint:oidcData?.userinfo_endpoint||null};
+  if (!tenantId) {
+    try {
+      const x = await fetchTextC(`https://login.microsoftonline.com/${domain}/federationmetadata/2007-06/federationmetadata.xml`, 'ms', 8000);
+      if (x) { const c = extractGuid(x); if (c && !MS_GENERIC_GUIDS.has(c.toLowerCase())) { const v = await validateTenantGuid(c); if (v) { tenantId = c; tenantValid = true; } } }
+    } catch {}
+  }
+  if (tenantId && !tenantValid) { tenantValid = await validateTenantGuid(tenantId); if (!tenantValid) tenantId = null; }
+  const isPro = realmData && realmData.NameSpaceType !== 'Consumer' && realmData.account_type?.toLowerCase() !== 'consumer';
+  if (tenantId || isPro) return { tenantId, tenantValid, namespaceType: realmData?.NameSpaceType || null, federationType: realmData?.federation_protocol || null, cloudInstance: realmData?.cloud_instance_name || 'microsoftonline.com', issuer: oidcData?.issuer || null, tokenEndpoint: oidcData?.token_endpoint || null, authorizationEndpoint: oidcData?.authorization_endpoint || null, userInfoEndpoint: oidcData?.userinfo_endpoint || null };
   return null;
 }
 
-async function checkGoogle(domain){
-  try{const[oidc,mx]=await Promise.all([fetchJson('https://accounts.google.com/.well-known/openid-configuration'),fetchJson(`https://dns.google/resolve?name=${domain}&type=MX`)]);if(!oidc||!mx)return null;const ans=mx.Answer||[];if(!ans.some(a=>a.data?.toLowerCase().includes('google')))return null;return{issuer:oidc.issuer,authorizationEndpoint:oidc.authorization_endpoint,tokenEndpoint:oidc.token_endpoint,userInfoEndpoint:oidc.userinfo_endpoint,mxRecords:ans.map(a=>a.data).filter(Boolean)};}catch{return null;}
+async function checkGoogle(domain) {
+  try {
+    const [oidc, mx] = await Promise.all([fetchJson('https://accounts.google.com/.well-known/openid-configuration'), fetchJson(`https://dns.google/resolve?name=${domain}&type=MX`)]);
+    if (!oidc || !mx) return null;
+    const ans = mx.Answer || [];
+    if (!ans.some(a => a.data?.toLowerCase().includes('google'))) return null;
+    return { issuer: oidc.issuer, authorizationEndpoint: oidc.authorization_endpoint, tokenEndpoint: oidc.token_endpoint, userInfoEndpoint: oidc.userinfo_endpoint, mxRecords: ans.map(a => a.data).filter(Boolean) };
+  } catch { return null; }
 }
 
-async function checkDNS(domain){
-  const r={mx:[],spf:null,txt:[],detectedProviders:[]};
-  const mx=await fetchJson(`https://dns.google/resolve?name=${domain}&type=MX`);if(mx)r.mx=(mx.Answer||[]).map(a=>a.data).filter(Boolean);
-  const txt=await fetchJson(`https://dns.google/resolve?name=${domain}&type=TXT`);if(txt){const all=(txt.Answer||[]).map(a=>a.data).filter(Boolean);r.spf=all.find(t=>t.includes('v=spf1'))||null;r.txt=all;}
-  const ms=r.mx.join(' ').toLowerCase(),ss=(r.spf||'').toLowerCase(),ts=r.txt.join(' ').toLowerCase();
-  if(ms.includes('google')||ms.includes('googlemail')||ss.includes('google'))r.detectedProviders.push('Google Workspace');
-  if(ms.includes('outlook')||ms.includes('microsoft')||ss.includes('microsoft')||ss.includes('protection.outlook'))r.detectedProviders.push('Microsoft 365');
-  if(ms.includes('amazonses')||ss.includes('amazonses'))r.detectedProviders.push('Amazon SES');
-  if(ms.includes('ovh'))r.detectedProviders.push('OVH Mail');
-  if(ms.includes('ionos')||ms.includes('1and1'))r.detectedProviders.push('IONOS / 1&1');
-  if(ms.includes('protonmail')||ts.includes('protonmail'))r.detectedProviders.push('Proton Mail');
-  if(ms.includes('zoho'))r.detectedProviders.push('Zoho Mail');
-  if(ms.includes('mimecast'))r.detectedProviders.push('Mimecast');
-  if(ms.includes('pphosted')||ms.includes('proofpoint'))r.detectedProviders.push('Proofpoint');
+async function checkDNS(domain) {
+  const r = { mx: [], spf: null, txt: [], detectedProviders: [] };
+  const mx  = await fetchJson(`https://dns.google/resolve?name=${domain}&type=MX`);  if (mx)  r.mx  = (mx.Answer  || []).map(a => a.data).filter(Boolean);
+  const txt = await fetchJson(`https://dns.google/resolve?name=${domain}&type=TXT`); if (txt) { const all = (txt.Answer || []).map(a => a.data).filter(Boolean); r.spf = all.find(t => t.includes('v=spf1')) || null; r.txt = all; }
+  const ms = r.mx.join(' ').toLowerCase(), ss = (r.spf || '').toLowerCase(), ts = r.txt.join(' ').toLowerCase();
+  const providers = [
+    [['google','googlemail'], ['google'], 'Google Workspace'],
+    [['outlook','microsoft'], ['microsoft','protection.outlook'], 'Microsoft 365'],
+    [['amazonses'], ['amazonses'], 'Amazon SES'],
+    [['ovh'], [], 'OVH Mail'],
+    [['ionos','1and1'], ['ionos','1&1'], 'IONOS / 1&1'],
+    [['protonmail'], ['protonmail'], 'Proton Mail'],
+    [['zoho'], [], 'Zoho Mail'],
+    [['mimecast'], [], 'Mimecast'],
+    [['pphosted','proofpoint'], [], 'Proofpoint'],
+  ];
+  for (const [mxKeys, spfKeys, name] of providers) {
+    if (mxKeys.some(k => ms.includes(k)) || spfKeys.some(k => ss.includes(k)) || (name === 'Proton Mail' && ts.includes('protonmail')))
+      r.detectedProviders.push(name);
+  }
   return r;
 }
 
-async function checkHealth(domain){
-  const checks=[];let score=0;
-  const mxA=await dnsQuery(domain,'MX');
-  if(mxA.length>0){score+=15;checks.push({t:'ok',icon:'✅',title:'MX Records présents',desc:mxA.map(a=>a.data).join(' | ')});}
-  else checks.push({t:'error',icon:'❌',title:'MX Records manquants',desc:'Aucun enregistrement MX.'});
-  const txtA=await dnsQuery(domain,'TXT'),allTxt=txtA.map(a=>a.data).filter(Boolean),spf=allTxt.find(t=>t.includes('v=spf1'));
-  if(spf){score+=15;checks.push({t:spf.includes('-all')?'ok':'warn',icon:spf.includes('-all')?'✅':'⚠️',title:spf.includes('-all')?'SPF strict (-all)':'SPF (softfail ~all)',desc:spf});}
-  else checks.push({t:'error',icon:'❌',title:'SPF manquant',desc:'Risque de spoofing.'});
-  const dmarcA=await dnsQuery(`_dmarc.${domain}`,'TXT'),dmarc=dmarcA.map(a=>a.data).find(d=>d.includes('v=DMARC1'));
-  let dmarcIsQuarantine=false;
-  if(dmarc){const p=(dmarc.match(/p=([^;]+)/i)||[])[1]?.trim().toLowerCase();if(p==='reject'){score+=20;checks.push({t:'ok',icon:'✅',title:'DMARC p=reject',desc:dmarc});}else if(p==='quarantine'){score+=20;dmarcIsQuarantine=true;checks.push({t:'ok',icon:'✅',title:'DMARC p=quarantine ⭐',desc:dmarc+' — Niveau équivalent à reject. ⭐ indique que p=reject serait préférable.'});}else{score+=5;checks.push({t:'warn',icon:'⚠️',title:'DMARC p=none',desc:dmarc});}}
-  else checks.push({t:'error',icon:'❌',title:'DMARC manquant',desc:`Aucun _dmarc.${domain}`});
-  const dkimSelectors=['selector1','selector2','default','google','microsoft','k1','mail','dkim','smtp','email','mailjet','sendgrid','mandrill','amazonses','postmark','sparkpost','mxroute','zoho','protonmail','brevo','s1','s2','sig1'];
-  const dkimResults={};
-  for(const s of dkimSelectors){const a=await dnsQuery(`${s}._domainkey.${domain}`,'TXT');const rec=a.map(x=>x.data).find(d=>d.includes('v=DKIM1')||d.includes('p='));dkimResults[s]=rec||null;}
-  const foundSelectors=Object.entries(dkimResults).filter(([,v])=>v!==null);
-  const hasSel1=dkimResults['selector1']!==null,hasSel2=dkimResults['selector2']!==null;
-  if(foundSelectors.length>0){
-    score+=25;const selNames=foundSelectors.map(([k])=>k).join(', ');
-    let dkimDesc=`Sélecteurs actifs : ${selNames}`;
-    if(hasSel1&&hasSel2)dkimDesc+=' — ✅ Rotation Microsoft 365 (selector1 + selector2 actifs)';
-    else if(hasSel1&&!hasSel2)dkimDesc+=' — ⚠️ selector1 actif, selector2 absent';
-    else if(!hasSel1&&hasSel2)dkimDesc+=' — ⚠️ selector2 actif, selector1 absent';
-    checks.push({t:'ok',icon:'✅',title:`DKIM actif (${selNames})`,desc:dkimDesc,dkimResults,hasSel1,hasSel2});
-  } else checks.push({t:'error',icon:'❌',title:'DKIM non détecté',desc:'Aucun DKIM sur les sélecteurs testés.',dkimResults,hasSel1:false,hasSel2:false});
-  const cnA=await dnsQuery(`www.${domain}`,'CNAME'),aA=await dnsQuery(`www.${domain}`,'A');
-  if(cnA.length>0){score+=5;checks.push({t:'ok',icon:'✅',title:'CNAME www',desc:cnA.map(a=>a.data).join(', ')});}
-  else if(aA.length>0){score+=4;checks.push({t:'info',icon:'ℹ️',title:'www via A record',desc:aA.map(a=>a.data).join(', ')});}
-  else checks.push({t:'warn',icon:'⚠️',title:'www non résolu',desc:`Aucun CNAME ni A pour www.${domain}.`});
-  const dsA=await dnsQuery(domain,'DS'),dkA=await dnsQuery(domain,'DNSKEY');
-  if(dsA.length>0||dkA.length>0){score+=10;checks.push({t:'ok',icon:'✅',title:'DNSSEC activé',desc:`${dsA.length} DS, ${dkA.length} DNSKEY.`});}
-  else checks.push({t:'warn',icon:'⚠️',title:'DNSSEC non activé',desc:'Vulnérable au DNS spoofing.'});
-  const mtaSts=await dnsQuery(`_mta-sts.${domain}`,'TXT');
-  const mtaRec=mtaSts.map(a=>a.data).find(d=>d.includes('v=STSv1'));
-  if(mtaRec){score+=5;checks.push({t:'ok',icon:'✅',title:'MTA-STS activé',desc:mtaRec});}
-  else checks.push({t:'info',icon:'ℹ️',title:'MTA-STS non configuré',desc:'Recommandé pour les domaines pro.'});
-  const bimiA=await dnsQuery(`default._bimi.${domain}`,'TXT');
-  const bimiRec=bimiA.map(a=>a.data).find(d=>d.includes('v=BIMI1'));
-  if(bimiRec){score+=5;checks.push({t:'ok',icon:'🏷️',title:'BIMI configuré',desc:bimiRec});}
-  else checks.push({t:'info',icon:'ℹ️',title:'BIMI absent',desc:'Nécessite DMARC p=quarantine ou reject.'});
-  return{score:Math.min(score,100),checks,dkimResults,hasSel1,hasSel2,dmarcIsQuarantine};
+async function checkHealth(domain) {
+  const checks = []; let score = 0;
+  const mxA = await dnsQuery(domain, 'MX');
+  if (mxA.length > 0) { score += 15; checks.push({ t:'ok',    icon:'✅', title:'MX Records présents', desc: mxA.map(a => a.data).join(' | ') }); }
+  else                              checks.push({ t:'error', icon:'❌', title:'MX Records manquants',  desc: 'Aucun enregistrement MX.' });
+
+  const txtA = await dnsQuery(domain, 'TXT'), allTxt = txtA.map(a => a.data).filter(Boolean), spf = allTxt.find(t => t.includes('v=spf1'));
+  if (spf) { score += 15; checks.push({ t: spf.includes('-all') ? 'ok' : 'warn', icon: spf.includes('-all') ? '✅' : '⚠️', title: spf.includes('-all') ? 'SPF strict (-all)' : 'SPF (softfail ~all)', desc: spf }); }
+  else     checks.push({ t:'error', icon:'❌', title:'SPF manquant', desc:'Risque de spoofing.' });
+
+  const dmarcA = await dnsQuery(`_dmarc.${domain}`, 'TXT'), dmarc = dmarcA.map(a => a.data).find(d => d.includes('v=DMARC1'));
+  let dmarcIsQuarantine = false;
+  if (dmarc) {
+    const p = (dmarc.match(/p=([^;]+)/i) || [])[1]?.trim().toLowerCase();
+    if (p === 'reject')     { score += 20; checks.push({ t:'ok',   icon:'✅', title:'DMARC p=reject', desc: dmarc }); }
+    else if (p === 'quarantine') { score += 20; dmarcIsQuarantine = true; checks.push({ t:'ok',   icon:'✅', title:'DMARC p=quarantine ⭐', desc: dmarc + ' — Niveau équivalent à reject. ⭐ indique que p=reject serait préférable.' }); }
+    else                    { score += 5;  checks.push({ t:'warn', icon:'⚠️', title:'DMARC p=none',   desc: dmarc }); }
+  } else checks.push({ t:'error', icon:'❌', title:'DMARC manquant', desc: `Aucun _dmarc.${domain}` });
+
+  const dkimSelectors = ['selector1','selector2','default','google','microsoft','k1','mail','dkim','smtp','email','mailjet','sendgrid','mandrill','amazonses','postmark','sparkpost','mxroute','zoho','protonmail','brevo','s1','s2','sig1'];
+  const dkimResults   = {};
+  for (const s of dkimSelectors) {
+    const a = await dnsQuery(`${s}._domainkey.${domain}`, 'TXT');
+    dkimResults[s] = a.map(x => x.data).find(d => d.includes('v=DKIM1') || d.includes('p=')) || null;
+  }
+  const foundSelectors = Object.entries(dkimResults).filter(([, v]) => v !== null);
+  const hasSel1 = dkimResults['selector1'] !== null, hasSel2 = dkimResults['selector2'] !== null;
+  if (foundSelectors.length > 0) {
+    score += 25;
+    const selNames = foundSelectors.map(([k]) => k).join(', ');
+    let dkimDesc = `Sélecteurs actifs : ${selNames}`;
+    if (hasSel1 && hasSel2)   dkimDesc += ' — ✅ Rotation Microsoft 365 (selector1 + selector2 actifs)';
+    else if (hasSel1)          dkimDesc += ' — ⚠️ selector1 actif, selector2 absent';
+    else if (hasSel2)          dkimDesc += ' — ⚠️ selector2 actif, selector1 absent';
+    checks.push({ t:'ok', icon:'✅', title:`DKIM actif (${selNames})`, desc: dkimDesc, dkimResults, hasSel1, hasSel2 });
+  } else checks.push({ t:'error', icon:'❌', title:'DKIM non détecté', desc:'Aucun DKIM sur les sélecteurs testés.', dkimResults, hasSel1:false, hasSel2:false });
+
+  const cnA = await dnsQuery(`www.${domain}`, 'CNAME'), aA = await dnsQuery(`www.${domain}`, 'A');
+  if      (cnA.length > 0) { score += 5; checks.push({ t:'ok',   icon:'✅', title:'CNAME www',          desc: cnA.map(a => a.data).join(', ') }); }
+  else if (aA.length  > 0) { score += 4; checks.push({ t:'info', icon:'ℹ️', title:'www via A record',   desc: aA.map(a  => a.data).join(', ') }); }
+  else                              checks.push({ t:'warn', icon:'⚠️', title:'www non résolu',           desc: `Aucun CNAME ni A pour www.${domain}.` });
+
+  const dsA = await dnsQuery(domain, 'DS'), dkA = await dnsQuery(domain, 'DNSKEY');
+  if (dsA.length > 0 || dkA.length > 0) { score += 10; checks.push({ t:'ok',   icon:'✅', title:'DNSSEC activé',          desc: `${dsA.length} DS, ${dkA.length} DNSKEY.` }); }
+  else                                               checks.push({ t:'warn', icon:'⚠️', title:'DNSSEC non activé',         desc: 'Vulnérable au DNS spoofing.' });
+
+  const mtaSts = await dnsQuery(`_mta-sts.${domain}`, 'TXT'), mtaRec = mtaSts.map(a => a.data).find(d => d.includes('v=STSv1'));
+  if (mtaRec) { score += 5; checks.push({ t:'ok',   icon:'✅', title:'MTA-STS activé',         desc: mtaRec }); }
+  else                  checks.push({ t:'info', icon:'ℹ️', title:'MTA-STS non configuré',  desc: 'Recommandé pour les domaines pro.' });
+
+  const bimiA = await dnsQuery(`default._bimi.${domain}`, 'TXT'), bimiRec = bimiA.map(a => a.data).find(d => d.includes('v=BIMI1'));
+  if (bimiRec) { score += 5; checks.push({ t:'ok',   icon:'🏷️', title:'BIMI configuré',          desc: bimiRec }); }
+  else                  checks.push({ t:'info', icon:'ℹ️', title:'BIMI absent',              desc: 'Nécessite DMARC p=quarantine ou reject.' });
+
+  return { score: Math.min(score, 100), checks, dkimResults, hasSel1, hasSel2, dmarcIsQuarantine };
 }
 
-async function checkOtherTenants(domain,dns){
-  const t=[],ms=(dns.mx||[]).join(' ').toLowerCase(),ss=(dns.spf||'').toLowerCase(),ts=(dns.txt||[]).join(' ').toLowerCase();
-  const L=(f,n)=>`<img class="svc-logo" src="${f}" alt="${n}" loading="lazy">`;
-  t.push({name:'Google Workspace',icon:L('google.png','Google Workspace'),on:ms.includes('google.com')||ms.includes('googlemail.com')});
-  const odoo=ts.includes('odoo')||ss.includes('odoo')||ms.includes('odoo')||(await dnsQuery(`odoo.${domain}`,'CNAME')).length>0;
-  t.push({name:'Odoo',icon:L('Odoo.png','Odoo'),on:odoo});
-  t.push({name:'Salesforce',icon:L('Salesforce.png','Salesforce'),on:ts.includes('salesforce')||ss.includes('salesforce')});
-  const hs=ts.includes('hubspot')||ss.includes('hubspot')||(await dnsQuery(`hs1._domainkey.${domain}`,'CNAME')).length>0;
-  t.push({name:'HubSpot',icon:L('HubSpot.png','HubSpot'),on:hs});
-  t.push({name:'Zendesk',icon:L('Zendesk.png','Zendesk'),on:ts.includes('zendesk')||ss.includes('zendesk')});
-  t.push({name:'Slack',icon:L('Slack.png','Slack'),on:ts.includes('slack')||ss.includes('slack-mail')});
-  const atl=ts.includes('atlassian')||!!(dns.txt||[]).find(x=>x.toLowerCase().includes('atlassian-domain-verification'));
-  t.push({name:'Atlassian',icon:L('Atlassian.png','Atlassian'),on:atl});
-  t.push({name:'Amazon SES',icon:L('Amazon.png','Amazon SES'),on:ss.includes('amazonses')||ms.includes('amazonses')});
+async function checkOtherTenants(domain, dns) {
+  const t  = [], ms = (dns.mx || []).join(' ').toLowerCase(), ss = (dns.spf || '').toLowerCase(), ts = (dns.txt || []).join(' ').toLowerCase();
+  const L  = (f, n) => `<img class="svc-logo" src="${f}" alt="${n}" loading="lazy">`;
+  t.push({ name:'Google Workspace', icon:L('google.png','Google Workspace'),     on: ms.includes('google.com') || ms.includes('googlemail.com') });
+  const odoo = ts.includes('odoo') || ss.includes('odoo') || ms.includes('odoo') || (await dnsQuery(`odoo.${domain}`, 'CNAME')).length > 0;
+  t.push({ name:'Odoo',             icon:L('Odoo.png','Odoo'),                   on: odoo });
+  t.push({ name:'Salesforce',       icon:L('Salesforce.png','Salesforce'),        on: ts.includes('salesforce') || ss.includes('salesforce') });
+  const hs = ts.includes('hubspot') || ss.includes('hubspot') || (await dnsQuery(`hs1._domainkey.${domain}`, 'CNAME')).length > 0;
+  t.push({ name:'HubSpot',          icon:L('HubSpot.png','HubSpot'),              on: hs });
+  t.push({ name:'Zendesk',          icon:L('Zendesk.png','Zendesk'),              on: ts.includes('zendesk')    || ss.includes('zendesk') });
+  t.push({ name:'Slack',            icon:L('Slack.png','Slack'),                  on: ts.includes('slack')      || ss.includes('slack-mail') });
+  const atl = ts.includes('atlassian') || !!(dns.txt || []).find(x => x.toLowerCase().includes('atlassian-domain-verification'));
+  t.push({ name:'Atlassian',        icon:L('Atlassian.png','Atlassian'),          on: atl });
+  t.push({ name:'Amazon SES',       icon:L('Amazon.png','Amazon SES'),            on: ss.includes('amazonses')  || ms.includes('amazonses') });
   return t;
 }
 
-const MSA_DOMAINS=new Set(['outlook.com','outlook.fr','outlook.be','outlook.es','outlook.de','outlook.it','outlook.co.uk','outlook.jp','outlook.pt','outlook.dk','outlook.at','outlook.ch','hotmail.com','hotmail.fr','hotmail.be','hotmail.es','hotmail.de','hotmail.it','hotmail.co.uk','hotmail.nl','hotmail.pt','hotmail.dk','hotmail.se','hotmail.no','live.com','live.fr','live.be','live.nl','live.co.uk','live.de','live.it','live.es','live.se','live.dk','live.no','live.ca','live.com.au','msn.com','passport.com','windowslive.com']);
-const isMsaPersonalDomain=d=>MSA_DOMAINS.has(d.toLowerCase());
+const MSA_DOMAINS = new Set(['outlook.com','outlook.fr','outlook.be','outlook.es','outlook.de','outlook.it','outlook.co.uk','outlook.jp','outlook.pt','outlook.dk','outlook.at','outlook.ch','hotmail.com','hotmail.fr','hotmail.be','hotmail.es','hotmail.de','hotmail.it','hotmail.co.uk','hotmail.nl','hotmail.pt','hotmail.dk','hotmail.se','hotmail.no','live.com','live.fr','live.be','live.nl','live.co.uk','live.de','live.it','live.es','live.se','live.dk','live.no','live.ca','live.com.au','msn.com','passport.com','windowslive.com']);
+const isMsaPersonalDomain = d => MSA_DOMAINS.has(d.toLowerCase());
 
-async function checkDuplicate(email){
-  const domain=extractDomain(email);
-  if(isMsaPersonalDomain(domain))return{hasPersonal:true,isNativelyPersonal:true,hasFreeAccount:false,details:[`${domain} est un domaine Microsoft grand public`]};
-  let hasPersonal=false,hasFreeAccount=false;const details=[];
-  try{const r=await fetchJson(`https://login.microsoftonline.com/common/userrealm/?user=${encodeURIComponent(email)}&api-version=2.1`);if(r){const at=(r.account_type||'').toLowerCase();if(at==='consumer'||r.NameSpaceType==='Consumer')hasPersonal=true;}}catch{}
-  try{const body=JSON.stringify({username:email,isOtherIdpSupported:true,checkPhones:false,isRemoteNGCSupported:true,isCookieBannerShown:false,isFidoSupported:true,originalRequest:'',country:'FR',forceotclogin:false,isExternalFederationDisallowed:false,isRemoteConnectSupported:false,federationFlags:0,isSignup:false,flowToken:''});const res=await fetch('https://login.microsoftonline.com/common/GetCredentialType',{method:'POST',headers:{'Content-Type':'application/json'},body,signal:AbortSignal.timeout(8000)});if(res.ok){const d=await res.json();const ie=d.IfExistsResult;if(ie===5){hasPersonal=true;details.push('Compte MSA personnel confirmé');}if(ie===0){const pref=d.Credentials?.PrefCredential;if(pref===3){hasPersonal=true;details.push('Credential préféré : MSA personnel');}}if((ie===0||ie===5)&&!d.EstsProperties?.UserTenantBranding){hasFreeAccount=true;details.push('Compte Microsoft gratuit détecté');}if(d.FederationRedirectUrl&&d.FederationRedirectUrl.includes('live.com')){hasFreeAccount=true;details.push('Redirection login.live.com détectée');}}}catch{}
-  try{const r2=await fetchJson(`https://login.microsoftonline.com/consumers/userrealm/?user=${encodeURIComponent(email)}&api-version=2.1`);if(r2?.NameSpaceType&&r2.NameSpaceType!=='Unknown'){hasPersonal=true;hasFreeAccount=true;details.push('Trouvé dans le realm consumers');}}catch{}
-  return{hasPersonal:hasPersonal||hasFreeAccount,hasFreeAccount,isNativelyPersonal:false,details};
+async function checkDuplicate(email) {
+  const domain = extractDomain(email);
+  if (isMsaPersonalDomain(domain)) return { hasPersonal:true, isNativelyPersonal:true, hasFreeAccount:false, details:[`${domain} est un domaine Microsoft grand public`] };
+  let hasPersonal = false, hasFreeAccount = false; const details = [];
+  try {
+    const r = await fetchJson(`https://login.microsoftonline.com/common/userrealm/?user=${encodeURIComponent(email)}&api-version=2.1`);
+    if (r) { const at = (r.account_type || '').toLowerCase(); if (at === 'consumer' || r.NameSpaceType === 'Consumer') hasPersonal = true; }
+  } catch {}
+  try {
+    const body = JSON.stringify({ username:email, isOtherIdpSupported:true, checkPhones:false, isRemoteNGCSupported:true, isCookieBannerShown:false, isFidoSupported:true, originalRequest:'', country:'FR', forceotclogin:false, isExternalFederationDisallowed:false, isRemoteConnectSupported:false, federationFlags:0, isSignup:false, flowToken:'' });
+    const res  = await fetch('https://login.microsoftonline.com/common/GetCredentialType', { method:'POST', headers:{'Content-Type':'application/json'}, body, signal:AbortSignal.timeout(8000) });
+    if (res.ok) {
+      const d  = await res.json();
+      const ie = d.IfExistsResult;
+      if (ie === 5)  { hasPersonal = true; details.push('Compte MSA personnel confirmé'); }
+      if (ie === 0 && d.Credentials?.PrefCredential === 3) { hasPersonal = true; details.push('Credential préféré : MSA personnel'); }
+      if ((ie === 0 || ie === 5) && !d.EstsProperties?.UserTenantBranding) { hasFreeAccount = true; details.push('Compte Microsoft gratuit détecté'); }
+      if (d.FederationRedirectUrl?.includes('live.com')) { hasFreeAccount = true; details.push('Redirection login.live.com détectée'); }
+    }
+  } catch {}
+  try {
+    const r2 = await fetchJson(`https://login.microsoftonline.com/consumers/userrealm/?user=${encodeURIComponent(email)}&api-version=2.1`);
+    if (r2?.NameSpaceType && r2.NameSpaceType !== 'Unknown') { hasPersonal = true; hasFreeAccount = true; details.push('Trouvé dans le realm consumers'); }
+  } catch {}
+  return { hasPersonal: hasPersonal || hasFreeAccount, hasFreeAccount, isNativelyPersonal:false, details };
 }
 
-async function checkHost(domain){
-  function parseRdap(r){
-    const entities=r.entities||[];let registrar=null;
-    for(const e of entities){if((e.roles||[]).includes('registrar')){const vcard=e.vcardArray?.[1]||[];const fn=vcard.find(x=>x[0]==='fn');if(fn){registrar=fn[3];break;}}}
-    const ns=(r.nameservers||[]).map(n=>n.ldhName).filter(Boolean);
-    const events=r.events||[];
-    const created=events.find(e=>e.eventAction==='registration')?.eventDate;
-    const expires=events.find(e=>e.eventAction==='expiration')?.eventDate;
-    const updated=events.find(e=>e.eventAction==='last changed')?.eventDate;
-    return{registrar,ns,status:r.status||[],created,expires,updated,hostName:detectHostFromNS(ns.join(' ').toLowerCase(),registrar||'')};
+async function checkHost(domain) {
+  function parseRdap(r) {
+    const entities  = r.entities || []; let registrar = null;
+    for (const e of entities) { if ((e.roles || []).includes('registrar')) { const fn = (e.vcardArray?.[1] || []).find(x => x[0] === 'fn'); if (fn) { registrar = fn[3]; break; } } }
+    const ns      = (r.nameservers || []).map(n => n.ldhName).filter(Boolean);
+    const events  = r.events || [];
+    const created = events.find(e => e.eventAction === 'registration')?.eventDate;
+    const expires = events.find(e => e.eventAction === 'expiration')?.eventDate;
+    const updated = events.find(e => e.eventAction === 'last changed')?.eventDate;
+    return { registrar, ns, status: r.status || [], created, expires, updated, hostName: detectHostFromNS(ns.join(' ').toLowerCase(), registrar || '') };
   }
-  try{const r=await fetchJsonC(`https://rdap.org/domain/${domain}`,'host',12000);if(r)return parseRdap(r);}catch{}
+  try { const r = await fetchJsonC(`https://rdap.org/domain/${domain}`, 'host', 12000); if (r) return parseRdap(r); } catch {}
   return null;
 }
 
-function detectHostFromNS(nsStr,registrar){
-  const r=registrar.toLowerCase();
-  if(nsStr.includes('ovh')||r.includes('ovh'))return'OVH';
-  if(nsStr.includes('gandi')||r.includes('gandi'))return'Gandi';
-  if(nsStr.includes('cloudflare')||r.includes('cloudflare'))return'Cloudflare';
-  if(nsStr.includes('awsdns')||r.includes('amazon')||r.includes('aws'))return'Amazon AWS / Route 53';
-  if(nsStr.includes('google')||r.includes('google'))return'Google Domains / Cloud DNS';
-  if(nsStr.includes('azure')||nsStr.includes('microsoft')||r.includes('microsoft'))return'Microsoft Azure DNS';
-  if(nsStr.includes('ionos')||nsStr.includes('1and1')||r.includes('ionos')||r.includes('1&1'))return'IONOS / 1&1';
-  if(nsStr.includes('godaddy')||r.includes('godaddy'))return'GoDaddy';
-  if(nsStr.includes('namecheap')||r.includes('namecheap'))return'Namecheap';
-  if(nsStr.includes('infomaniak')||r.includes('infomaniak'))return'Infomaniak';
-  if(nsStr.includes('online.net')||r.includes('online.net')||r.includes('scaleway'))return'Scaleway / Online.net';
-  if(nsStr.includes('o2switch')||r.includes('o2switch'))return'o2switch';
-  if(nsStr.includes('planethoster')||r.includes('planethoster'))return'PlanetHoster';
-  if(nsStr.includes('nameshield')||r.includes('nameshield'))return'Nameshield';
-  if(r.includes('amen')||r.includes('agence des m')||nsStr.includes('amen.fr'))return'AMEN';
-  if(r.includes('csc corporate')||r.includes('csc global')||r.includes('corporation service')||nsStr.includes('cscdbs.com')||nsStr.includes('cscglobal'))return'CSC Corporate Domains';
-  if(nsStr.includes('markmonitor')||r.includes('markmonitor'))return'MarkMonitor';
-  if(nsStr.includes('verisign')||r.includes('verisign'))return'VeriSign';
-  if(nsStr.includes('networksolutions')||r.includes('network solutions'))return'Network Solutions';
-  if(nsStr.includes('register.com')||r.includes('register.com'))return'Register.com';
-  if(nsStr.includes('nic.fr')||r.includes('afnic')||r.includes('nic.fr'))return'AFNIC';
-  if(nsStr.includes('bookmyname')||r.includes('bookmyname'))return'BookMyName';
-  if(nsStr.includes('hostinger')||r.includes('hostinger'))return'Hostinger';
-  if(nsStr.includes('siteground')||r.includes('siteground'))return'SiteGround';
-  if(nsStr.includes('bluehost')||r.includes('bluehost'))return'Bluehost';
-  if(nsStr.includes('dreamhost')||r.includes('dreamhost'))return'DreamHost';
-  if(nsStr.includes('wpengine')||r.includes('wp engine'))return'WP Engine';
-  if(nsStr.includes('hetzner')||r.includes('hetzner'))return'Hetzner';
-  if(nsStr.includes('digitalocean')||r.includes('digitalocean'))return'DigitalOcean';
-  if(nsStr.includes('linode')||r.includes('linode')||r.includes('akamai'))return'Akamai / Linode';
-  if(nsStr.includes('vultr')||r.includes('vultr'))return'Vultr';
-  if(nsStr.includes('dnsimple')||r.includes('dnsimple'))return'DNSimple';
-  if(nsStr.includes('name.com')||r.includes('name.com'))return'Name.com';
-  if(nsStr.includes('dynadot')||r.includes('dynadot'))return'Dynadot';
-  if(nsStr.includes('porkbun')||r.includes('porkbun'))return'Porkbun';
-  if(nsStr.includes('hover')||r.includes('hover'))return'Hover';
-  if(nsStr.includes('cloudns')||r.includes('cloudns'))return'ClouDNS';
-  if(r)return registrar;return'Inconnu';
+function detectHostFromNS(nsStr, registrar) {
+  const r = registrar.toLowerCase();
+  const map = [
+    [['ovh'],                              ['ovh'],                         'OVH'],
+    [['gandi'],                            ['gandi'],                       'Gandi'],
+    [['cloudflare'],                       ['cloudflare'],                  'Cloudflare'],
+    [['awsdns'],                           ['amazon','aws'],                'Amazon AWS / Route 53'],
+    [['google'],                           ['google'],                      'Google Domains / Cloud DNS'],
+    [['azure','microsoft'],                ['microsoft'],                   'Microsoft Azure DNS'],
+    [['ionos','1and1'],                    ['ionos','1&1'],                  'IONOS / 1&1'],
+    [['godaddy'],                          ['godaddy'],                     'GoDaddy'],
+    [['namecheap'],                        ['namecheap'],                   'Namecheap'],
+    [['infomaniak'],                       ['infomaniak'],                  'Infomaniak'],
+    [['online.net'],                       ['online.net','scaleway'],       'Scaleway / Online.net'],
+    [['o2switch'],                         ['o2switch'],                    'o2switch'],
+    [['planethoster'],                     ['planethoster'],                'PlanetHoster'],
+    [['nameshield'],                       ['nameshield'],                  'Nameshield'],
+    [['amen.fr'],                          ['amen','agence des m'],         'AMEN'],
+    [['cscdbs.com','cscglobal'],           ['csc corporate','csc global','corporation service'], 'CSC Corporate Domains'],
+    [['markmonitor'],                      ['markmonitor'],                 'MarkMonitor'],
+    [['verisign'],                         ['verisign'],                    'VeriSign'],
+    [['networksolutions'],                 ['network solutions'],           'Network Solutions'],
+    [['register.com'],                     ['register.com'],                'Register.com'],
+    [['nic.fr'],                           ['afnic','nic.fr'],              'AFNIC'],
+    [['bookmyname'],                       ['bookmyname'],                  'BookMyName'],
+    [['hostinger'],                        ['hostinger'],                   'Hostinger'],
+    [['siteground'],                       ['siteground'],                  'SiteGround'],
+    [['bluehost'],                         ['bluehost'],                    'Bluehost'],
+    [['dreamhost'],                        ['dreamhost'],                   'DreamHost'],
+    [['wpengine'],                         ['wp engine'],                   'WP Engine'],
+    [['hetzner'],                          ['hetzner'],                     'Hetzner'],
+    [['digitalocean'],                     ['digitalocean'],                'DigitalOcean'],
+    [['linode'],                           ['linode','akamai'],             'Akamai / Linode'],
+    [['vultr'],                            ['vultr'],                       'Vultr'],
+    [['dnsimple'],                         ['dnsimple'],                    'DNSimple'],
+    [['name.com'],                         ['name.com'],                    'Name.com'],
+    [['dynadot'],                          ['dynadot'],                     'Dynadot'],
+    [['porkbun'],                          ['porkbun'],                     'Porkbun'],
+    [['hover'],                            ['hover'],                       'Hover'],
+    [['cloudns'],                          ['cloudns'],                     'ClouDNS'],
+  ];
+  for (const [nsKeys, rKeys, label] of map) {
+    if (nsKeys.some(k => nsStr.includes(k)) || rKeys.some(k => r.includes(k))) return label;
+  }
+  return registrar || 'Inconnu';
 }
 
-function formatDate(d){if(!d)return null;try{return new Date(d).toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});}catch{return d;}}
+function formatDate(d) {
+  if (!d) return null;
+  try { return new Date(d).toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' }); } catch { return d; }
+}
 
-const HOST_LOGO_MAP={
+const HOST_LOGO_MAP = {
   ovh:              {domain:'ovh.com',               color:'#007DC5', label:'OVH'},
   cloudflare:       {domain:'cloudflare.com',         color:'#F48120', label:'CF'},
   gandi:            {domain:'gandi.net',              color:'#2E7D32', label:'GN'},
@@ -933,414 +1001,424 @@ const HOST_LOGO_MAP={
   azure:            {domain:'azure.microsoft.com',    color:'#0078D4', label:'AZ'},
   o2switch:         {domain:'o2switch.fr',            color:'#2ECC71', label:'O2'},
   planethoster:     {domain:'planethoster.com',       color:'#E74C3C', label:'PH'},
-  nameshield:           {domain:'nameshield.net',         color:'#003566', label:'NSH'},
-  amen:                 {domain:'amen.fr',                color:'#E2001A', label:'AMN'},
-  'csc corporate':      {domain:'cscglobal.com',          color:'#1A1A2E', label:'CSC'},
-  markmonitor:          {domain:'markmonitor.com',        color:'#003087', label:'MM'},
-  verisign:             {domain:'verisign.com',           color:'#005A8E', label:'VS'},
-  'network solutions':  {domain:'networksolutions.com',   color:'#E8622A', label:'NS'},
-  'register.com':       {domain:'register.com',           color:'#0069AA', label:'RC'},
-  afnic:                {domain:'afnic.fr',               color:'#003189', label:'AF'},
-  bookmyname:           {domain:'bookmyname.com',         color:'#FF6600', label:'BM'},
-  hostinger:            {domain:'hostinger.com',          color:'#7B2FBE', label:'HG'},
-  siteground:           {domain:'siteground.com',         color:'#F7941D', label:'SG'},
-  bluehost:             {domain:'bluehost.com',           color:'#003768', label:'BH'},
-  dreamhost:            {domain:'dreamhost.com',          color:'#00ADEF', label:'DH'},
-  'wp engine':          {domain:'wpengine.com',           color:'#40BFB0', label:'WP'},
-  hetzner:              {domain:'hetzner.com',            color:'#D50C2D', label:'HZ'},
-  digitalocean:         {domain:'digitalocean.com',       color:'#0080FF', label:'DO'},
-  akamai:               {domain:'akamai.com',             color:'#009BDE', label:'AK'},
-  linode:               {domain:'linode.com',             color:'#009BDE', label:'LN'},
-  vultr:                {domain:'vultr.com',              color:'#007BFC', label:'VT'},
-  dnsimple:             {domain:'dnsimple.com',           color:'#1083C6', label:'DS'},
-  'name.com':           {domain:'name.com',               color:'#3E9A47', label:'NM'},
-  dynadot:              {domain:'dynadot.com',            color:'#FF6600', label:'DY'},
-  porkbun:              {domain:'porkbun.com',            color:'#F26522', label:'PB'},
-  hover:                {domain:'hover.com',              color:'#41B6E6', label:'HV'},
-  cloudns:              {domain:'cloudns.net',            color:'#2196F3', label:'CN'},
+  nameshield:       {domain:'nameshield.net',         color:'#003566', label:'NSH'},
+  amen:             {domain:'amen.fr',                color:'#E2001A', label:'AMN'},
+  'csc corporate':  {domain:'cscglobal.com',          color:'#1A1A2E', label:'CSC'},
+  markmonitor:      {domain:'markmonitor.com',        color:'#003087', label:'MM'},
+  verisign:         {domain:'verisign.com',           color:'#005A8E', label:'VS'},
+  'network solutions':{domain:'networksolutions.com', color:'#E8622A', label:'NS'},
+  'register.com':   {domain:'register.com',           color:'#0069AA', label:'RC'},
+  afnic:            {domain:'afnic.fr',               color:'#003189', label:'AF'},
+  bookmyname:       {domain:'bookmyname.com',         color:'#FF6600', label:'BM'},
+  hostinger:        {domain:'hostinger.com',          color:'#7B2FBE', label:'HG'},
+  siteground:       {domain:'siteground.com',         color:'#F7941D', label:'SG'},
+  bluehost:         {domain:'bluehost.com',           color:'#003768', label:'BH'},
+  dreamhost:        {domain:'dreamhost.com',          color:'#00ADEF', label:'DH'},
+  'wp engine':      {domain:'wpengine.com',           color:'#40BFB0', label:'WP'},
+  hetzner:          {domain:'hetzner.com',            color:'#D50C2D', label:'HZ'},
+  digitalocean:     {domain:'digitalocean.com',       color:'#0080FF', label:'DO'},
+  akamai:           {domain:'akamai.com',             color:'#009BDE', label:'AK'},
+  linode:           {domain:'linode.com',             color:'#009BDE', label:'LN'},
+  vultr:            {domain:'vultr.com',              color:'#007BFC', label:'VT'},
+  dnsimple:         {domain:'dnsimple.com',           color:'#1083C6', label:'DS'},
+  'name.com':       {domain:'name.com',               color:'#3E9A47', label:'NM'},
+  dynadot:          {domain:'dynadot.com',            color:'#FF6600', label:'DY'},
+  porkbun:          {domain:'porkbun.com',            color:'#F26522', label:'PB'},
+  hover:            {domain:'hover.com',              color:'#41B6E6', label:'HV'},
+  cloudns:          {domain:'cloudns.net',            color:'#2196F3', label:'CN'},
 };
-function hostLogo(hostName){
-  if(!hostName)return{html:_hostInitial('?','#9ca3af'),imgUrl:null};
-  const l=hostName.toLowerCase();
-  for(const[key,val]of Object.entries(HOST_LOGO_MAP)){if(l.includes(key)){const faviconUrl=`https://www.google.com/s2/favicons?domain=${val.domain}&sz=64`;const fid='hlogo_'+Math.random().toString(36).slice(2);const html=`<img src="${faviconUrl}" style="width:22px;height:22px;object-fit:contain;border-radius:4px" onerror="this.style.display='none';document.getElementById('${fid}').style.display='flex'" alt="${val.label}"><span id="${fid}" style="display:none;width:22px;height:22px;border-radius:4px;background:${val.color};color:#fff;font-size:8px;font-weight:800;align-items:center;justify-content:center">${val.label}</span>`;return{html,imgUrl:faviconUrl};}}
-  return{html:_hostInitial(hostName[0]?.toUpperCase()||'?','#6b7280'),imgUrl:null};
+
+function hostLogo(hostName) {
+  if (!hostName) return { html: _hostInitial('?', '#9ca3af'), imgUrl: null };
+  const l = hostName.toLowerCase();
+  for (const [key, val] of Object.entries(HOST_LOGO_MAP)) {
+    if (l.includes(key)) {
+      const fid        = 'hlogo_' + Math.random().toString(36).slice(2);
+      const faviconUrl = `https://www.google.com/s2/favicons?domain=${val.domain}&sz=64`;
+      const html       = `<img src="${faviconUrl}" style="width:22px;height:22px;object-fit:contain;border-radius:4px" onerror="this.style.display='none';document.getElementById('${fid}').style.display='flex'" alt="${val.label}"><span id="${fid}" style="display:none;width:22px;height:22px;border-radius:4px;background:${val.color};color:#fff;font-size:8px;font-weight:800;align-items:center;justify-content:center">${val.label}</span>`;
+      return { html, imgUrl: faviconUrl };
+    }
+  }
+  return { html: _hostInitial(hostName[0]?.toUpperCase() || '?', '#6b7280'), imgUrl: null };
 }
-function _hostInitial(letter,color){return`<span style="display:inline-flex;width:22px;height:22px;border-radius:4px;background:${color};color:#fff;font-size:9px;font-weight:800;align-items:center;justify-content:center">${letter}</span>`;}
+function _hostInitial(letter, color) {
+  return `<span style="display:inline-flex;width:22px;height:22px;border-radius:4px;background:${color};color:#fff;font-size:9px;font-weight:800;align-items:center;justify-content:center">${letter}</span>`;
+}
 
-const MS_SVG=`<img src="Microsoft.png" width="22" height="22" alt="Microsoft" style="object-fit:contain;border-radius:3px;">`;
-const GG_SVG=`<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>`;
+const MS_SVG = `<img src="Microsoft.png" width="22" height="22" alt="Microsoft" style="object-fit:contain;border-radius:3px;">`;
+const GG_SVG = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>`;
 
-function addRow(b,label,value,hiClass=''){
-  if(!value)return;
-  const id='rv_'+Math.random().toString(36).slice(2);
-  const row=document.createElement('div');row.className='d-row'+(hiClass?' '+hiClass:'');
-  row.innerHTML=`<div class="d-label">${label}</div><div class="d-value"><span id="${id}" style="flex:1">${value.replace(/\n/g,'<br>')}</span><button class="copy-btn" onclick="copyVal('${id}',this)">Copier</button></div>`;
+// ── UI helpers ──
+function addRow(b, label, value, hiClass = '') {
+  if (!value) return;
+  const id  = 'rv_' + Math.random().toString(36).slice(2);
+  const row = document.createElement('div');
+  row.className = 'd-row' + (hiClass ? ' ' + hiClass : '');
+  row.innerHTML = `<div class="d-label">${label}</div><div class="d-value"><span id="${id}" style="flex:1">${value.replace(/\n/g, '<br>')}</span><button class="copy-btn" onclick="copyVal('${id}',this)">Copier</button></div>`;
   b.appendChild(row);
 }
-function addSectionTitle(b,title){const d=document.createElement('div');d.className='panel-section-title';d.textContent=title;b.appendChild(d);}
+function addSectionTitle(b, title) {
+  const d = document.createElement('div'); d.className = 'panel-section-title'; d.textContent = title; b.appendChild(d);
+}
+function showError(msg) { const b = document.getElementById('errBox'); b.textContent = msg; b.style.display = 'block'; }
+function copyVal(id, btn) {
+  navigator.clipboard.writeText(document.getElementById(id).innerText).then(() => { btn.textContent = '✓ Copié'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 1500); });
+}
+function lockButtons()     { document.getElementById('checkBtnFast').disabled = true;  document.getElementById('checkBtnFull').disabled = true; }
+function unlockButtons()   { document.getElementById('checkBtnFast').disabled = false; document.getElementById('checkBtnFull').disabled = false; }
+function setFastLoading(on){ document.getElementById('btnFastText').style.display = on ? 'none' : 'inline'; document.getElementById('spinnerFast').style.display = on ? 'inline-block' : 'none'; }
+function setFullLoading(on){ document.getElementById('btnFullText').style.display  = on ? 'none' : 'inline'; document.getElementById('spinnerFull').style.display  = on ? 'inline-block' : 'none'; }
 
-function buildScoreRing(score,dmarcIsQuarantine){
-  const r=22,circ=2*Math.PI*r,offset=circ-(score/100)*circ;
-  const color=score<40?'#dc2626':score<70?'#d97706':'#16a34a';
-  const lbl=score>=80?'Excellent':score>=60?'Bon':score>=40?'Moyen':'Faible';
-  const lblColor=score<40?'#dc2626':score<70?'#b45309':'#15803d';
-  const bg=score<40?'#1A1010':score<70?'#12100C':'#0C120C';
-  const starNote=dmarcIsQuarantine?'<div style="font-size:9.5px;font-weight:700;color:#b45309;margin-top:3px">⭐ DMARC p=quarantine — score plein, p=reject recommandé</div>':'';
-  const d=document.createElement('div');d.className='score-block';d.style.background=bg;d.style.borderColor=color+'44';
-  d.innerHTML=`<div class="score-ring"><svg viewBox="0 0 54 54"><circle class="trk" cx="27" cy="27" r="${r}"/><circle class="fll" cx="27" cy="27" r="${r}" stroke="${color}" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/></svg><div class="lbl">${score}%${dmarcIsQuarantine?'<span style="font-size:8px">⭐</span>':''}</div></div><div class="score-info"><div class="score-title" style="color:${lblColor}">Sécurité : ${lbl}</div><div class="score-desc">MX · SPF · DMARC · DKIM · DNSSEC · MTA-STS · BIMI</div>${starNote}</div>`;
-  return d;
+function buildScoreRing(score, dmarcIsQuarantine) {
+  const r      = 22, circ = 2 * Math.PI * r, offset = circ - (score / 100) * circ;
+  const color  = score < 40 ? '#dc2626' : score < 70 ? '#d97706' : '#16a34a';
+  const lbl    = score >= 80 ? 'Excellent' : score >= 60 ? 'Bon' : score >= 40 ? 'Moyen' : 'Faible';
+  const lblClr = score < 40 ? '#dc2626' : score < 70 ? '#b45309' : '#15803d';
+  const bg     = score < 40 ? '#1A1010' : score < 70 ? '#12100C' : '#0C120C';
+  const star   = dmarcIsQuarantine ? '<div style="font-size:9.5px;font-weight:700;color:#b45309;margin-top:3px">⭐ DMARC p=quarantine — score plein, p=reject recommandé</div>' : '';
+  const el = document.createElement('div'); el.className = 'score-block'; el.style.background = bg; el.style.borderColor = color + '44';
+  el.innerHTML = `<div class="score-ring"><svg viewBox="0 0 54 54"><circle class="trk" cx="27" cy="27" r="${r}"/><circle class="fll" cx="27" cy="27" r="${r}" stroke="${color}" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/></svg><div class="lbl">${score}%${dmarcIsQuarantine ? '<span style="font-size:8px">⭐</span>' : ''}</div></div><div class="score-info"><div class="score-title" style="color:${lblClr}">Sécurité : ${lbl}</div><div class="score-desc">MX · SPF · DMARC · DKIM · DNSSEC · MTA-STS · BIMI</div>${star}</div>`;
+  return el;
 }
 
-function buildDkimBlock(b,dkimResults,hasSel1,hasSel2){
-  addSectionTitle(b,'Détail des sélecteurs DKIM testés');
-  const priority=['selector1','selector2'];
-  const others=Object.keys(dkimResults).filter(k=>!priority.includes(k));
-  for(const sel of [...priority,...others]){
-    const val=dkimResults[sel];const present=val!==null;
-    const div=document.createElement('div');div.className='dkim-detail';
-    const shortVal=val&&val.length>100?val.slice(0,100)+'…':val;
-    const isMsPrimary=priority.includes(sel);
-    div.innerHTML=`<div class="dkim-detail-head"><span style="font-size:10.5px;font-weight:800;color:var(--text)">${sel}._domainkey${isMsPrimary?' <span style="font-size:8px;color:#0078d4;font-weight:700">[MS365]</span>':''}</span><span class="dkim-sel-badge ${present?'':'absent'}">${present?'✅ Présent':'❌ Absent'}</span></div>${present?`<div class="dkim-val">${shortVal}</div>`:''}`;
+function buildDkimBlock(b, dkimResults, hasSel1, hasSel2) {
+  addSectionTitle(b, 'Détail des sélecteurs DKIM testés');
+  const priority = ['selector1', 'selector2'];
+  const others   = Object.keys(dkimResults).filter(k => !priority.includes(k));
+  for (const sel of [...priority, ...others]) {
+    const val     = dkimResults[sel], present = val !== null;
+    const isPri   = priority.includes(sel);
+    const shortV  = val && val.length > 100 ? val.slice(0, 100) + '…' : val;
+    const div     = document.createElement('div'); div.className = 'dkim-detail';
+    div.innerHTML = `<div class="dkim-detail-head"><span style="font-size:10.5px;font-weight:800;color:var(--text)">${sel}._domainkey${isPri ? ' <span style="font-size:8px;color:#0078d4;font-weight:700">[MS365]</span>' : ''}</span><span class="dkim-sel-badge ${present ? '' : 'absent'}">${present ? '✅ Présent' : '❌ Absent'}</span></div>${present ? `<div class="dkim-val">${shortV}</div>` : ''}`;
     b.appendChild(div);
   }
 }
 
-function makeCard({id,iconHtml,iconBg,title,sub,badge,badgeCls,selCls,onClick}){
-  const card=document.createElement('div');
-  card.className='result-card';card.id='card-'+id;card.dataset.selClass=selCls;
-  card.innerHTML=`<div class="card-row"><div class="card-left"><div class="card-icon-wrap ${iconBg}">${iconHtml}</div><div><div class="card-title">${title}</div><div class="card-sub">${sub}</div></div></div>${badge?`<span class="card-badge ${badgeCls}">${badge}</span>`:''}<span class="card-chevron">›</span></div>`;
-  card.addEventListener('click',onClick);
+function makeCard({ id, iconHtml, iconBg, title, sub, badge, badgeCls, selCls, onClick }) {
+  const card = document.createElement('div');
+  card.className = 'result-card'; card.id = 'card-' + id; card.dataset.selClass = selCls;
+  card.innerHTML = `<div class="card-row"><div class="card-left"><div class="card-icon-wrap ${iconBg}">${iconHtml}</div><div><div class="card-title">${title}</div><div class="card-sub">${sub}</div></div></div>${badge ? `<span class="card-badge ${badgeCls}">${badge}</span>` : ''}<span class="card-chevron">›</span></div>`;
+  card.addEventListener('click', onClick);
   return card;
 }
 
-// ── Export ──
-function exportReport(){
-  if(!lastReport)return;
-  const r=lastReport;
-  const lines=[];
-  lines.push('═══════════════════════════════════════');
-  lines.push('  RAPPORT DIAGNOSTIC MICROSOFT 365');
-  lines.push('  Tech RUN MW N1 — '+new Date(r.analysedAt).toLocaleString('fr-FR'));
-  lines.push('');lines.push(' DOMAINE : '+r.domain);lines.push('');
-  if(r.microsoft&&r.microsoft.tenantId){
-    if(r.microsoft.namespaceType)lines.push('Namespace: '+r.microsoft.namespaceType);
-    if(r.microsoft.cloudInstance)lines.push('Cloud: '+r.microsoft.cloudInstance);
-    if(r.microsoft.federationType)lines.push('Fédération: '+r.microsoft.federationType);
-  } else lines.push('Tenant MS365  : ❌ Non détecté');
-  lines.push('');
-  if(r.health){
-    lines.push('DNS & SÉCURITÉ:');
-    lines.push('Score santé   : '+r.health.score+'%');
-    const hmap={ok:'✅',warn:'⚠️',error:'❌',info:'ℹ️'};
-    r.health.checks.forEach(c=>lines.push('  '+(hmap[c.type]||'·')+' '+c.title));
-    lines.push('');
-    lines.push('DKIM selector1 : '+(r.health.dkim.selector1?'✅ Présent':'❌ Absent'));
-    lines.push('DKIM selector2 : '+(r.health.dkim.selector2?'✅ Présent':'❌ Absent'));
-  }
-  if(r.dns){
-    if(r.dns.spf)lines.push('SPF            : '+r.dns.spf);
-    if(r.dns.mx&&r.dns.mx.length)lines.push('MX             : '+r.dns.mx.join(', '));
-  }
-  lines.push('');
-  lines.push('HÉBERGEUR:');
-  if(r.host){
-    lines.push('Hébergeur     : '+(r.host.hostName||'Inconnu'));
-    lines.push('Registrar     : '+(r.host.registrar||'—'));
-    if(r.host.created)lines.push('Créé le       : '+new Date(r.host.created).toLocaleDateString('fr-FR'));
-    if(r.host.expires)lines.push('Expire le     : '+new Date(r.host.expires).toLocaleDateString('fr-FR'));
-    if(r.host.ns&&r.host.ns.length)lines.push('NS            : '+r.host.ns.join(', '));
-  } else lines.push('Hébergeur     : '+(r.fullDone?'Non récupéré':'Non analysé (analyse rapide)'));
-  lines.push('');
-  if(r.otherServices){
-    lines.push('SERVICES DÉTECTÉS:');
-    r.otherServices.filter(s=>s.on).forEach(s=>lines.push('  • '+s.name));
-    if(!r.otherServices.some(s=>s.on))lines.push('  Aucun service tiers détecté');
-    lines.push('');
-  }
-  lines.push('═══════════════════════════════════════');
-  const text=lines.join('\n');
-  const btn=document.getElementById('exportBtn');
-  navigator.clipboard.writeText(text).then(()=>{
-    btn.textContent='✅ Rapport copié !';
-    setTimeout(()=>{btn.innerHTML='📋 Copier le rapport';},2000);
-  }).catch(()=>{
-    const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
-    document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
-    btn.textContent='✅ Rapport copié !';setTimeout(()=>{btn.innerHTML='📋 Copier le rapport';},2000);
-  });
-}
+// ── Hero renderer ──
+function renderHero(center, ms, dup, domain, raw, confidence) {
+  const hero   = document.createElement('div'); hero.className = 'tenant-hero';
+  const msLogo = `<img src='Microsoft.png' width='14' height='14' alt='Microsoft' style='display:inline-block;vertical-align:middle;flex-shrink:0;opacity:.85;'>`;
 
-// ── Button UI helpers ──
-function lockButtons(){document.getElementById('checkBtnFast').disabled=true;document.getElementById('checkBtnFull').disabled=true;}
-function unlockButtons(){document.getElementById('checkBtnFast').disabled=false;document.getElementById('checkBtnFull').disabled=false;}
-function setFastLoading(on){document.getElementById('btnFastText').style.display=on?'none':'inline';document.getElementById('spinnerFast').style.display=on?'inline-block':'none';}
-function setFullLoading(on){document.getElementById('btnFullText').style.display=on?'none':'inline';document.getElementById('spinnerFull').style.display=on?'inline-block':'none';}
-
-// ── Render hero ──
-// MODIFIÉ : toutes les occurrences de l'emoji fenêtre dans les hero-labels
-// sont remplacées par <img src='Microsoft.png'> avec les mêmes propriétés visuellesuelles
-function renderHero(center,ms,dup,domain,raw,confidence){
-  const hero=document.createElement('div');hero.className='tenant-hero';
-  // Helper logo MS inline pour les hero-labels (blanc semi-transparent sur fond dégradé bleu)
-  const msLogo=`<img src='Microsoft.png' width='14' height='14' alt='Microsoft' style='display:inline-block;vertical-align:middle;flex-shrink:0;opacity:.85;'>`;
-  if(!ms&&dup?.isNativelyPersonal){
-    hero.style.background='linear-gradient(135deg,#1e3a5f 0%,#0078d4 100%)';
-    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Compte Microsoft Personnel</span></div><div class="hero-none">${domain} — domaine Microsoft grand public</div><div class="hero-domain">${raw}</div>`;
-    const da=document.createElement('div');da.className='dup-alert info';da.innerHTML=`<div class="dup-icon">ℹ️</div><div class="dup-body"><div class="dup-title">Adresse personnelle Microsoft (MSA)</div><div class="dup-desc">Pas de tenant professionnel.</div></div>`;
-    hero.appendChild(da);
-  } else if(!ms&&dup?.hasFreeAccount){
-    hero.style.background='linear-gradient(135deg,#1c2a3a 0%,#1d4ed8 60%,#2563eb 100%)';
-    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Aucun Tenant Microsoft 365 Pro</span></div><div class="hero-none">Pas de Microsoft 365 professionnel pour ce domaine</div><div class="hero-domain">${domain}</div>`;
-    const da=document.createElement('div');da.className='dup-alert warn';da.innerHTML=`<div class="dup-icon">⚠️</div><div class="dup-body"><div class="dup-title">Compte Microsoft gratuit détecté</div><div class="dup-desc">${raw} possède un compte MSA gratuit mais aucun tenant 365 pro.</div></div>`;
-    hero.appendChild(da);
-  } else if(!ms){
-    hero.style.background='linear-gradient(135deg,#374151 0%,#4b5563 100%)';
-    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft 365</span></div><div class="hero-none">Aucun tenant Microsoft 365 détecté pour ce domaine</div><div class="hero-domain">${domain}</div>`;
-  } else if(ms.tenantId&&!ms.tenantValid){
-    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft Tenant ID</span></div><div class="hero-guid" style="opacity:.45;text-decoration:line-through;font-size:15px"><span>${ms.tenantId}</span></div><div class="hero-domain">${domain}</div>`;
-    const da=document.createElement('div');da.className='dup-alert warn';da.innerHTML=`<div class="dup-icon">⚠️</div><div class="dup-body"><div class="dup-title">Tenant ID invalide</div><div class="dup-desc">Le GUID ne correspond pas à un tenant 365 actif.</div></div>`;
-    hero.appendChild(da);
+  if (!ms && dup?.isNativelyPersonal) {
+    hero.style.background = 'linear-gradient(135deg,#1e3a5f 0%,#0078d4 100%)';
+    hero.innerHTML = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Compte Microsoft Personnel</span></div><div class="hero-none">${domain} — domaine Microsoft grand public</div><div class="hero-domain">${raw}</div>`;
+    hero.appendChild(Object.assign(document.createElement('div'), { className:'dup-alert info', innerHTML:`<div class="dup-icon">ℹ️</div><div class="dup-body"><div class="dup-title">Adresse personnelle Microsoft (MSA)</div><div class="dup-desc">Pas de tenant professionnel.</div></div>` }));
+  } else if (!ms && dup?.hasFreeAccount) {
+    hero.style.background = 'linear-gradient(135deg,#1c2a3a 0%,#1d4ed8 60%,#2563eb 100%)';
+    hero.innerHTML = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Aucun Tenant Microsoft 365 Pro</span></div><div class="hero-none">Pas de Microsoft 365 professionnel pour ce domaine</div><div class="hero-domain">${domain}</div>`;
+    hero.appendChild(Object.assign(document.createElement('div'), { className:'dup-alert warn', innerHTML:`<div class="dup-icon">⚠️</div><div class="dup-body"><div class="dup-title">Compte Microsoft gratuit détecté</div><div class="dup-desc">${raw} possède un compte MSA gratuit mais aucun tenant 365 pro.</div></div>` }));
+  } else if (!ms) {
+    hero.style.background = 'linear-gradient(135deg,#374151 0%,#4b5563 100%)';
+    hero.innerHTML = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft 365</span></div><div class="hero-none">Aucun tenant Microsoft 365 détecté pour ce domaine</div><div class="hero-domain">${domain}</div>`;
+  } else if (ms.tenantId && !ms.tenantValid) {
+    hero.innerHTML = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft Tenant ID</span></div><div class="hero-guid" style="opacity:.45;text-decoration:line-through;font-size:15px"><span>${ms.tenantId}</span></div><div class="hero-domain">${domain}</div>`;
+    hero.appendChild(Object.assign(document.createElement('div'), { className:'dup-alert warn', innerHTML:`<div class="dup-icon">⚠️</div><div class="dup-body"><div class="dup-title">Tenant ID invalide</div><div class="dup-desc">Le GUID ne correspond pas à un tenant 365 actif.</div></div>` }));
   } else {
-    const hid='tid_'+Math.random().toString(36).slice(2);
-    const confClass=confidence>=80?'high':confidence>=50?'medium':'low';
-    const confLabel=confidence>=80?'Confiance élevée':confidence>=50?'Confiance moyenne':'Confiance faible';
-    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft Tenant ID</span></div>${ms.tenantId?`<div class="hero-guid"><span id="${hid}">${ms.tenantId}</span><button class="hero-copy-btn" onclick="copyVal('${hid}',this)">Copier</button><span class="confidence-badge ${confClass}">${confidence}% — ${confLabel}</span></div>`:`<div class="hero-none">GUID non résolu — domaine Microsoft détecté</div>`}<div class="hero-domain">${domain}</div>`;
-    if(ms.tenantId&&ms.tenantValid){
-      const actionsDiv=document.createElement('div');actionsDiv.className='hero-actions';
-      const partnerBtn=document.createElement('a');
-      partnerBtn.className='hero-partner-btn';
-      partnerBtn.href=`https://partner.microsoft.com/dashboard/v2/customers/${ms.tenantId}/servicemanagementpage`;
-      partnerBtn.target='_blank';partnerBtn.rel='noopener';
-      partnerBtn.innerHTML='<img src="Redirect.png" width="11" height="11" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;">Ouvrir Partner Center';
-      actionsDiv.appendChild(partnerBtn);
-      hero.appendChild(actionsDiv);
+    const hid       = 'tid_' + Math.random().toString(36).slice(2);
+    const confClass = confidence >= 80 ? 'high' : confidence >= 50 ? 'medium' : 'low';
+    const confLabel = confidence >= 80 ? 'Confiance élevée' : confidence >= 50 ? 'Confiance moyenne' : 'Confiance faible';
+    hero.innerHTML  = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft Tenant ID</span></div>${ms.tenantId ? `<div class="hero-guid"><span id="${hid}">${ms.tenantId}</span><button class="hero-copy-btn" onclick="copyVal('${hid}',this)">Copier</button><span class="confidence-badge ${confClass}">${confidence}% — ${confLabel}</span></div>` : `<div class="hero-none">GUID non résolu — domaine Microsoft détecté</div>`}<div class="hero-domain">${domain}</div>`;
+    if (ms.tenantId && ms.tenantValid) {
+      const a = document.createElement('a');
+      a.className = 'hero-partner-btn'; a.href = `https://partner.microsoft.com/dashboard/v2/customers/${ms.tenantId}/servicemanagementpage`; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = '<img src="Redirect.png" width="11" height="11" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;">Ouvrir Partner Center';
+      const actions = document.createElement('div'); actions.className = 'hero-actions'; actions.appendChild(a);
+      hero.appendChild(actions);
     }
-    if(dup){
-      let ac='ok',ai='✅',at='Aucun doublon MSA',ad=`Aucun compte Microsoft personnel pour ${raw}.`;
-      if(dup.hasFreeAccount){ac='warn';ai='⚠️';at='Compte Microsoft gratuit détecté';ad=`${raw} possède un compte MSA gratuit — risque de conflit de connexion.`;}
-      else if(dup.hasPersonal){ac='warn';ai='⚠️';at='Doublon MSA détecté';ad=`${raw} a aussi un compte Microsoft personnel.`;}
-      const da=document.createElement('div');da.className=`dup-alert ${ac}`;da.innerHTML=`<div class="dup-icon">${ai}</div><div class="dup-body"><div class="dup-title">${at}</div><div class="dup-desc">${ad}</div></div>`;
-      hero.appendChild(da);
+    if (dup) {
+      let ac = 'ok', ai = '✅', at = 'Aucun doublon MSA', ad = `Aucun compte Microsoft personnel pour ${raw}.`;
+      if (dup.hasFreeAccount)  { ac = 'warn'; ai = '⚠️'; at = 'Compte Microsoft gratuit détecté'; ad = `${raw} possède un compte MSA gratuit — risque de conflit de connexion.`; }
+      else if (dup.hasPersonal){ ac = 'warn'; ai = '⚠️'; at = 'Doublon MSA détecté';               ad = `${raw} a aussi un compte Microsoft personnel.`; }
+      hero.appendChild(Object.assign(document.createElement('div'), { className:`dup-alert ${ac}`, innerHTML:`<div class="dup-icon">${ai}</div><div class="dup-body"><div class="dup-title">${at}</div><div class="dup-desc">${ad}</div></div>` }));
     }
   }
   return hero;
 }
 
+// ── Export ──
+function exportReport() {
+  if (!lastReport) return;
+  const r = lastReport, lines = [];
+  lines.push('═══════════════════════════════════════');
+  lines.push('  RAPPORT DIAGNOSTIC MICROSOFT 365');
+  lines.push('  Tech RUN MW N1 — ' + new Date(r.analysedAt).toLocaleString('fr-FR'));
+  lines.push('', ' DOMAINE : ' + r.domain, '');
+  if (r.microsoft?.tenantId) {
+    if (r.microsoft.namespaceType) lines.push('Namespace: ' + r.microsoft.namespaceType);
+    if (r.microsoft.cloudInstance) lines.push('Cloud: '     + r.microsoft.cloudInstance);
+    if (r.microsoft.federationType)lines.push('Fédération: '+ r.microsoft.federationType);
+  } else lines.push('Tenant MS365  : ❌ Non détecté');
+  lines.push('');
+  if (r.health) {
+    lines.push('DNS & SÉCURITÉ:', 'Score santé   : ' + r.health.score + '%');
+    const hmap = { ok:'✅', warn:'⚠️', error:'❌', info:'ℹ️' };
+    r.health.checks.forEach(c => lines.push('  ' + (hmap[c.type] || '·') + ' ' + c.title));
+    lines.push('', 'DKIM selector1 : ' + (r.health.dkim.selector1 ? '✅ Présent' : '❌ Absent'));
+    lines.push('DKIM selector2 : ' + (r.health.dkim.selector2 ? '✅ Présent' : '❌ Absent'));
+  }
+  if (r.dns) {
+    if (r.dns.spf)          lines.push('SPF            : ' + r.dns.spf);
+    if (r.dns.mx?.length)   lines.push('MX             : ' + r.dns.mx.join(', '));
+  }
+  lines.push('', 'HÉBERGEUR:');
+  if (r.host) {
+    lines.push('Hébergeur     : ' + (r.host.hostName  || 'Inconnu'));
+    lines.push('Registrar     : ' + (r.host.registrar || '—'));
+    if (r.host.created) lines.push('Créé le       : ' + new Date(r.host.created).toLocaleDateString('fr-FR'));
+    if (r.host.expires) lines.push('Expire le     : ' + new Date(r.host.expires).toLocaleDateString('fr-FR'));
+    if (r.host.ns?.length) lines.push('NS            : ' + r.host.ns.join(', '));
+  } else lines.push('Hébergeur     : ' + (r.fullDone ? 'Non récupéré' : 'Non analysé (analyse rapide)'));
+  lines.push('');
+  if (r.otherServices) {
+    lines.push('SERVICES DÉTECTÉS:');
+    r.otherServices.filter(s => s.on).forEach(s => lines.push('  • ' + s.name));
+    if (!r.otherServices.some(s => s.on)) lines.push('  Aucun service tiers détecté');
+    lines.push('');
+  }
+  lines.push('═══════════════════════════════════════');
+  const text = lines.join('\n'), btn = document.getElementById('exportBtn');
+  navigator.clipboard.writeText(text).then(() => { btn.textContent = '✅ Rapport copié !'; setTimeout(() => { btn.innerHTML = '📋 Copier le rapport'; }, 2000); }).catch(() => {
+    const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent = '✅ Rapport copié !'; setTimeout(() => { btn.innerHTML = '📋 Copier le rapport'; }, 2000);
+  });
+}
+
+// ── Common panel builders (shared between fast & full paths) ──
+function buildMsPanel(ms) {
+  return b => [
+    ms.namespaceType       && ['Namespace Type',         ms.namespaceType],
+    ms.federationType      && ['Fédération',             ms.federationType],
+    ms.cloudInstance       && ['Cloud Instance',         ms.cloudInstance],
+    ms.issuer              && ['Issuer',                 ms.issuer],
+    ms.tokenEndpoint       && ['Token Endpoint',         ms.tokenEndpoint],
+    ms.authorizationEndpoint && ['Authorization Endpoint', ms.authorizationEndpoint],
+    ms.userInfoEndpoint    && ['UserInfo Endpoint',      ms.userInfoEndpoint],
+  ].filter(Boolean).forEach(([l, v]) => addRow(b, l, v));
+}
+function buildGooglePanel(goog) {
+  return b => { addRow(b, 'MX Records', goog.mxRecords.join('\n'), 'hi-google'); addRow(b, 'Issuer', goog.issuer); addRow(b, 'Authorization', goog.authorizationEndpoint); addRow(b, 'Token', goog.tokenEndpoint); addRow(b, 'UserInfo', goog.userInfoEndpoint); };
+}
+function buildDnsPanel(dns) {
+  const rows = [dns.mx?.length && ['MX Records', dns.mx.join('\n')], dns.spf && ['SPF Record', dns.spf], dns.detectedProviders?.length && ['Providers détectés', dns.detectedProviders.join(', ')], dns.txt?.length && ['TXT Records', dns.txt.join('\n')]].filter(Boolean);
+  return b => rows.forEach(([l, v]) => addRow(b, l, v));
+}
+function buildHostPanel(host, domain) {
+  return b => {
+    const logo = hostLogo(host.hostName);
+    const sum  = document.createElement('div'); sum.className = 'host-summary';
+    sum.innerHTML = `<div class="host-logo">${logo.html}</div><div><div class="host-name">${host.hostName || 'Inconnu'}</div><div class="host-sub">${host.registrar || 'Registrar non disponible'}</div></div>`;
+    b.appendChild(sum);
+    if (host.ns?.length)    addRow(b, 'Serveurs de noms (NS)', host.ns.join('\n'));
+    if (host.created)       addRow(b, 'Date de création',      formatDate(host.created));
+    if (host.expires)       addRow(b, "Date d'expiration",     formatDate(host.expires));
+    if (host.updated)       addRow(b, 'Dernière mise à jour',  formatDate(host.updated));
+    if (host.status?.length)addRow(b, 'Statut WHOIS',          host.status.join(', '));
+    const lnk = document.createElement('a'); lnk.className = 'ext-link'; lnk.href = `https://www.whois.com/whois/${domain}`; lnk.target = '_blank'; lnk.rel = 'noopener'; lnk.innerHTML = `🔗 WHOIS complet — <strong>${domain}</strong>`; b.appendChild(lnk);
+  };
+}
+function buildHealthPanel(health, domain) {
+  return b => {
+    b.appendChild(buildScoreRing(health.score, health.dmarcIsQuarantine));
+    const hcl = document.createElement('div'); hcl.className = 'hc-list';
+    health.checks.forEach(c => { const it = document.createElement('div'); it.className = 'hc-item ' + c.t; it.innerHTML = `<div class="hc-icon">${c.icon}</div><div class="hc-body"><div class="hc-title">${c.title}</div><div class="hc-desc">${c.desc}</div></div>`; hcl.appendChild(it); });
+    b.appendChild(hcl);
+    buildDkimBlock(b, health.dkimResults, health.hasSel1, health.hasSel2);
+    const lnk = document.createElement('a'); lnk.className = 'ext-link'; lnk.href = `https://mxtoolbox.com/SuperTool.aspx?action=mx:${domain}`; lnk.target = '_blank'; lnk.rel = 'noopener'; lnk.innerHTML = `🔗 Analyse complète sur MXToolbox — <strong>${domain}</strong>`; b.appendChild(lnk);
+  };
+}
+
+function msRows(ms) {
+  return [ms.namespaceType && ['Namespace Type', ms.namespaceType], ms.federationType && ['Fédération', ms.federationType], ms.cloudInstance && ['Cloud Instance', ms.cloudInstance], ms.issuer && ['Issuer', ms.issuer], ms.tokenEndpoint && ['Token Endpoint', ms.tokenEndpoint], ms.authorizationEndpoint && ['Authorization Endpoint', ms.authorizationEndpoint], ms.userInfoEndpoint && ['UserInfo Endpoint', ms.userInfoEndpoint]].filter(Boolean);
+}
+function healthScoreLbl(health) {
+  const star = health.dmarcIsQuarantine ? ' ⭐' : '';
+  return health.score >= 80 ? `${health.score}%${star} 🟢` : health.score >= 50 ? `${health.score}%${star} 🟡` : `${health.score}%${star} 🔴`;
+}
+function healthSubLbl(health) {
+  const errC = health.checks.filter(c => c.t === 'error').length, warnC = health.checks.filter(c => c.t === 'warn').length;
+  const dkim = health.hasSel1 && health.hasSel2 ? ' · DKIM✅✅' : health.hasSel1 || health.hasSel2 ? ' · DKIM✅⚠️' : ' · DKIM❌';
+  return `SPF · DMARC · DKIM · DNSSEC · MTA-STS${errC > 0 ? ' — ' + errC + ' erreur(s)' : ''}${warnC > 0 ? ', ' + warnC + ' avert.' : ''}${dkim}`;
+}
+
 // ── FAST check ──
-async function checkFast(){
-  const raw=emailInput.value.trim();
-  if(!raw){showError('Veuillez entrer une adresse e-mail ou un domaine.');return;}
-  const domain=extractDomain(raw);
-  if(!domain||!domain.includes('.')){showError('Domaine invalide.');return;}
-  const center=document.getElementById('centerCol');
-  const exportBtn=document.getElementById('exportBtn');
-  const errBox=document.getElementById('errBox');
-  errBox.style.display='none';center.innerHTML='';closePanel();
-  exportBtn.classList.remove('visible');lastReport=null;
-  currentState={domain,ms:null,dns:null,goog:null,health:null,others:null,dup:null,host:null,fastDone:false,fullDone:false};
-  lockButtons();setFastLoading(true);
-  showSteps(['ms','google','dns']);
-  try{
-    setStep('step-ms','active');
-    stepRetryFns.ms=async()=>{setStep('step-ms','active');currentState.ms=isMsaPersonalDomain(domain)?null:await checkMicrosoft(domain);setStep('step-ms',currentState.ms?'done':'fail');};
-    currentState.ms=isMsaPersonalDomain(domain)?null:await checkMicrosoft(domain);
-    if(document.getElementById('step-ms').className.includes('timeout'))currentState.ms=null;
-    else setStep('step-ms',currentState.ms?'done':'fail');
-    setStep('step-google','active');
-    stepRetryFns.google=async()=>{setStep('step-google','active');currentState.goog=await checkGoogle(domain);setStep('step-google',currentState.goog?'done':'fail');};
-    currentState.goog=await checkGoogle(domain);
-    if(!document.getElementById('step-google').className.includes('timeout'))setStep('step-google',currentState.goog?'done':'fail');
-    setStep('step-dns','active');
-    stepRetryFns.dns=async()=>{setStep('step-dns','active');currentState.dns=await checkDNS(domain);setStep('step-dns',currentState.dns?.mx?.length>0?'done':'fail');};
-    currentState.dns=await checkDNS(domain);
-    if(!document.getElementById('step-dns').className.includes('timeout'))setStep('step-dns',currentState.dns.mx.length>0?'done':'fail');
-    document.getElementById('progList').style.display='none';
-    currentState.fastDone=true;
-    const confidence=computeConfidence(currentState.ms);
-    lastReport={domain,analysedAt:new Date().toISOString(),input:raw,microsoft:currentState.ms,google:currentState.goog,dns:currentState.dns,health:null,otherServices:null,duplicate:null,host:null,tenantConfidence:confidence,fullDone:false};
+async function checkFast() {
+  const raw = emailInput.value.trim(); if (!raw) { showError('Veuillez entrer une adresse e-mail ou un domaine.'); return; }
+  const domain = extractDomain(raw); if (!domain || !domain.includes('.')) { showError('Domaine invalide.'); return; }
+  const center = document.getElementById('centerCol'), exportBtn = document.getElementById('exportBtn'), errBox = document.getElementById('errBox');
+  errBox.style.display = 'none'; center.innerHTML = ''; closePanel();
+  exportBtn.classList.remove('visible'); lastReport = null;
+  currentState = { domain, ms:null, dns:null, goog:null, health:null, others:null, dup:null, host:null, fastDone:false, fullDone:false };
+  lockButtons(); setFastLoading(true);
+  showSteps(['ms', 'google', 'dns']);
+  try {
+    setStep('step-ms', 'active');
+    stepRetryFns.ms = async () => { setStep('step-ms', 'active'); currentState.ms = isMsaPersonalDomain(domain) ? null : await checkMicrosoft(domain); setStep('step-ms', currentState.ms ? 'done' : 'fail'); };
+    currentState.ms = isMsaPersonalDomain(domain) ? null : await checkMicrosoft(domain);
+    if (!document.getElementById('step-ms').className.includes('timeout')) setStep('step-ms', currentState.ms ? 'done' : 'fail');
+
+    setStep('step-google', 'active');
+    stepRetryFns.google = async () => { setStep('step-google', 'active'); currentState.goog = await checkGoogle(domain); setStep('step-google', currentState.goog ? 'done' : 'fail'); };
+    currentState.goog = await checkGoogle(domain);
+    if (!document.getElementById('step-google').className.includes('timeout')) setStep('step-google', currentState.goog ? 'done' : 'fail');
+
+    setStep('step-dns', 'active');
+    stepRetryFns.dns = async () => { setStep('step-dns', 'active'); currentState.dns = await checkDNS(domain); setStep('step-dns', currentState.dns?.mx?.length > 0 ? 'done' : 'fail'); };
+    currentState.dns = await checkDNS(domain);
+    if (!document.getElementById('step-dns').className.includes('timeout')) setStep('step-dns', currentState.dns.mx.length > 0 ? 'done' : 'fail');
+
+    document.getElementById('progList').style.display = 'none';
+    currentState.fastDone = true;
+    const confidence = computeConfidence(currentState.ms);
+    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: null, otherServices: null, duplicate: null, host: null, tenantConfidence: confidence, fullDone: false };
     exportBtn.classList.add('visible');
-    if(currentState.ms&&currentState.ms.tenantId&&currentState.ms.tenantValid)addToHistory(domain,currentState.ms.tenantId);
-    center.appendChild(renderHero(center,currentState.ms,null,domain,raw,confidence));
-    if(currentState.dns?.detectedProviders?.length){
-      const pb=document.createElement('div');pb.className='pills-block';
-      const pl=document.createElement('div');pl.className='pills-label';pl.textContent='Providers e-mail détectés (DNS)';
-      const pr=document.createElement('div');pr.className='pills-row';
-      currentState.dns.detectedProviders.forEach(name=>{const p=document.createElement('div');p.className='pill on';p.textContent='✓ '+name;pr.appendChild(p);});
-      pb.appendChild(pl);pb.appendChild(pr);center.appendChild(pb);
+    if (currentState.ms?.tenantId && currentState.ms.tenantValid) addToHistory(domain, currentState.ms.tenantId);
+    center.appendChild(renderHero(center, currentState.ms, null, domain, raw, confidence));
+    if (currentState.dns?.detectedProviders?.length) {
+      const pb = document.createElement('div'); pb.className = 'pills-block';
+      const pl = document.createElement('div'); pl.className = 'pills-label'; pl.textContent = 'Providers e-mail détectés (DNS)';
+      const pr = document.createElement('div'); pr.className = 'pills-row';
+      currentState.dns.detectedProviders.forEach(name => { const p = document.createElement('div'); p.className = 'pill on'; p.textContent = '✓ ' + name; pr.appendChild(p); });
+      pb.appendChild(pl); pb.appendChild(pr); center.appendChild(pb);
     }
-    if(currentState.ms&&currentState.ms.tenantValid){
-      const msRows=[currentState.ms.namespaceType&&['Namespace Type',currentState.ms.namespaceType],currentState.ms.federationType&&['Fédération',currentState.ms.federationType],currentState.ms.cloudInstance&&['Cloud Instance',currentState.ms.cloudInstance],currentState.ms.issuer&&['Issuer',currentState.ms.issuer],currentState.ms.tokenEndpoint&&['Token Endpoint',currentState.ms.tokenEndpoint],currentState.ms.authorizationEndpoint&&['Authorization Endpoint',currentState.ms.authorizationEndpoint],currentState.ms.userInfoEndpoint&&['UserInfo Endpoint',currentState.ms.userInfoEndpoint]].filter(Boolean);
-      center.appendChild(makeCard({id:'ms',iconHtml:MS_SVG,iconBg:'ms-clr',title:'Microsoft 365 / Entra ID',sub:'Endpoints & informations tenant',badge:msRows.length+' champs',badgeCls:'ms-b',selCls:'selected',onClick:()=>openPanel('ms','Microsoft 365 / Entra ID',b=>{msRows.forEach(([l,v])=>addRow(b,l,v));})}));
+    if (currentState.ms?.tenantValid) {
+      const rows = msRows(currentState.ms);
+      center.appendChild(makeCard({ id:'ms', iconHtml:MS_SVG, iconBg:'ms-clr', title:'Microsoft 365 / Entra ID', sub:'Endpoints & informations tenant', badge: rows.length + ' champs', badgeCls:'ms-b', selCls:'selected', onClick: () => openPanel('ms', 'Microsoft 365 / Entra ID', buildMsPanel(currentState.ms)) }));
     }
-    if(currentState.goog){
-      center.appendChild(makeCard({id:'google',iconHtml:GG_SVG,iconBg:'gg-clr',title:'Google Workspace',sub:'OpenID Connect & MX Records',badge:'5 champs',badgeCls:'gg-b',selCls:'sel-google',onClick:()=>openPanel('google','🔵 Google Workspace',b=>{addRow(b,'MX Records',currentState.goog.mxRecords.join('\n'),'hi-google');addRow(b,'Issuer',currentState.goog.issuer);addRow(b,'Authorization',currentState.goog.authorizationEndpoint);addRow(b,'Token',currentState.goog.tokenEndpoint);addRow(b,'UserInfo',currentState.goog.userInfoEndpoint);})}));
-    }
-    const dnsRows=[currentState.dns?.mx?.length&&['MX Records',currentState.dns.mx.join('\n')],currentState.dns?.spf&&['SPF Record',currentState.dns.spf],currentState.dns?.detectedProviders?.length&&['Providers détectés',currentState.dns.detectedProviders.join(', ')],currentState.dns?.txt?.length&&['TXT Records',currentState.dns.txt.join('\n')]].filter(Boolean);
-    if(dnsRows.length){center.appendChild(makeCard({id:'dns',iconHtml:'<img src="DNS.png" width="20" height="20" alt="DNS" style="object-fit:contain;">',iconBg:'dn-clr',title:'Enregistrements DNS',sub:'MX · SPF · TXT',badge:dnsRows.length+' entrées',badgeCls:'dn-b',selCls:'sel-dns',onClick:()=>openPanel('dns','🌐 Enregistrements DNS',b=>{dnsRows.forEach(([l,v])=>addRow(b,l,v));})}));}
-    const ctaBtn=document.createElement('button');
-    ctaBtn.className='btn-trigger-full';ctaBtn.id='btnTriggerFull';
-    ctaBtn.innerHTML=`<span id="stfLabel"><img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Lancer l'analyse complète</span><span class="stf-spinner"></span><span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>`;
-    ctaBtn.onclick=()=>runFullFromState(raw,domain,ctaBtn);
+    if (currentState.goog) center.appendChild(makeCard({ id:'google', iconHtml:GG_SVG, iconBg:'gg-clr', title:'Google Workspace', sub:'OpenID Connect & MX Records', badge:'5 champs', badgeCls:'gg-b', selCls:'sel-google', onClick: () => openPanel('google', '🔵 Google Workspace', buildGooglePanel(currentState.goog)) }));
+    const dnsRowCount = [currentState.dns?.mx?.length, currentState.dns?.spf, currentState.dns?.detectedProviders?.length, currentState.dns?.txt?.length].filter(Boolean).length;
+    if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconHtml:'<img src="DNS.png" width="20" height="20" alt="DNS" style="object-fit:contain;">', iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
+    const ctaBtn = document.createElement('button'); ctaBtn.className = 'btn-trigger-full'; ctaBtn.id = 'btnTriggerFull';
+    ctaBtn.innerHTML = `<span id="stfLabel"><img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Lancer l'analyse complète</span><span class="stf-spinner"></span><span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>`;
+    ctaBtn.onclick = () => runFullFromState(raw, domain, ctaBtn);
     center.appendChild(ctaBtn);
-  }catch(err){document.getElementById('progList').style.display='none';showError('⚠ Erreur : '+err.message);}
-  finally{unlockButtons();setFastLoading(false);}
+  } catch (err) { document.getElementById('progList').style.display = 'none'; showError('⚠ Erreur : ' + err.message); }
+  finally { unlockButtons(); setFastLoading(false); }
 }
 
-// ── FULL check from scratch ──
-async function checkFull(){
-  const raw=emailInput.value.trim();
-  if(!raw){showError('Veuillez entrer une adresse e-mail ou un domaine.');return;}
-  const domain=extractDomain(raw);
-  if(!domain||!domain.includes('.')){showError('Domaine invalide.');return;}
-  const center=document.getElementById('centerCol');
-  const exportBtn=document.getElementById('exportBtn');
-  const errBox=document.getElementById('errBox');
-  errBox.style.display='none';center.innerHTML='';closePanel();
-  exportBtn.classList.remove('visible');lastReport=null;
-  currentState={domain,ms:null,dns:null,goog:null,health:null,others:null,dup:null,host:null,fastDone:false,fullDone:false};
-  lockButtons();setFullLoading(true);
-  showSteps(['ms','google','dns','health','others','dup','host']);
-  ['ms','google','dns','health','others','dup','host'].forEach(k=>setStep('step-'+k,'pending'));
-  try{await runAllSteps(raw,domain,center,exportBtn);}
-  catch(err){document.getElementById('progList').style.display='none';showError('⚠ Erreur : '+err.message);}
-  finally{unlockButtons();setFullLoading(false);}
-}
-
-// ── Add full results to fast ──
-async function runFullFromState(raw,domain,ctaBtn){
-  if(currentState.fullDone)return;
+// ── Full from fast ──
+async function runFullFromState(raw, domain, ctaBtn) {
+  if (currentState.fullDone) return;
   ctaBtn.classList.add('running');
-  document.getElementById('stfLabel').textContent='Analyse en cours…';
+  document.getElementById('stfLabel').textContent = 'Analyse en cours…';
   lockButtons();
-  showSteps(['health','others','dup','host']);
-  ['health','others','dup','host'].forEach(k=>setStep('step-'+k,'pending'));
-  try{
-    const center=document.getElementById('centerCol');
-    const exportBtn=document.getElementById('exportBtn');
-    setStep('step-health','active');
-    stepRetryFns.health=async()=>{setStep('step-health','active');currentState.health=await checkHealth(domain);setStep('step-health','done');};
-    const health=await checkHealth(domain);
-    if(!document.getElementById('step-health').className.includes('timeout')){setStep('step-health','done');currentState.health=health;}else currentState.health=health;
-    setStep('step-others','active');
-    stepRetryFns.others=async()=>{setStep('step-others','active');currentState.others=await checkOtherTenants(domain,currentState.dns||{});setStep('step-others','done');};
-    const others=await checkOtherTenants(domain,currentState.dns||{});
-    if(!document.getElementById('step-others').className.includes('timeout')){setStep('step-others','done');currentState.others=others;}else currentState.others=others;
-    const isEmail=raw.includes('@');
-    setStep('step-dup','active');
-    stepRetryFns.dup=async()=>{setStep('step-dup','active');currentState.dup=isEmail?await checkDuplicate(raw.trim()):null;setStep('step-dup','done');};
-    const dup=isEmail?await checkDuplicate(raw.trim()):null;
-    if(!document.getElementById('step-dup').className.includes('timeout')){setStep('step-dup','done');currentState.dup=dup;}else currentState.dup=dup;
-    setStep('step-host','active');
-    stepRetryFns.host=async()=>{setStep('step-host','active');currentState.host=await checkHost(domain);setStep('step-host',currentState.host?'done':'fail');};
-    const host=await checkHost(domain);
-    if(!document.getElementById('step-host').className.includes('timeout')){setStep('step-host',host?'done':'fail');currentState.host=host;}else currentState.host=host;
-    document.getElementById('progList').style.display='none';
-    currentState.fullDone=true;
-    const oldHero=center.querySelector('.tenant-hero');
-    if(oldHero){const confidence=computeConfidence(currentState.ms);const newHero=renderHero(center,currentState.ms,currentState.dup,domain,raw,confidence);center.replaceChild(newHero,oldHero);}
-    const confidence=computeConfidence(currentState.ms);
-    lastReport={domain,analysedAt:new Date().toISOString(),input:raw,microsoft:currentState.ms,google:currentState.goog,dns:currentState.dns,health:{score:currentState.health.score,dmarcIsQuarantine:currentState.health.dmarcIsQuarantine,checks:currentState.health.checks.map(c=>({type:c.t,title:c.title,desc:c.desc})),dkim:{selector1:currentState.health.hasSel1,selector2:currentState.health.hasSel2,allResults:currentState.health.dkimResults}},otherServices:currentState.others,duplicate:currentState.dup,host:currentState.host,tenantConfidence:confidence,fullDone:true};
-    const oldPills=center.querySelector('.pills-block');
-    const newPb=document.createElement('div');newPb.className='pills-block';
-    const pl=document.createElement('div');pl.className='pills-label';pl.textContent='Autres services détectés';
-    const pr=document.createElement('div');pr.className='pills-row';
-    (currentState.others||[]).forEach(t=>{const p=document.createElement('div');p.className='pill '+(t.on?'on':'off');p.innerHTML=`${t.icon} ${t.name}${t.on?' ✓':''}`;pr.appendChild(p);});
-    newPb.appendChild(pl);newPb.appendChild(pr);
-    if(oldPills)center.replaceChild(newPb,oldPills);else center.insertBefore(newPb,center.querySelector('.result-card')||ctaBtn);
-    if(currentState.host){
-      const logo=hostLogo(currentState.host.hostName);
-      const hc=makeCard({id:'host',iconHtml:logo.html,iconBg:'hs-clr',title:'Hébergeur & Registrar',sub:'WHOIS / RDAP — '+(currentState.host.hostName||'Inconnu'),badge:currentState.host.hostName||'Inconnu',badgeCls:'hs-b',selCls:'sel-host',onClick:()=>openPanel('host','🏠 Hébergeur & Registrar',b=>{
-        const sum=document.createElement('div');sum.className='host-summary';sum.innerHTML=`<div class="host-logo">${logo.html}</div><div><div class="host-name">${currentState.host.hostName||'Inconnu'}</div><div class="host-sub">${currentState.host.registrar||'Registrar non disponible'}</div></div>`;b.appendChild(sum);
-        if(currentState.host.ns?.length)addRow(b,'Serveurs de noms (NS)',currentState.host.ns.join('\n'));
-        if(currentState.host.created)addRow(b,'Date de création',formatDate(currentState.host.created));
-        if(currentState.host.expires)addRow(b,"Date d'expiration",formatDate(currentState.host.expires));
-        if(currentState.host.updated)addRow(b,'Dernière mise à jour',formatDate(currentState.host.updated));
-        if(currentState.host.status?.length)addRow(b,'Statut WHOIS',currentState.host.status.join(', '));
-        const lnk=document.createElement('a');lnk.className='ext-link';lnk.href=`https://www.whois.com/whois/${domain}`;lnk.target='_blank';lnk.rel='noopener';lnk.innerHTML=`🔗 WHOIS complet — <strong>${domain}</strong>`;b.appendChild(lnk);
-      })});
-      center.insertBefore(hc,ctaBtn);
+  showSteps(['health', 'others', 'dup', 'host']);
+  ['health', 'others', 'dup', 'host'].forEach(k => setStep('step-' + k, 'pending'));
+  try {
+    const center = document.getElementById('centerCol'), exportBtn = document.getElementById('exportBtn');
+
+    setStep('step-health', 'active');
+    stepRetryFns.health = async () => { setStep('step-health', 'active'); currentState.health = await checkHealth(domain); setStep('step-health', 'done'); };
+    currentState.health = await checkHealth(domain);
+    if (!document.getElementById('step-health').className.includes('timeout')) setStep('step-health', 'done');
+
+    setStep('step-others', 'active');
+    stepRetryFns.others = async () => { setStep('step-others', 'active'); currentState.others = await checkOtherTenants(domain, currentState.dns || {}); setStep('step-others', 'done'); };
+    currentState.others = await checkOtherTenants(domain, currentState.dns || {});
+    if (!document.getElementById('step-others').className.includes('timeout')) setStep('step-others', 'done');
+
+    const isEmail = raw.includes('@');
+    setStep('step-dup', 'active');
+    stepRetryFns.dup = async () => { setStep('step-dup', 'active'); currentState.dup = isEmail ? await checkDuplicate(raw.trim()) : null; setStep('step-dup', 'done'); };
+    currentState.dup = isEmail ? await checkDuplicate(raw.trim()) : null;
+    if (!document.getElementById('step-dup').className.includes('timeout')) setStep('step-dup', 'done');
+
+    setStep('step-host', 'active');
+    stepRetryFns.host = async () => { setStep('step-host', 'active'); currentState.host = await checkHost(domain); setStep('step-host', currentState.host ? 'done' : 'fail'); };
+    currentState.host = await checkHost(domain);
+    if (!document.getElementById('step-host').className.includes('timeout')) setStep('step-host', currentState.host ? 'done' : 'fail');
+
+    document.getElementById('progList').style.display = 'none';
+    currentState.fullDone = true;
+    const confidence = computeConfidence(currentState.ms);
+    const oldHero = center.querySelector('.tenant-hero');
+    if (oldHero) center.replaceChild(renderHero(center, currentState.ms, currentState.dup, domain, raw, confidence), oldHero);
+
+    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: { score: currentState.health.score, dmarcIsQuarantine: currentState.health.dmarcIsQuarantine, checks: currentState.health.checks.map(c => ({ type:c.t, title:c.title, desc:c.desc })), dkim: { selector1: currentState.health.hasSel1, selector2: currentState.health.hasSel2, allResults: currentState.health.dkimResults } }, otherServices: currentState.others, duplicate: currentState.dup, host: currentState.host, tenantConfidence: confidence, fullDone: true };
+    exportBtn.classList.add('visible');
+
+    const newPb = document.createElement('div'); newPb.className = 'pills-block';
+    const pl = document.createElement('div'); pl.className = 'pills-label'; pl.textContent = 'Autres services détectés';
+    const pr = document.createElement('div'); pr.className = 'pills-row';
+    (currentState.others || []).forEach(t => { const p = document.createElement('div'); p.className = 'pill ' + (t.on ? 'on' : 'off'); p.innerHTML = `${t.icon} ${t.name}${t.on ? ' ✓' : ''}`; pr.appendChild(p); });
+    newPb.appendChild(pl); newPb.appendChild(pr);
+    const oldPills = center.querySelector('.pills-block');
+    if (oldPills) center.replaceChild(newPb, oldPills); else center.insertBefore(newPb, center.querySelector('.result-card') || ctaBtn);
+
+    if (currentState.host) {
+      const logo = hostLogo(currentState.host.hostName);
+      center.insertBefore(makeCard({ id:'host', iconHtml:logo.html, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }), ctaBtn);
     }
-    if(currentState.health){
-      const errC=currentState.health.checks.filter(c=>c.t==='error').length,warnC=currentState.health.checks.filter(c=>c.t==='warn').length;
-      const dkimStatusLabel=currentState.health.hasSel1&&currentState.health.hasSel2?' · DKIM✅✅':currentState.health.hasSel1||currentState.health.hasSel2?' · DKIM✅⚠️':' · DKIM❌';
-      const starLabel=currentState.health.dmarcIsQuarantine?' ⭐':'';
-      const scoreLbl=currentState.health.score>=80?`${currentState.health.score}%${starLabel} 🟢`:currentState.health.score>=50?`${currentState.health.score}%${starLabel} 🟡`:`${currentState.health.score}%${starLabel} 🔴`;
-      const hcard=makeCard({id:'health',iconHtml:'<img src="Santé.png" width="20" height="20" alt="Santé" style="object-fit:contain;">',iconBg:'hl-clr',title:'Santé du domaine',sub:`SPF · DMARC · DKIM · DNSSEC · MTA-STS${errC>0?' — '+errC+' erreur(s)':''}${warnC>0?', '+warnC+' avert.':''}${dkimStatusLabel}`,badge:scoreLbl,badgeCls:'hl-b',selCls:'sel-health',onClick:()=>openPanel('health','🛡️ Santé du domaine',b=>{
-        b.appendChild(buildScoreRing(currentState.health.score,currentState.health.dmarcIsQuarantine));
-        const hcl=document.createElement('div');hcl.className='hc-list';
-        currentState.health.checks.forEach(c=>{const it=document.createElement('div');it.className='hc-item '+c.t;it.innerHTML=`<div class="hc-icon">${c.icon}</div><div class="hc-body"><div class="hc-title">${c.title}</div><div class="hc-desc">${c.desc}</div></div>`;hcl.appendChild(it);});
-        b.appendChild(hcl);
-        buildDkimBlock(b,currentState.health.dkimResults,currentState.health.hasSel1,currentState.health.hasSel2);
-        const lnk=document.createElement('a');lnk.className='ext-link';lnk.href=`https://mxtoolbox.com/SuperTool.aspx?action=mx:${domain}`;lnk.target='_blank';lnk.rel='noopener';lnk.innerHTML=`🔗 Analyse complète sur MXToolbox — <strong>${domain}</strong>`;b.appendChild(lnk);
-      })});
-      center.insertBefore(hcard,ctaBtn);
+    if (currentState.health) {
+      center.insertBefore(makeCard({ id:'health', iconHtml:'<img src="Santé.png" width="20" height="20" alt="Santé" style="object-fit:contain;">', iconBg:'hl-clr', title:'Santé du domaine', sub: healthSubLbl(currentState.health), badge: healthScoreLbl(currentState.health), badgeCls:'hl-b', selCls:'sel-health', onClick: () => openPanel('health', '🛡️ Santé du domaine', buildHealthPanel(currentState.health, domain)) }), ctaBtn);
     }
-    ctaBtn.classList.remove('running');ctaBtn.classList.add('done');ctaBtn.innerHTML='✅ Analyse complète effectuée';ctaBtn.onclick=null;
-  }catch(err){
+    ctaBtn.classList.remove('running'); ctaBtn.classList.add('done'); ctaBtn.innerHTML = '✅ Analyse complète effectuée'; ctaBtn.onclick = null;
+  } catch (err) {
     ctaBtn.classList.remove('running');
-    ctaBtn.innerHTML='<img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Lancer l\'analyse complète <span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>';
-    document.getElementById('progList').style.display='none';
-    showError('⚠ Erreur analyse complète : '+err.message);
-  }finally{unlockButtons();}
+    ctaBtn.innerHTML = '<img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Lancer l\'analyse complète <span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>';
+    document.getElementById('progList').style.display = 'none';
+    showError('⚠ Erreur analyse complète : ' + err.message);
+  } finally { unlockButtons(); }
 }
 
 // ── Full from scratch ──
-async function runAllSteps(raw,domain,center,exportBtn){
-  setStep('step-ms','active');const ms=isMsaPersonalDomain(domain)?null:await checkMicrosoft(domain);setStep('step-ms',ms?'done':'fail');currentState.ms=ms;
-  setStep('step-google','active');const goog=await checkGoogle(domain);setStep('step-google',goog?'done':'fail');currentState.goog=goog;
-  setStep('step-dns','active');const dns=await checkDNS(domain);setStep('step-dns',dns.mx.length>0?'done':'fail');currentState.dns=dns;
-  setStep('step-health','active');const health=await checkHealth(domain);setStep('step-health','done');currentState.health=health;
-  setStep('step-others','active');const others=await checkOtherTenants(domain,dns);setStep('step-others','done');currentState.others=others;
-  const isEmail=raw.includes('@');
-  setStep('step-dup','active');const dup=isEmail?await checkDuplicate(raw.trim()):null;setStep('step-dup','done');currentState.dup=dup;
-  setStep('step-host','active');const host=await checkHost(domain);setStep('step-host',host?'done':'fail');currentState.host=host;
-  document.getElementById('progList').style.display='none';
-  currentState.fastDone=true;currentState.fullDone=true;
-  const confidence=computeConfidence(ms);
-  lastReport={domain,analysedAt:new Date().toISOString(),input:raw,microsoft:ms,google:goog,dns,health:{score:health.score,dmarcIsQuarantine:health.dmarcIsQuarantine,checks:health.checks.map(c=>({type:c.t,title:c.title,desc:c.desc})),dkim:{selector1:health.hasSel1,selector2:health.hasSel2,allResults:health.dkimResults}},otherServices:others,duplicate:dup,host,tenantConfidence:confidence,fullDone:true};
-  exportBtn.classList.add('visible');
-  if(ms&&ms.tenantId&&ms.tenantValid)addToHistory(domain,ms.tenantId);
-  center.appendChild(renderHero(center,ms,dup,domain,raw,confidence));
-  const pb=document.createElement('div');pb.className='pills-block';
-  const pl=document.createElement('div');pl.className='pills-label';pl.textContent='Autres services détectés';
-  const pr=document.createElement('div');pr.className='pills-row';
-  others.forEach(t=>{const p=document.createElement('div');p.className='pill '+(t.on?'on':'off');p.innerHTML=`${t.icon} ${t.name}${t.on?' ✓':''}`;pr.appendChild(p);});
-  pb.appendChild(pl);pb.appendChild(pr);center.appendChild(pb);
-  if(ms&&ms.tenantValid){
-    const msRows=[ms.namespaceType&&['Namespace Type',ms.namespaceType],ms.federationType&&['Fédération',ms.federationType],ms.cloudInstance&&['Cloud Instance',ms.cloudInstance],ms.issuer&&['Issuer',ms.issuer],ms.tokenEndpoint&&['Token Endpoint',ms.tokenEndpoint],ms.authorizationEndpoint&&['Authorization Endpoint',ms.authorizationEndpoint],ms.userInfoEndpoint&&['UserInfo Endpoint',ms.userInfoEndpoint]].filter(Boolean);
-    center.appendChild(makeCard({id:'ms',iconHtml:MS_SVG,iconBg:'ms-clr',title:'Microsoft 365 / Entra ID',sub:'Endpoints & informations tenant',badge:msRows.length+' champs',badgeCls:'ms-b',selCls:'selected',onClick:()=>openPanel('ms','Microsoft 365 / Entra ID',b=>{msRows.forEach(([l,v])=>addRow(b,l,v));})}));
-  }
-  if(goog)center.appendChild(makeCard({id:'google',iconHtml:GG_SVG,iconBg:'gg-clr',title:'Google Workspace',sub:'OpenID Connect & MX Records',badge:'5 champs',badgeCls:'gg-b',selCls:'sel-google',onClick:()=>openPanel('google','🔵 Google Workspace',b=>{addRow(b,'MX Records',goog.mxRecords.join('\n'),'hi-google');addRow(b,'Issuer',goog.issuer);addRow(b,'Authorization',goog.authorizationEndpoint);addRow(b,'Token',goog.tokenEndpoint);addRow(b,'UserInfo',goog.userInfoEndpoint);})}));
-  if(host){
-    const logo=hostLogo(host.hostName);
-    center.appendChild(makeCard({id:'host',iconHtml:logo.html,iconBg:'hs-clr',title:'Hébergeur & Registrar',sub:'WHOIS / RDAP — '+(host.hostName||'Inconnu'),badge:host.hostName||'Inconnu',badgeCls:'hs-b',selCls:'sel-host',onClick:()=>openPanel('host','🏠 Hébergeur & Registrar',b=>{
-      const sum=document.createElement('div');sum.className='host-summary';sum.innerHTML=`<div class="host-logo">${logo.html}</div><div><div class="host-name">${host.hostName||'Inconnu'}</div><div class="host-sub">${host.registrar||'Registrar non disponible'}</div></div>`;b.appendChild(sum);
-      if(host.ns?.length)addRow(b,'NS',host.ns.join('\n'));
-      if(host.created)addRow(b,'Créé le',formatDate(host.created));
-      if(host.expires)addRow(b,'Expire le',formatDate(host.expires));
-      if(host.updated)addRow(b,'MAJ',formatDate(host.updated));
-      if(host.status?.length)addRow(b,'Statut',host.status.join(', '));
-      const lnk=document.createElement('a');lnk.className='ext-link';lnk.href=`https://www.whois.com/whois/${domain}`;lnk.target='_blank';lnk.rel='noopener';lnk.innerHTML=`🔗 WHOIS complet — <strong>${domain}</strong>`;b.appendChild(lnk);
-    })}));
-  }
-  const dnsRows=[dns.mx.length&&['MX Records',dns.mx.join('\n')],dns.spf&&['SPF Record',dns.spf],dns.detectedProviders.length&&['Providers détectés',dns.detectedProviders.join(', ')],dns.txt.length&&['TXT Records',dns.txt.join('\n')]].filter(Boolean);
-  if(dnsRows.length)center.appendChild(makeCard({id:'dns',iconHtml:'🌐',iconBg:'dn-clr',title:'Enregistrements DNS',sub:'MX · SPF · TXT',badge:dnsRows.length+' entrées',badgeCls:'dn-b',selCls:'sel-dns',onClick:()=>openPanel('dns','🌐 Enregistrements DNS',b=>{dnsRows.forEach(([l,v])=>addRow(b,l,v));})}));
-  const errC=health.checks.filter(c=>c.t==='error').length,warnC=health.checks.filter(c=>c.t==='warn').length;
-  const dkimStatusLabel=health.hasSel1&&health.hasSel2?' · DKIM✅✅':health.hasSel1||health.hasSel2?' · DKIM✅⚠️':' · DKIM❌';
-  const starLabel=health.dmarcIsQuarantine?' ⭐':'';
-  const scoreLbl=health.score>=80?`${health.score}%${starLabel} 🟢`:health.score>=50?`${health.score}%${starLabel} 🟡`:`${health.score}%${starLabel} 🔴`;
-  center.appendChild(makeCard({id:'health',iconHtml:'<img src="Santé.png" width="20" height="20" alt="Santé" style="object-fit:contain;">',iconBg:'hl-clr',title:'Santé du domaine',sub:`SPF · DMARC · DKIM · DNSSEC · MTA-STS${errC>0?' — '+errC+' erreur(s)':''}${warnC>0?', '+warnC+' avert.':''}${dkimStatusLabel}`,badge:scoreLbl,badgeCls:'hl-b',selCls:'sel-health',onClick:()=>openPanel('health','🛡️ Santé du domaine',b=>{
-    b.appendChild(buildScoreRing(health.score,health.dmarcIsQuarantine));
-    const hcl=document.createElement('div');hcl.className='hc-list';
-    health.checks.forEach(c=>{const it=document.createElement('div');it.className='hc-item '+c.t;it.innerHTML=`<div class="hc-icon">${c.icon}</div><div class="hc-body"><div class="hc-title">${c.title}</div><div class="hc-desc">${c.desc}</div></div>`;hcl.appendChild(it);});
-    b.appendChild(hcl);
-    buildDkimBlock(b,health.dkimResults,health.hasSel1,health.hasSel2);
-    const lnk=document.createElement('a');lnk.className='ext-link';lnk.href=`https://mxtoolbox.com/SuperTool.aspx?action=mx:${domain}`;lnk.target='_blank';lnk.rel='noopener';lnk.innerHTML=`🔗 Analyse complète sur MXToolbox — <strong>${domain}</strong>`;b.appendChild(lnk);
-  })}));
-}
+async function checkFull() {
+  const raw = emailInput.value.trim(); if (!raw) { showError('Veuillez entrer une adresse e-mail ou un domaine.'); return; }
+  const domain = extractDomain(raw); if (!domain || !domain.includes('.')) { showError('Domaine invalide.'); return; }
+  const center = document.getElementById('centerCol'), exportBtn = document.getElementById('exportBtn'), errBox = document.getElementById('errBox');
+  errBox.style.display = 'none'; center.innerHTML = ''; closePanel();
+  exportBtn.classList.remove('visible'); lastReport = null;
+  currentState = { domain, ms:null, dns:null, goog:null, health:null, others:null, dup:null, host:null, fastDone:false, fullDone:false };
+  lockButtons(); setFullLoading(true);
+  showSteps(['ms', 'google', 'dns', 'health', 'others', 'dup', 'host']);
+  ['ms', 'google', 'dns', 'health', 'others', 'dup', 'host'].forEach(k => setStep('step-' + k, 'pending'));
+  try {
+    setStep('step-ms', 'active');     currentState.ms     = isMsaPersonalDomain(domain) ? null : await checkMicrosoft(domain); setStep('step-ms', currentState.ms ? 'done' : 'fail');
+    setStep('step-google', 'active'); currentState.goog   = await checkGoogle(domain);                                          setStep('step-google', currentState.goog ? 'done' : 'fail');
+    setStep('step-dns', 'active');    currentState.dns    = await checkDNS(domain);                                            setStep('step-dns', currentState.dns.mx.length > 0 ? 'done' : 'fail');
+    setStep('step-health', 'active'); currentState.health = await checkHealth(domain);                                         setStep('step-health', 'done');
+    setStep('step-others', 'active'); currentState.others = await checkOtherTenants(domain, currentState.dns);                 setStep('step-others', 'done');
+    const isEmail = raw.includes('@');
+    setStep('step-dup', 'active');    currentState.dup    = isEmail ? await checkDuplicate(raw.trim()) : null;                 setStep('step-dup', 'done');
+    setStep('step-host', 'active');   currentState.host   = await checkHost(domain);                                           setStep('step-host', currentState.host ? 'done' : 'fail');
+    document.getElementById('progList').style.display = 'none';
+    currentState.fastDone = currentState.fullDone = true;
+    const confidence = computeConfidence(currentState.ms);
+    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: { score: currentState.health.score, dmarcIsQuarantine: currentState.health.dmarcIsQuarantine, checks: currentState.health.checks.map(c => ({ type:c.t, title:c.title, desc:c.desc })), dkim: { selector1: currentState.health.hasSel1, selector2: currentState.health.hasSel2, allResults: currentState.health.dkimResults } }, otherServices: currentState.others, duplicate: currentState.dup, host: currentState.host, tenantConfidence: confidence, fullDone: true };
+    exportBtn.classList.add('visible');
+    if (currentState.ms?.tenantId && currentState.ms.tenantValid) addToHistory(domain, currentState.ms.tenantId);
+    center.appendChild(renderHero(center, currentState.ms, currentState.dup, domain, raw, confidence));
 
-function showError(msg){const b=document.getElementById('errBox');b.textContent=msg;b.style.display='block';}
-function copyVal(id,btn){navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>{btn.textContent='✓ Copié';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copier';btn.classList.remove('copied');},1500);});}
+    const pb = document.createElement('div'); pb.className = 'pills-block';
+    const pl = document.createElement('div'); pl.className = 'pills-label'; pl.textContent = 'Autres services détectés';
+    const pr = document.createElement('div'); pr.className = 'pills-row';
+    currentState.others.forEach(t => { const p = document.createElement('div'); p.className = 'pill ' + (t.on ? 'on' : 'off'); p.innerHTML = `${t.icon} ${t.name}${t.on ? ' ✓' : ''}`; pr.appendChild(p); });
+    pb.appendChild(pl); pb.appendChild(pr); center.appendChild(pb);
+
+    if (currentState.ms?.tenantValid) {
+      const rows = msRows(currentState.ms);
+      center.appendChild(makeCard({ id:'ms', iconHtml:MS_SVG, iconBg:'ms-clr', title:'Microsoft 365 / Entra ID', sub:'Endpoints & informations tenant', badge: rows.length + ' champs', badgeCls:'ms-b', selCls:'selected', onClick: () => openPanel('ms', 'Microsoft 365 / Entra ID', buildMsPanel(currentState.ms)) }));
+    }
+    if (currentState.goog) center.appendChild(makeCard({ id:'google', iconHtml:GG_SVG, iconBg:'gg-clr', title:'Google Workspace', sub:'OpenID Connect & MX Records', badge:'5 champs', badgeCls:'gg-b', selCls:'sel-google', onClick: () => openPanel('google', '🔵 Google Workspace', buildGooglePanel(currentState.goog)) }));
+    if (currentState.host) {
+      const logo = hostLogo(currentState.host.hostName);
+      center.appendChild(makeCard({ id:'host', iconHtml:logo.html, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }));
+    }
+    const dnsRowCount = [currentState.dns?.mx?.length, currentState.dns?.spf, currentState.dns?.detectedProviders?.length, currentState.dns?.txt?.length].filter(Boolean).length;
+    if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconHtml:'<img src="DNS.png" width="20" height="20" alt="DNS" style="object-fit:contain;">', iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
+    center.appendChild(makeCard({ id:'health', iconHtml:'<img src="Santé.png" width="20" height="20" alt="Santé" style="object-fit:contain;">', iconBg:'hl-clr', title:'Santé du domaine', sub: healthSubLbl(currentState.health), badge: healthScoreLbl(currentState.health), badgeCls:'hl-b', selCls:'sel-health', onClick: () => openPanel('health', '🛡️ Santé du domaine', buildHealthPanel(currentState.health, domain)) }));
+  } catch (err) { document.getElementById('progList').style.display = 'none'; showError('⚠ Erreur : ' + err.message); }
+  finally { unlockButtons(); setFullLoading(false); }
+}
 </script>
 </body>
 </html>
