@@ -896,12 +896,79 @@ function detectHostFromNS(nsStr,registrar){
   if(nsStr.includes('online.net')||r.includes('online.net')||r.includes('scaleway'))return'Scaleway / Online.net';
   if(nsStr.includes('o2switch')||r.includes('o2switch'))return'o2switch';
   if(nsStr.includes('planethoster')||r.includes('planethoster'))return'PlanetHoster';
+  if(nsStr.includes('nameshield')||r.includes('nameshield'))return'Nameshield';
+  if(r.includes('amen')||r.includes('agence des m')||nsStr.includes('amen.fr'))return'AMEN';
+  if(r.includes('csc corporate')||r.includes('csc global')||r.includes('corporation service')||nsStr.includes('cscdbs.com')||nsStr.includes('cscglobal'))return'CSC Corporate Domains';
+  if(nsStr.includes('markmonitor')||r.includes('markmonitor'))return'MarkMonitor';
+  if(nsStr.includes('verisign')||r.includes('verisign'))return'VeriSign';
+  if(nsStr.includes('networksolutions')||r.includes('network solutions'))return'Network Solutions';
+  if(nsStr.includes('register.com')||r.includes('register.com'))return'Register.com';
+  if(nsStr.includes('nic.fr')||r.includes('afnic')||r.includes('nic.fr'))return'AFNIC';
+  if(nsStr.includes('bookmyname')||r.includes('bookmyname'))return'BookMyName';
+  if(nsStr.includes('hostinger')||r.includes('hostinger'))return'Hostinger';
+  if(nsStr.includes('siteground')||r.includes('siteground'))return'SiteGround';
+  if(nsStr.includes('bluehost')||r.includes('bluehost'))return'Bluehost';
+  if(nsStr.includes('dreamhost')||r.includes('dreamhost'))return'DreamHost';
+  if(nsStr.includes('wpengine')||r.includes('wp engine'))return'WP Engine';
+  if(nsStr.includes('hetzner')||r.includes('hetzner'))return'Hetzner';
+  if(nsStr.includes('digitalocean')||r.includes('digitalocean'))return'DigitalOcean';
+  if(nsStr.includes('linode')||r.includes('linode')||r.includes('akamai'))return'Akamai / Linode';
+  if(nsStr.includes('vultr')||r.includes('vultr'))return'Vultr';
+  if(nsStr.includes('dnsimple')||r.includes('dnsimple'))return'DNSimple';
+  if(nsStr.includes('name.com')||r.includes('name.com'))return'Name.com';
+  if(nsStr.includes('dynadot')||r.includes('dynadot'))return'Dynadot';
+  if(nsStr.includes('porkbun')||r.includes('porkbun'))return'Porkbun';
+  if(nsStr.includes('hover')||r.includes('hover'))return'Hover';
+  if(nsStr.includes('cloudns')||r.includes('cloudns'))return'ClouDNS';
   if(r)return registrar;return'Inconnu';
 }
 
 function formatDate(d){if(!d)return null;try{return new Date(d).toLocaleDateString('fr-FR',{day:'2-digit',month:'long',year:'numeric'});}catch{return d;}}
 
-const HOST_LOGO_MAP={ovh:{domain:'ovh.com',color:'#007DC5',label:'OVH'},cloudflare:{domain:'cloudflare.com',color:'#F48120',label:'CF'},gandi:{domain:'gandi.net',color:'#2E7D32',label:'GN'},godaddy:{domain:'godaddy.com',color:'#1BDB00',label:'GD'},namecheap:{domain:'namecheap.com',color:'#DE3723',label:'NC'},ionos:{domain:'ionos.com',color:'#003D8F',label:'IO'},'1and1':{domain:'ionos.com',color:'#003D8F',label:'IO'},infomaniak:{domain:'infomaniak.com',color:'#0098FF',label:'IK'},scaleway:{domain:'scaleway.com',color:'#7B5EA7',label:'SCW'},'online.net':{domain:'online.net',color:'#7B5EA7',label:'ONL'},amazon:{domain:'aws.amazon.com',color:'#FF9900',label:'AWS'},aws:{domain:'aws.amazon.com',color:'#FF9900',label:'AWS'},google:{domain:'domains.google',color:'#4285F4',label:'G'},microsoft:{domain:'microsoft.com',color:'#0078D4',label:'MS'},azure:{domain:'azure.microsoft.com',color:'#0078D4',label:'AZ'},o2switch:{domain:'o2switch.fr',color:'#2ECC71',label:'O2'},planethoster:{domain:'planethoster.com',color:'#E74C3C',label:'PH'}};
+const HOST_LOGO_MAP={
+  ovh:              {domain:'ovh.com',               color:'#007DC5', label:'OVH'},
+  cloudflare:       {domain:'cloudflare.com',         color:'#F48120', label:'CF'},
+  gandi:            {domain:'gandi.net',              color:'#2E7D32', label:'GN'},
+  godaddy:          {domain:'godaddy.com',            color:'#1BDB00', label:'GD'},
+  namecheap:        {domain:'namecheap.com',          color:'#DE3723', label:'NC'},
+  ionos:            {domain:'ionos.com',              color:'#003D8F', label:'IO'},
+  '1and1':          {domain:'ionos.com',              color:'#003D8F', label:'IO'},
+  infomaniak:       {domain:'infomaniak.com',         color:'#0098FF', label:'IK'},
+  scaleway:         {domain:'scaleway.com',           color:'#7B5EA7', label:'SCW'},
+  'online.net':     {domain:'online.net',             color:'#7B5EA7', label:'ONL'},
+  amazon:           {domain:'aws.amazon.com',         color:'#FF9900', label:'AWS'},
+  aws:              {domain:'aws.amazon.com',         color:'#FF9900', label:'AWS'},
+  google:           {domain:'domains.google',         color:'#4285F4', label:'G'},
+  microsoft:        {domain:'microsoft.com',          color:'#0078D4', label:'MS'},
+  azure:            {domain:'azure.microsoft.com',    color:'#0078D4', label:'AZ'},
+  o2switch:         {domain:'o2switch.fr',            color:'#2ECC71', label:'O2'},
+  planethoster:     {domain:'planethoster.com',       color:'#E74C3C', label:'PH'},
+  nameshield:           {domain:'nameshield.net',         color:'#003566', label:'NSH'},
+  amen:                 {domain:'amen.fr',                color:'#E2001A', label:'AMN'},
+  'csc corporate':      {domain:'cscglobal.com',          color:'#1A1A2E', label:'CSC'},
+  markmonitor:          {domain:'markmonitor.com',        color:'#003087', label:'MM'},
+  verisign:             {domain:'verisign.com',           color:'#005A8E', label:'VS'},
+  'network solutions':  {domain:'networksolutions.com',   color:'#E8622A', label:'NS'},
+  'register.com':       {domain:'register.com',           color:'#0069AA', label:'RC'},
+  afnic:                {domain:'afnic.fr',               color:'#003189', label:'AF'},
+  bookmyname:           {domain:'bookmyname.com',         color:'#FF6600', label:'BM'},
+  hostinger:            {domain:'hostinger.com',          color:'#7B2FBE', label:'HG'},
+  siteground:           {domain:'siteground.com',         color:'#F7941D', label:'SG'},
+  bluehost:             {domain:'bluehost.com',           color:'#003768', label:'BH'},
+  dreamhost:            {domain:'dreamhost.com',          color:'#00ADEF', label:'DH'},
+  'wp engine':          {domain:'wpengine.com',           color:'#40BFB0', label:'WP'},
+  hetzner:              {domain:'hetzner.com',            color:'#D50C2D', label:'HZ'},
+  digitalocean:         {domain:'digitalocean.com',       color:'#0080FF', label:'DO'},
+  akamai:               {domain:'akamai.com',             color:'#009BDE', label:'AK'},
+  linode:               {domain:'linode.com',             color:'#009BDE', label:'LN'},
+  vultr:                {domain:'vultr.com',              color:'#007BFC', label:'VT'},
+  dnsimple:             {domain:'dnsimple.com',           color:'#1083C6', label:'DS'},
+  'name.com':           {domain:'name.com',               color:'#3E9A47', label:'NM'},
+  dynadot:              {domain:'dynadot.com',            color:'#FF6600', label:'DY'},
+  porkbun:              {domain:'porkbun.com',            color:'#F26522', label:'PB'},
+  hover:                {domain:'hover.com',              color:'#41B6E6', label:'HV'},
+  cloudns:              {domain:'cloudns.net',            color:'#2196F3', label:'CN'},
+};
 function hostLogo(hostName){
   if(!hostName)return{html:_hostInitial('?','#9ca3af'),imgUrl:null};
   const l=hostName.toLowerCase();
