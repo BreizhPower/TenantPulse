@@ -112,12 +112,10 @@ input::placeholder{color:var(--muted);font-weight:500}
 .btn-go:hover{background:var(--blue-dark);box-shadow:0 6px 20px rgba(75,63,190,.45)}
 .btn-go:active{transform:scale(.99)}
 .btn-go:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
-.btn-full-analysis{flex:1;padding:11px 8px;background:transparent;border:2px solid var(--blue);border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--blue);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
-.btn-full-analysis:hover{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(75,63,190,.25)}
+.btn-full-analysis{flex:1;padding:11px 8px;background:#121212;border:none;border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.btn-full-analysis:hover{background:#2c2c2c;box-shadow:0 6px 20px rgba(0,0,0,.45)}
 .btn-full-analysis:active{transform:scale(.99)}
-.btn-full-analysis:disabled{opacity:.55;cursor:not-allowed}
-[data-theme="dark"] .btn-full-analysis{border-color:#8b80f8;color:#8b80f8}
-[data-theme="dark"] .btn-full-analysis:hover{background:#8b80f8;color:#fff}
+.btn-full-analysis:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
 
 .btn-hints{display:flex;gap:8px;margin-top:5px;margin-bottom:12px}
 .btn-hint{flex:1;font-size:9px;font-weight:600;color:var(--muted);text-align:center;line-height:1.4}
@@ -175,7 +173,7 @@ input::placeholder{color:var(--muted);font-weight:500}
 .empty-state-sub{font-size:11.5px;font-weight:600;color:var(--soft)}
 
 /* TENANT HERO */
-.tenant-hero{background:linear-gradient(135deg,#3730A3 0%,#4B3FBE 55%,#6d5ce8 100%);border-radius:14px;padding:22px 26px 18px;position:relative;overflow:hidden;box-shadow:0 6px 28px rgba(75,63,190,.25);cursor:default}
+.tenant-hero{background:#121212;border-radius:14px;padding:22px 26px 18px;position:relative;overflow:hidden;box-shadow:0 1px 10px rgba(0,0,0,.35);cursor:default}
 /* Remplacement emoji fenêtre ::after par le logo Microsoft.png — même taille et opacité */
 .tenant-hero::after{content:'';position:absolute;right:30px;top:50%;transform:translateY(-50%);width:80px;height:80px;opacity:.08;pointer-events:none;background:url('Microsoft.png') center/contain no-repeat}
 .hero-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:5px}
@@ -393,7 +391,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 
     <div class="nav-dropdown" id="mainDropdown">
       <button class="nav-drop-btn" onclick="toggleDropdown()">
-        ⚙️ Options <span class="drop-arrow">▾</span>
+        <img src="option.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> Options <span class="drop-arrow">▾</span>
       </button>
       <div class="drop-menu" id="dropMenu">
         <div class="drop-section">Apparence</div>
@@ -456,11 +454,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 
       <div class="btn-row">
         <button class="btn-go" id="checkBtnFast" onclick="checkFast()">
-          <span id="btnFastText">🔍 Tenant ID</span>
+          <span id="btnFastText"><img src="LOUPE.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Tenant ID</span>
           <div class="spinner" id="spinnerFast"></div>
         </button>
         <button class="btn-full-analysis" id="checkBtnFull" onclick="checkFull()">
-          <span id="btnFullText">🔬 Analyse complète</span>
+          <span id="btnFullText"><img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Analyse complète</span>
           <div class="spinner-blue" id="spinnerFull"></div>
         </button>
       </div>
@@ -1045,7 +1043,7 @@ function renderHero(center,ms,dup,domain,raw,confidence){
       partnerBtn.className='hero-partner-btn';
       partnerBtn.href=`https://partner.microsoft.com/dashboard/v2/customers/${ms.tenantId}/servicemanagementpage`;
       partnerBtn.target='_blank';partnerBtn.rel='noopener';
-      partnerBtn.innerHTML='🤝 Ouvrir dans Partner Center';
+      partnerBtn.innerHTML='<img src="Redirect.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;">Ouvrir dans Partner Center';
       actionsDiv.appendChild(partnerBtn);
       hero.appendChild(actionsDiv);
     }
@@ -1113,7 +1111,7 @@ async function checkFast(){
     if(dnsRows.length){center.appendChild(makeCard({id:'dns',iconHtml:'🌐',iconBg:'dn-clr',title:'Enregistrements DNS',sub:'MX · SPF · TXT',badge:dnsRows.length+' entrées',badgeCls:'dn-b',selCls:'sel-dns',onClick:()=>openPanel('dns','🌐 Enregistrements DNS',b=>{dnsRows.forEach(([l,v])=>addRow(b,l,v));})}));}
     const ctaBtn=document.createElement('button');
     ctaBtn.className='btn-trigger-full';ctaBtn.id='btnTriggerFull';
-    ctaBtn.innerHTML=`<span id="stfLabel">🔬 Lancer l'analyse complète</span><span class="stf-spinner"></span><span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>`;
+    ctaBtn.innerHTML=`<span id="stfLabel"><img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Lancer l'analyse complète</span><span class="stf-spinner"></span><span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>`;
     ctaBtn.onclick=()=>runFullFromState(raw,domain,ctaBtn);
     center.appendChild(ctaBtn);
   }catch(err){document.getElementById('progList').style.display='none';showError('⚠ Erreur : '+err.message);}
@@ -1212,7 +1210,7 @@ async function runFullFromState(raw,domain,ctaBtn){
     ctaBtn.classList.remove('running');ctaBtn.classList.add('done');ctaBtn.innerHTML='✅ Analyse complète effectuée';ctaBtn.onclick=null;
   }catch(err){
     ctaBtn.classList.remove('running');
-    ctaBtn.innerHTML='🔬 Lancer l\'analyse complète <span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>';
+    ctaBtn.innerHTML='<img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Lancer l\'analyse complète <span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>';
     document.getElementById('progList').style.display='none';
     showError('⚠ Erreur analyse complète : '+err.message);
   }finally{unlockButtons();}
