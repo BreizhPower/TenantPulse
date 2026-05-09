@@ -150,7 +150,7 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .p-step.active{background:#2a2860;border-color:#5b52cc;color:#a5b4fc}
 [data-theme="dark"] .p-step.done{background:#1a2e1a;border-color:#4a7c4a;color:#86efac}
 [data-theme="dark"] .p-step.timeout{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
-.p-step-icon{font-size:11px;flex-shrink:0}
+.p-step-icon{font-size:11px;flex-shrink:0;display:flex;align-items:center;width:18px}
 .p-step-label{flex:1;min-width:0}
 .p-step-cancel{display:none;margin-left:auto;background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);color:#dc2626;border-radius:4px;font-size:9px;font-weight:800;font-family:'Nunito',sans-serif;padding:1px 6px;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1.5}
 .p-step-cancel:hover{background:rgba(220,38,38,.22)}
@@ -176,8 +176,11 @@ input::placeholder{color:var(--muted);font-weight:500}
 
 /* TENANT HERO */
 .tenant-hero{background:linear-gradient(135deg,#3730A3 0%,#4B3FBE 55%,#6d5ce8 100%);border-radius:14px;padding:22px 26px 18px;position:relative;overflow:hidden;box-shadow:0 6px 28px rgba(75,63,190,.25);cursor:default}
-.tenant-hero::after{content:'🪟';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:72px;opacity:.06;pointer-events:none}
-.hero-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.55);margin-bottom:8px}
+/* Remplacement emoji fenêtre ::after par le logo Microsoft.png — même taille et opacité */
+.tenant-hero::after{content:'';position:absolute;right:16px;top:50%;transform:translateY(-50%);width:80px;height:80px;opacity:.08;pointer-events:none;background:url('Microsoft.png') center/contain no-repeat}
+.hero-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+/* Classe utilitaire pour le logo MS inline dans les hero-labels */
+.ms-logo-inline{width:14px;height:14px;object-fit:contain;display:inline-block;vertical-align:middle;flex-shrink:0}
 .hero-guid{font-size:19px;font-weight:800;color:#fff;word-break:break-all;letter-spacing:.015em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-shadow:0 1px 6px rgba(0,0,0,.18);margin-bottom:6px}
 .hero-copy-btn{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.32);border-radius:6px;color:#fff;font-size:10.5px;font-weight:700;font-family:'Nunito',sans-serif;padding:4px 12px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
 .hero-copy-btn:hover{background:rgba(255,255,255,.26)}
@@ -358,7 +361,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 .history-item-copy:hover{border-color:var(--black);color:var(--black)}
 .history-item-copy.copied{border-color:#16a34a;color:#16a34a}
 .history-item-time{font-size:8.5px;font-weight:600;color:var(--muted);flex-shrink:0}
-.history-item-icon{font-size:13px;flex-shrink:0}
+.history-item-icon{font-size:13px;flex-shrink:0;display:flex;align-items:center;width:16px}
 .btn-clear-history{width:100%;margin-top:4px;padding:6px;background:transparent;border:1.5px solid var(--border);border-radius:7px;font-family:'Nunito',sans-serif;font-size:10.5px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s}
 .btn-clear-history:hover{border-color:#fecdd3;color:#dc2626}
 [data-theme="dark"] .btn-clear-history:hover{border-color:#7f1d1d;color:#fca5a5}
@@ -469,7 +472,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
       <button class="btn-export" id="exportBtn" onclick="exportReport()">📋 Copier le rapport</button>
 
       <div class="prog-list" id="progList">
-        <div class="p-step" id="step-ms"><span class="p-step-icon">🪟</span><span class="p-step-label">Microsoft 365…</span><button class="p-step-cancel" onclick="cancelStep('ms')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('ms')" title="Relancer">↺ Relancer</button></div>
+        <!-- MODIFIÉ : emoji fenêtre remplacé par Microsoft.png -->
+        <div class="p-step" id="step-ms"><span class="p-step-icon"><img src="Microsoft.png" width="14" height="14" alt="Microsoft" style="display:inline-block;vertical-align:middle;flex-shrink:0;"></span><span class="p-step-label">Microsoft 365…</span><button class="p-step-cancel" onclick="cancelStep('ms')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('ms')" title="Relancer">↺ Relancer</button></div>
         <div class="p-step" id="step-google"><span class="p-step-icon">🔵</span><span class="p-step-label">Google Workspace…</span><button class="p-step-cancel" onclick="cancelStep('google')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('google')" title="Relancer">↺ Relancer</button></div>
         <div class="p-step" id="step-dns"><span class="p-step-icon">🌐</span><span class="p-step-label">DNS…</span><button class="p-step-cancel" onclick="cancelStep('dns')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('dns')" title="Relancer">↺ Relancer</button></div>
         <div class="p-step" id="step-health"><span class="p-step-icon">🛡️</span><span class="p-step-label">Sécurité…</span><button class="p-step-cancel" onclick="cancelStep('health')" title="Annuler">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('health')" title="Relancer">↺ Relancer</button></div>
@@ -481,8 +485,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 
       <!-- MSA manual check -->
       <div class="msa-check-block">
+        <!-- MODIFIÉ : emoji fenêtre remplacé par Microsoft.png dans le bouton collapsible -->
         <button class="collapsible-btn" onclick="toggleCollapsible('msaBody','msaArrow')">
-          <span>🪟 Vérification manuelle MSA</span>
+          <span style="display:inline-flex;align-items:center;gap:6px;"><img src="Microsoft.png" width="16" height="16" alt="Microsoft" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> Vérification manuelle MSA</span>
           <span class="coll-arrow" id="msaArrow">▾</span>
         </button>
         <div class="collapsible-body" id="msaBody">
@@ -631,10 +636,11 @@ function renderHistory(){
   if(!list)return;
   const items=loadHistory();
   if(!items.length){list.innerHTML='<div class="history-empty">Aucune analyse effectuée</div>';return;}
+  /* MODIFIÉ : emoji fenêtre remplacé par Microsoft.png dans les items d'historique */
   list.innerHTML=items.map((item,i)=>{
     const shortGuid=item.tenantId?item.tenantId.slice(0,8)+'…':'—';
     return`<div class="history-item" onclick="loadFromHistory('${item.domain}','${item.tenantId||''}',${i})">
-      <span class="history-item-icon">🪟</span>
+      <span class="history-item-icon"><img src='Microsoft.png' width='14' height='14' alt='Microsoft' style='display:inline-block;vertical-align:middle;flex-shrink:0;'></span>
       <div style="flex:1;min-width:0"><div class="history-item-domain">${item.domain}</div><div class="history-item-guid">${shortGuid}</div></div>
       <span class="history-item-time">${relativeTime(item.at)}</span>
       <button class="history-item-copy" onclick="event.stopPropagation();copyHistoryGuid('${item.tenantId}',this)" title="Copier le Tenant ID complet">📋</button>
@@ -1005,30 +1011,34 @@ function setFastLoading(on){document.getElementById('btnFastText').style.display
 function setFullLoading(on){document.getElementById('btnFullText').style.display=on?'none':'inline';document.getElementById('spinnerFull').style.display=on?'inline-block':'none';}
 
 // ── Render hero ──
+// MODIFIÉ : toutes les occurrences de l'emoji fenêtre dans les hero-labels
+// sont remplacées par <img src='Microsoft.png'> avec les mêmes propriétés visuellesuelles
 function renderHero(center,ms,dup,domain,raw,confidence){
   const hero=document.createElement('div');hero.className='tenant-hero';
+  // Helper logo MS inline pour les hero-labels (blanc semi-transparent sur fond dégradé bleu)
+  const msLogo=`<img src='Microsoft.png' width='14' height='14' alt='Microsoft' style='display:inline-block;vertical-align:middle;flex-shrink:0;opacity:.85;'>`;
   if(!ms&&dup?.isNativelyPersonal){
     hero.style.background='linear-gradient(135deg,#1e3a5f 0%,#0078d4 100%)';
-    hero.innerHTML=`<div class="hero-label">🪟 Compte Microsoft Personnel</div><div class="hero-none">${domain} — domaine Microsoft grand public</div><div class="hero-domain">${raw}</div>`;
+    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Compte Microsoft Personnel</span></div><div class="hero-none">${domain} — domaine Microsoft grand public</div><div class="hero-domain">${raw}</div>`;
     const da=document.createElement('div');da.className='dup-alert info';da.innerHTML=`<div class="dup-icon">ℹ️</div><div class="dup-body"><div class="dup-title">Adresse personnelle Microsoft (MSA)</div><div class="dup-desc">Pas de tenant professionnel.</div></div>`;
     hero.appendChild(da);
   } else if(!ms&&dup?.hasFreeAccount){
     hero.style.background='linear-gradient(135deg,#1c2a3a 0%,#1d4ed8 60%,#2563eb 100%)';
-    hero.innerHTML=`<div class="hero-label">🪟 Aucun Tenant Microsoft 365 Pro</div><div class="hero-none">Pas de Microsoft 365 professionnel pour ce domaine</div><div class="hero-domain">${domain}</div>`;
+    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Aucun Tenant Microsoft 365 Pro</span></div><div class="hero-none">Pas de Microsoft 365 professionnel pour ce domaine</div><div class="hero-domain">${domain}</div>`;
     const da=document.createElement('div');da.className='dup-alert warn';da.innerHTML=`<div class="dup-icon">⚠️</div><div class="dup-body"><div class="dup-title">Compte Microsoft gratuit détecté</div><div class="dup-desc">${raw} possède un compte MSA gratuit mais aucun tenant 365 pro.</div></div>`;
     hero.appendChild(da);
   } else if(!ms){
     hero.style.background='linear-gradient(135deg,#374151 0%,#4b5563 100%)';
-    hero.innerHTML=`<div class="hero-label">🪟 Microsoft 365</div><div class="hero-none">Aucun tenant Microsoft 365 détecté pour ce domaine</div><div class="hero-domain">${domain}</div>`;
+    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft 365</span></div><div class="hero-none">Aucun tenant Microsoft 365 détecté pour ce domaine</div><div class="hero-domain">${domain}</div>`;
   } else if(ms.tenantId&&!ms.tenantValid){
-    hero.innerHTML=`<div class="hero-label">🪟 Microsoft Tenant ID</div><div class="hero-guid" style="opacity:.45;text-decoration:line-through;font-size:15px"><span>${ms.tenantId}</span></div><div class="hero-domain">${domain}</div>`;
+    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft Tenant ID</span></div><div class="hero-guid" style="opacity:.45;text-decoration:line-through;font-size:15px"><span>${ms.tenantId}</span></div><div class="hero-domain">${domain}</div>`;
     const da=document.createElement('div');da.className='dup-alert warn';da.innerHTML=`<div class="dup-icon">⚠️</div><div class="dup-body"><div class="dup-title">Tenant ID invalide</div><div class="dup-desc">Le GUID ne correspond pas à un tenant 365 actif.</div></div>`;
     hero.appendChild(da);
   } else {
     const hid='tid_'+Math.random().toString(36).slice(2);
     const confClass=confidence>=80?'high':confidence>=50?'medium':'low';
     const confLabel=confidence>=80?'Confiance élevée':confidence>=50?'Confiance moyenne':'Confiance faible';
-    hero.innerHTML=`<div class="hero-label">🪟 Microsoft Tenant ID</div>${ms.tenantId?`<div class="hero-guid"><span id="${hid}">${ms.tenantId}</span><button class="hero-copy-btn" onclick="copyVal('${hid}',this)">Copier</button><span class="confidence-badge ${confClass}">${confidence}% — ${confLabel}</span></div>`:`<div class="hero-none">GUID non résolu — domaine Microsoft détecté</div>`}<div class="hero-domain">${domain}</div>`;
+    hero.innerHTML=`<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft Tenant ID</span></div>${ms.tenantId?`<div class="hero-guid"><span id="${hid}">${ms.tenantId}</span><button class="hero-copy-btn" onclick="copyVal('${hid}',this)">Copier</button><span class="confidence-badge ${confClass}">${confidence}% — ${confLabel}</span></div>`:`<div class="hero-none">GUID non résolu — domaine Microsoft détecté</div>`}<div class="hero-domain">${domain}</div>`;
     if(ms.tenantId&&ms.tenantValid){
       const actionsDiv=document.createElement('div');actionsDiv.className='hero-actions';
       const partnerBtn=document.createElement('a');
@@ -1094,7 +1104,7 @@ async function checkFast(){
     }
     if(currentState.ms&&currentState.ms.tenantValid){
       const msRows=[currentState.ms.namespaceType&&['Namespace Type',currentState.ms.namespaceType],currentState.ms.federationType&&['Fédération',currentState.ms.federationType],currentState.ms.cloudInstance&&['Cloud Instance',currentState.ms.cloudInstance],currentState.ms.issuer&&['Issuer',currentState.ms.issuer],currentState.ms.tokenEndpoint&&['Token Endpoint',currentState.ms.tokenEndpoint],currentState.ms.authorizationEndpoint&&['Authorization Endpoint',currentState.ms.authorizationEndpoint],currentState.ms.userInfoEndpoint&&['UserInfo Endpoint',currentState.ms.userInfoEndpoint]].filter(Boolean);
-      center.appendChild(makeCard({id:'ms',iconHtml:MS_SVG,iconBg:'ms-clr',title:'Microsoft 365 / Entra ID',sub:'Endpoints & informations tenant',badge:msRows.length+' champs',badgeCls:'ms-b',selCls:'selected',onClick:()=>openPanel('ms','🪟 Microsoft 365 / Entra ID',b=>{msRows.forEach(([l,v])=>addRow(b,l,v));})}));
+      center.appendChild(makeCard({id:'ms',iconHtml:MS_SVG,iconBg:'ms-clr',title:'Microsoft 365 / Entra ID',sub:'Endpoints & informations tenant',badge:msRows.length+' champs',badgeCls:'ms-b',selCls:'selected',onClick:()=>openPanel('ms','Microsoft 365 / Entra ID',b=>{msRows.forEach(([l,v])=>addRow(b,l,v));})}));
     }
     if(currentState.goog){
       center.appendChild(makeCard({id:'google',iconHtml:GG_SVG,iconBg:'gg-clr',title:'Google Workspace',sub:'OpenID Connect & MX Records',badge:'5 champs',badgeCls:'gg-b',selCls:'sel-google',onClick:()=>openPanel('google','🔵 Google Workspace',b=>{addRow(b,'MX Records',currentState.goog.mxRecords.join('\n'),'hi-google');addRow(b,'Issuer',currentState.goog.issuer);addRow(b,'Authorization',currentState.goog.authorizationEndpoint);addRow(b,'Token',currentState.goog.tokenEndpoint);addRow(b,'UserInfo',currentState.goog.userInfoEndpoint);})}));
@@ -1232,7 +1242,7 @@ async function runAllSteps(raw,domain,center,exportBtn){
   pb.appendChild(pl);pb.appendChild(pr);center.appendChild(pb);
   if(ms&&ms.tenantValid){
     const msRows=[ms.namespaceType&&['Namespace Type',ms.namespaceType],ms.federationType&&['Fédération',ms.federationType],ms.cloudInstance&&['Cloud Instance',ms.cloudInstance],ms.issuer&&['Issuer',ms.issuer],ms.tokenEndpoint&&['Token Endpoint',ms.tokenEndpoint],ms.authorizationEndpoint&&['Authorization Endpoint',ms.authorizationEndpoint],ms.userInfoEndpoint&&['UserInfo Endpoint',ms.userInfoEndpoint]].filter(Boolean);
-    center.appendChild(makeCard({id:'ms',iconHtml:MS_SVG,iconBg:'ms-clr',title:'Microsoft 365 / Entra ID',sub:'Endpoints & informations tenant',badge:msRows.length+' champs',badgeCls:'ms-b',selCls:'selected',onClick:()=>openPanel('ms','🪟 Microsoft 365 / Entra ID',b=>{msRows.forEach(([l,v])=>addRow(b,l,v));})}));
+    center.appendChild(makeCard({id:'ms',iconHtml:MS_SVG,iconBg:'ms-clr',title:'Microsoft 365 / Entra ID',sub:'Endpoints & informations tenant',badge:msRows.length+' champs',badgeCls:'ms-b',selCls:'selected',onClick:()=>openPanel('ms','Microsoft 365 / Entra ID',b=>{msRows.forEach(([l,v])=>addRow(b,l,v));})}));
   }
   if(goog)center.appendChild(makeCard({id:'google',iconHtml:GG_SVG,iconBg:'gg-clr',title:'Google Workspace',sub:'OpenID Connect & MX Records',badge:'5 champs',badgeCls:'gg-b',selCls:'sel-google',onClick:()=>openPanel('google','🔵 Google Workspace',b=>{addRow(b,'MX Records',goog.mxRecords.join('\n'),'hi-google');addRow(b,'Issuer',goog.issuer);addRow(b,'Authorization',goog.authorizationEndpoint);addRow(b,'Token',goog.tokenEndpoint);addRow(b,'UserInfo',goog.userInfoEndpoint);})}));
   if(host){
