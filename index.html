@@ -51,7 +51,6 @@
 
 body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text);min-height:100vh;display:flex;flex-direction:column;transition:background .25s,color .25s}
 
-/* NAV */
 .topbar{background:#121212!important;color:#fff;text-align:center;font-size:11.5px;font-weight:600;padding:6px 20px;letter-spacing:.03em}
 nav{background:#4B3FBE!important;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .nav-logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;color:#fff;text-decoration:none}
@@ -59,7 +58,6 @@ nav{background:#4B3FBE!important;padding:0 24px;height:52px;display:flex;align-i
 .nav-right{display:flex;align-items:center;gap:6px;position:relative}
 .nav-badge{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);padding:3px 9px;border-radius:20px;letter-spacing:.04em}
 
-/* Dropdown menu */
 .nav-dropdown{position:relative}
 .nav-drop-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:20px;padding:3px 10px 3px 8px;cursor:pointer;font-size:11px;font-weight:700;color:#fff;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:5px;transition:background .15s;white-space:nowrap}
 .nav-drop-btn:hover{background:rgba(255,255,255,.25)}
@@ -97,10 +95,8 @@ nav{background:#4B3FBE!important;padding:0 24px;height:52px;display:flex;align-i
 .proxy-detail-url{font-size:9px;font-family:'Courier New',monospace;color:var(--muted);background:var(--row);border:1px solid var(--border);border-radius:5px;padding:4px 7px;word-break:break-all}
 .drop-info-row{display:flex;align-items:flex-start;gap:8px;padding:9px 14px;font-size:10px;font-weight:600;color:var(--soft);line-height:1.45;border-top:1px solid var(--border)}
 
-/* 3-COLUMN LAYOUT */
 .app{flex:1;display:flex;min-height:0}
 
-/* LEFT */
 .sidebar{width:320px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto;transition:background .25s}
 .sb-head{padding:20px 20px 16px;border-bottom:1px solid var(--border)}
 .sb-head h1{font-size:17px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:4px}
@@ -117,7 +113,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 .ep-preview .domain{color:var(--blue);font-weight:800}
 [data-theme="dark"] .ep-preview .domain{color:#8b80f8}
 
-/* TWO BUTTONS */
 .btn-row{display:flex;gap:8px;margin-bottom:0}
 .btn-go{flex:1;padding:11px 0px;background:var(--blue);border:none;border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(75,63,190,.35)}
 .btn-go:hover{background:var(--blue-dark);box-shadow:0 6px 20px rgba(75,63,190,.45)}
@@ -176,19 +171,14 @@ input::placeholder{color:var(--muted);font-weight:500}
 .hero-partner-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
 .hero-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 
-/* CENTER */
 .center{flex:1;padding:24px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;min-height:calc(100vh - 52px)}
 .empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:.3;padding:60px 0}
 .empty-state-icon{font-size:44px}
 .empty-state-title{font-size:14px;font-weight:800;color:var(--text)}
 .empty-state-sub{font-size:11.5px;font-weight:600;color:var(--soft)}
-
-/* TENANT HERO */
 .tenant-hero{background:#121212;border-radius:14px;padding:22px 26px 18px;position:relative;overflow:hidden;box-shadow:0 1px 10px rgba(0,0,0,.35);cursor:default}
-/* Remplacement emoji fenêtre ::after par le logo Microsoft.png — même taille et opacité */
-.tenant-hero::after{content:'';position:absolute;right:35px;top:50%;transform:translateY(-50%);width:80px;height:80px;opacity:.08;pointer-events:none;background:url('Microsoft.png') center/contain no-repeat}
+.tenant-hero::after{content:'';position:absolute;right:35px;top:50%;transform:translateY(-50%);width:80px;height:80px;opacity:.08;pointer-events:none;background:url('MicrosoftN.png') center/contain no-repeat}
 .hero-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:5px}
-/* Classe utilitaire pour le logo MS inline dans les hero-labels */
 .ms-logo-inline{width:14px;height:14px;object-fit:contain;display:inline-block;vertical-align:middle;flex-shrink:0}
 .hero-guid{font-size:19px;font-weight:800;color:#fff;word-break:break-all;letter-spacing:.015em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-shadow:0 1px 6px rgba(0,0,0,.18);margin-bottom:6px}
 .hero-copy-btn{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.32);border-radius:6px;color:#fff;font-size:10.5px;font-weight:700;font-family:'Nunito',sans-serif;padding:4px 12px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
