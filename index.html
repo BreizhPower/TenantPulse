@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TenantPulse — v0.4</title>
+<title>TenantPulse — v0.5</title>
 <link rel="icon" type="image/png" href="TP.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
@@ -73,8 +73,6 @@ nav{background:#4B3FBE!important;padding:0 24px;height:52px;display:flex;align-i
 .proxy-row:hover{background:var(--row)}
 .proxy-row-icon{font-size:13px;flex-shrink:0}
 .proxy-row-title{font-size:11px;font-weight:700;color:var(--text);flex:1}
-.proxy-row-tag{font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;background:#fef3c7;color:#92400e;border:1px solid #fde68a;flex-shrink:0}
-[data-theme="dark"] .proxy-row-tag{background:#2a2010;color:#fcd34d;border-color:#92781a}
 .proxy-row-chev{font-size:9px;color:var(--muted);flex-shrink:0}
 .proxy-detail-overlay{position:fixed;inset:0;z-index:600;pointer-events:none}
 .proxy-detail-overlay.open{pointer-events:auto}
@@ -86,8 +84,6 @@ nav{background:#4B3FBE!important;padding:0 24px;height:52px;display:flex;align-i
 .proxy-detail-title{font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px}
 .proxy-detail-desc{font-size:10.5px;font-weight:600;color:var(--soft);line-height:1.55;margin-bottom:8px}
 .proxy-detail-url{font-size:9px;font-family:'Courier New',monospace;color:var(--muted);background:var(--row);border:1px solid var(--border);border-radius:5px;padding:4px 7px;word-break:break-all}
-.proxy-tag-detail{display:inline-flex;align-items:center;gap:3px;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:4px;font-size:8.5px;font-weight:800;padding:2px 6px;margin-bottom:8px}
-[data-theme="dark"] .proxy-tag-detail{background:#2a2010;color:#fcd34d;border-color:#92781a}
 .drop-info-row{display:flex;align-items:flex-start;gap:8px;padding:9px 14px;font-size:10px;font-weight:600;color:var(--soft);line-height:1.45;border-top:1px solid var(--border)}
 
 /* 3-COLUMN LAYOUT */
@@ -116,8 +112,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 .btn-go:hover{background:var(--blue-dark);box-shadow:0 6px 20px rgba(75,63,190,.45)}
 .btn-go:active{transform:scale(.99)}
 .btn-go:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
-.btn-go.btn-full{flex:none;width:100%;font-size:13px;padding:11px}
-/* Full analysis button — secondary style */
 .btn-full-analysis{flex:1;padding:11px 8px;background:transparent;border:2px solid var(--blue);border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--blue);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}
 .btn-full-analysis:hover{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(75,63,190,.25)}
 .btn-full-analysis:active{transform:scale(.99)}
@@ -125,7 +119,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .btn-full-analysis{border-color:#8b80f8;color:#8b80f8}
 [data-theme="dark"] .btn-full-analysis:hover{background:#8b80f8;color:#fff}
 
-/* Button hint labels */
 .btn-hints{display:flex;gap:8px;margin-top:5px;margin-bottom:12px}
 .btn-hint{flex:1;font-size:9px;font-weight:600;color:var(--muted);text-align:center;line-height:1.4}
 
@@ -134,12 +127,10 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .spinner-blue{border-color:rgba(139,128,248,.2);border-top-color:#8b80f8}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Export btn */
 .btn-export{width:100%;padding:9px;background:transparent;border:2px solid var(--border);border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--soft);cursor:pointer;display:none;align-items:center;justify-content:center;gap:6px;transition:all .2s;margin-top:8px}
 .btn-export:hover{border-color:var(--black);color:var(--black)}
 .btn-export.visible{display:flex}
 
-/* Full analysis trigger button (shown in results after fast search) */
 .btn-trigger-full{width:100%;padding:10px;background:transparent;border:2px dashed var(--blue);border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--blue);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;margin-top:0}
 .btn-trigger-full:hover{background:var(--blue);color:#fff;border-style:solid}
 [data-theme="dark"] .btn-trigger-full{border-color:#8b80f8;color:#8b80f8}
@@ -161,12 +152,10 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .p-step.timeout{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
 .p-step-icon{font-size:11px;flex-shrink:0}
 .p-step-label{flex:1;min-width:0}
-/* Cancel button (×) shown on active steps */
 .p-step-cancel{display:none;margin-left:auto;background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);color:#dc2626;border-radius:4px;font-size:9px;font-weight:800;font-family:'Nunito',sans-serif;padding:1px 6px;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1.5}
 .p-step-cancel:hover{background:rgba(220,38,38,.22)}
 [data-theme="dark"] .p-step-cancel{background:rgba(252,165,165,.1);border-color:rgba(252,165,165,.25);color:#fca5a5}
 .p-step.active .p-step-cancel{display:inline-flex;align-items:center}
-/* Retry button — shown when step is timed-out */
 .p-step-retry{display:none;margin-left:auto;background:rgba(75,63,190,.1);border:1px solid rgba(75,63,190,.3);color:var(--blue);border-radius:4px;font-size:9px;font-weight:800;font-family:'Nunito',sans-serif;padding:1px 6px;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1.5}
 .p-step-retry:hover{background:rgba(75,63,190,.2)}
 [data-theme="dark"] .p-step-retry{background:rgba(139,128,248,.1);border-color:rgba(139,128,248,.3);color:#a5b4fc}
@@ -174,7 +163,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 .err-box{margin-top:10px;background:#fff1f2;border:1.5px solid #fecdd3;border-radius:7px;padding:9px 12px;font-size:11.5px;font-weight:700;color:#dc2626;display:none}
 [data-theme="dark"] .err-box{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
 
-/* Partner dashboard button in hero */
 .hero-partner-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.28);border-radius:6px;color:rgba(255,255,255,.85);font-size:10px;font-weight:700;font-family:'Nunito',sans-serif;padding:4px 11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;margin-top:8px}
 .hero-partner-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
 .hero-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -200,7 +188,6 @@ input::placeholder{color:var(--muted);font-weight:500}
 .confidence-badge.high{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.4)}
 .confidence-badge.medium{background:rgba(251,191,36,.2);border-color:rgba(251,191,36,.4)}
 .confidence-badge.low{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4)}
-
 .dup-alert{display:flex;align-items:flex-start;gap:9px;margin-top:12px;padding:10px 12px;border-radius:8px}
 .dup-alert.warn{background:rgba(251,191,36,.16);border:1.5px solid rgba(251,191,36,.45)}
 .dup-alert.ok{background:rgba(34,197,94,.12);border:1.5px solid rgba(34,197,94,.3)}
@@ -397,9 +384,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
   <a class="nav-logo" href="#">
     <img src="TP.png" class="nav-logo-icon" style="height:18px;">
     TenantPulse
-</a>
+  </a>
   <div class="nav-right">
-    <div class="nav-badge">🔧 WIP v0.4</div>
+    <div class="nav-badge">v0.5</div>
 
     <div class="nav-dropdown" id="mainDropdown">
       <button class="nav-drop-btn" onclick="toggleDropdown()">
@@ -414,26 +401,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
           </div>
           <div class="drop-toggle-switch" id="darkSwitch"></div>
         </div>
-        <div class="drop-section">Proxys tiers utilisés</div>
-        <div class="drop-toggle" onclick="toggleThirdPartyProxies(event)" title="Activer/désactiver les proxys tiers (corsproxy.io et allorigins.win)">
-          <div class="drop-toggle-left">
-            <span class="drop-toggle-icon">🔀</span>
-            <span class="drop-toggle-label">Proxys tiers (corsproxy / allorigins)</span>
-          </div>
-          <div class="drop-toggle-switch" id="tppSwitch"></div>
-        </div>
-        <div class="proxy-row" onclick="showProxyDetail('corsproxy')">
-          <span class="proxy-row-icon">🔀</span>
-          <span class="proxy-row-title">corsproxy.io</span>
-          <span class="proxy-row-tag" id="tppTagCors" style="background:#e5e7eb;color:#4b5563;border-color:#d1d5db">🚫 Désactivé</span>
-          <span class="proxy-row-chev">›</span>
-        </div>
-        <div class="proxy-row" onclick="showProxyDetail('allorigins')">
-          <span class="proxy-row-icon">🔀</span>
-          <span class="proxy-row-title">allorigins.win</span>
-          <span class="proxy-row-tag" id="tppTagAll" style="background:#e5e7eb;color:#4b5563;border-color:#d1d5db">🚫 Désactivé</span>
-          <span class="proxy-row-chev">›</span>
-        </div>
+        <div class="drop-section">APIs utilisées</div>
         <div class="proxy-row" onclick="showProxyDetail('dnsgoogle')">
           <span class="proxy-row-icon">🌐</span>
           <span class="proxy-row-title">dns.google</span>
@@ -450,8 +418,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
           <span class="proxy-row-chev">›</span>
         </div>
         <div class="drop-info-row">
-          <span>ℹ️</span>
-          <span>Aucune donnée saisie n'est stockée. Requêtes depuis votre navigateur.</span>
+          <span>✅</span>
+          <span>Requêtes directes vers APIs officielles Microsoft, Google DNS et RDAP. Aucun proxy tiers. Aucune donnée stockée.</span>
         </div>
       </div>
     </div>
@@ -460,7 +428,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
       <div class="proxy-detail-panel" id="proxyDetailPanel" onclick="event.stopPropagation()">
         <div class="proxy-detail-back" onclick="hideProxyDetail()">‹ Retour</div>
         <div class="proxy-detail-title" id="pdTitle"></div>
-        <div class="proxy-tag-detail" id="pdTag" style="display:none">⚠️ Proxy tiers</div>
         <div class="proxy-detail-desc" id="pdDesc"></div>
         <div class="proxy-detail-url" id="pdUrl"></div>
       </div>
@@ -484,7 +451,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
       <label class="flabel">Endpoint OpenID Microsoft 365</label>
       <div class="ep-preview" id="endpointPreview">https://login.microsoftonline.com/<span class="domain">domaine.com</span>/.well-known/openid-configuration</div>
 
-      <!-- TWO BUTTONS -->
       <div class="btn-row">
         <button class="btn-go" id="checkBtnFast" onclick="checkFast()">
           <span id="btnFastText">🔍 Tenant ID</span>
@@ -513,7 +479,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
       </div>
       <div class="err-box" id="errBox"></div>
 
-      <!-- MSA manual check — collapsible -->
+      <!-- MSA manual check -->
       <div class="msa-check-block">
         <button class="collapsible-btn" onclick="toggleCollapsible('msaBody','msaArrow')">
           <span>🪟 Vérification manuelle MSA</span>
@@ -536,7 +502,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
         </div>
       </div>
 
-      <!-- History — collapsible -->
+      <!-- History -->
       <div class="msa-check-block" style="margin-top:0">
         <button class="collapsible-btn" onclick="toggleCollapsible('historyBody','historyArrow')">
           <span>🕐 Historique des Tenant ID</span>
@@ -573,39 +539,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 <footer><div class="powered">Powered by <span>Tech RUN MW N1</span> Engineer (Au SMIC)</div></footer>
 
 <script>
-// ── Feature flags ──
-// Proxys tiers (corsproxy.io / allorigins.win) — désactivés par défaut.
-// Activables à l'exécution via l'interrupteur dans le menu Options
-// (préférence persistée dans localStorage).
-let ENABLE_THIRD_PARTY_PROXIES=(()=>{try{return localStorage.getItem('tpp_enabled')==='1';}catch{return false;}})();
-function isThirdPartyProxiesEnabled(){return ENABLE_THIRD_PARTY_PROXIES;}
-function syncThirdPartyProxiesUI(){
-  const on=ENABLE_THIRD_PARTY_PROXIES;
-  const sw=document.getElementById('tppSwitch');if(sw)sw.classList.toggle('on',on);
-  const tagOn={text:'✅ Activé',bg:'#dcfce7',color:'#15803d',border:'#bbf7d0'};
-  const tagOff={text:'🚫 Désactivé',bg:'#e5e7eb',color:'#4b5563',border:'#d1d5db'};
-  const t=on?tagOn:tagOff;
-  ['tppTagCors','tppTagAll'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.textContent=t.text;el.style.background=t.bg;el.style.color=t.color;el.style.borderColor=t.border;});
-  if(typeof PROXY_DATA!=='undefined'){
-    const d=on
-      ?'✅ Activé. Les requêtes peuvent être relayées par ce proxy tiers en cas d\'échec direct (CORS). Désactivable depuis le menu Options.'
-      :'🚫 Désactivé par défaut. Aucune requête n\'est envoyée à ce proxy tiers. Réactivable depuis le menu Options.';
-    PROXY_DATA.corsproxy.desc=d;PROXY_DATA.allorigins.desc=d;
-  }
-}
-function toggleThirdPartyProxies(e){
-  if(e){e.stopPropagation();}
-  ENABLE_THIRD_PARTY_PROXIES=!ENABLE_THIRD_PARTY_PROXIES;
-  try{localStorage.setItem('tpp_enabled',ENABLE_THIRD_PARTY_PROXIES?'1':'0');}catch{}
-  syncThirdPartyProxiesUI();
-}
-// ── Proxy data ──
+// ── Proxy data — APIs officielles uniquement, aucun proxy tiers ──
 const PROXY_DATA={
-  corsproxy:{title:'corsproxy.io',desc:'🚫 Désactivé par défaut. Aucune requête n\'est envoyée à ce proxy tiers. Pour le réactiver, passer ENABLE_THIRD_PARTY_PROXIES à true dans le code.',url:'https://corsproxy.io/',isTiers:true},
-  allorigins:{title:'allorigins.win',desc:'🚫 Désactivé par défaut. Aucune requête n\'est envoyée à ce proxy tiers. Pour le réactiver, passer ENABLE_THIRD_PARTY_PROXIES à true dans le code.',url:'https://api.allorigins.win/',isTiers:true},
-  dnsgoogle:{title:'dns.google',desc:'API DNS-over-HTTPS de Google (DoH). Utilisée pour résoudre MX, SPF, DKIM, DMARC, DNSSEC, BIMI et MTA-STS. Aucune donnée personnelle transmise — seulement le nom de domaine.',url:'https://dns.google/resolve',isTiers:false},
-  rdap:{title:'rdap.org',desc:'Service RDAP public (Registration Data Access Protocol). Utilisé pour récupérer les données WHOIS : registrar, serveurs NS, dates de création/expiration. Lecture seule.',url:'https://rdap.org/domain/',isTiers:false},
-  mslogin:{title:'login.microsoftonline.com',desc:'Endpoint public officiel Microsoft. Utilisé pour détecter le Tenant ID (OpenID Connect), le type de compte (pro/MSA) et valider le GUID du tenant.',url:'https://login.microsoftonline.com/common/.well-known/openid-configuration',isTiers:false},
+  dnsgoogle:{title:'dns.google',desc:'API DNS-over-HTTPS de Google (DoH). Utilisée pour résoudre MX, SPF, DKIM, DMARC, DNSSEC, BIMI et MTA-STS. Aucune donnée personnelle transmise — seulement le nom de domaine.',url:'https://dns.google/resolve'},
+  rdap:{title:'rdap.org',desc:'Service RDAP public (Registration Data Access Protocol). Utilisé pour récupérer les données WHOIS : registrar, serveurs NS, dates de création/expiration. Lecture seule.',url:'https://rdap.org/domain/'},
+  mslogin:{title:'login.microsoftonline.com',desc:'Endpoint public officiel Microsoft. Utilisé pour détecter le Tenant ID (OpenID Connect), le type de compte (pro/MSA) et valider le GUID du tenant.',url:'https://login.microsoftonline.com/common/.well-known/openid-configuration'},
 };
 
 // ── Dropdown ──
@@ -626,7 +564,6 @@ function showProxyDetail(key){
   document.getElementById('pdTitle').textContent=p.title;
   document.getElementById('pdDesc').textContent=p.desc;
   document.getElementById('pdUrl').textContent=p.url;
-  document.getElementById('pdTag').style.display=p.isTiers?'inline-flex':'none';
   const menu=document.getElementById('dropMenu');
   const rect=menu.getBoundingClientRect();
   panel.style.top=rect.top+'px';
@@ -659,8 +596,6 @@ function toggleDark(){
     syncDarkUI(e.matches);
   });
 })();
-// init third-party proxies UI
-syncThirdPartyProxiesUI();
 
 // ── Collapsible ──
 function toggleCollapsible(bodyId,arrowId){
@@ -719,7 +654,6 @@ window.addEventListener('load',renderHistory);
 // ── Panel ──
 let openCardId=null;
 let lastReport=null;
-// Track what has been run for the current domain
 let currentState={domain:null,ms:null,dns:null,goog:null,health:null,others:null,dup:null,host:null,fastDone:false,fullDone:false};
 
 function openPanel(id,title,buildFn){
@@ -750,9 +684,7 @@ emailInput.addEventListener('input',()=>{
 emailInput.addEventListener('keydown',e=>{if(e.key==='Enter')checkFast();});
 
 // ── Step helpers ──
-// Per-step AbortControllers so each step can be cancelled independently
 const stepControllers={};
-// Retry callbacks — set by each step when it starts
 const stepRetryFns={};
 
 function setStep(id,state,label){
@@ -768,44 +700,31 @@ function showSteps(ids){
   ids.forEach(id=>{const el=document.getElementById('step-'+id);if(el)el.style.display='flex';});
   document.getElementById('progList').style.display='flex';
 }
-
-// Cancel a running step — aborts its fetch, marks it as timeout, continues pipeline
 function cancelStep(key){
   const ctrl=stepControllers[key];
   if(ctrl){ctrl.abort();delete stepControllers[key];}
   setStep('step-'+key,'timeout');
 }
-
-// Retry a timed-out step — re-runs the stored retry function
 async function retryStep(key){
   const fn=stepRetryFns[key];
   if(!fn)return;
   setStep('step-'+key,'active');
   try{await fn();}catch(e){setStep('step-'+key,'timeout');}
 }
-
-// Cancellable fetchJson — registers controller under a step key
 async function fetchJsonC(url,key,timeout=10000){
   const ctrl=new AbortController();
   stepControllers[key]=ctrl;
   const tid=setTimeout(()=>ctrl.abort(),timeout);
-  try{
-    const r=await fetch(url,{signal:ctrl.signal});
-    clearTimeout(tid);delete stepControllers[key];
-    if(!r.ok)return null;return await r.json();
-  }catch{clearTimeout(tid);delete stepControllers[key];return null;}
+  try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);delete stepControllers[key];if(!r.ok)return null;return await r.json();}
+  catch{clearTimeout(tid);delete stepControllers[key];return null;}
 }
 async function fetchTextC(url,key,timeout=10000){
   const ctrl=new AbortController();
   stepControllers[key]=ctrl;
   const tid=setTimeout(()=>ctrl.abort(),timeout);
-  try{
-    const r=await fetch(url,{signal:ctrl.signal});
-    clearTimeout(tid);delete stepControllers[key];
-    if(!r.ok)return null;return await r.text();
-  }catch{clearTimeout(tid);delete stepControllers[key];return null;}
+  try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);delete stepControllers[key];if(!r.ok)return null;return await r.text();}
+  catch{clearTimeout(tid);delete stepControllers[key];return null;}
 }
-
 function extractGuid(s){if(!s)return null;const m=s.match(/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i);return m?m[1]:null;}
 async function fetchJson(url,timeout=9000){const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),timeout);try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);if(!r.ok)return null;return await r.json();}catch{clearTimeout(tid);return null;}}
 async function fetchText(url,timeout=9000){const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),timeout);try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);if(!r.ok)return null;return await r.text();}catch{clearTimeout(tid);return null;}}
@@ -829,8 +748,9 @@ async function checkMicrosoft(domain){
   if(realmData?.NameSpaceType==='Consumer'||realmData?.account_type?.toLowerCase()==='consumer')return null;
   const direct=await fetchJsonC(`https://login.microsoftonline.com/${domain}/.well-known/openid-configuration`,'ms',8000);
   if(direct){const c=extractGuid(direct.issuer)||extractGuid(direct.token_endpoint)||extractGuid(direct.authorization_endpoint);if(c&&!MS_GENERIC_GUIDS.has(c.toLowerCase())&&direct.issuer?.includes(c)){oidcData=direct;tenantId=c;tenantValid=true;}}
-  if(!tenantId){for(const fn of (ENABLE_THIRD_PARTY_PROXIES?[()=>fetchJsonC(`https://corsproxy.io/?url=${encodeURIComponent(`https://login.microsoftonline.com/${domain}/.well-known/openid-configuration`)}`,'ms',8000),async()=>{const w=await fetchJsonC(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://login.microsoftonline.com/${domain}/.well-known/openid-configuration`)}`,'ms',8000);return w?.contents?JSON.parse(w.contents):null;}]:[])){try{const d=await fn();if(d){const c=extractGuid(d.issuer)||extractGuid(d.token_endpoint)||extractGuid(d.authorization_endpoint);if(c&&!MS_GENERIC_GUIDS.has(c.toLowerCase())&&d.issuer?.includes(c)){if(!oidcData)oidcData=d;tenantId=c;tenantValid=true;break;}}}catch{}}}
-  if(!tenantId){for(const fn of [()=>fetchTextC(`https://login.microsoftonline.com/${domain}/federationmetadata/2007-06/federationmetadata.xml`,'ms',8000),...(ENABLE_THIRD_PARTY_PROXIES?[()=>fetchTextC(`https://corsproxy.io/?url=${encodeURIComponent(`https://login.microsoftonline.com/${domain}/federationmetadata/2007-06/federationmetadata.xml`)}`,'ms',8000),async()=>{const w=await fetchJsonC(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://login.microsoftonline.com/${domain}/federationmetadata/2007-06/federationmetadata.xml`)}`,'ms',8000);return w?.contents||null;}]:[])]){try{const x=await fn();if(x){const c=extractGuid(x);if(c&&!MS_GENERIC_GUIDS.has(c.toLowerCase())){const v=await validateTenantGuid(c);if(v){tenantId=c;tenantValid=true;break;}}}}catch{}}}
+  if(!tenantId){
+    try{const x=await fetchTextC(`https://login.microsoftonline.com/${domain}/federationmetadata/2007-06/federationmetadata.xml`,'ms',8000);if(x){const c=extractGuid(x);if(c&&!MS_GENERIC_GUIDS.has(c.toLowerCase())){const v=await validateTenantGuid(c);if(v){tenantId=c;tenantValid=true;}}}}catch{}
+  }
   if(tenantId&&!tenantValid){tenantValid=await validateTenantGuid(tenantId);if(!tenantValid)tenantId=null;}
   const isPro=realmData&&realmData.NameSpaceType!=='Consumer'&&realmData.account_type?.toLowerCase()!=='consumer';
   if(tenantId||isPro)return{tenantId,tenantValid,namespaceType:realmData?.NameSpaceType||null,federationType:realmData?.federation_protocol||null,cloudInstance:realmData?.cloud_instance_name||'microsoftonline.com',issuer:oidcData?.issuer||null,tokenEndpoint:oidcData?.token_endpoint||null,authorizationEndpoint:oidcData?.authorization_endpoint||null,userInfoEndpoint:oidcData?.userinfo_endpoint||null};
@@ -943,7 +863,6 @@ async function checkHost(domain){
     return{registrar,ns,status:r.status||[],created,expires,updated,hostName:detectHostFromNS(ns.join(' ').toLowerCase(),registrar||'')};
   }
   try{const r=await fetchJsonC(`https://rdap.org/domain/${domain}`,'host',12000);if(r)return parseRdap(r);}catch{}
-  if(ENABLE_THIRD_PARTY_PROXIES){try{const w=await fetchJsonC(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://rdap.org/domain/${domain}`)}`,'host',12000);if(w?.contents)return parseRdap(JSON.parse(w.contents));}catch{}}
   return null;
 }
 
@@ -1080,24 +999,12 @@ function exportReport(){
 }
 
 // ── Button UI helpers ──
-function lockButtons(){
-  document.getElementById('checkBtnFast').disabled=true;
-  document.getElementById('checkBtnFull').disabled=true;
-}
-function unlockButtons(){
-  document.getElementById('checkBtnFast').disabled=false;
-  document.getElementById('checkBtnFull').disabled=false;
-}
-function setFastLoading(on){
-  document.getElementById('btnFastText').style.display=on?'none':'inline';
-  document.getElementById('spinnerFast').style.display=on?'inline-block':'none';
-}
-function setFullLoading(on){
-  document.getElementById('btnFullText').style.display=on?'none':'inline';
-  document.getElementById('spinnerFull').style.display=on?'inline-block':'none';
-}
+function lockButtons(){document.getElementById('checkBtnFast').disabled=true;document.getElementById('checkBtnFull').disabled=true;}
+function unlockButtons(){document.getElementById('checkBtnFast').disabled=false;document.getElementById('checkBtnFull').disabled=false;}
+function setFastLoading(on){document.getElementById('btnFastText').style.display=on?'none':'inline';document.getElementById('spinnerFast').style.display=on?'inline-block':'none';}
+function setFullLoading(on){document.getElementById('btnFullText').style.display=on?'none':'inline';document.getElementById('spinnerFull').style.display=on?'inline-block':'none';}
 
-// ── Render hero (shared) ──
+// ── Render hero ──
 function renderHero(center,ms,dup,domain,raw,confidence){
   const hero=document.createElement('div');hero.className='tenant-hero';
   if(!ms&&dup?.isNativelyPersonal){
@@ -1122,7 +1029,6 @@ function renderHero(center,ms,dup,domain,raw,confidence){
     const confClass=confidence>=80?'high':confidence>=50?'medium':'low';
     const confLabel=confidence>=80?'Confiance élevée':confidence>=50?'Confiance moyenne':'Confiance faible';
     hero.innerHTML=`<div class="hero-label">🪟 Microsoft Tenant ID</div>${ms.tenantId?`<div class="hero-guid"><span id="${hid}">${ms.tenantId}</span><button class="hero-copy-btn" onclick="copyVal('${hid}',this)">Copier</button><span class="confidence-badge ${confClass}">${confidence}% — ${confLabel}</span></div>`:`<div class="hero-none">GUID non résolu — domaine Microsoft détecté</div>`}<div class="hero-domain">${domain}</div>`;
-    // Partner Center button — only when we have a valid GUID
     if(ms.tenantId&&ms.tenantValid){
       const actionsDiv=document.createElement('div');actionsDiv.className='hero-actions';
       const partnerBtn=document.createElement('a');
@@ -1144,71 +1050,41 @@ function renderHero(center,ms,dup,domain,raw,confidence){
   return hero;
 }
 
-// ── FAST check: MS ID + DNS de base ──
+// ── FAST check ──
 async function checkFast(){
   const raw=emailInput.value.trim();
   if(!raw){showError('Veuillez entrer une adresse e-mail ou un domaine.');return;}
   const domain=extractDomain(raw);
   if(!domain||!domain.includes('.')){showError('Domaine invalide.');return;}
-
   const center=document.getElementById('centerCol');
   const exportBtn=document.getElementById('exportBtn');
   const errBox=document.getElementById('errBox');
-
   errBox.style.display='none';center.innerHTML='';closePanel();
   exportBtn.classList.remove('visible');lastReport=null;
   currentState={domain,ms:null,dns:null,goog:null,health:null,others:null,dup:null,host:null,fastDone:false,fullDone:false};
-
   lockButtons();setFastLoading(true);
   showSteps(['ms','google','dns']);
-
   try{
-    // ── MS step ──
     setStep('step-ms','active');
-    stepRetryFns.ms=async()=>{
-      setStep('step-ms','active');
-      currentState.ms=isMsaPersonalDomain(domain)?null:await checkMicrosoft(domain);
-      setStep('step-ms',currentState.ms?'done':'fail');
-    };
+    stepRetryFns.ms=async()=>{setStep('step-ms','active');currentState.ms=isMsaPersonalDomain(domain)?null:await checkMicrosoft(domain);setStep('step-ms',currentState.ms?'done':'fail');};
     currentState.ms=isMsaPersonalDomain(domain)?null:await checkMicrosoft(domain);
-    // If cancelled, step is already 'timeout' — don't overwrite
     if(document.getElementById('step-ms').className.includes('timeout'))currentState.ms=null;
     else setStep('step-ms',currentState.ms?'done':'fail');
-
-    // ── Google step ──
     setStep('step-google','active');
-    stepRetryFns.google=async()=>{
-      setStep('step-google','active');
-      currentState.goog=await checkGoogle(domain);
-      setStep('step-google',currentState.goog?'done':'fail');
-    };
+    stepRetryFns.google=async()=>{setStep('step-google','active');currentState.goog=await checkGoogle(domain);setStep('step-google',currentState.goog?'done':'fail');};
     currentState.goog=await checkGoogle(domain);
-    if(!document.getElementById('step-google').className.includes('timeout'))
-      setStep('step-google',currentState.goog?'done':'fail');
-
-    // ── DNS step ──
+    if(!document.getElementById('step-google').className.includes('timeout'))setStep('step-google',currentState.goog?'done':'fail');
     setStep('step-dns','active');
-    stepRetryFns.dns=async()=>{
-      setStep('step-dns','active');
-      currentState.dns=await checkDNS(domain);
-      setStep('step-dns',currentState.dns?.mx?.length>0?'done':'fail');
-    };
+    stepRetryFns.dns=async()=>{setStep('step-dns','active');currentState.dns=await checkDNS(domain);setStep('step-dns',currentState.dns?.mx?.length>0?'done':'fail');};
     currentState.dns=await checkDNS(domain);
-    if(!document.getElementById('step-dns').className.includes('timeout'))
-      setStep('step-dns',currentState.dns.mx.length>0?'done':'fail');
-
+    if(!document.getElementById('step-dns').className.includes('timeout'))setStep('step-dns',currentState.dns.mx.length>0?'done':'fail');
     document.getElementById('progList').style.display='none';
     currentState.fastDone=true;
-
     const confidence=computeConfidence(currentState.ms);
     lastReport={domain,analysedAt:new Date().toISOString(),input:raw,microsoft:currentState.ms,google:currentState.goog,dns:currentState.dns,health:null,otherServices:null,duplicate:null,host:null,tenantConfidence:confidence,fullDone:false};
     exportBtn.classList.add('visible');
     if(currentState.ms&&currentState.ms.tenantId&&currentState.ms.tenantValid)addToHistory(domain,currentState.ms.tenantId);
-
-    // Hero
     center.appendChild(renderHero(center,currentState.ms,null,domain,raw,confidence));
-
-    // DNS pills (providers only)
     if(currentState.dns?.detectedProviders?.length){
       const pb=document.createElement('div');pb.className='pills-block';
       const pl=document.createElement('div');pl.className='pills-label';pl.textContent='Providers e-mail détectés (DNS)';
@@ -1216,8 +1092,6 @@ async function checkFast(){
       currentState.dns.detectedProviders.forEach(name=>{const p=document.createElement('div');p.className='pill on';p.textContent='✓ '+name;pr.appendChild(p);});
       pb.appendChild(pl);pb.appendChild(pr);center.appendChild(pb);
     }
-
-    // MS card
     if(currentState.ms&&currentState.ms.tenantValid){
       const msRows=[currentState.ms.namespaceType&&['Namespace Type',currentState.ms.namespaceType],currentState.ms.federationType&&['Fédération',currentState.ms.federationType],currentState.ms.cloudInstance&&['Cloud Instance',currentState.ms.cloudInstance],currentState.ms.issuer&&['Issuer',currentState.ms.issuer],currentState.ms.tokenEndpoint&&['Token Endpoint',currentState.ms.tokenEndpoint],currentState.ms.authorizationEndpoint&&['Authorization Endpoint',currentState.ms.authorizationEndpoint],currentState.ms.userInfoEndpoint&&['UserInfo Endpoint',currentState.ms.userInfoEndpoint]].filter(Boolean);
       center.appendChild(makeCard({id:'ms',iconHtml:MS_SVG,iconBg:'ms-clr',title:'Microsoft 365 / Entra ID',sub:'Endpoints & informations tenant',badge:msRows.length+' champs',badgeCls:'ms-b',selCls:'selected',onClick:()=>openPanel('ms','🪟 Microsoft 365 / Entra ID',b=>{msRows.forEach(([l,v])=>addRow(b,l,v));})}));
@@ -1226,17 +1100,12 @@ async function checkFast(){
       center.appendChild(makeCard({id:'google',iconHtml:GG_SVG,iconBg:'gg-clr',title:'Google Workspace',sub:'OpenID Connect & MX Records',badge:'5 champs',badgeCls:'gg-b',selCls:'sel-google',onClick:()=>openPanel('google','🔵 Google Workspace',b=>{addRow(b,'MX Records',currentState.goog.mxRecords.join('\n'),'hi-google');addRow(b,'Issuer',currentState.goog.issuer);addRow(b,'Authorization',currentState.goog.authorizationEndpoint);addRow(b,'Token',currentState.goog.tokenEndpoint);addRow(b,'UserInfo',currentState.goog.userInfoEndpoint);})}));
     }
     const dnsRows=[currentState.dns?.mx?.length&&['MX Records',currentState.dns.mx.join('\n')],currentState.dns?.spf&&['SPF Record',currentState.dns.spf],currentState.dns?.detectedProviders?.length&&['Providers détectés',currentState.dns.detectedProviders.join(', ')],currentState.dns?.txt?.length&&['TXT Records',currentState.dns.txt.join('\n')]].filter(Boolean);
-    if(dnsRows.length){
-      center.appendChild(makeCard({id:'dns',iconHtml:'🌐',iconBg:'dn-clr',title:'Enregistrements DNS',sub:'MX · SPF · TXT',badge:dnsRows.length+' entrées',badgeCls:'dn-b',selCls:'sel-dns',onClick:()=>openPanel('dns','🌐 Enregistrements DNS',b=>{dnsRows.forEach(([l,v])=>addRow(b,l,v));})}));
-    }
-
-    // Full analysis CTA
+    if(dnsRows.length){center.appendChild(makeCard({id:'dns',iconHtml:'🌐',iconBg:'dn-clr',title:'Enregistrements DNS',sub:'MX · SPF · TXT',badge:dnsRows.length+' entrées',badgeCls:'dn-b',selCls:'sel-dns',onClick:()=>openPanel('dns','🌐 Enregistrements DNS',b=>{dnsRows.forEach(([l,v])=>addRow(b,l,v));})}));}
     const ctaBtn=document.createElement('button');
     ctaBtn.className='btn-trigger-full';ctaBtn.id='btnTriggerFull';
     ctaBtn.innerHTML=`<span id="stfLabel">🔬 Lancer l'analyse complète</span><span class="stf-spinner"></span><span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>`;
     ctaBtn.onclick=()=>runFullFromState(raw,domain,ctaBtn);
     center.appendChild(ctaBtn);
-
   }catch(err){document.getElementById('progList').style.display='none';showError('⚠ Erreur : '+err.message);}
   finally{unlockButtons();setFastLoading(false);}
 }
@@ -1247,107 +1116,61 @@ async function checkFull(){
   if(!raw){showError('Veuillez entrer une adresse e-mail ou un domaine.');return;}
   const domain=extractDomain(raw);
   if(!domain||!domain.includes('.')){showError('Domaine invalide.');return;}
-
   const center=document.getElementById('centerCol');
   const exportBtn=document.getElementById('exportBtn');
   const errBox=document.getElementById('errBox');
-
   errBox.style.display='none';center.innerHTML='';closePanel();
   exportBtn.classList.remove('visible');lastReport=null;
   currentState={domain,ms:null,dns:null,goog:null,health:null,others:null,dup:null,host:null,fastDone:false,fullDone:false};
-
   lockButtons();setFullLoading(true);
   showSteps(['ms','google','dns','health','others','dup','host']);
   ['ms','google','dns','health','others','dup','host'].forEach(k=>setStep('step-'+k,'pending'));
-
-  try{
-    await runAllSteps(raw,domain,center,exportBtn);
-  }catch(err){document.getElementById('progList').style.display='none';showError('⚠ Erreur : '+err.message);}
+  try{await runAllSteps(raw,domain,center,exportBtn);}
+  catch(err){document.getElementById('progList').style.display='none';showError('⚠ Erreur : '+err.message);}
   finally{unlockButtons();setFullLoading(false);}
 }
 
-// ── Add full results to existing fast results ──
+// ── Add full results to fast ──
 async function runFullFromState(raw,domain,ctaBtn){
   if(currentState.fullDone)return;
   ctaBtn.classList.add('running');
   document.getElementById('stfLabel').textContent='Analyse en cours…';
   lockButtons();
-
-  // Show only the steps not yet done
   showSteps(['health','others','dup','host']);
   ['health','others','dup','host'].forEach(k=>setStep('step-'+k,'pending'));
-
   try{
     const center=document.getElementById('centerCol');
     const exportBtn=document.getElementById('exportBtn');
-
     setStep('step-health','active');
-    stepRetryFns.health=async()=>{
-      setStep('step-health','active');
-      currentState.health=await checkHealth(domain);
-      setStep('step-health','done');
-    };
+    stepRetryFns.health=async()=>{setStep('step-health','active');currentState.health=await checkHealth(domain);setStep('step-health','done');};
     const health=await checkHealth(domain);
-    if(!document.getElementById('step-health').className.includes('timeout')){setStep('step-health','done');currentState.health=health;}
-    else currentState.health=health; // keep result even if UI shows timeout
-
+    if(!document.getElementById('step-health').className.includes('timeout')){setStep('step-health','done');currentState.health=health;}else currentState.health=health;
     setStep('step-others','active');
-    stepRetryFns.others=async()=>{
-      setStep('step-others','active');
-      currentState.others=await checkOtherTenants(domain,currentState.dns||{});
-      setStep('step-others','done');
-    };
+    stepRetryFns.others=async()=>{setStep('step-others','active');currentState.others=await checkOtherTenants(domain,currentState.dns||{});setStep('step-others','done');};
     const others=await checkOtherTenants(domain,currentState.dns||{});
-    if(!document.getElementById('step-others').className.includes('timeout')){setStep('step-others','done');currentState.others=others;}
-    else currentState.others=others;
-
+    if(!document.getElementById('step-others').className.includes('timeout')){setStep('step-others','done');currentState.others=others;}else currentState.others=others;
     const isEmail=raw.includes('@');
     setStep('step-dup','active');
-    stepRetryFns.dup=async()=>{
-      setStep('step-dup','active');
-      currentState.dup=isEmail?await checkDuplicate(raw.trim()):null;
-      setStep('step-dup','done');
-    };
+    stepRetryFns.dup=async()=>{setStep('step-dup','active');currentState.dup=isEmail?await checkDuplicate(raw.trim()):null;setStep('step-dup','done');};
     const dup=isEmail?await checkDuplicate(raw.trim()):null;
-    if(!document.getElementById('step-dup').className.includes('timeout')){setStep('step-dup','done');currentState.dup=dup;}
-    else currentState.dup=dup;
-
+    if(!document.getElementById('step-dup').className.includes('timeout')){setStep('step-dup','done');currentState.dup=dup;}else currentState.dup=dup;
     setStep('step-host','active');
-    stepRetryFns.host=async()=>{
-      setStep('step-host','active');
-      currentState.host=await checkHost(domain);
-      setStep('step-host',currentState.host?'done':'fail');
-    };
+    stepRetryFns.host=async()=>{setStep('step-host','active');currentState.host=await checkHost(domain);setStep('step-host',currentState.host?'done':'fail');};
     const host=await checkHost(domain);
-    if(!document.getElementById('step-host').className.includes('timeout')){setStep('step-host',host?'done':'fail');currentState.host=host;}
-    else currentState.host=host;
-
+    if(!document.getElementById('step-host').className.includes('timeout')){setStep('step-host',host?'done':'fail');currentState.host=host;}else currentState.host=host;
     document.getElementById('progList').style.display='none';
     currentState.fullDone=true;
-
-    // Update hero with dup info
     const oldHero=center.querySelector('.tenant-hero');
-    if(oldHero){
-      const confidence=computeConfidence(currentState.ms);
-      const newHero=renderHero(center,currentState.ms,currentState.dup,domain,raw,confidence);
-      center.replaceChild(newHero,oldHero);
-    }
-
-    // Update lastReport
+    if(oldHero){const confidence=computeConfidence(currentState.ms);const newHero=renderHero(center,currentState.ms,currentState.dup,domain,raw,confidence);center.replaceChild(newHero,oldHero);}
     const confidence=computeConfidence(currentState.ms);
     lastReport={domain,analysedAt:new Date().toISOString(),input:raw,microsoft:currentState.ms,google:currentState.goog,dns:currentState.dns,health:{score:currentState.health.score,dmarcIsQuarantine:currentState.health.dmarcIsQuarantine,checks:currentState.health.checks.map(c=>({type:c.t,title:c.title,desc:c.desc})),dkim:{selector1:currentState.health.hasSel1,selector2:currentState.health.hasSel2,allResults:currentState.health.dkimResults}},otherServices:currentState.others,duplicate:currentState.dup,host:currentState.host,tenantConfidence:confidence,fullDone:true};
-
-    // Pills services
     const oldPills=center.querySelector('.pills-block');
     const newPb=document.createElement('div');newPb.className='pills-block';
     const pl=document.createElement('div');pl.className='pills-label';pl.textContent='Autres services détectés';
     const pr=document.createElement('div');pr.className='pills-row';
     (currentState.others||[]).forEach(t=>{const p=document.createElement('div');p.className='pill '+(t.on?'on':'off');p.innerHTML=`${t.icon} ${t.name}${t.on?' ✓':''}`;pr.appendChild(p);});
     newPb.appendChild(pl);newPb.appendChild(pr);
-    if(oldPills)center.replaceChild(newPb,oldPills);
-    else center.insertBefore(newPb,center.querySelector('.result-card')||ctaBtn);
-
-    // Host card (insert before CTA)
+    if(oldPills)center.replaceChild(newPb,oldPills);else center.insertBefore(newPb,center.querySelector('.result-card')||ctaBtn);
     if(currentState.host){
       const logo=hostLogo(currentState.host.hostName);
       const hc=makeCard({id:'host',iconHtml:logo.html,iconBg:'hs-clr',title:'Hébergeur & Registrar',sub:'WHOIS / RDAP — '+(currentState.host.hostName||'Inconnu'),badge:currentState.host.hostName||'Inconnu',badgeCls:'hs-b',selCls:'sel-host',onClick:()=>openPanel('host','🏠 Hébergeur & Registrar',b=>{
@@ -1361,8 +1184,6 @@ async function runFullFromState(raw,domain,ctaBtn){
       })});
       center.insertBefore(hc,ctaBtn);
     }
-
-    // Health card
     if(currentState.health){
       const errC=currentState.health.checks.filter(c=>c.t==='error').length,warnC=currentState.health.checks.filter(c=>c.t==='warn').length;
       const dkimStatusLabel=currentState.health.hasSel1&&currentState.health.hasSel2?' · DKIM✅✅':currentState.health.hasSel1||currentState.health.hasSel2?' · DKIM✅⚠️':' · DKIM❌';
@@ -1378,13 +1199,7 @@ async function runFullFromState(raw,domain,ctaBtn){
       })});
       center.insertBefore(hcard,ctaBtn);
     }
-
-    // Mark CTA as done
-    ctaBtn.classList.remove('running');
-    ctaBtn.classList.add('done');
-    ctaBtn.innerHTML='✅ Analyse complète effectuée';
-    ctaBtn.onclick=null;
-
+    ctaBtn.classList.remove('running');ctaBtn.classList.add('done');ctaBtn.innerHTML='✅ Analyse complète effectuée';ctaBtn.onclick=null;
   }catch(err){
     ctaBtn.classList.remove('running');
     ctaBtn.innerHTML='🔬 Lancer l\'analyse complète <span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>';
@@ -1393,59 +1208,33 @@ async function runFullFromState(raw,domain,ctaBtn){
   }finally{unlockButtons();}
 }
 
-// ── Full analysis from scratch (used by checkFull button) ──
+// ── Full from scratch ──
 async function runAllSteps(raw,domain,center,exportBtn){
-  setStep('step-ms','active');
-  const ms=isMsaPersonalDomain(domain)?null:await checkMicrosoft(domain);
-  setStep('step-ms',ms?'done':'fail');currentState.ms=ms;
-
-  setStep('step-google','active');
-  const goog=await checkGoogle(domain);
-  setStep('step-google',goog?'done':'fail');currentState.goog=goog;
-
-  setStep('step-dns','active');
-  const dns=await checkDNS(domain);
-  setStep('step-dns',dns.mx.length>0?'done':'fail');currentState.dns=dns;
-
-  setStep('step-health','active');
-  const health=await checkHealth(domain);
-  setStep('step-health','done');currentState.health=health;
-
-  setStep('step-others','active');
-  const others=await checkOtherTenants(domain,dns);
-  setStep('step-others','done');currentState.others=others;
-
+  setStep('step-ms','active');const ms=isMsaPersonalDomain(domain)?null:await checkMicrosoft(domain);setStep('step-ms',ms?'done':'fail');currentState.ms=ms;
+  setStep('step-google','active');const goog=await checkGoogle(domain);setStep('step-google',goog?'done':'fail');currentState.goog=goog;
+  setStep('step-dns','active');const dns=await checkDNS(domain);setStep('step-dns',dns.mx.length>0?'done':'fail');currentState.dns=dns;
+  setStep('step-health','active');const health=await checkHealth(domain);setStep('step-health','done');currentState.health=health;
+  setStep('step-others','active');const others=await checkOtherTenants(domain,dns);setStep('step-others','done');currentState.others=others;
   const isEmail=raw.includes('@');
-  setStep('step-dup','active');
-  const dup=isEmail?await checkDuplicate(raw.trim()):null;
-  setStep('step-dup','done');currentState.dup=dup;
-
-  setStep('step-host','active');
-  const host=await checkHost(domain);
-  setStep('step-host',host?'done':'fail');currentState.host=host;
-
+  setStep('step-dup','active');const dup=isEmail?await checkDuplicate(raw.trim()):null;setStep('step-dup','done');currentState.dup=dup;
+  setStep('step-host','active');const host=await checkHost(domain);setStep('step-host',host?'done':'fail');currentState.host=host;
   document.getElementById('progList').style.display='none';
   currentState.fastDone=true;currentState.fullDone=true;
-
   const confidence=computeConfidence(ms);
   lastReport={domain,analysedAt:new Date().toISOString(),input:raw,microsoft:ms,google:goog,dns,health:{score:health.score,dmarcIsQuarantine:health.dmarcIsQuarantine,checks:health.checks.map(c=>({type:c.t,title:c.title,desc:c.desc})),dkim:{selector1:health.hasSel1,selector2:health.hasSel2,allResults:health.dkimResults}},otherServices:others,duplicate:dup,host,tenantConfidence:confidence,fullDone:true};
   exportBtn.classList.add('visible');
   if(ms&&ms.tenantId&&ms.tenantValid)addToHistory(domain,ms.tenantId);
-
   center.appendChild(renderHero(center,ms,dup,domain,raw,confidence));
-
   const pb=document.createElement('div');pb.className='pills-block';
   const pl=document.createElement('div');pl.className='pills-label';pl.textContent='Autres services détectés';
   const pr=document.createElement('div');pr.className='pills-row';
   others.forEach(t=>{const p=document.createElement('div');p.className='pill '+(t.on?'on':'off');p.innerHTML=`${t.icon} ${t.name}${t.on?' ✓':''}`;pr.appendChild(p);});
   pb.appendChild(pl);pb.appendChild(pr);center.appendChild(pb);
-
   if(ms&&ms.tenantValid){
     const msRows=[ms.namespaceType&&['Namespace Type',ms.namespaceType],ms.federationType&&['Fédération',ms.federationType],ms.cloudInstance&&['Cloud Instance',ms.cloudInstance],ms.issuer&&['Issuer',ms.issuer],ms.tokenEndpoint&&['Token Endpoint',ms.tokenEndpoint],ms.authorizationEndpoint&&['Authorization Endpoint',ms.authorizationEndpoint],ms.userInfoEndpoint&&['UserInfo Endpoint',ms.userInfoEndpoint]].filter(Boolean);
     center.appendChild(makeCard({id:'ms',iconHtml:MS_SVG,iconBg:'ms-clr',title:'Microsoft 365 / Entra ID',sub:'Endpoints & informations tenant',badge:msRows.length+' champs',badgeCls:'ms-b',selCls:'selected',onClick:()=>openPanel('ms','🪟 Microsoft 365 / Entra ID',b=>{msRows.forEach(([l,v])=>addRow(b,l,v));})}));
   }
   if(goog)center.appendChild(makeCard({id:'google',iconHtml:GG_SVG,iconBg:'gg-clr',title:'Google Workspace',sub:'OpenID Connect & MX Records',badge:'5 champs',badgeCls:'gg-b',selCls:'sel-google',onClick:()=>openPanel('google','🔵 Google Workspace',b=>{addRow(b,'MX Records',goog.mxRecords.join('\n'),'hi-google');addRow(b,'Issuer',goog.issuer);addRow(b,'Authorization',goog.authorizationEndpoint);addRow(b,'Token',goog.tokenEndpoint);addRow(b,'UserInfo',goog.userInfoEndpoint);})}));
-
   if(host){
     const logo=hostLogo(host.hostName);
     center.appendChild(makeCard({id:'host',iconHtml:logo.html,iconBg:'hs-clr',title:'Hébergeur & Registrar',sub:'WHOIS / RDAP — '+(host.hostName||'Inconnu'),badge:host.hostName||'Inconnu',badgeCls:'hs-b',selCls:'sel-host',onClick:()=>openPanel('host','🏠 Hébergeur & Registrar',b=>{
@@ -1458,10 +1247,8 @@ async function runAllSteps(raw,domain,center,exportBtn){
       const lnk=document.createElement('a');lnk.className='ext-link';lnk.href=`https://www.whois.com/whois/${domain}`;lnk.target='_blank';lnk.rel='noopener';lnk.innerHTML=`🔗 WHOIS complet — <strong>${domain}</strong>`;b.appendChild(lnk);
     })}));
   }
-
   const dnsRows=[dns.mx.length&&['MX Records',dns.mx.join('\n')],dns.spf&&['SPF Record',dns.spf],dns.detectedProviders.length&&['Providers détectés',dns.detectedProviders.join(', ')],dns.txt.length&&['TXT Records',dns.txt.join('\n')]].filter(Boolean);
   if(dnsRows.length)center.appendChild(makeCard({id:'dns',iconHtml:'🌐',iconBg:'dn-clr',title:'Enregistrements DNS',sub:'MX · SPF · TXT',badge:dnsRows.length+' entrées',badgeCls:'dn-b',selCls:'sel-dns',onClick:()=>openPanel('dns','🌐 Enregistrements DNS',b=>{dnsRows.forEach(([l,v])=>addRow(b,l,v));})}));
-
   const errC=health.checks.filter(c=>c.t==='error').length,warnC=health.checks.filter(c=>c.t==='warn').length;
   const dkimStatusLabel=health.hasSel1&&health.hasSel2?' · DKIM✅✅':health.hasSel1||health.hasSel2?' · DKIM✅⚠️':' · DKIM❌';
   const starLabel=health.dmarcIsQuarantine?' ⭐':'';
