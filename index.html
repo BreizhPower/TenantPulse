@@ -513,7 +513,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
   </aside>
 </div>
 
-<footer><div class="powered">Internal prototype • <span>ARI RUN MW N1</span></span> • TenantPulse</div></footer>
+<footer><div class="powered">Powered by <span>Tech RUN MW N1</span> Engineer (Au SMIC)</div></footer>
 
 <script>
 const PROXY_DATA = {
@@ -1147,49 +1147,143 @@ function renderHero(center, ms, dup, domain, raw, confidence) {
 // ── Export ──
 function exportReport() {
   if (!lastReport) return;
-  const r = lastReport, lines = [];
-  lines.push('═══════════════════════════════════════');
-  lines.push('  TenantPulse DIAG MICROSOFT 365');
-  lines.push('  Tech RUN MW N1 — ' + new Date(r.analysedAt).toLocaleString('fr-FR'));
-  lines.push('', ' DOMAINE: ' + r.domain, '');
-  if (r.microsoft?.tenantId) {
-    if (r.microsoft.namespaceType) lines.push('Namespace: ' + r.microsoft.namespaceType);
-    if (r.microsoft.cloudInstance) lines.push('Cloud: '     + r.microsoft.cloudInstance);
-    if (r.microsoft.federationType)lines.push('Fédération: '+ r.microsoft.federationType);
-  } else lines.push('Tenant MS365  : ❌ Non détecté');
-  lines.push('');
+  const r       = lastReport;
+  const W       = 52;
+  const pad     = (l, v) => l + ': ' + v;
+  const hr      = (char = '\u2500') => char.repeat(W);
+  const section = t => '\n' + t.toUpperCase() + '\n' + hr();
+  const dateStr = new Date(r.analysedAt).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+  const lines   = [];
+
+  // ── Header ──
+  lines.push('  TENANTPULSE  \u2014  SECURITY SUMMARY REPORT');
+  lines.push('  ' + r.domain + '   \u00b7   ' + dateStr);
+  lines.push(hr());
+
+  // ── Overall status ──
+  lines.push(section('Overall Status'));
   if (r.health) {
-    lines.push('DNS & SÉCURITÉ:', 'Score santé   : ' + r.health.score + '%');
-    const hmap = { ok:'✅', warn:'⚠️', error:'❌', info:'ℹ️' };
-    r.health.checks.forEach(c => lines.push('  ' + (hmap[c.type] || '·') + ' ' + c.title));
-    lines.push('', 'DKIM selector1 : ' + (r.health.dkim.selector1 ? '✅ Présent' : '❌ Absent'));
-    lines.push('DKIM selector2 : ' + (r.health.dkim.selector2 ? '✅ Présent' : '❌ Absent'));
+    const s       = r.health.score;
+    const posture = s >= 80 ? 'HIGH' : s >= 50 ? 'MEDIUM' : 'LOW';
+    const grade   = s >= 80 ? '[OK]' : s >= 50 ? '[WARN]' : '[CRIT]';
+    const hasSpf  = r.health.checks.some(c => c.title.includes('SPF')       && (c.type === 'ok' || c.type === 'warn'));
+    const hasDkim = r.health.checks.some(c => c.title.includes('DKIM actif'));
+    const hasDmarc= r.health.checks.some(c => c.title.includes('DMARC')     && (c.type === 'ok' || c.type === 'warn'));
+    const mailProt = (hasSpf && hasDkim && hasDmarc) ? 'FULL' : (hasSpf || hasDmarc) ? 'PARTIAL' : 'NONE';
+    lines.push(pad('Health Score',     s + '%  ' + grade));
+    lines.push(pad('Security Posture', posture));
+    lines.push(pad('Mail Protection',  mailProt));
+  } else {
+    lines.push(pad('Health Score', 'N/A  (fast scan only)'));
   }
-  if (r.dns) {
-    if (r.dns.spf)          lines.push('SPF            : ' + r.dns.spf);
-    if (r.dns.mx?.length)   lines.push('MX             : ' + r.dns.mx.join(', '));
+  if (r.microsoft?.tenantId && r.microsoft.tenantValid)
+    lines.push(pad('MS365 Tenant',   'Detected'));
+  else if (!r.microsoft)
+    lines.push(pad('MS365 Tenant',   'Not found'));
+
+  // ── Security checks ──
+  if (r.health) {
+    lines.push(section('Security Checks'));
+    const sym = { ok:' [+]', warn:' [!]', error:' [-]', info:' [i]' };
+    r.health.checks.forEach(c => lines.push(sym[c.type] + '  ' + c.title));
   }
-  lines.push('', 'HÉBERGEUR:');
-  if (r.host) {
-    lines.push('Hébergeur: ' + (r.host.hostName  || 'Inconnu'));
-    lines.push('Registrar: ' + (r.host.registrar || '—'));
-    if (r.host.created) lines.push('Créé le       : ' + new Date(r.host.created).toLocaleDateString('fr-FR'));
-    if (r.host.expires) lines.push('Expire le     : ' + new Date(r.host.expires).toLocaleDateString('fr-FR'));
-    if (r.host.ns?.length) lines.push('NS            : ' + r.host.ns.join(', '));
-  } else lines.push('Hébergeur: ' + (r.fullDone ? 'Non récupéré' : 'Non analysé (analyse rapide)'));
+
+  // ── Infrastructure ──
+  lines.push(section('Infrastructure'));
+  const cloud = r.microsoft ? 'Microsoft 365' : r.google ? 'Google Workspace' : r.dns?.detectedProviders?.[0] || '\u2014';
+  if (r.host?.hostName)  lines.push(pad('Provider',      r.host.hostName));
+  lines.push(pad('Cloud Platform',  cloud));
+  if (r.host?.registrar) lines.push(pad('Registrar',     r.host.registrar));
+  if (r.microsoft?.tenantId && r.microsoft.tenantValid)
+                         lines.push(pad('Tenant ID',     r.microsoft.tenantId));
+  if (r.microsoft?.cloudInstance)
+                         lines.push(pad('Cloud Instance',r.microsoft.cloudInstance));
+  if (r.host?.created)   lines.push(pad('Domain Since',  new Date(r.host.created).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })));
+  if (r.host?.expires)   lines.push(pad('Expires',       new Date(r.host.expires).toLocaleDateString('en-GB',  { day:'2-digit', month:'short', year:'numeric' })));
+  if (r.dns?.mx?.length) lines.push(pad('MX',            r.dns.mx[0] + (r.dns.mx.length > 1 ? ' (+' + (r.dns.mx.length - 1) + ')' : '')));
+
+  // ── Key risks ──
+  if (r.health) {
+    const RISK_MAP = [
+      ['SPF manquant',        'Outbound mail spoofing risk'],
+      ['SPF (softfail',       'SPF softfail \u2014 spoofing partially possible'],
+      ['DKIM non',            'Weak email authentication posture'],
+      ['DMARC manquant',      'No DMARC policy \u2014 phishing risk'],
+      ['DMARC p=none',        'DMARC monitor-only \u2014 no enforcement'],
+      ['DNSSEC non',          'No DNSSEC integrity validation'],
+      ['MX Records manquants','No mail server configured'],
+    ];
+    const risks = [];
+    r.health.checks.forEach(c => {
+      if (c.type !== 'error' && c.type !== 'warn') return;
+      for (const [key, msg] of RISK_MAP) {
+        if (c.title.includes(key.split(' ')[0]) && c.title.toLowerCase().includes((key.split(' ')[1] || '').toLowerCase())) {
+          if (!risks.includes(msg)) risks.push(msg);
+          return;
+        }
+      }
+    });
+    if (risks.length) {
+      lines.push(section('Key Risks'));
+      risks.forEach(risk => lines.push('  \u25b8  ' + risk));
+    }
+
+    // ── Recommended actions ──
+    const actions = [];
+    r.health.checks.forEach(c => {
+      if (c.type === 'error') {
+        if (c.title.includes('DKIM'))  actions.push('Enable and configure DKIM signing');
+        if (c.title.includes('SPF'))   actions.push('Add a valid SPF record');
+        if (c.title.includes('DMARC')) actions.push('Deploy a DMARC policy (p=quarantine minimum)');
+        if (c.title.includes('MX'))    actions.push('Configure MX records');
+      }
+      if (c.type === 'warn') {
+        if (c.title.includes('DMARC') && c.title.includes('none')) actions.push('Enforce DMARC \u2014 move to p=quarantine or p=reject');
+        if (c.title.includes('SPF')   && c.title.includes('softfail')) actions.push('Harden SPF \u2014 replace ~all with -all');
+        if (c.title.includes('DNSSEC')) actions.push('Activate DNSSEC on your registrar');
+      }
+      if (c.type === 'info') {
+        if (c.title.includes('MTA-STS')) actions.push('Configure MTA-STS for inbound mail security');
+        if (c.title.includes('BIMI'))    actions.push('Configure BIMI (requires DMARC enforce)');
+      }
+    });
+    const unique = [...new Set(actions)];
+    if (unique.length) {
+      lines.push(section('Recommended Actions'));
+      unique.forEach((a, i) => lines.push('  ' + (i + 1) + '.  ' + a));
+    }
+  }
+
+  // ── MSA conflict ──
+  if (r.duplicate?.hasPersonal) {
+    lines.push(section('Account Risk'));
+    lines.push('  [!]  MSA personal account conflict detected');
+    if (r.duplicate.hasFreeAccount)
+      lines.push('        Free Microsoft account found \u2014 login conflict risk');
+  }
+
+  // ── Other services ──
+  const active = (r.otherServices || []).filter(s => s.on);
+  if (active.length) {
+    lines.push(section('Detected Services'));
+    active.forEach(s => lines.push('  [+]  ' + s.name));
+  }
+
+  // ── Footer ──
   lines.push('');
-  if (r.otherServices) {
-    lines.push('SERVICES DÉTECTÉS:');
-    r.otherServices.filter(s => s.on).forEach(s => lines.push('  • ' + s.name));
-    if (!r.otherServices.some(s => s.on)) lines.push('  Aucun service tiers détecté');
-    lines.push('');
-  }
-  lines.push('═══════════════════════════════════════');
+  lines.push(hr());
+  lines.push('  TenantPulse  \u2014  Internal RUN MW Platform');
+  lines.push(hr());
+
   const text = lines.join('\n'), btn = document.getElementById('exportBtn');
-  navigator.clipboard.writeText(text).then(() => { btn.textContent = '✅ Rapport copié !'; setTimeout(() => { btn.innerHTML = '📋 Copier le rapport'; }, 2000); }).catch(() => {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ Rapport copié !';
+    setTimeout(() => { btn.innerHTML = '📋 Copier le rapport'; }, 2000);
+  }).catch(() => {
     const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
     document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-    btn.textContent = '✅ Rapport copié !'; setTimeout(() => { btn.innerHTML = '📋 Copier le rapport'; }, 2000);
+    btn.textContent = '✅ Rapport copié !';
+    setTimeout(() => { btn.innerHTML = '📋 Copier le rapport'; }, 2000);
   });
 }
 
