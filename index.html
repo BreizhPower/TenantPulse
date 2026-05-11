@@ -201,8 +201,11 @@ input::placeholder{color:var(--muted);font-weight:500}
 .dup-desc{font-size:10px;font-weight:600;color:rgba(255,255,255,.6);line-height:1.5}
 
 .pills-block{display:flex;flex-direction:column;gap:6px}
-.pills-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.pills-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:flex;align-items:center;gap:8px}
 .pills-row{display:flex;flex-wrap:wrap;gap:5px}
+.pills-row.collapsed{flex-wrap:nowrap;overflow:hidden;mask-image:linear-gradient(to right,#000 80%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 80%,transparent 100%)}
+.pills-toggle{margin-left:auto;background:var(--row);border:1px solid var(--border);color:var(--text);font-family:'Nunito',sans-serif;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:12px;cursor:pointer;transition:background .15s}
+.pills-toggle:hover{background:var(--acc-hover)}
 .pill{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;border:1.5px solid;white-space:nowrap}
 .pill.on{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
 .pill.off{background:var(--row);color:var(--muted);border-color:var(--border);font-weight:600}
@@ -1466,8 +1469,11 @@ async function runFullFromState(raw, domain, ctaBtn) {
 
     const newPb = document.createElement('div'); newPb.className = 'pills-block';
     const pl = document.createElement('div'); pl.className = 'pills-label'; pl.textContent = 'Autres services détectés';
-    const pr = document.createElement('div'); pr.className = 'pills-row';
+    const pr = document.createElement('div'); pr.className = 'pills-row collapsed';
     (currentState.others || []).forEach(t => { const p = document.createElement('div'); p.className = 'pill ' + (t.on ? 'on' : 'off'); p.innerHTML = `${t.icon} ${t.name}${t.on ? ' ✓' : ''}`; pr.appendChild(p); });
+    const tg = document.createElement('button'); tg.type='button'; tg.className='pills-toggle'; tg.textContent='Afficher tout';
+    tg.onclick = () => { const c = pr.classList.toggle('collapsed'); tg.textContent = c ? 'Afficher tout' : 'Réduire'; };
+    pl.appendChild(tg);
     newPb.appendChild(pl); newPb.appendChild(pr);
     const oldPills = center.querySelector('.pills-block');
     if (oldPills) center.replaceChild(newPb, oldPills); else center.insertBefore(newPb, center.querySelector('.result-card') || ctaBtn);
@@ -1518,8 +1524,11 @@ async function checkFull() {
 
     const pb = document.createElement('div'); pb.className = 'pills-block';
     const pl = document.createElement('div'); pl.className = 'pills-label'; pl.textContent = 'Autres services détectés';
-    const pr = document.createElement('div'); pr.className = 'pills-row';
+    const pr = document.createElement('div'); pr.className = 'pills-row collapsed';
     currentState.others.forEach(t => { const p = document.createElement('div'); p.className = 'pill ' + (t.on ? 'on' : 'off'); p.innerHTML = `${t.icon} ${t.name}${t.on ? ' ✓' : ''}`; pr.appendChild(p); });
+    const tg = document.createElement('button'); tg.type='button'; tg.className='pills-toggle'; tg.textContent='Afficher tout';
+    tg.onclick = () => { const c = pr.classList.toggle('collapsed'); tg.textContent = c ? 'Afficher tout' : 'Réduire'; };
+    pl.appendChild(tg);
     pb.appendChild(pl); pb.appendChild(pr); center.appendChild(pb);
 
     if (currentState.ms?.tenantValid) {
