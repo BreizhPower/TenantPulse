@@ -891,7 +891,7 @@ async function checkOtherTenants(domain, dns) {
   t.push({ name:'Vade Secure',      icon:L('Vade.png','Vade Secure'),                on: ms.includes('vadecloud') || ms.includes('vadesecure') || ss.includes('vadecloud') });
   t.push({ name:'Barracuda',        icon:L('Barracuda.png','Barracuda'),             on: ms.includes('barracudanetworks') || ss.includes('barracudanetworks') });
   t.push({ name:'Hornetsecurity',   icon:L('Hornetsecurity.png','Hornetsecurity'),   on: ms.includes('hornetsecurity') || ss.includes('hornetsecurity') });
-  t.push({ name:'Brevo',            icon:L('Brevo.png','Brevo'),                     on: ss.includes('brevo') || ss.includes('sendinblue') || ms.includes('sendinblue') });
+  t.push({ name:'Brevo',            icon:L('Brevo.jpeg','Brevo'),                     on: ss.includes('brevo') || ss.includes('sendinblue') || ms.includes('sendinblue') });
   t.push({ name:'Mailjet',          icon:L('Mailjet.png','Mailjet'),                 on: ss.includes('mailjet') || (await dnsQuery(`mailjet._domainkey.${domain}`, 'TXT')).length > 0 });
   t.push({ name:'SendGrid',         icon:L('SendGrid.png','SendGrid'),               on: ss.includes('sendgrid') || (await dnsQuery(`s1._domainkey.${domain}`, 'CNAME')).length > 0 });
   t.push({ name:'Postmark',         icon:L('Postmark.png','Postmark'),               on: ss.includes('spf.mtasv') || ss.includes('postmarkapp') });
