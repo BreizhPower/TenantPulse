@@ -120,10 +120,13 @@ nav{background:#4B3FBE!important;padding:0 24px;height:52px;display:flex;align-i
 .sb-body{padding:14px 16px;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden}
 
 
-.sb-privacy-note{font-size:var(--text-xs);font-weight:400;color:var(--muted);line-height:1.55;margin-top:-6px;margin-bottom:12px;padding:0 2px}
-.input-wrap{margin-bottom:12px}
-.input-wrap input{width:100%;border:2px solid var(--border);border-radius:9px;padding:10px 12px;font-family:var(--font);font-size:var(--text-base);font-weight:400;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s,background .25s;background:var(--surface)}
-.input-wrap input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(75,63,190,.1)}
+.flabel{display:block;font-size:var(--text-xs);font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.sb-privacy-note{font-size:var(--text-xs);font-weight:400;color:var(--muted);line-height:1.55;margin-top:-4px;margin-bottom:12px;padding:0 2px}
+.input-wrap{margin-bottom:12px;position:relative}
+.input-wrap input{width:100%;border:2px solid var(--blue);border-radius:10px;padding:11px 13px;font-family:var(--font);font-size:var(--text-base);font-weight:400;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s,background .25s;background:var(--surface);box-shadow:0 2px 8px rgba(75,63,190,.12)}
+.input-wrap input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(75,63,190,.18)}
+[data-theme="dark"] .input-wrap input{border-color:#7c74f0;box-shadow:0 2px 8px rgba(124,116,240,.18)}
+[data-theme="dark"] .input-wrap input:focus{box-shadow:0 0 0 4px rgba(124,116,240,.22)}
 input::placeholder{color:var(--muted);font-weight:500}
 .ep-preview{background:var(--row);border:1.5px solid var(--border);border-radius:7px;padding:8px 10px;font-size:var(--text-xs);font-weight:400;color:var(--soft);word-break:break-all;margin-bottom:14px;font-family:'Courier New',monospace;line-height:1.5;transition:background .25s}
 .ep-preview .domain{color:var(--blue);font-weight:500}
