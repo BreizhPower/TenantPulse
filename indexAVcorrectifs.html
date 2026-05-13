@@ -15,10 +15,14 @@
   })();
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 :root{
+  --font:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI Variable','Segoe UI',sans-serif;
+  --text-xs:clamp(.65rem,.62rem + .15vw,.72rem);
+  --text-sm:clamp(.72rem,.68rem + .2vw,.8rem);
+  --text-base:clamp(.8rem,.75rem + .2vw,.875rem);
+  --text-lg:clamp(.875rem,.82rem + .25vw,.95rem);
+  --text-xl:clamp(1rem,.92rem + .4vw,1.125rem);
   --black:#000000;
   --blue:#4B3FBE;
   --blue-dark:#3730A3;
@@ -47,29 +51,29 @@
   --step-bg:#333230;
 }
 
-body{background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text);min-height:100vh;display:flex;flex-direction:column;transition:background .25s,color .25s}
+body{background:var(--bg);font-family:var(--font);font-size:var(--text-base);color:var(--text);min-height:100vh;display:flex;flex-direction:column;transition:background .25s,color .25s}
 
-.topbar{background:#121212!important;color:#fff;text-align:center;font-size:11.5px;font-weight:600;padding:6px 20px;letter-spacing:.03em}
+.topbar{background:#121212!important;color:#fff;text-align:center;font-size:var(--text-sm);font-weight:400;padding:6px 20px;letter-spacing:.03em}
 nav{background:#4B3FBE!important;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.nav-logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;color:#fff;text-decoration:none}
+.nav-logo{display:flex;align-items:center;gap:8px;font-size:1rem;font-weight:500;color:#fff;text-decoration:none}
 .nav-logo .nav-logo-icon{font-size:22px;line-height:1}
 .nav-right{display:flex;align-items:center;gap:6px;position:relative}
-.nav-badge{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);padding:3px 9px;border-radius:20px;letter-spacing:.04em}
+.nav-badge{font-size:var(--text-xs);font-weight:500;color:rgba(255,255,255,.85);background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);padding:3px 9px;border-radius:20px;letter-spacing:.04em}
 
 .nav-dropdown{position:relative}
-.nav-drop-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:20px;padding:3px 10px 3px 8px;cursor:pointer;font-size:11px;font-weight:700;color:#fff;font-family:'Nunito',sans-serif;display:flex;align-items:center;gap:5px;transition:background .15s;white-space:nowrap}
+.nav-drop-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:20px;padding:3px 10px 3px 8px;cursor:pointer;font-size:var(--text-sm);font-weight:500;color:#fff;font-family:var(--font);display:flex;align-items:center;gap:5px;transition:background .15s;white-space:nowrap}
 .nav-drop-btn:hover{background:rgba(255,255,255,.25)}
-.nav-drop-btn .drop-arrow{font-size:8px;transition:transform .2s;display:inline-block}
+.nav-drop-btn .drop-arrow{font-size:var(--text-xs);transition:transform .2s;display:inline-block}
 .nav-dropdown.open .drop-arrow{transform:rotate(180deg)}
 .drop-menu{position:absolute;right:0;top:calc(100% + 10px);background:var(--surface);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);width:230px;max-height:calc(100vh - 80px);overflow-y:auto;display:none;z-index:500}
 .nav-dropdown.open .drop-menu{display:block;animation:dropIn .18s ease}
 @keyframes dropIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.drop-section{padding:8px 12px 5px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);border-bottom:1px solid var(--border);background:var(--row)}
+.drop-section{padding:8px 12px 5px;font-size:var(--text-xs);font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);border-bottom:1px solid var(--border);background:var(--row)}
 .drop-toggle{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--border);justify-content:space-between}
 .drop-toggle:hover{background:var(--row)}
 .drop-toggle-left{display:flex;align-items:center;gap:8px}
-.drop-toggle-icon{font-size:14px;flex-shrink:0}
-.drop-toggle-label{font-size:11.5px;font-weight:800;color:var(--text)}
+.drop-toggle-icon{font-size:var(--text-lg);flex-shrink:0}
+.drop-toggle-label{font-size:var(--text-sm);font-weight:700;color:var(--text)}
 .drop-toggle-switch{width:32px;height:18px;background:var(--border);border-radius:9px;position:relative;transition:background .2s;flex-shrink:0}
 .drop-toggle-switch.on{background:var(--blue)}
 [data-theme="dark"] .drop-toggle-switch.on{background:#7c74f0}
@@ -78,62 +82,71 @@ nav{background:#4B3FBE!important;padding:0 24px;height:52px;display:flex;align-i
 .proxy-row{display:flex;align-items:center;gap:8px;padding:8px 14px;cursor:pointer;transition:background .12s;border-bottom:1px solid var(--border)}
 .proxy-row:last-child{border-bottom:none}
 .proxy-row:hover{background:var(--row)}
-.proxy-row-icon{font-size:13px;flex-shrink:0}
-.proxy-row-title{font-size:11px;font-weight:700;color:var(--text);flex:1}
-.proxy-row-chev{font-size:9px;color:var(--muted);flex-shrink:0}
+.proxy-row-icon{font-size:var(--text-base);flex-shrink:0}
+.proxy-row-title{font-size:var(--text-sm);font-weight:500;color:var(--text);flex:1}
+.proxy-row-chev{font-size:var(--text-xs);color:var(--muted);flex-shrink:0}
 .proxy-detail-overlay{position:fixed;inset:0;z-index:600;pointer-events:none}
 .proxy-detail-overlay.open{pointer-events:auto}
 .proxy-detail-panel{position:absolute;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.22);width:280px;padding:14px 16px;display:none;z-index:601}
 .proxy-detail-panel.open{display:block;animation:dropIn .15s ease}
-.proxy-detail-back{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:800;color:var(--blue);cursor:pointer;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.proxy-detail-back{display:flex;align-items:center;gap:6px;font-size:var(--text-xs);font-weight:500;color:var(--blue);cursor:pointer;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 [data-theme="dark"] .proxy-detail-back{color:#a5b4fc}
 .proxy-detail-back:hover{opacity:.7}
-.proxy-detail-title{font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px}
-.proxy-detail-desc{font-size:10.5px;font-weight:600;color:var(--soft);line-height:1.55;margin-bottom:8px}
-.proxy-detail-url{font-size:9px;font-family:'Courier New',monospace;color:var(--muted);background:var(--row);border:1px solid var(--border);border-radius:5px;padding:4px 7px;word-break:break-all}
-.drop-info-row{display:flex;align-items:flex-start;gap:8px;padding:9px 14px;font-size:10px;font-weight:600;color:var(--soft);line-height:1.45;border-top:1px solid var(--border)}
+.proxy-detail-title{font-size:var(--text-base);font-weight:700;color:var(--text);margin-bottom:4px}
+.proxy-detail-desc{font-size:var(--text-xs);font-weight:400;color:var(--soft);line-height:1.55;margin-bottom:8px}
+.proxy-detail-url{font-size:var(--text-xs);font-family:'Courier New',monospace;color:var(--muted);background:var(--row);border:1px solid var(--border);border-radius:5px;padding:4px 7px;word-break:break-all}
+.drop-info-row{display:flex;align-items:flex-start;gap:8px;padding:9px 14px;font-size:var(--text-xs);font-weight:400;color:var(--soft);line-height:1.45;border-top:1px solid var(--border)}
 
-.app{flex:1;display:flex;min-height:0}
+.app{flex:1;display:flex;min-height:0;overflow:hidden}
 
-.sidebar{width:320px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto;transition:background .25s}
-.sb-head{padding:20px 20px 16px;border-bottom:1px solid var(--border)}
-.sb-head h1{font-size:17px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:4px}
+.col-header{display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1.5px solid var(--border);margin-bottom:4px;flex-shrink:0}
+.col-header-icon{font-size:var(--text-lg)}
+.col-header-title{font-size:var(--text-sm);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+
+/* Colonne droite — masquée par défaut, visible quand .open */
+.detail-panel{width:0;flex-shrink:0;background:var(--surface);border-left:none;position:sticky;top:52px;height:calc(100vh - 52px);display:flex;flex-direction:column;transition:width .28s cubic-bezier(.4,0,.2,1),background .25s;overflow:hidden}
+.detail-panel.open{width:380px;border-left:1.5px solid var(--border)}
+.sidebar{width:300px;flex-shrink:0;background:var(--surface);border-right:1.5px solid var(--border);display:flex;flex-direction:column;position:sticky;top:52px;height:calc(100vh - 52px);overflow:hidden;transition:background .25s;z-index:10}
+.sb-head{padding:16px 18px 14px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--surface)}
+.sb-head h1{font-size:var(--text-lg);font-weight:700;color:var(--text);line-height:1.3;margin-bottom:3px}
 .sb-head h1 span{color:var(--blue)}
 [data-theme="dark"] .sb-head h1 span{color:#8b80f8}
-.sb-head p{font-size:11px;color:var(--soft);font-weight:600;line-height:1.5}
-.sb-body{padding:16px 20px;flex:1}
-.flabel{display:block;font-size:10px;font-weight:800;color:var(--text);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.sb-head p{font-size:var(--text-xs);color:var(--soft);font-weight:400;line-height:1.5}
+.sb-body{padding:14px 16px;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden}
+
+
+.sb-privacy-note{font-size:var(--text-xs);font-weight:400;color:var(--muted);line-height:1.55;margin-top:-6px;margin-bottom:12px;padding:0 2px}
 .input-wrap{margin-bottom:12px}
-.input-wrap input{width:100%;border:2px solid var(--border);border-radius:9px;padding:10px 12px;font-family:'Nunito',sans-serif;font-size:13.5px;font-weight:600;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s,background .25s;background:var(--surface)}
+.input-wrap input{width:100%;border:2px solid var(--border);border-radius:9px;padding:10px 12px;font-family:var(--font);font-size:var(--text-base);font-weight:400;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s,background .25s;background:var(--surface)}
 .input-wrap input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(75,63,190,.1)}
 input::placeholder{color:var(--muted);font-weight:500}
-.ep-preview{background:var(--row);border:1.5px solid var(--border);border-radius:7px;padding:8px 10px;font-size:9.5px;font-weight:600;color:var(--soft);word-break:break-all;margin-bottom:14px;font-family:'Courier New',monospace;line-height:1.5;transition:background .25s}
-.ep-preview .domain{color:var(--blue);font-weight:800}
+.ep-preview{background:var(--row);border:1.5px solid var(--border);border-radius:7px;padding:8px 10px;font-size:var(--text-xs);font-weight:400;color:var(--soft);word-break:break-all;margin-bottom:14px;font-family:'Courier New',monospace;line-height:1.5;transition:background .25s}
+.ep-preview .domain{color:var(--blue);font-weight:500}
 [data-theme="dark"] .ep-preview .domain{color:#8b80f8}
 
 .btn-row{display:flex;gap:8px;margin-bottom:0}
-.btn-go{flex:1;padding:11px 0px;background:var(--blue);border:none;border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(75,63,190,.35)}
+.btn-go{flex:1;padding:11px 0px;background:var(--blue);border:none;border-radius:9px;font-family:var(--font);font-size:var(--text-sm);font-weight:500;color:#fff;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(75,63,190,.35)}
 .btn-go:hover{background:var(--blue-dark);box-shadow:0 6px 20px rgba(75,63,190,.45)}
 .btn-go:active{transform:scale(.99)}
 .btn-go:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
-.btn-full-analysis{flex:1;padding:11px 8px;background:#121212;border:none;border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:#fff;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.btn-full-analysis{flex:1;padding:11px 8px;background:#121212;border:none;border-radius:9px;font-family:var(--font);font-size:var(--text-sm);font-weight:500;color:#fff;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .btn-full-analysis:hover{background:#2c2c2c;box-shadow:0 6px 20px rgba(0,0,0,.45)}
 .btn-full-analysis:active{transform:scale(.99)}
 .btn-full-analysis:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
 
 .btn-hints{display:flex;gap:8px;margin-top:5px;margin-bottom:12px}
-.btn-hint{flex:1;font-size:9px;font-weight:600;color:var(--muted);text-align:center;line-height:1.4}
+.btn-hint{flex:1;font-size:var(--text-xs);font-weight:400;color:var(--muted);text-align:center;line-height:1.4}
 
 .spinner{display:none;width:13px;height:13px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 .spinner-blue{display:none;width:13px;height:13px;border:2.5px solid rgba(75,63,190,.2);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite}
 [data-theme="dark"] .spinner-blue{border-color:rgba(139,128,248,.2);border-top-color:#8b80f8}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.btn-export{width:100%;padding:9px;background:transparent;border:2px solid var(--border);border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--soft);cursor:pointer;display:none;align-items:center;justify-content:center;gap:6px;transition:all .2s;margin-top:8px}
+.btn-export{width:100%;padding:9px;background:transparent;border:2px solid var(--border);border-radius:9px;font-family:var(--font);font-size:var(--text-sm);font-weight:500;color:var(--soft);cursor:pointer;display:none;align-items:center;justify-content:center;gap:6px;transition:all .2s;margin-top:8px}
 .btn-export:hover{border-color:var(--black);color:var(--black)}
 .btn-export.visible{display:flex}
 
-.btn-trigger-full{width:100%;padding:10px;background:transparent;border:2px dashed var(--blue);border-radius:9px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--blue);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;margin-top:0}
+.btn-trigger-full{width:100%;padding:10px;background:transparent;border:2px dashed var(--blue);border-radius:9px;font-family:var(--font);font-size:var(--text-sm);font-weight:500;color:var(--blue);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;margin-top:0}
 .btn-trigger-full:hover{background:var(--blue);color:#fff;border-style:solid}
 [data-theme="dark"] .btn-trigger-full{border-color:#8b80f8;color:#8b80f8}
 [data-theme="dark"] .btn-trigger-full:hover{background:#8b80f8;color:#fff}
@@ -144,7 +157,7 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .btn-trigger-full.done{border-color:#4a7c4a;color:#86efac}
 
 .prog-list{margin-top:12px;display:none;flex-direction:column;gap:4px}
-.p-step{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;color:var(--soft);padding:5px 8px 5px 10px;border-radius:6px;background:var(--step-bg);border:1.5px solid var(--border);transition:all .2s;position:relative}
+.p-step{display:flex;align-items:center;gap:7px;font-size:var(--text-xs);font-weight:500;color:var(--soft);padding:5px 8px 5px 10px;border-radius:6px;background:var(--step-bg);border:1.5px solid var(--border);transition:all .2s;position:relative}
 .p-step.active{color:var(--blue);border-color:#c7d2fe;background:#eef2ff}
 .p-step.done{color:#16a34a;border-color:#bbf7d0;background:#f0fdf4}
 .p-step.fail{color:var(--muted);text-decoration:line-through;opacity:.6}
@@ -152,39 +165,39 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .p-step.active{background:#2a2860;border-color:#5b52cc;color:#a5b4fc}
 [data-theme="dark"] .p-step.done{background:#1a2e1a;border-color:#4a7c4a;color:#86efac}
 [data-theme="dark"] .p-step.timeout{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
-.p-step-icon{font-size:11px;flex-shrink:0;display:flex;align-items:center;width:18px}
+.p-step-icon{font-size:var(--text-sm);flex-shrink:0;display:flex;align-items:center;width:18px}
 .p-step-label{flex:1;min-width:0}
-.p-step-cancel{display:none;margin-left:auto;background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);color:#dc2626;border-radius:4px;font-size:9px;font-weight:800;font-family:'Nunito',sans-serif;padding:1px 6px;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1.5}
+.p-step-cancel{display:none;margin-left:auto;background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.25);color:#dc2626;border-radius:4px;font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:1px 6px;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1.5}
 .p-step-cancel:hover{background:rgba(220,38,38,.22)}
 [data-theme="dark"] .p-step-cancel{background:rgba(252,165,165,.1);border-color:rgba(252,165,165,.25);color:#fca5a5}
 .p-step.active .p-step-cancel{display:inline-flex;align-items:center}
-.p-step-retry{display:none;margin-left:auto;background:rgba(75,63,190,.1);border:1px solid rgba(75,63,190,.3);color:var(--blue);border-radius:4px;font-size:9px;font-weight:800;font-family:'Nunito',sans-serif;padding:1px 6px;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1.5}
+.p-step-retry{display:none;margin-left:auto;background:rgba(75,63,190,.1);border:1px solid rgba(75,63,190,.3);color:var(--blue);border-radius:4px;font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:1px 6px;cursor:pointer;flex-shrink:0;transition:all .15s;line-height:1.5}
 .p-step-retry:hover{background:rgba(75,63,190,.2)}
 [data-theme="dark"] .p-step-retry{background:rgba(139,128,248,.1);border-color:rgba(139,128,248,.3);color:#a5b4fc}
 .p-step.timeout .p-step-retry{display:inline-flex;align-items:center}
-.err-box{margin-top:10px;background:#fff1f2;border:1.5px solid #fecdd3;border-radius:7px;padding:9px 12px;font-size:11.5px;font-weight:700;color:#dc2626;display:none}
+.err-box{margin-top:10px;background:#fff1f2;border:1.5px solid #fecdd3;border-radius:7px;padding:9px 12px;font-size:var(--text-sm);font-weight:500;color:#dc2626;display:none}
 [data-theme="dark"] .err-box{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
 
-.hero-partner-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.28);border-radius:6px;color:rgba(255,255,255,.85);font-size:10px;font-weight:700;font-family:'Nunito',sans-serif;padding:4px 11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;margin-top:8px}
+.hero-partner-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.28);border-radius:6px;color:rgba(255,255,255,.85);font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:4px 11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;margin-top:8px}
 .hero-partner-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
 .hero-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 
-.center{flex:1;padding:24px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;min-height:calc(100vh - 52px)}
+.center{flex:1;padding:20px 18px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;height:calc(100vh - 52px);min-width:0}
 .empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:.3;padding:60px 0}
 .empty-state-icon{font-size:44px}
-.empty-state-title{font-size:14px;font-weight:800;color:var(--text)}
-.empty-state-sub{font-size:11.5px;font-weight:600;color:var(--soft)}
+.empty-state-title{font-size:var(--text-lg);font-weight:500;color:var(--text)}
+.empty-state-sub{font-size:var(--text-sm);font-weight:400;color:var(--soft)}
 .tenant-hero{background:#121212;border-radius:14px;padding:22px 26px 18px;position:relative;overflow:hidden;box-shadow:0 1px 10px rgba(0,0,0,.35);cursor:default}
 .tenant-hero::after{content:'';position:absolute;right:35px;top:50%;transform:translateY(-50%);width:80px;height:80px;opacity:.08;pointer-events:none;background:url('MicrosoftN.png') center/contain no-repeat}
-.hero-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.hero-label{font-size:var(--text-xs);font-weight:500;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;align-items:center;gap:5px}
 .ms-logo-inline{width:14px;height:14px;object-fit:contain;display:inline-block;vertical-align:middle;flex-shrink:0}
-.hero-guid{font-size:19px;font-weight:800;color:#fff;word-break:break-all;letter-spacing:.015em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-shadow:0 1px 6px rgba(0,0,0,.18);margin-bottom:6px}
-.hero-copy-btn{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.32);border-radius:6px;color:#fff;font-size:10.5px;font-weight:700;font-family:'Nunito',sans-serif;padding:4px 12px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.hero-guid{font-size:var(--text-xl);font-weight:500;color:#fff;word-break:break-all;letter-spacing:.015em;display:flex;align-items:center;gap:12px;flex-wrap:wrap;text-shadow:0 1px 6px rgba(0,0,0,.18);margin-bottom:6px}
+.hero-copy-btn{background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.32);border-radius:6px;color:#fff;font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:4px 12px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
 .hero-copy-btn:hover{background:rgba(255,255,255,.26)}
 .hero-copy-btn.copied{background:rgba(22,163,74,.28);border-color:#86efac;color:#86efac}
-.hero-domain{font-size:11px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.03em}
-.hero-none{font-size:13px;font-weight:700;color:rgba(255,255,255,.55);font-style:italic;margin-bottom:6px}
-.confidence-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:800;color:rgba(255,255,255,.9);margin-left:8px}
+.hero-domain{font-size:var(--text-sm);font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.03em}
+.hero-none{font-size:var(--text-base);font-weight:500;color:rgba(255,255,255,.55);font-style:italic;margin-bottom:6px}
+.confidence-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:20px;padding:3px 10px;font-size:var(--text-xs);font-weight:500;color:rgba(255,255,255,.9);margin-left:8px}
 .confidence-badge.high{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.4)}
 .confidence-badge.medium{background:rgba(251,191,36,.2);border-color:rgba(251,191,36,.4)}
 .confidence-badge.low{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4)}
@@ -192,23 +205,23 @@ input::placeholder{color:var(--muted);font-weight:500}
 .dup-alert.warn{background:rgba(251,191,36,.16);border:1.5px solid rgba(251,191,36,.45)}
 .dup-alert.ok{background:rgba(34,197,94,.12);border:1.5px solid rgba(34,197,94,.3)}
 .dup-alert.info{background:rgba(56,189,248,.12);border:1.5px solid rgba(56,189,248,.4)}
-.dup-icon{font-size:13px;flex-shrink:0;margin-top:1px}
+.dup-icon{font-size:var(--text-base);flex-shrink:0;margin-top:1px}
 .dup-body{flex:1}
-.dup-title{font-size:11px;font-weight:800;margin-bottom:2px}
+.dup-title{font-size:var(--text-sm);font-weight:500;margin-bottom:2px}
 .dup-alert.warn .dup-title{color:#fef3c7}
 .dup-alert.ok .dup-title{color:#bbf7d0}
 .dup-alert.info .dup-title{color:#bae6fd}
-.dup-desc{font-size:10px;font-weight:600;color:rgba(255,255,255,.6);line-height:1.5}
+.dup-desc{font-size:var(--text-xs);font-weight:400;color:rgba(255,255,255,.6);line-height:1.5}
 
 .pills-block{display:flex;flex-direction:column;gap:6px}
-.pills-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:flex;align-items:center;gap:8px}
+.pills-label{font-size:var(--text-xs);font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:flex;align-items:center;gap:8px}
 .pills-row{display:flex;flex-wrap:wrap;gap:5px}
 .pills-row.collapsed{flex-wrap:nowrap;overflow:hidden;mask-image:linear-gradient(to right,#000 80%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 80%,transparent 100%)}
-.pills-toggle{margin-left:auto;background:var(--row);border:1px solid var(--border);color:var(--text);font-family:'Nunito',sans-serif;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:12px;cursor:pointer;transition:background .15s}
+.pills-toggle{margin-left:auto;background:var(--row);border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:var(--text-xs);font-weight:500;text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:12px;cursor:pointer;transition:background .15s}
 .pills-toggle:hover{background:var(--acc-hover)}
-.pill{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;border:1.5px solid;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:var(--text-xs);font-weight:500;padding:3px 9px;border-radius:20px;border:1.5px solid;white-space:nowrap}
 .pill.on{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
-.pill.off{background:var(--row);color:var(--muted);border-color:var(--border);font-weight:600}
+.pill.off{background:var(--row);color:var(--muted);border-color:var(--border);font-weight:400}
 [data-theme="dark"] .pill.on{background:#1a2e1a;color:#86efac;border-color:#4a7c4a}
 .svc-logo{width:14px;height:14px;object-fit:contain;display:inline-block;vertical-align:middle;border-radius:3px}
 
@@ -221,7 +234,7 @@ input::placeholder{color:var(--muted);font-weight:500}
 .result-card.sel-dns{border-color:#6b7280;box-shadow:0 0 0 2px rgba(107,114,128,.2)}
 .card-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;gap:10px}
 .card-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
-.card-icon-wrap{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.card-icon-wrap{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:var(--text-xl)}
 .card-icon-wrap.ms-clr{background:#eff6ff}
 .card-icon-wrap.gg-clr{background:#fef9c3}
 .card-icon-wrap.hl-clr{background:#f0fdf4}
@@ -232,9 +245,9 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .card-icon-wrap.hl-clr{background:#0d1f0d}
 [data-theme="dark"] .card-icon-wrap.hs-clr{background:#1f0d14}
 [data-theme="dark"] .card-icon-wrap.dn-clr{background:var(--row)}
-.card-title{font-size:12.5px;font-weight:800;color:var(--text)}
-.card-sub{font-size:10px;font-weight:600;color:var(--soft);margin-top:1px}
-.card-badge{font-size:9.5px;font-weight:800;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.card-title{font-size:var(--text-base);font-weight:700;color:var(--text)}
+.card-sub{font-size:var(--text-xs);font-weight:400;color:var(--soft);margin-top:1px}
+.card-badge{font-size:var(--text-xs);font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
 .card-badge.ms-b{background:#e0e7ff;color:var(--blue)}
 .card-badge.gg-b{background:#fef3c7;color:#b45309}
 .card-badge.hl-b{background:#dcfce7;color:#15803d}
@@ -245,47 +258,48 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .card-badge.hl-b{background:#1a2e1a;color:#86efac}
 [data-theme="dark"] .card-badge.hs-b{background:#2d1520;color:#f9a8d4}
 [data-theme="dark"] .card-badge.dn-b{background:var(--row);color:var(--soft)}
-.card-chevron{font-size:10px;color:var(--muted);transition:transform .2s}
+.card-chevron{font-size:var(--text-xs);color:var(--muted);transition:transform .2s}
 .result-card.selected .card-chevron,.result-card.sel-google .card-chevron,.result-card.sel-health .card-chevron,.result-card.sel-host .card-chevron,.result-card.sel-dns .card-chevron{transform:rotate(90deg)}
 
-.detail-panel{width:0;flex-shrink:0;overflow:hidden;transition:width .28s cubic-bezier(.4,0,.2,1),background .25s;background:var(--surface);border-left:1px solid var(--border);position:sticky;top:52px;height:calc(100vh - 52px);display:flex;flex-direction:column}
-.detail-panel.open{width:var(--panel-w)}
+.detail-panel{width:380px;flex-shrink:0;overflow:hidden;background:var(--surface);border-left:1.5px solid var(--border);position:sticky;top:52px;height:calc(100vh - 52px);display:flex;flex-direction:column;transition:width .28s cubic-bezier(.4,0,.2,1),background .25s;--panel-w:380px}
+.detail-panel.open{width:380px}
+.detail-panel:not(.open){width:0;border-left:none}
 .panel-head{padding:14px 16px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-shrink:0}
-.panel-title{font-size:13px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.panel-close{background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:2px 6px;border-radius:5px;transition:background .15s}
+.panel-title{font-size:var(--text-base);font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.panel-close{background:none;border:none;cursor:pointer;font-size:var(--text-xl);color:var(--muted);padding:2px 6px;border-radius:5px;transition:background .15s}
 .panel-close:hover{background:var(--row)}
-.panel-body{flex:1;overflow-y:auto;padding:14px 16px 20px;display:flex;flex-direction:column;gap:10px;min-width:var(--panel-w)}
+.panel-body{flex:1;overflow-y:auto;padding:14px 16px 20px;display:flex;flex-direction:column;gap:10px;min-width:0}
 
 .d-row{background:var(--row);border:1.5px solid var(--border);border-radius:7px;padding:9px 11px;transition:background .25s}
 .d-row.hi-google{border-color:#bfdbfe;background:#fffbeb}
 [data-theme="dark"] .d-row.hi-google{background:#1e1a00;border-color:#92781a}
-.d-label{font-size:9px;font-weight:800;color:var(--soft);text-transform:uppercase;letter-spacing:.09em;margin-bottom:3px}
-.d-value{font-size:11.5px;font-weight:700;color:var(--text);word-break:break-all;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.copy-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:5px;color:var(--soft);font-size:9px;font-weight:700;font-family:'Nunito',sans-serif;padding:2px 7px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.d-label{font-size:var(--text-xs);font-weight:500;color:var(--soft);text-transform:uppercase;letter-spacing:.09em;margin-bottom:3px}
+.d-value{font-size:var(--text-sm);font-weight:500;color:var(--text);word-break:break-all;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.copy-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:5px;color:var(--soft);font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:2px 7px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
 .copy-btn:hover{border-color:var(--black);color:var(--black)}
 .copy-btn.copied{border-color:#16a34a;color:#16a34a}
 .dkim-detail{background:var(--row);border:1.5px solid var(--border);border-radius:7px;padding:9px 11px;margin-top:4px}
 .dkim-detail-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.dkim-sel-badge{font-size:9px;font-weight:800;padding:2px 7px;border-radius:20px;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.dkim-sel-badge{font-size:var(--text-xs);font-weight:500;padding:2px 7px;border-radius:20px;background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
 .dkim-sel-badge.absent{background:var(--row);color:var(--muted);border-color:var(--border)}
 [data-theme="dark"] .dkim-sel-badge{background:#1a2e1a;color:#86efac;border-color:#4a7c4a}
 [data-theme="dark"] .dkim-sel-badge.absent{background:var(--row);color:var(--muted)}
-.dkim-val{font-size:10px;font-weight:600;color:var(--soft);word-break:break-all;font-family:'Courier New',monospace;line-height:1.4}
+.dkim-val{font-size:var(--text-xs);font-weight:400;color:var(--soft);word-break:break-all;font-family:'Courier New',monospace;line-height:1.4}
 
 .host-summary{display:flex;align-items:center;gap:12px;padding:12px 13px;border-radius:9px;background:var(--row);border:1.5px solid var(--border)}
-.host-logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#f9a8d4,#c084fc);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.host-name{font-size:13.5px;font-weight:800;color:var(--text)}
-.host-sub{font-size:10px;font-weight:600;color:var(--soft);margin-top:2px}
+.host-logo{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#f9a8d4,#c084fc);display:flex;align-items:center;justify-content:center;font-size:var(--text-xl);flex-shrink:0}
+.host-name{font-size:var(--text-base);font-weight:700;color:var(--text)}
+.host-sub{font-size:var(--text-xs);font-weight:400;color:var(--soft);margin-top:2px}
 
 .score-block{display:flex;align-items:center;gap:14px;padding:12px 13px;border-radius:9px;border:1.5px solid var(--border);margin-bottom:2px}
 .score-ring{position:relative;width:52px;height:52px;flex-shrink:0}
 .score-ring svg{width:52px;height:52px;transform:rotate(-90deg)}
 .score-ring .trk{fill:none;stroke:var(--border);stroke-width:5}
 .score-ring .fll{fill:none;stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset .9s ease}
-.score-ring .lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:12px;font-weight:800;color:#FFFFFF}
+.score-ring .lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:var(--text-sm);font-weight:500;color:#FFFFFF}
 .score-info{flex:1}
-.score-title{font-size:12.5px;font-weight:800;margin-bottom:2px}
-.score-desc{font-size:10px;font-weight:600;color:var(--soft);line-height:1.4}
+.score-title{font-size:var(--text-base);font-weight:700;margin-bottom:2px}
+.score-desc{font-size:var(--text-xs);font-weight:400;color:var(--soft);line-height:1.4}
 .hc-list{display:flex;flex-direction:column;gap:6px}
 .hc-item{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border-radius:7px;border:1.5px solid}
 .hc-item.ok{background:#f0fdf4;border-color:#bbf7d0}
@@ -296,9 +310,9 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .hc-item.warn{background:#2a2010;border-color:#92781a}
 [data-theme="dark"] .hc-item.error{background:#2d1515;border-color:#7f1d1d}
 [data-theme="dark"] .hc-item.info{background:#0d2030;border-color:#1e5a7a}
-.hc-icon{font-size:13px;flex-shrink:0;margin-top:1px}
+.hc-icon{font-size:var(--text-base);flex-shrink:0;margin-top:1px}
 .hc-body{flex:1;min-width:0}
-.hc-title{font-size:11px;font-weight:800;margin-bottom:2px}
+.hc-title{font-size:var(--text-sm);font-weight:700;margin-bottom:2px}
 .hc-item.ok .hc-title{color:#15803d}
 .hc-item.warn .hc-title{color:#b45309}
 .hc-item.error .hc-title{color:#dc2626}
@@ -307,35 +321,35 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .hc-item.warn .hc-title{color:#fcd34d}
 [data-theme="dark"] .hc-item.error .hc-title{color:#fca5a5}
 [data-theme="dark"] .hc-item.info .hc-title{color:#7dd3fc}
-.hc-desc{font-size:10px;font-weight:600;color:var(--soft);line-height:1.5;word-break:break-all}
-.ext-link{display:flex;align-items:center;gap:7px;padding:9px 11px;background:var(--row);border:1.5px solid #c7d2fe;border-radius:7px;font-size:10.5px;font-weight:700;color:var(--blue);text-decoration:none;transition:background .15s}
+.hc-desc{font-size:var(--text-xs);font-weight:400;color:var(--soft);line-height:1.5;word-break:break-all}
+.ext-link{display:flex;align-items:center;gap:7px;padding:9px 11px;background:var(--row);border:1.5px solid #c7d2fe;border-radius:7px;font-size:var(--text-xs);font-weight:500;color:var(--blue);text-decoration:none;transition:background .15s}
 .ext-link:hover{background:#eef2ff}
 [data-theme="dark"] .ext-link{border-color:#3a3580;color:#a5b4fc}
 [data-theme="dark"] .ext-link:hover{background:#2a2860}
-.panel-section-title{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:4px;margin-bottom:-2px}
+.panel-section-title{font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:4px;margin-bottom:-2px}
 
 footer{background:var(--surface);border-top:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;justify-content:center;transition:background .25s}
-.powered{font-size:11px;font-weight:700;color:var(--soft)}
-.powered span{color:var(--blue);font-weight:800}
+.powered{font-size:var(--text-sm);font-weight:500;color:var(--soft)}
+.powered span{color:var(--blue);font-weight:500}
 
 .msa-check-block{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
-.collapsible-btn{width:100%;background:var(--row);border:1.5px solid var(--border);border-radius:9px;padding:9px 13px;font-family:'Nunito',sans-serif;font-size:11.5px;font-weight:800;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .15s;text-align:left}
+.collapsible-btn{width:100%;background:var(--row);border:1.5px solid var(--border);border-radius:9px;padding:9px 13px;font-family:var(--font);font-size:var(--text-sm);font-weight:500;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .15s;text-align:left}
 .collapsible-btn:hover{border-color:var(--blue);background:var(--acc-hover)}
 [data-theme="dark"] .collapsible-btn:hover{border-color:#5b52cc}
-.coll-arrow{font-size:10px;color:var(--muted);transition:transform .22s;display:inline-block}
+.coll-arrow{font-size:var(--text-xs);color:var(--muted);transition:transform .22s;display:inline-block}
 .coll-arrow.open{transform:rotate(180deg)}
 .collapsible-body{overflow:hidden;max-height:0;transition:max-height .3s ease,opacity .25s ease;opacity:0;pointer-events:none}
-.collapsible-body.open{max-height:800px;opacity:1;pointer-events:auto;margin-top:10px}
+.collapsible-body.open{max-height:1200px;opacity:1;pointer-events:auto;margin-top:10px}
 
-.btn-msa{width:100%;padding:10px;background:transparent;border:2px solid var(--ms);border-radius:9px;font-family:'Nunito',sans-serif;font-size:12.5px;font-weight:800;color:var(--ms);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;text-decoration:none}
+.btn-msa{width:100%;padding:10px;background:transparent;border:2px solid var(--ms);border-radius:9px;font-family:var(--font);font-size:var(--text-base);font-weight:500;color:var(--ms);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;text-decoration:none}
 .btn-msa:hover{background:var(--ms);color:#fff}
 [data-theme="dark"] .btn-msa{border-color:#3b82f6;color:#3b82f6}
 [data-theme="dark"] .btn-msa:hover{background:#3b82f6;color:#fff}
 .msa-procedure{margin-top:10px;background:var(--row);border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:7px}
-.msa-step{display:flex;align-items:flex-start;gap:8px;font-size:10.5px;font-weight:600;color:var(--soft);line-height:1.5}
-.msa-step-num{width:18px;height:18px;border-radius:50%;background:var(--blue);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.msa-step{display:flex;align-items:flex-start;gap:8px;font-size:var(--text-xs);font-weight:400;color:var(--soft);line-height:1.5}
+.msa-step-num{width:18px;height:18px;border-radius:50%;background:var(--blue);color:#fff;font-size:var(--text-xs);font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .msa-result{display:flex;flex-direction:column;gap:4px;margin-top:2px}
-.msa-result-row{display:flex;align-items:flex-start;gap:6px;font-size:10px;font-weight:700;padding:5px 8px;border-radius:6px;border:1.5px solid}
+.msa-result-row{display:flex;align-items:flex-start;gap:6px;font-size:var(--text-xs);font-weight:500;padding:5px 8px;border-radius:6px;border:1.5px solid}
 .msa-result-row.ok{background:#f0fdf4;border-color:#bbf7d0;color:#15803d}
 .msa-result-row.warn{background:#fffbeb;border-color:#fde68a;color:#b45309}
 .msa-result-row.err{background:#fff1f2;border-color:#fecdd3;color:#dc2626}
@@ -343,28 +357,42 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 [data-theme="dark"] .msa-result-row.warn{background:#2a2010;border-color:#92781a;color:#fcd34d}
 [data-theme="dark"] .msa-result-row.err{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
 
-.history-empty{font-size:10.5px;font-weight:600;color:var(--muted);text-align:center;padding:10px 0;font-style:italic}
+.history-empty{font-size:var(--text-xs);font-weight:400;color:var(--muted);text-align:center;padding:10px 0;font-style:italic}
 .history-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;border:1.5px solid var(--border);background:var(--row);margin-bottom:5px;cursor:pointer;transition:all .15s;position:relative}
 .history-item:hover{border-color:#c7d2fe;background:var(--acc-hover)}
-.history-item-domain{font-size:11.5px;font-weight:800;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.history-item-guid{font-size:9px;font-weight:600;color:var(--muted);font-family:'Courier New',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px}
-.history-item-copy{background:var(--surface);border:1.5px solid var(--border);border-radius:5px;color:var(--soft);font-size:8.5px;font-weight:700;font-family:'Nunito',sans-serif;padding:2px 6px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.history-item-domain{font-size:var(--text-sm);font-weight:700;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-item-guid{font-size:var(--text-xs);font-weight:400;color:var(--muted);font-family:'Courier New',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px}
+.history-item-copy{background:var(--surface);border:1.5px solid var(--border);border-radius:5px;color:var(--soft);font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:2px 6px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0}
 .history-item-copy:hover{border-color:var(--black);color:var(--black)}
 .history-item-copy.copied{border-color:#16a34a;color:#16a34a}
-.history-item-time{font-size:8.5px;font-weight:600;color:var(--muted);flex-shrink:0}
-.history-item-icon{font-size:13px;flex-shrink:0;display:flex;align-items:center;width:16px}
-.btn-clear-history{width:100%;margin-top:4px;padding:6px;background:transparent;border:1.5px solid var(--border);border-radius:7px;font-family:'Nunito',sans-serif;font-size:10.5px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s}
+.history-item-time{font-size:var(--text-xs);font-weight:400;color:var(--muted);flex-shrink:0}
+.history-item-icon{font-size:var(--text-base);flex-shrink:0;display:flex;align-items:center;width:16px}
+.btn-clear-history{width:100%;margin-top:4px;padding:6px;background:transparent;border:1.5px solid var(--border);border-radius:7px;font-family:var(--font);font-size:var(--text-xs);font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s}
 .btn-clear-history:hover{border-color:#fecdd3;color:#dc2626}
 [data-theme="dark"] .btn-clear-history:hover{border-color:#7f1d1d;color:#fca5a5}
 
+.privacy-block{margin-top:0;border-top:1px solid var(--border);padding-top:10px}.privacy-body{display:flex;flex-direction:column;gap:8px;padding-top:2px}
+.privacy-intro{font-size:var(--text-xs);font-weight:400;color:var(--soft);line-height:1.55}
+.privacy-section-lbl{font-size:var(--text-xs);font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:2px;margin-bottom:3px}
+.privacy-api-list{display:flex;flex-direction:column;gap:3px}
+.privacy-api-item{display:flex;align-items:center;gap:6px;font-size:var(--text-xs);font-weight:500;color:var(--text);background:var(--row);border:1.5px solid var(--border);border-radius:6px;padding:5px 8px}
+.privacy-api-item-icon{font-size:var(--text-sm);flex-shrink:0}
+.privacy-api-item-name{flex:1;font-family:'Courier New',monospace;font-size:var(--text-xs)}
+.privacy-api-item-tag{font-size:var(--text-xs);font-weight:500;color:var(--muted);background:var(--border);border-radius:3px;padding:1px 5px;flex-shrink:0}
+.privacy-storage-row{display:flex;align-items:flex-start;gap:7px;font-size:var(--text-xs);font-weight:400;color:var(--soft);line-height:1.5;background:var(--row);border:1.5px solid var(--border);border-radius:6px;padding:7px 9px}
+.privacy-storage-icon{font-size:var(--text-sm);flex-shrink:0;margin-top:1px}
+.privacy-cta{display:flex;align-items:center;justify-content:center;gap:5px;font-size:var(--text-xs);font-weight:500;color:var(--blue);background:transparent;border:1.5px solid var(--border);border-radius:7px;padding:7px 10px;cursor:pointer;width:100%;font-family:var(--font);transition:all .15s;text-align:center}
+.privacy-cta:hover{border-color:var(--blue);background:var(--acc-hover)}
+[data-theme="dark"] .privacy-cta{color:#8b80f8}
+[data-theme="dark"] .privacy-cta:hover{border-color:#5b52cc}
 @media(max-width:768px){
   .app{flex-direction:column}
   .sidebar{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid var(--border);}
-  .center{padding:16px 12px;gap:10px}
+  .center{padding:16px 12px;gap:10px;height:auto;min-height:50vh}
   .detail-panel{width:100%!important;height:auto;position:static;border-left:none;border-top:1px solid var(--border);}
-  .detail-panel.open{display:flex;flex-direction:column}
+  .detail-panel.open{display:flex;flex-direction:column;width:100%!important}
   .tenant-hero{padding:18px 16px 14px}
-  .hero-guid{font-size:15px}
+  .hero-guid{font-size:var(--text-lg)}
   nav{padding:0 16px}
   .nav-badge{display:none}
 }
@@ -383,7 +411,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
     <div class="nav-badge">v0.5 Correctifs en cours</div>
     <div class="nav-dropdown" id="mainDropdown">
       <button class="nav-drop-btn" onclick="toggleDropdown()">
-        <img src="option.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> Options <span class="drop-arrow">▾</span>
+        <img src="option.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> Paramètres & Confidentialité <span class="drop-arrow">▾</span>
       </button>
       <div class="drop-menu" id="dropMenu">
         <div class="drop-section">Apparence</div>
@@ -393,6 +421,18 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
             <span class="drop-toggle-label" id="darkLabel">Mode sombre</span>
           </div>
           <div class="drop-toggle-switch" id="darkSwitch"></div>
+        </div>
+        <div class="drop-section">Données</div>
+        <div class="drop-toggle" onclick="setHistoryEnabled(!isHistoryEnabled())">
+          <div class="drop-toggle-left">
+            <span class="drop-toggle-icon">🕐</span>
+            <span class="drop-toggle-label">Historique des Tenant ID</span>
+          </div>
+          <div class="drop-toggle-switch" id="historyOptSwitch"></div>
+        </div>
+        <div class="drop-info-row">
+          <span>ℹ️</span>
+          <span>L'historique utilise le stockage local (localStorage) de votre navigateur. Aucune donnée n'est transmise à un serveur.</span>
         </div>
         <div class="drop-section">APIs utilisées</div>
         <div class="proxy-row" onclick="showProxyDetail('dnsgoogle')">
@@ -410,9 +450,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
           <span class="proxy-row-title">login.microsoftonline.com</span>
           <span class="proxy-row-chev">›</span>
         </div>
+        <div class="proxy-row" onclick="showProxyDetail('googleaccounts')">
+          <span class="proxy-row-icon">🔵</span>
+          <span class="proxy-row-title">accounts.google.com</span>
+          <span class="proxy-row-chev">›</span>
+        </div>
         <div class="drop-info-row">
           <span>✅</span>
-          <span>Requêtes directes vers APIs officielles Microsoft, Google DNS et RDAP. Aucun proxy tiers. Aucune donnée stockée.</span>
+          <span>Requêtes directes vers APIs officielles Microsoft, Google DNS, Google Accounts et RDAP. Aucun proxy tiers. Aucune donnée stockée côté serveur.</span>
         </div>
       </div>
     </div>
@@ -430,14 +475,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 <div class="app">
   <aside class="sidebar">
     <div class="sb-head">
-      <h1>Diagnostic <span>Microsoft 365</span> & sécurité</h1>
-      <p>Tenant ID · MSA · DNS · hébergeur</p>
+      <h1>Diagnostic <span>Microsoft 365</span></h1>
+      <p>Interface de diagnostic M365 et hygiène DNS, avec traitement local des données.</p>
     </div>
     <div class="sb-body">
       <label class="flabel">Adresse e-mail ou domaine</label>
       <div class="input-wrap">
         <input type="text" id="emailInput" placeholder="user@domaine.com ou domaine.com" autocomplete="off"/>
       </div>
+      <p class="sb-privacy-note">Seuls le domaine ou l'adresse saisis sont utilisés pour interroger des endpoints publics.*</p>
       <label class="flabel">Endpoint OpenID Microsoft 365</label>
       <div class="ep-preview" id="endpointPreview">https://login.microsoftonline.com/<span class="domain">domaine.com</span>/.well-known/openid-configuration</div>
       <div class="btn-row">
@@ -452,7 +498,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
       </div>
       <div class="btn-hints">
         <div class="btn-hint">Rapide — ID MS + DNS de base</div>
-        <div class="btn-hint">Complet — WHOIS · doublon MSA · sécurité</div>
+        <div class="btn-hint">Complet — WHOIS · sécurité DNS</div>
       </div>
       <button class="btn-export" id="exportBtn" onclick="exportReport()">📋 Copier le rapport</button>
       <div class="prog-list" id="progList">
@@ -461,30 +507,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
         <div class="p-step" id="step-dns"><span class="p-step-icon">🌐</span><span class="p-step-label">DNS…</span><button class="p-step-cancel" onclick="cancelStep('dns')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('dns')">↺ Relancer</button></div>
         <div class="p-step" id="step-health"><span class="p-step-icon">🛡️</span><span class="p-step-label">Sécurité…</span><button class="p-step-cancel" onclick="cancelStep('health')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('health')">↺ Relancer</button></div>
         <div class="p-step" id="step-others"><span class="p-step-icon">🔍</span><span class="p-step-label">Autres services…</span><button class="p-step-cancel" onclick="cancelStep('others')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('others')">↺ Relancer</button></div>
-        <div class="p-step" id="step-dup"><span class="p-step-icon">⚠️</span><span class="p-step-label">Doublon MSA…</span><button class="p-step-cancel" onclick="cancelStep('dup')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('dup')">↺ Relancer</button></div>
         <div class="p-step" id="step-host"><span class="p-step-icon">🏠</span><span class="p-step-label">Hébergeur…</span><button class="p-step-cancel" onclick="cancelStep('host')">✕ Annuler</button><button class="p-step-retry" onclick="retryStep('host')">↺ Relancer</button></div>
       </div>
       <div class="err-box" id="errBox"></div>
-
-      <div class="msa-check-block">
-        <button class="collapsible-btn" onclick="toggleCollapsible('msaBody','msaArrow')">
-          <span style="display:inline-flex;align-items:center;gap:6px;"><img src="Microsoft.png" width="16" height="16" alt="Microsoft" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> Vérification manuelle MSA</span>
-          <span class="coll-arrow" id="msaArrow">▾</span>
-        </button>
-        <div class="collapsible-body" id="msaBody">
-          <a id="btnMsa" href="https://login.live.com/login.srf" target="_blank" rel="noopener" class="btn-msa">🔗 Ouvrir login.live.com</a>
-          <div class="msa-procedure">
-            <div class="msa-step"><div class="msa-step-num">1</div><span>Cliquez le bouton ci-dessus en <strong>navigation privée</strong> (Ctrl+Maj+N)</span></div>
-            <div class="msa-step"><div class="msa-step-num">2</div><span>Entrez l'e-mail à vérifier, tapez un mot de passe <strong>volontairement faux</strong> (ex: <code style="background:var(--border);padding:1px 4px;border-radius:3px;font-size:9.5px">A1b2c3!</code>)</span></div>
-            <div class="msa-step"><div class="msa-step-num">3</div><span>Interprétez le résultat :</span></div>
-            <div class="msa-result">
-              <div class="msa-result-row warn">⚠️ "Mot de passe incorrect" → <strong>Compte MSA existant</strong></div>
-              <div class="msa-result-row ok">✅ "Ce compte n'existe pas" → <strong>Aucun compte MSA</strong></div>
-              <div class="msa-result-row err">🔒 CAPTCHA → Réessayez en navigation privée</div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div class="msa-check-block" style="margin-top:0">
         <button class="collapsible-btn" onclick="toggleCollapsible('historyBody','historyArrow')">
@@ -496,10 +521,74 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
           <button class="btn-clear-history" onclick="clearHistory()">🗑 Effacer l'historique</button>
         </div>
       </div>
+
+      <div class="privacy-block">
+        <button class="collapsible-btn" onclick="toggleCollapsible('privacyBody','privacyArrow')">
+          <span>🔒 Confidentialité</span>
+          <span class="coll-arrow" id="privacyArrow">▾</span>
+        </button>
+        <div class="collapsible-body" id="privacyBody">
+          <div class="privacy-body">
+
+            <p class="privacy-intro">Cet outil effectue des requêtes <strong>directement depuis votre navigateur</strong> vers des APIs publiques. Aucun serveur intermédiaire ne reçoit ou ne conserve vos données.</p>
+
+            <div>
+              <div class="privacy-section-lbl">APIs contactées lors d'une analyse</div>
+              <div class="privacy-api-list">
+                <div class="privacy-api-item">
+                  <span class="privacy-api-item-icon">🌐</span>
+                  <span class="privacy-api-item-name">dns.google</span>
+                  <span class="privacy-api-item-tag">DNS</span>
+                </div>
+                <div class="privacy-api-item">
+                  <span class="privacy-api-item-icon">🔍</span>
+                  <span class="privacy-api-item-name">login.microsoftonline.com</span>
+                  <span class="privacy-api-item-tag">Microsoft</span>
+                </div>
+                <div class="privacy-api-item">
+                  <span class="privacy-api-item-icon">🔵</span>
+                  <span class="privacy-api-item-name">accounts.google.com</span>
+                  <span class="privacy-api-item-tag">Google</span>
+                </div>
+                <div class="privacy-api-item">
+                  <span class="privacy-api-item-icon">🌐</span>
+                  <span class="privacy-api-item-name">rdap.org</span>
+                  <span class="privacy-api-item-tag">WHOIS</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="privacy-section-lbl">Ressources chargées lors d'une analyse</div>
+              <div class="privacy-api-list">
+                <div class="privacy-api-item">
+                  <span class="privacy-api-item-icon">🖼️</span>
+                  <span class="privacy-api-item-name">google.com/s2/favicons</span>
+                  <span class="privacy-api-item-tag">Icônes</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="privacy-storage-row">
+              <span class="privacy-storage-icon">💾</span>
+              <span>Aucun stockage par défaut. L'historique (optionnel) utilise uniquement le <strong>localStorage</strong> de votre navigateur — jamais transmis.</span>
+            </div>
+
+            <button class="privacy-cta" onclick="toggleDropdown(); toggleCollapsible('privacyBody','privacyArrow');">
+              ⚙️ Détail de chaque connexion dans Paramètres & Confidentialité
+            </button>
+
+          </div>
+        </div>
+      </div>
     </div>
   </aside>
 
   <main class="center" id="centerCol">
+    <div class="col-header">
+      <span class="col-header-icon">📊</span>
+      <span class="col-header-title">Résultats</span>
+    </div>
     <div class="empty-state">
       <div class="empty-state-icon">🔍</div>
       <div class="empty-state-title">Aucune analyse en cours</div>
@@ -520,9 +609,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
 
 <script>
 const PROXY_DATA = {
-  dnsgoogle: {title:'dns.google', desc:'API DNS-over-HTTPS de Google (DoH). Utilisée pour résoudre MX, SPF, DKIM, DMARC, DNSSEC, BIMI et MTA-STS. Aucune donnée personnelle transmise — seulement le nom de domaine.', url:'https://dns.google/resolve'},
-  rdap:      {title:'rdap.org',   desc:'Service RDAP public (Registration Data Access Protocol). Utilisé pour récupérer les données WHOIS : registrar, serveurs NS, dates de création/expiration. Lecture seule.', url:'https://rdap.org/domain/'},
-  mslogin:   {title:'login.microsoftonline.com', desc:'Endpoint public officiel Microsoft. Utilisé pour détecter le Tenant ID (OpenID Connect), le type de compte (pro/MSA) et valider le GUID du tenant.', url:'https://login.microsoftonline.com/common/.well-known/openid-configuration'},
+  dnsgoogle:      {title:'dns.google', desc:'API DNS-over-HTTPS de Google (DoH). Utilisée pour résoudre MX, SPF, DKIM, DMARC, DNSSEC, BIMI et MTA-STS. Aucune donnée personnelle transmise — seulement le nom de domaine.', url:'https://dns.google/resolve'},
+  rdap:           {title:'rdap.org',   desc:'Service RDAP public (Registration Data Access Protocol). Utilisé pour récupérer les données WHOIS : registrar, serveurs NS, dates de création/expiration. Lecture seule.', url:'https://rdap.org/domain/'},
+  mslogin:        {title:'login.microsoftonline.com', desc:'Endpoint public officiel Microsoft. Utilisé pour détecter le Tenant ID (OpenID Connect) et valider le GUID du tenant.', url:'https://login.microsoftonline.com/common/.well-known/openid-configuration'},
+  googleaccounts: {title:'accounts.google.com', desc:'Endpoint public officiel Google. Utilisé pour détecter Google Workspace via OpenID Connect (issuer, token & authorization endpoints). Lecture seule.', url:'https://accounts.google.com/.well-known/openid-configuration'},
 };
 
 // ── Dropdown ──
@@ -587,10 +677,25 @@ function toggleCollapsible(bodyId, arrowId) {
 
 // ── History ──
 const HISTORY_KEY = 'tenantIdHistory_v1';
+const HISTORY_OPT_KEY = 'tenantIdHistory_enabled';
+
+function isHistoryEnabled() {
+  try { return localStorage.getItem(HISTORY_OPT_KEY) === 'true'; } catch { return false; }
+}
+function setHistoryEnabled(val) {
+  try { localStorage.setItem(HISTORY_OPT_KEY, val ? 'true' : 'false'); } catch {}
+  syncHistoryToggleUI();
+  if (!val) { saveHistory([]); renderHistory(); }
+  else renderHistory();
+}
+function syncHistoryToggleUI() {
+  const sw = document.getElementById('historyOptSwitch');
+  if (sw) sw.classList.toggle('on', isHistoryEnabled());
+}
 function loadHistory()        { try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch { return []; } }
 function saveHistory(items)   { try { localStorage.setItem(HISTORY_KEY, JSON.stringify(items)); } catch {} }
 function addToHistory(domain, tenantId) {
-  if (!tenantId) return;
+  if (!tenantId || !isHistoryEnabled()) return;
   let items = loadHistory().filter(i => i.domain !== domain);
   items.unshift({ domain, tenantId, at: Date.now() });
   saveHistory(items.slice(0, 7));
@@ -605,18 +710,37 @@ function relativeTime(ts) {
   return Math.floor(s / 86400) + 'j';
 }
 function renderHistory() {
-  const list  = document.getElementById('historyList'); if (!list) return;
+  const list = document.getElementById('historyList'); if (!list) return;
+  list.textContent = '';
+  if (!isHistoryEnabled()) {
+    const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = 'Historique désactivé — activez-le dans Options'; list.appendChild(empty); return;
+  }
   const items = loadHistory();
-  if (!items.length) { list.innerHTML = '<div class="history-empty">Aucune analyse effectuée</div>'; return; }
-  list.innerHTML = items.map((item, i) => {
+  if (!items.length) {
+    const empty = document.createElement('div'); empty.className = 'history-empty'; empty.textContent = 'Aucune analyse effectuée'; list.appendChild(empty); return;
+  }
+  items.forEach((item) => {
     const shortGuid = item.tenantId ? item.tenantId.slice(0, 8) + '…' : '—';
-    return `<div class="history-item" onclick="loadFromHistory('${item.domain}','${item.tenantId||''}',${i})">
-      <span class="history-item-icon"><img src='Microsoft.png' width='14' height='14' alt='Microsoft' style='display:inline-block;vertical-align:middle;flex-shrink:0;'></span>
-      <div style="flex:1;min-width:0"><div class="history-item-domain">${item.domain}</div><div class="history-item-guid">${shortGuid}</div></div>
-      <span class="history-item-time">${relativeTime(item.at)}</span>
-      <button class="history-item-copy" onclick="event.stopPropagation();copyHistoryGuid('${item.tenantId}',this)">📋</button>
-    </div>`;
-  }).join('');
+    const row = document.createElement('div'); row.className = 'history-item';
+    row.addEventListener('click', () => loadFromHistory(item.domain));
+
+    const iconSpan = document.createElement('span'); iconSpan.className = 'history-item-icon';
+    const iconImg = document.createElement('img'); iconImg.src = 'Microsoft.png'; iconImg.width = 14; iconImg.height = 14; iconImg.alt = 'Microsoft'; iconImg.style.cssText = 'display:inline-block;vertical-align:middle;flex-shrink:0;';
+    iconSpan.appendChild(iconImg);
+
+    const textWrap = document.createElement('div'); textWrap.style.cssText = 'flex:1;min-width:0';
+    const domainEl = document.createElement('div'); domainEl.className = 'history-item-domain'; domainEl.textContent = item.domain;
+    const guidEl   = document.createElement('div'); guidEl.className   = 'history-item-guid';   guidEl.textContent   = shortGuid;
+    textWrap.appendChild(domainEl); textWrap.appendChild(guidEl);
+
+    const timeEl = document.createElement('span'); timeEl.className = 'history-item-time'; timeEl.textContent = relativeTime(item.at);
+
+    const copyBtn = document.createElement('button'); copyBtn.className = 'history-item-copy'; copyBtn.textContent = '📋';
+    copyBtn.addEventListener('click', e => { e.stopPropagation(); copyHistoryGuid(item.tenantId, copyBtn); });
+
+    row.appendChild(iconSpan); row.appendChild(textWrap); row.appendChild(timeEl); row.appendChild(copyBtn);
+    list.appendChild(row);
+  });
 }
 function loadFromHistory(domain) {
   emailInput.value = domain;
@@ -626,7 +750,7 @@ function loadFromHistory(domain) {
 function copyHistoryGuid(guid, btn) {
   navigator.clipboard.writeText(guid).then(() => { btn.textContent = '✅'; setTimeout(() => { btn.textContent = '📋'; }, 1500); });
 }
-window.addEventListener('load', renderHistory);
+window.addEventListener('load', () => { syncHistoryToggleUI(); renderHistory(); });
 
 // ── Panel ──
 let openCardId = null;
@@ -648,7 +772,8 @@ function openPanel(id, title, buildFn) {
   panel.classList.add('open');
 }
 function closePanel() {
-  document.getElementById('detailPanel').classList.remove('open');
+  const panel = document.getElementById('detailPanel');
+  panel.classList.remove('open');
   document.querySelectorAll('.result-card').forEach(c => c.className = c.className.replace(/\bsel-\w+\b|\bselected\b/g, '').trim());
   openCardId = null;
 }
@@ -663,10 +788,12 @@ function extractDomain(val) {
 }
 emailInput.addEventListener('input', () => {
   const d = extractDomain(emailInput.value) || 'domaine.com';
-  document.getElementById('endpointPreview').innerHTML = `https://login.microsoftonline.com/<span class="domain">${d}</span>/.well-known/openid-configuration`;
-  const raw    = emailInput.value.trim();
-  const btnMsa = document.getElementById('btnMsa');
-  btnMsa.href  = raw.includes('@') ? `https://login.live.com/login.srf?login_hint=${encodeURIComponent(raw)}` : 'https://login.live.com/login.srf';
+  const preview = document.getElementById('endpointPreview');
+  preview.textContent = '';
+  const pre = document.createTextNode('https://login.microsoftonline.com/');
+  const domSpan = document.createElement('span'); domSpan.className = 'domain'; domSpan.textContent = d;
+  const post = document.createTextNode('/.well-known/openid-configuration');
+  preview.appendChild(pre); preview.appendChild(domSpan); preview.appendChild(post);
 });
 emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') checkFast(); });
 
@@ -679,7 +806,7 @@ const STEP_LABELS = {
   dns:    { active:'Récupération DNS…',            done:'DNS ✓',              fail:'DNS — Vide',                   timeout:'DNS — Annulé' },
   health: { active:'Vérification DKIM/DMARC…',    done:'Sécurité analysée ✓',fail:'Sécurité — Partiel',           timeout:'Sécurité — Annulé' },
   others: { active:'Détection services…',          done:'Autres services ✓',  fail:'Services — Partiel',           timeout:'Services — Annulé' },
-  dup:    { active:'Vérification doublon MSA…',    done:'Doublon vérifié ✓',  fail:'Doublon — Non vérifié',        timeout:'Doublon MSA — Annulé' },
+  dup:    { active:'Vérification doublon…',        done:'Doublon vérifié ✓',  fail:'Doublon — Non vérifié',        timeout:'Doublon — Annulé' },
   host:   { active:'Recherche hébergeur (WHOIS)…', done:'Hébergeur trouvé ✓', fail:'Hébergeur — Non trouvé',       timeout:'Hébergeur — Annulé' },
 };
 function setStep(id, state, label) {
@@ -884,64 +1011,36 @@ async function checkHealth(domain) {
 
 async function checkOtherTenants(domain, dns) {
   const t  = [], ms = (dns.mx || []).join(' ').toLowerCase(), ss = (dns.spf || '').toLowerCase(), ts = (dns.txt || []).join(' ').toLowerCase();
-  const L  = (f, n) => `<img class="svc-logo" src="${f}" alt="${n}" loading="lazy">`;
 
   // Messagerie & sécurité email
-  t.push({ name:'Google Workspace', icon:L('google.png','Google Workspace'),         on: ms.includes('google.com') || ms.includes('googlemail.com') });
-  t.push({ name:'Mailinblack',      icon:L('mailinblack.jpeg','Mailinblack'),         on: ms.includes('mailinblack') || ss.includes('mailinblack') });
-  t.push({ name:'Mimecast',         icon:L('Mimecast.png','Mimecast'),               on: ms.includes('mimecast') || ss.includes('mimecast') });
-  t.push({ name:'Proofpoint',       icon:L('Proofpoint.png','Proofpoint'),           on: ms.includes('pphosted') || ms.includes('proofpoint') || ss.includes('proofpoint') });
-  t.push({ name:'Vade Secure',      icon:L('Vade.png','Vade Secure'),                on: ms.includes('vadecloud') || ms.includes('vadesecure') || ss.includes('vadecloud') });
-  t.push({ name:'Barracuda',        icon:L('Barracuda.png','Barracuda'),             on: ms.includes('barracudanetworks') || ss.includes('barracudanetworks') });
-  t.push({ name:'Hornetsecurity',   icon:L('Hornetsecurity.png','Hornetsecurity'),   on: ms.includes('hornetsecurity') || ss.includes('hornetsecurity') });
-  t.push({ name:'Brevo',            icon:L('Brevo.jpeg','Brevo'),                     on: ss.includes('brevo') || ss.includes('sendinblue') || ms.includes('sendinblue') });
-  t.push({ name:'Mailjet',          icon:L('Mailjet.png','Mailjet'),                 on: ss.includes('mailjet') || (await dnsQuery(`mailjet._domainkey.${domain}`, 'TXT')).length > 0 });
-  t.push({ name:'SendGrid',         icon:L('SendGrid.png','SendGrid'),               on: ss.includes('sendgrid') || (await dnsQuery(`s1._domainkey.${domain}`, 'CNAME')).length > 0 });
-  t.push({ name:'Postmark',         icon:L('Postmark.png','Postmark'),               on: ss.includes('spf.mtasv') || ss.includes('postmarkapp') });
+  t.push({ name:'Google Workspace', imgSrc:'google.png',          on: ms.includes('google.com') || ms.includes('googlemail.com') });
+  t.push({ name:'Mailinblack',      imgSrc:'mailinblack.jpeg',    on: ms.includes('mailinblack') || ss.includes('mailinblack') });
+  t.push({ name:'Mimecast',         imgSrc:'Mimecast.png',        on: ms.includes('mimecast') || ss.includes('mimecast') });
+  t.push({ name:'Proofpoint',       imgSrc:'Proofpoint.png',      on: ms.includes('pphosted') || ms.includes('proofpoint') || ss.includes('proofpoint') });
+  t.push({ name:'Vade Secure',      imgSrc:'Vade.png',            on: ms.includes('vadecloud') || ms.includes('vadesecure') || ss.includes('vadecloud') });
+  t.push({ name:'Barracuda',        imgSrc:'Barracuda.png',       on: ms.includes('barracudanetworks') || ss.includes('barracudanetworks') });
+  t.push({ name:'Hornetsecurity',   imgSrc:'Hornetsecurity.png',  on: ms.includes('hornetsecurity') || ss.includes('hornetsecurity') });
+  t.push({ name:'Brevo',            imgSrc:'Brevo.jpeg',          on: ss.includes('brevo') || ss.includes('sendinblue') || ms.includes('sendinblue') });
+  t.push({ name:'Mailjet',          imgSrc:'Mailjet.png',         on: ss.includes('mailjet') || (await dnsQuery(`mailjet._domainkey.${domain}`, 'TXT')).length > 0 });
+  t.push({ name:'SendGrid',         imgSrc:'SendGrid.png',        on: ss.includes('sendgrid') || (await dnsQuery(`s1._domainkey.${domain}`, 'CNAME')).length > 0 });
+  t.push({ name:'Postmark',         imgSrc:'Postmark.png',        on: ss.includes('spf.mtasv') || ss.includes('postmarkapp') });
 
   // CRM & SaaS
   const odoo = ts.includes('odoo') || ss.includes('odoo') || ms.includes('odoo') || (await dnsQuery(`odoo.${domain}`, 'CNAME')).length > 0;
-  t.push({ name:'Odoo',             icon:L('Odoo.png','Odoo'),                       on: odoo });
-  t.push({ name:'Salesforce',       icon:L('Salesforce.png','Salesforce'),           on: ts.includes('salesforce') || ss.includes('salesforce') });
+  t.push({ name:'Odoo',             imgSrc:'Odoo.png',            on: odoo });
+  t.push({ name:'Salesforce',       imgSrc:'Salesforce.png',      on: ts.includes('salesforce') || ss.includes('salesforce') });
   const hs = ts.includes('hubspot') || ss.includes('hubspot') || (await dnsQuery(`hs1._domainkey.${domain}`, 'CNAME')).length > 0;
-  t.push({ name:'HubSpot',          icon:L('HubSpot.png','HubSpot'),                 on: hs });
-  t.push({ name:'Zendesk',          icon:L('Zendesk.png','Zendesk'),                 on: ts.includes('zendesk') || ss.includes('zendesk') });
-  t.push({ name:'Slack',            icon:L('Slack.png','Slack'),                     on: ts.includes('slack') || ss.includes('slack-mail') });
+  t.push({ name:'HubSpot',          imgSrc:'HubSpot.png',         on: hs });
+  t.push({ name:'Zendesk',          imgSrc:'Zendesk.png',         on: ts.includes('zendesk') || ss.includes('zendesk') });
+  t.push({ name:'Slack',            imgSrc:'Slack.png',           on: ts.includes('slack') || ss.includes('slack-mail') });
   const atl = ts.includes('atlassian') || !!(dns.txt || []).find(x => x.toLowerCase().includes('atlassian-domain-verification'));
-  t.push({ name:'Atlassian',        icon:L('Atlassian.png','Atlassian'),             on: atl });
-  t.push({ name:'Amazon SES',       icon:L('Amazon.png','Amazon SES'),               on: ss.includes('amazonses') || ms.includes('amazonses') });
+  t.push({ name:'Atlassian',        imgSrc:'Atlassian.png',       on: atl });
+  t.push({ name:'Amazon SES',       imgSrc:'Amazon.png',          on: ss.includes('amazonses') || ms.includes('amazonses') });
   return t;
 }
 
 const MSA_DOMAINS = new Set(['outlook.com','outlook.fr','outlook.be','outlook.es','outlook.de','outlook.it','outlook.co.uk','outlook.jp','outlook.pt','outlook.dk','outlook.at','outlook.ch','hotmail.com','hotmail.fr','hotmail.be','hotmail.es','hotmail.de','hotmail.it','hotmail.co.uk','hotmail.nl','hotmail.pt','hotmail.dk','hotmail.se','hotmail.no','live.com','live.fr','live.be','live.nl','live.co.uk','live.de','live.it','live.es','live.se','live.dk','live.no','live.ca','live.com.au','msn.com','passport.com','windowslive.com']);
 const isMsaPersonalDomain = d => MSA_DOMAINS.has(d.toLowerCase());
-
-async function checkDuplicate(email) {
-  const domain = extractDomain(email);
-  if (isMsaPersonalDomain(domain)) return { hasPersonal:true, isNativelyPersonal:true, hasFreeAccount:false, details:[`${domain} est un domaine Microsoft grand public`] };
-  let hasPersonal = false, hasFreeAccount = false; const details = [];
-  try {
-    const r = await fetchJson(`https://login.microsoftonline.com/common/userrealm/?user=${encodeURIComponent(email)}&api-version=2.1`);
-    if (r) { const at = (r.account_type || '').toLowerCase(); if (at === 'consumer' || r.NameSpaceType === 'Consumer') hasPersonal = true; }
-  } catch {}
-  try {
-    const body = JSON.stringify({ username:email, isOtherIdpSupported:true, checkPhones:false, isRemoteNGCSupported:true, isCookieBannerShown:false, isFidoSupported:true, originalRequest:'', country:'FR', forceotclogin:false, isExternalFederationDisallowed:false, isRemoteConnectSupported:false, federationFlags:0, isSignup:false, flowToken:'' });
-    const res  = await fetch('https://login.microsoftonline.com/common/GetCredentialType', { method:'POST', headers:{'Content-Type':'application/json'}, body, signal:AbortSignal.timeout(8000) });
-    if (res.ok) {
-      const d  = await res.json();
-      const ie = d.IfExistsResult;
-      if (ie === 5)  { hasPersonal = true; details.push('Compte MSA personnel confirmé'); }
-      if (ie === 0 && d.Credentials?.PrefCredential === 3) { hasPersonal = true; details.push('Credential préféré : MSA personnel'); }
-      if ((ie === 0 || ie === 5) && !d.EstsProperties?.UserTenantBranding) { hasFreeAccount = true; details.push('Compte Microsoft gratuit détecté'); }
-      if (d.FederationRedirectUrl?.includes('live.com')) { hasFreeAccount = true; details.push('Redirection login.live.com détectée'); }
-    }
-  } catch {}
-  try {
-    const r2 = await fetchJson(`https://login.microsoftonline.com/consumers/userrealm/?user=${encodeURIComponent(email)}&api-version=2.1`);
-    if (r2?.NameSpaceType && r2.NameSpaceType !== 'Unknown') { hasPersonal = true; hasFreeAccount = true; details.push('Trouvé dans le realm consumers'); }
-  } catch {}
-  return { hasPersonal: hasPersonal || hasFreeAccount, hasFreeAccount, isNativelyPersonal:false, details };
-}
 
 async function checkHost(domain) {
   function parseRdap(r) {
@@ -1055,21 +1154,28 @@ const HOST_LOGO_MAP = {
   cloudns:          {domain:'cloudns.net',            color:'#2196F3', label:'CN'},
 };
 
+function _hostInitial(letter, color) {
+  const s = document.createElement('span');
+  s.style.cssText = `display:inline-flex;width:22px;height:22px;border-radius:4px;background:${color};color:#fff;font-size:9px;font-weight:500;align-items:center;justify-content:center`;
+  s.textContent = letter;
+  return s;
+}
+
 function hostLogo(hostName) {
-  if (!hostName) return { html: _hostInitial('?', '#9ca3af'), imgUrl: null };
+  if (!hostName) return { el: _hostInitial('?', '#9ca3af'), imgUrl: null };
   const l = hostName.toLowerCase();
   for (const [key, val] of Object.entries(HOST_LOGO_MAP)) {
     if (l.includes(key)) {
-      const fid        = 'hlogo_' + Math.random().toString(36).slice(2);
-      const faviconUrl = `https://www.google.com/s2/favicons?domain=${val.domain}&sz=64`;
-      const html       = `<img src="${faviconUrl}" style="width:22px;height:22px;object-fit:contain;border-radius:4px" onerror="this.style.display='none';document.getElementById('${fid}').style.display='flex'" alt="${val.label}"><span id="${fid}" style="display:none;width:22px;height:22px;border-radius:4px;background:${val.color};color:#fff;font-size:8px;font-weight:800;align-items:center;justify-content:center">${val.label}</span>`;
-      return { html, imgUrl: faviconUrl };
+      const fid = 'hlogo_' + Math.random().toString(36).slice(2);
+      const wrap = document.createElement('span'); wrap.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px';
+      const img = document.createElement('img'); img.src = `https://www.google.com/s2/favicons?domain=${val.domain}&sz=64`; img.style.cssText = 'width:22px;height:22px;object-fit:contain;border-radius:4px'; img.alt = val.label; img.loading = 'lazy';
+      const fallback = _hostInitial(val.label.slice(0,2), val.color); fallback.id = fid; fallback.style.display = 'none';
+      img.onerror = () => { img.style.display = 'none'; fallback.style.display = 'inline-flex'; };
+      wrap.appendChild(img); wrap.appendChild(fallback);
+      return { el: wrap, imgUrl: img.src };
     }
   }
-  return { html: _hostInitial(hostName[0]?.toUpperCase() || '?', '#6b7280'), imgUrl: null };
-}
-function _hostInitial(letter, color) {
-  return `<span style="display:inline-flex;width:22px;height:22px;border-radius:4px;background:${color};color:#fff;font-size:9px;font-weight:800;align-items:center;justify-content:center">${letter}</span>`;
+  return { el: _hostInitial(hostName[0]?.toUpperCase() || '?', '#6b7280'), imgUrl: null };
 }
 
 const MS_SVG = `<img src="Microsoft.png" width="22" height="22" alt="Microsoft" style="object-fit:contain;border-radius:3px;">`;
@@ -1081,7 +1187,15 @@ function addRow(b, label, value, hiClass = '') {
   const id  = 'rv_' + Math.random().toString(36).slice(2);
   const row = document.createElement('div');
   row.className = 'd-row' + (hiClass ? ' ' + hiClass : '');
-  row.innerHTML = `<div class="d-label">${label}</div><div class="d-value"><span id="${id}" style="flex:1">${value.replace(/\n/g, '<br>')}</span><button class="copy-btn" onclick="copyVal('${id}',this)">Copier</button></div>`;
+  const lbl = document.createElement('div'); lbl.className = 'd-label'; lbl.textContent = label;
+  const val = document.createElement('div'); val.className = 'd-value';
+  const sp  = document.createElement('span'); sp.id = id; sp.style.flex = '1';
+  // newlines → <br> but safe
+  String(value).split('\n').forEach((line, i) => { if (i > 0) sp.appendChild(document.createElement('br')); sp.appendChild(document.createTextNode(line)); });
+  const btn = document.createElement('button'); btn.className = 'copy-btn'; btn.textContent = 'Copier';
+  btn.addEventListener('click', () => copyVal(id, btn));
+  val.appendChild(sp); val.appendChild(btn);
+  row.appendChild(lbl); row.appendChild(val);
   b.appendChild(row);
 }
 function addSectionTitle(b, title) {
@@ -1102,9 +1216,28 @@ function buildScoreRing(score, dmarcIsQuarantine) {
   const lbl    = score >= 80 ? 'Excellent' : score >= 60 ? 'Bon' : score >= 40 ? 'Moyen' : 'Faible';
   const lblClr = score < 40 ? '#dc2626' : score < 70 ? '#b45309' : '#15803d';
   const bg     = score < 40 ? '#1A1010' : score < 70 ? '#12100C' : '#0C120C';
-  const star   = dmarcIsQuarantine ? '<div style="font-size:9.5px;font-weight:700;color:#b45309;margin-top:3px">⭐ DMARC p=quarantine — score plein, p=reject recommandé</div>' : '';
+
   const el = document.createElement('div'); el.className = 'score-block'; el.style.background = bg; el.style.borderColor = color + '44';
-  el.innerHTML = `<div class="score-ring"><svg viewBox="0 0 54 54"><circle class="trk" cx="27" cy="27" r="${r}"/><circle class="fll" cx="27" cy="27" r="${r}" stroke="${color}" stroke-dasharray="${circ}" stroke-dashoffset="${offset}"/></svg><div class="lbl">${score}%${dmarcIsQuarantine ? '<span style="font-size:8px">⭐</span>' : ''}</div></div><div class="score-info"><div class="score-title" style="color:${lblClr}">Sécurité : ${lbl}</div><div class="score-desc">MX · SPF · DMARC · DKIM · DNSSEC · MTA-STS · BIMI</div>${star}</div>`;
+
+  // Ring
+  const NS = 'http://www.w3.org/2000/svg';
+  const ring = document.createElement('div'); ring.className = 'score-ring';
+  const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('viewBox', '0 0 54 54');
+  const trk = document.createElementNS(NS, 'circle'); trk.setAttribute('class','trk'); trk.setAttribute('cx','27'); trk.setAttribute('cy','27'); trk.setAttribute('r', String(r));
+  const fll = document.createElementNS(NS, 'circle'); fll.setAttribute('class','fll'); fll.setAttribute('cx','27'); fll.setAttribute('cy','27'); fll.setAttribute('r', String(r)); fll.setAttribute('stroke', color); fll.setAttribute('stroke-dasharray', String(circ)); fll.setAttribute('stroke-dashoffset', String(offset));
+  svg.appendChild(trk); svg.appendChild(fll);
+  const lbl_el = document.createElement('div'); lbl_el.className = 'lbl'; lbl_el.textContent = score + '%';
+  if (dmarcIsQuarantine) { const star = document.createElement('span'); star.style.fontSize = '8px'; star.textContent = '⭐'; lbl_el.appendChild(star); }
+  ring.appendChild(svg); ring.appendChild(lbl_el);
+
+  // Info
+  const info = document.createElement('div'); info.className = 'score-info';
+  const title = document.createElement('div'); title.className = 'score-title'; title.style.color = lblClr; title.textContent = 'Sécurité : ' + lbl;
+  const desc  = document.createElement('div'); desc.className  = 'score-desc';  desc.textContent  = 'MX · SPF · DMARC · DKIM · DNSSEC · MTA-STS · BIMI';
+  info.appendChild(title); info.appendChild(desc);
+  if (dmarcIsQuarantine) { const star = document.createElement('div'); star.style.cssText = 'font-size:9.5px;font-weight:500;color:#b45309;margin-top:3px'; star.textContent = '⭐ DMARC p=quarantine — score plein, p=reject recommandé'; info.appendChild(star); }
+
+  el.appendChild(ring); el.appendChild(info);
   return el;
 }
 
@@ -1117,55 +1250,97 @@ function buildDkimBlock(b, dkimResults, hasSel1, hasSel2) {
     const isPri   = priority.includes(sel);
     const shortV  = val && val.length > 100 ? val.slice(0, 100) + '…' : val;
     const div     = document.createElement('div'); div.className = 'dkim-detail';
-    div.innerHTML = `<div class="dkim-detail-head"><span style="font-size:10.5px;font-weight:800;color:var(--text)">${sel}._domainkey${isPri ? ' <span style="font-size:8px;color:#0078d4;font-weight:700">[MS365]</span>' : ''}</span><span class="dkim-sel-badge ${present ? '' : 'absent'}">${present ? '✅ Présent' : '❌ Absent'}</span></div>${present ? `<div class="dkim-val">${shortV}</div>` : ''}`;
+    // Header row
+    const head = document.createElement('div'); head.className = 'dkim-detail-head';
+    const selLbl = document.createElement('span'); selLbl.style.cssText = 'font-size:10.5px;font-weight:500;color:var(--text)';
+    selLbl.textContent = sel + '._domainkey';
+    if (isPri) { const tag = document.createElement('span'); tag.style.cssText = 'font-size:8px;color:#0078d4;font-weight:500;margin-left:4px'; tag.textContent = '[MS365]'; selLbl.appendChild(tag); }
+    const badge = document.createElement('span'); badge.className = 'dkim-sel-badge' + (present ? '' : ' absent'); badge.textContent = present ? '✅ Présent' : '❌ Absent';
+    head.appendChild(selLbl); head.appendChild(badge);
+    div.appendChild(head);
+    if (present && shortV) { const dv = document.createElement('div'); dv.className = 'dkim-val'; dv.textContent = shortV; div.appendChild(dv); }
     b.appendChild(div);
   }
 }
 
-function makeCard({ id, iconHtml, iconBg, title, sub, badge, badgeCls, selCls, onClick }) {
+function makeCard({ id, iconHtml, iconEl, iconBg, title, sub, badge, badgeCls, selCls, onClick }) {
   const card = document.createElement('div');
   card.className = 'result-card'; card.id = 'card-' + id; card.dataset.selClass = selCls;
-  card.innerHTML = `<div class="card-row"><div class="card-left"><div class="card-icon-wrap ${iconBg}">${iconHtml}</div><div><div class="card-title">${title}</div><div class="card-sub">${sub}</div></div></div>${badge ? `<span class="card-badge ${badgeCls}">${badge}</span>` : ''}<span class="card-chevron">›</span></div>`;
+  const row = document.createElement('div'); row.className = 'card-row';
+  const left = document.createElement('div'); left.className = 'card-left';
+  const iconWrap = document.createElement('div'); iconWrap.className = 'card-icon-wrap ' + iconBg;
+  if (iconEl) { iconWrap.appendChild(iconEl); }
+  else if (iconHtml) { iconWrap.innerHTML = iconHtml; } // only hardcoded strings reach here
+  const textWrap = document.createElement('div');
+  const titleEl = document.createElement('div'); titleEl.className = 'card-title'; titleEl.textContent = title;
+  const subEl   = document.createElement('div'); subEl.className   = 'card-sub';   subEl.textContent   = sub;
+  textWrap.appendChild(titleEl); textWrap.appendChild(subEl);
+  left.appendChild(iconWrap); left.appendChild(textWrap);
+  row.appendChild(left);
+  if (badge) { const b = document.createElement('span'); b.className = 'card-badge ' + badgeCls; b.textContent = badge; row.appendChild(b); }
+  const chev = document.createElement('span'); chev.className = 'card-chevron'; chev.textContent = '›';
+  row.appendChild(chev);
+  card.appendChild(row);
   card.addEventListener('click', onClick);
   return card;
 }
 
 // ── Hero renderer ──
-function renderHero(center, ms, dup, domain, raw, confidence) {
-  const hero   = document.createElement('div'); hero.className = 'tenant-hero';
-  const msLogo = `<img src='Microsoft.png' width='14' height='14' alt='Microsoft' style='display:inline-block;vertical-align:middle;flex-shrink:0;opacity:.85;'>`;
+function renderHero(center, ms, domain, raw, confidence) {
+  const hero = document.createElement('div'); hero.className = 'tenant-hero';
+  const msLogoEl = () => { const i = document.createElement('img'); i.src='Microsoft.png'; i.width=14; i.height=14; i.alt='Microsoft'; i.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;opacity:.85;'; return i; };
 
-  if (!ms && dup?.isNativelyPersonal) {
-    hero.style.background = 'linear-gradient(135deg,#1e3a5f 0%,#0078d4 100%)';
-    hero.innerHTML = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Compte Microsoft Personnel</span></div><div class="hero-none">${domain} — domaine Microsoft grand public</div><div class="hero-domain">${raw}</div>`;
-    hero.appendChild(Object.assign(document.createElement('div'), { className:'dup-alert info', innerHTML:`<div class="dup-icon">ℹ️</div><div class="dup-body"><div class="dup-title">Adresse personnelle Microsoft (MSA)</div><div class="dup-desc">Pas de tenant professionnel.</div></div>` }));
-  } else if (!ms && dup?.hasFreeAccount) {
-    hero.style.background = 'linear-gradient(135deg,#1c2a3a 0%,#1d4ed8 60%,#2563eb 100%)';
-    hero.innerHTML = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Aucun Tenant Microsoft 365 Pro</span></div><div class="hero-none">Pas de Microsoft 365 professionnel pour ce domaine</div><div class="hero-domain">${domain}</div>`;
-    hero.appendChild(Object.assign(document.createElement('div'), { className:'dup-alert warn', innerHTML:`<div class="dup-icon">⚠️</div><div class="dup-body"><div class="dup-title">Compte Microsoft gratuit détecté</div><div class="dup-desc">${raw} possède un compte MSA gratuit mais aucun tenant 365 pro.</div></div>` }));
-  } else if (!ms) {
+  const mkLabel = (text) => {
+    const d = document.createElement('div'); d.className = 'hero-label';
+    const s = document.createElement('span'); s.style.cssText = 'display:inline-flex;align-items:center;gap:5px;';
+    s.appendChild(msLogoEl()); s.appendChild(document.createTextNode(' ' + text));
+    d.appendChild(s); return d;
+  };
+  const mkDomain = () => { const d = document.createElement('div'); d.className = 'hero-domain'; d.textContent = domain; return d; };
+
+  if (!ms) {
     hero.style.background = 'linear-gradient(135deg,#374151 0%,#4b5563 100%)';
-    hero.innerHTML = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft 365</span></div><div class="hero-none">Aucun tenant Microsoft 365 détecté pour ce domaine</div><div class="hero-domain">${domain}</div>`;
+    hero.appendChild(mkLabel('Microsoft 365'));
+    const none = document.createElement('div'); none.className = 'hero-none'; none.textContent = 'Aucun tenant Microsoft 365 détecté pour ce domaine';
+    hero.appendChild(none); hero.appendChild(mkDomain());
   } else if (ms.tenantId && !ms.tenantValid) {
-    hero.innerHTML = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft Tenant ID</span></div><div class="hero-guid" style="opacity:.45;text-decoration:line-through;font-size:15px"><span>${ms.tenantId}</span></div><div class="hero-domain">${domain}</div>`;
-    hero.appendChild(Object.assign(document.createElement('div'), { className:'dup-alert warn', innerHTML:`<div class="dup-icon">⚠️</div><div class="dup-body"><div class="dup-title">Tenant ID invalide</div><div class="dup-desc">Le GUID ne correspond pas à un tenant 365 actif.</div></div>` }));
+    hero.appendChild(mkLabel('Microsoft Tenant ID'));
+    const guid = document.createElement('div'); guid.className = 'hero-guid'; guid.style.cssText = 'opacity:.45;text-decoration:line-through;font-size:15px';
+    const sp = document.createElement('span'); sp.textContent = ms.tenantId; guid.appendChild(sp);
+    hero.appendChild(guid); hero.appendChild(mkDomain());
+    const alert = document.createElement('div'); alert.className = 'dup-alert warn';
+    const ico = document.createElement('div'); ico.className = 'dup-icon'; ico.textContent = '⚠️';
+    const body = document.createElement('div'); body.className = 'dup-body';
+    const t = document.createElement('div'); t.className = 'dup-title'; t.textContent = 'Tenant ID invalide';
+    const desc = document.createElement('div'); desc.className = 'dup-desc'; desc.textContent = 'Le GUID ne correspond pas à un tenant 365 actif.';
+    body.appendChild(t); body.appendChild(desc); alert.appendChild(ico); alert.appendChild(body);
+    hero.appendChild(alert);
   } else {
-    const hid       = 'tid_' + Math.random().toString(36).slice(2);
+    const hid = 'tid_' + Math.random().toString(36).slice(2);
     const confClass = confidence >= 80 ? 'high' : confidence >= 50 ? 'medium' : 'low';
     const confLabel = confidence >= 80 ? 'Confiance élevée' : confidence >= 50 ? 'Confiance moyenne' : 'Confiance faible';
-    hero.innerHTML  = `<div class="hero-label"><span style="display:inline-flex;align-items:center;gap:5px;">${msLogo} Microsoft Tenant ID</span></div>${ms.tenantId ? `<div class="hero-guid"><span id="${hid}">${ms.tenantId}</span><button class="hero-copy-btn" onclick="copyVal('${hid}',this)">Copier</button><span class="confidence-badge ${confClass}">${confidence}% — ${confLabel}</span></div>` : `<div class="hero-none">GUID non résolu — domaine Microsoft détecté</div>`}<div class="hero-domain">${domain}</div>`;
+    hero.appendChild(mkLabel('Microsoft Tenant ID'));
+    if (ms.tenantId) {
+      const guid = document.createElement('div'); guid.className = 'hero-guid';
+      const sp = document.createElement('span'); sp.id = hid; sp.textContent = ms.tenantId;
+      const copyBtn = document.createElement('button'); copyBtn.className = 'hero-copy-btn'; copyBtn.textContent = 'Copier';
+      copyBtn.addEventListener('click', () => copyVal(hid, copyBtn));
+      const badge = document.createElement('span'); badge.className = 'confidence-badge ' + confClass;
+      badge.textContent = confidence + '% — ' + confLabel;
+      guid.appendChild(sp); guid.appendChild(copyBtn); guid.appendChild(badge);
+      hero.appendChild(guid);
+    } else {
+      const none = document.createElement('div'); none.className = 'hero-none'; none.textContent = 'GUID non résolu — domaine Microsoft détecté';
+      hero.appendChild(none);
+    }
+    hero.appendChild(mkDomain());
     if (ms.tenantId && ms.tenantValid) {
       const a = document.createElement('a');
-      a.className = 'hero-partner-btn'; a.href = `https://partner.microsoft.com/dashboard/v2/customers/${ms.tenantId}/servicemanagementpage`; a.target = '_blank'; a.rel = 'noopener';
-      a.innerHTML = '<img src="Redirect.png" width="11" height="11" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;">Ouvrir Partner Center';
+      a.className = 'hero-partner-btn'; a.href = `https://partner.microsoft.com/dashboard/v2/customers/${encodeURIComponent(ms.tenantId)}/servicemanagementpage`; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      const img = document.createElement('img'); img.src='Redirect.png'; img.width=11; img.height=11; img.alt=''; img.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;';
+      a.appendChild(img); a.appendChild(document.createTextNode('Ouvrir Partner Center'));
       const actions = document.createElement('div'); actions.className = 'hero-actions'; actions.appendChild(a);
       hero.appendChild(actions);
-    }
-    if (dup) {
-      let ac = 'ok', ai = '✅', at = 'Aucun doublon MSA', ad = `Aucun compte Microsoft personnel pour ${raw}.`;
-      if (dup.hasFreeAccount)  { ac = 'warn'; ai = '⚠️'; at = 'Compte Microsoft gratuit détecté'; ad = `${raw} possède un compte MSA gratuit — risque de conflit de connexion.`; }
-      else if (dup.hasPersonal){ ac = 'warn'; ai = '⚠️'; at = 'Doublon MSA détecté';               ad = `${raw} a aussi un compte Microsoft personnel.`; }
-      hero.appendChild(Object.assign(document.createElement('div'), { className:`dup-alert ${ac}`, innerHTML:`<div class="dup-icon">${ai}</div><div class="dup-body"><div class="dup-title">${at}</div><div class="dup-desc">${ad}</div></div>` }));
     }
   }
   return hero;
@@ -1281,14 +1456,6 @@ function exportReport() {
     }
   }
 
-  // ── MSA conflict ──
-  if (r.duplicate?.hasPersonal) {
-    lines.push(section('Account Risk'));
-    lines.push('  [!]  MSA personal account conflict detected');
-    if (r.duplicate.hasFreeAccount)
-      lines.push('        Free Microsoft account found \u2014 login conflict risk');
-  }
-
   // ── Other services ──
   const active = (r.otherServices || []).filter(s => s.on);
   if (active.length) {
@@ -1305,12 +1472,12 @@ function exportReport() {
   const text = lines.join('\n'), btn = document.getElementById('exportBtn');
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = '✅ Rapport copié !';
-    setTimeout(() => { btn.innerHTML = '📋 Copier le rapport'; }, 2000);
+    setTimeout(() => { btn.textContent = '📋 Copier le rapport'; }, 2000);
   }).catch(() => {
     const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
     document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
     btn.textContent = '✅ Rapport copié !';
-    setTimeout(() => { btn.innerHTML = '📋 Copier le rapport'; }, 2000);
+    setTimeout(() => { btn.textContent = '📋 Copier le rapport'; }, 2000);
   });
 }
 
@@ -1337,24 +1504,41 @@ function buildHostPanel(host, domain) {
   return b => {
     const logo = hostLogo(host.hostName);
     const sum  = document.createElement('div'); sum.className = 'host-summary';
-    sum.innerHTML = `<div class="host-logo">${logo.html}</div><div><div class="host-name">${host.hostName || 'Inconnu'}</div><div class="host-sub">${host.registrar || 'Registrar non disponible'}</div></div>`;
+    const logoDiv = document.createElement('div'); logoDiv.className = 'host-logo'; logoDiv.appendChild(logo.el);
+    const info = document.createElement('div');
+    const nameEl = document.createElement('div'); nameEl.className = 'host-name'; nameEl.textContent = host.hostName || 'Inconnu';
+    const subEl  = document.createElement('div'); subEl.className  = 'host-sub';  subEl.textContent  = host.registrar || 'Registrar non disponible';
+    info.appendChild(nameEl); info.appendChild(subEl);
+    sum.appendChild(logoDiv); sum.appendChild(info);
     b.appendChild(sum);
     if (host.ns?.length)    addRow(b, 'Serveurs de noms (NS)', host.ns.join('\n'));
     if (host.created)       addRow(b, 'Date de création',      formatDate(host.created));
     if (host.expires)       addRow(b, "Date d'expiration",     formatDate(host.expires));
     if (host.updated)       addRow(b, 'Dernière mise à jour',  formatDate(host.updated));
     if (host.status?.length)addRow(b, 'Statut WHOIS',          host.status.join(', '));
-    const lnk = document.createElement('a'); lnk.className = 'ext-link'; lnk.href = `https://www.whois.com/whois/${domain}`; lnk.target = '_blank'; lnk.rel = 'noopener'; lnk.innerHTML = `🔗 WHOIS complet — <strong>${domain}</strong>`; b.appendChild(lnk);
+    const lnk = document.createElement('a'); lnk.className = 'ext-link'; lnk.href = `https://www.whois.com/whois/${encodeURIComponent(domain)}`; lnk.target = '_blank'; lnk.rel = 'noopener noreferrer';
+    const lnkIcon = document.createTextNode('🔗 WHOIS complet — '); const lnkStrong = document.createElement('strong'); lnkStrong.textContent = domain;
+    lnk.appendChild(lnkIcon); lnk.appendChild(lnkStrong); b.appendChild(lnk);
   };
 }
 function buildHealthPanel(health, domain) {
   return b => {
     b.appendChild(buildScoreRing(health.score, health.dmarcIsQuarantine));
     const hcl = document.createElement('div'); hcl.className = 'hc-list';
-    health.checks.forEach(c => { const it = document.createElement('div'); it.className = 'hc-item ' + c.t; it.innerHTML = `<div class="hc-icon">${c.icon}</div><div class="hc-body"><div class="hc-title">${c.title}</div><div class="hc-desc">${c.desc}</div></div>`; hcl.appendChild(it); });
+    health.checks.forEach(c => {
+      const it = document.createElement('div'); it.className = 'hc-item ' + c.t;
+      const ico = document.createElement('div'); ico.className = 'hc-icon'; ico.textContent = c.icon;
+      const body = document.createElement('div'); body.className = 'hc-body';
+      const ttl = document.createElement('div'); ttl.className = 'hc-title'; ttl.textContent = c.title;
+      const dsc = document.createElement('div'); dsc.className = 'hc-desc';  dsc.textContent = c.desc;
+      body.appendChild(ttl); body.appendChild(dsc); it.appendChild(ico); it.appendChild(body);
+      hcl.appendChild(it);
+    });
     b.appendChild(hcl);
     buildDkimBlock(b, health.dkimResults, health.hasSel1, health.hasSel2);
-    const lnk = document.createElement('a'); lnk.className = 'ext-link'; lnk.href = `https://mxtoolbox.com/SuperTool.aspx?action=mx:${domain}`; lnk.target = '_blank'; lnk.rel = 'noopener'; lnk.innerHTML = `🔗 Analyse complète sur MXToolbox — <strong>${domain}</strong>`; b.appendChild(lnk);
+    const lnk = document.createElement('a'); lnk.className = 'ext-link'; lnk.href = `https://mxtoolbox.com/SuperTool.aspx?action=mx:${encodeURIComponent(domain)}`; lnk.target = '_blank'; lnk.rel = 'noopener';
+    const lnkIcon = document.createTextNode('🔗 Analyse complète sur MXToolbox — '); const lnkStrong = document.createElement('strong'); lnkStrong.textContent = domain;
+    lnk.appendChild(lnkIcon); lnk.appendChild(lnkStrong); b.appendChild(lnk);
   };
 }
 
@@ -1400,10 +1584,10 @@ async function checkFast() {
     document.getElementById('progList').style.display = 'none';
     currentState.fastDone = true;
     const confidence = computeConfidence(currentState.ms);
-    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: null, otherServices: null, duplicate: null, host: null, tenantConfidence: confidence, fullDone: false };
+    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: null, otherServices: null, host: null, tenantConfidence: confidence, fullDone: false };
     exportBtn.classList.add('visible');
     if (currentState.ms?.tenantId && currentState.ms.tenantValid) addToHistory(domain, currentState.ms.tenantId);
-    center.appendChild(renderHero(center, currentState.ms, null, domain, raw, confidence));
+    center.appendChild(renderHero(center, currentState.ms, domain, raw, confidence));
     if (currentState.dns?.detectedProviders?.length) {
       const pb = document.createElement('div'); pb.className = 'pills-block';
       const pl = document.createElement('div'); pl.className = 'pills-label'; pl.textContent = 'Providers e-mail détectés (DNS)';
@@ -1419,7 +1603,16 @@ async function checkFast() {
     const dnsRowCount = [currentState.dns?.mx?.length, currentState.dns?.spf, currentState.dns?.detectedProviders?.length, currentState.dns?.txt?.length].filter(Boolean).length;
     if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconHtml:'<img src="DNS.png" width="20" height="20" alt="DNS" style="object-fit:contain;">', iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
     const ctaBtn = document.createElement('button'); ctaBtn.className = 'btn-trigger-full'; ctaBtn.id = 'btnTriggerFull';
-    ctaBtn.innerHTML = `<span id="stfLabel"><img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Lancer l'analyse complète</span><span class="stf-spinner"></span><span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>`;
+    // Build button content safely
+    (() => {
+      ctaBtn.textContent = '';
+      const lbl = document.createElement('span'); lbl.id = 'stfLabel';
+      const img = document.createElement('img'); img.src='Analyse.png'; img.width=14; img.height=14; img.alt=''; img.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;';
+      lbl.appendChild(img); lbl.appendChild(document.createTextNode("Lancer l'analyse complète"));
+      const spinner = document.createElement('span'); spinner.className = 'stf-spinner';
+      const hint = document.createElement('span'); hint.style.cssText='font-size:10px;opacity:.65;margin-left:4px'; hint.textContent='WHOIS · sécurité DNS';
+      ctaBtn.appendChild(lbl); ctaBtn.appendChild(spinner); ctaBtn.appendChild(hint);
+    })();
     ctaBtn.onclick = () => runFullFromState(raw, domain, ctaBtn);
     center.appendChild(ctaBtn);
   } catch (err) { document.getElementById('progList').style.display = 'none'; showError('⚠ Erreur : ' + err.message); }
@@ -1432,8 +1625,8 @@ async function runFullFromState(raw, domain, ctaBtn) {
   ctaBtn.classList.add('running');
   document.getElementById('stfLabel').textContent = 'Analyse en cours…';
   lockButtons();
-  showSteps(['health', 'others', 'dup', 'host']);
-  ['health', 'others', 'dup', 'host'].forEach(k => setStep('step-' + k, 'pending'));
+  showSteps(['health', 'others', 'host']);
+  ['health', 'others', 'host'].forEach(k => setStep('step-' + k, 'pending'));
   try {
     const center = document.getElementById('centerCol'), exportBtn = document.getElementById('exportBtn');
 
@@ -1447,12 +1640,6 @@ async function runFullFromState(raw, domain, ctaBtn) {
     currentState.others = await checkOtherTenants(domain, currentState.dns || {});
     if (!document.getElementById('step-others').className.includes('timeout')) setStep('step-others', 'done');
 
-    const isEmail = raw.includes('@');
-    setStep('step-dup', 'active');
-    stepRetryFns.dup = async () => { setStep('step-dup', 'active'); currentState.dup = isEmail ? await checkDuplicate(raw.trim()) : null; setStep('step-dup', 'done'); };
-    currentState.dup = isEmail ? await checkDuplicate(raw.trim()) : null;
-    if (!document.getElementById('step-dup').className.includes('timeout')) setStep('step-dup', 'done');
-
     setStep('step-host', 'active');
     stepRetryFns.host = async () => { setStep('step-host', 'active'); currentState.host = await checkHost(domain); setStep('step-host', currentState.host ? 'done' : 'fail'); };
     currentState.host = await checkHost(domain);
@@ -1462,15 +1649,20 @@ async function runFullFromState(raw, domain, ctaBtn) {
     currentState.fullDone = true;
     const confidence = computeConfidence(currentState.ms);
     const oldHero = center.querySelector('.tenant-hero');
-    if (oldHero) center.replaceChild(renderHero(center, currentState.ms, currentState.dup, domain, raw, confidence), oldHero);
+    if (oldHero) center.replaceChild(renderHero(center, currentState.ms, domain, raw, confidence), oldHero);
 
-    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: { score: currentState.health.score, dmarcIsQuarantine: currentState.health.dmarcIsQuarantine, checks: currentState.health.checks.map(c => ({ type:c.t, title:c.title, desc:c.desc })), dkim: { selector1: currentState.health.hasSel1, selector2: currentState.health.hasSel2, allResults: currentState.health.dkimResults } }, otherServices: currentState.others, duplicate: currentState.dup, host: currentState.host, tenantConfidence: confidence, fullDone: true };
+    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: { score: currentState.health.score, dmarcIsQuarantine: currentState.health.dmarcIsQuarantine, checks: currentState.health.checks.map(c => ({ type:c.t, title:c.title, desc:c.desc })), dkim: { selector1: currentState.health.hasSel1, selector2: currentState.health.hasSel2, allResults: currentState.health.dkimResults } }, otherServices: currentState.others, host: currentState.host, tenantConfidence: confidence, fullDone: true };
     exportBtn.classList.add('visible');
 
     const newPb = document.createElement('div'); newPb.className = 'pills-block';
     const pl = document.createElement('div'); pl.className = 'pills-label'; pl.textContent = 'Autres services détectés';
     const pr = document.createElement('div'); pr.className = 'pills-row collapsed';
-    (currentState.others || []).forEach(t => { const p = document.createElement('div'); p.className = 'pill ' + (t.on ? 'on' : 'off'); p.innerHTML = `${t.icon} ${t.name}${t.on ? ' ✓' : ''}`; pr.appendChild(p); });
+    (currentState.others || []).forEach(t => {
+      const p = document.createElement('div'); p.className = 'pill ' + (t.on ? 'on' : 'off');
+      if (t.imgSrc) { const img = document.createElement('img'); img.className='svc-logo'; img.src=t.imgSrc; img.alt=t.name; img.loading='lazy'; p.appendChild(img); p.appendChild(document.createTextNode(' ')); }
+      p.appendChild(document.createTextNode(t.name + (t.on ? ' ✓' : '')));
+      pr.appendChild(p);
+    });
     const tg = document.createElement('button'); tg.type='button'; tg.className='pills-toggle'; tg.textContent='Afficher tout';
     tg.onclick = () => { const c = pr.classList.toggle('collapsed'); tg.textContent = c ? 'Afficher tout' : 'Réduire'; };
     pl.appendChild(tg);
@@ -1480,15 +1672,21 @@ async function runFullFromState(raw, domain, ctaBtn) {
 
     if (currentState.host) {
       const logo = hostLogo(currentState.host.hostName);
-      center.insertBefore(makeCard({ id:'host', iconHtml:logo.html, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }), ctaBtn);
+      center.insertBefore(makeCard({ id:'host', iconEl:logo.el, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }), ctaBtn);
     }
     if (currentState.health) {
       center.insertBefore(makeCard({ id:'health', iconHtml:'<img src="Santé.png" width="20" height="20" alt="Santé" style="object-fit:contain;">', iconBg:'hl-clr', title:'Santé du domaine', sub: healthSubLbl(currentState.health), badge: healthScoreLbl(currentState.health), badgeCls:'hl-b', selCls:'sel-health', onClick: () => openPanel('health', '🛡️ Santé du domaine', buildHealthPanel(currentState.health, domain)) }), ctaBtn);
     }
-    ctaBtn.classList.remove('running'); ctaBtn.classList.add('done'); ctaBtn.innerHTML = '✅ Analyse complète effectuée'; ctaBtn.onclick = null;
+    ctaBtn.classList.remove('running'); ctaBtn.classList.add('done'); ctaBtn.textContent = '✅ Analyse complète effectuée'; ctaBtn.onclick = null;
   } catch (err) {
     ctaBtn.classList.remove('running');
-    ctaBtn.innerHTML = '<img src="Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Lancer l\'analyse complète <span style="font-size:10px;opacity:.65;margin-left:4px">WHOIS · doublon MSA · sécurité DNS</span>';
+    // Rebuild button content safely on error
+    ctaBtn.textContent = '';
+    const lbl2 = document.createElement('span'); lbl2.id = 'stfLabel';
+    const img2 = document.createElement('img'); img2.src='Analyse.png'; img2.width=14; img2.height=14; img2.alt=''; img2.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;';
+    lbl2.appendChild(img2); lbl2.appendChild(document.createTextNode("Lancer l'analyse complète"));
+    const hint2 = document.createElement('span'); hint2.style.cssText='font-size:10px;opacity:.65;margin-left:4px'; hint2.textContent='WHOIS · sécurité DNS';
+    ctaBtn.appendChild(lbl2); ctaBtn.appendChild(hint2);
     document.getElementById('progList').style.display = 'none';
     showError('⚠ Erreur analyse complète : ' + err.message);
   } finally { unlockButtons(); }
@@ -1503,29 +1701,32 @@ async function checkFull() {
   exportBtn.classList.remove('visible'); lastReport = null;
   currentState = { domain, ms:null, dns:null, goog:null, health:null, others:null, dup:null, host:null, fastDone:false, fullDone:false };
   lockButtons(); setFullLoading(true);
-  showSteps(['ms', 'google', 'dns', 'health', 'others', 'dup', 'host']);
-  ['ms', 'google', 'dns', 'health', 'others', 'dup', 'host'].forEach(k => setStep('step-' + k, 'pending'));
+  showSteps(['ms', 'google', 'dns', 'health', 'others', 'host']);
+  ['ms', 'google', 'dns', 'health', 'others', 'host'].forEach(k => setStep('step-' + k, 'pending'));
   try {
     setStep('step-ms', 'active');     currentState.ms     = isMsaPersonalDomain(domain) ? null : await checkMicrosoft(domain); setStep('step-ms', currentState.ms ? 'done' : 'fail');
     setStep('step-google', 'active'); currentState.goog   = await checkGoogle(domain);                                          setStep('step-google', currentState.goog ? 'done' : 'fail');
     setStep('step-dns', 'active');    currentState.dns    = await checkDNS(domain);                                            setStep('step-dns', currentState.dns.mx.length > 0 ? 'done' : 'fail');
     setStep('step-health', 'active'); currentState.health = await checkHealth(domain);                                         setStep('step-health', 'done');
     setStep('step-others', 'active'); currentState.others = await checkOtherTenants(domain, currentState.dns);                 setStep('step-others', 'done');
-    const isEmail = raw.includes('@');
-    setStep('step-dup', 'active');    currentState.dup    = isEmail ? await checkDuplicate(raw.trim()) : null;                 setStep('step-dup', 'done');
     setStep('step-host', 'active');   currentState.host   = await checkHost(domain);                                           setStep('step-host', currentState.host ? 'done' : 'fail');
     document.getElementById('progList').style.display = 'none';
     currentState.fastDone = currentState.fullDone = true;
     const confidence = computeConfidence(currentState.ms);
-    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: { score: currentState.health.score, dmarcIsQuarantine: currentState.health.dmarcIsQuarantine, checks: currentState.health.checks.map(c => ({ type:c.t, title:c.title, desc:c.desc })), dkim: { selector1: currentState.health.hasSel1, selector2: currentState.health.hasSel2, allResults: currentState.health.dkimResults } }, otherServices: currentState.others, duplicate: currentState.dup, host: currentState.host, tenantConfidence: confidence, fullDone: true };
+    lastReport = { domain, analysedAt: new Date().toISOString(), input: raw, microsoft: currentState.ms, google: currentState.goog, dns: currentState.dns, health: { score: currentState.health.score, dmarcIsQuarantine: currentState.health.dmarcIsQuarantine, checks: currentState.health.checks.map(c => ({ type:c.t, title:c.title, desc:c.desc })), dkim: { selector1: currentState.health.hasSel1, selector2: currentState.health.hasSel2, allResults: currentState.health.dkimResults } }, otherServices: currentState.others, host: currentState.host, tenantConfidence: confidence, fullDone: true };
     exportBtn.classList.add('visible');
     if (currentState.ms?.tenantId && currentState.ms.tenantValid) addToHistory(domain, currentState.ms.tenantId);
-    center.appendChild(renderHero(center, currentState.ms, currentState.dup, domain, raw, confidence));
+    center.appendChild(renderHero(center, currentState.ms, domain, raw, confidence));
 
     const pb = document.createElement('div'); pb.className = 'pills-block';
     const pl = document.createElement('div'); pl.className = 'pills-label'; pl.textContent = 'Autres services détectés';
     const pr = document.createElement('div'); pr.className = 'pills-row collapsed';
-    currentState.others.forEach(t => { const p = document.createElement('div'); p.className = 'pill ' + (t.on ? 'on' : 'off'); p.innerHTML = `${t.icon} ${t.name}${t.on ? ' ✓' : ''}`; pr.appendChild(p); });
+    currentState.others.forEach(t => {
+      const p = document.createElement('div'); p.className = 'pill ' + (t.on ? 'on' : 'off');
+      if (t.imgSrc) { const img = document.createElement('img'); img.className='svc-logo'; img.src=t.imgSrc; img.alt=t.name; img.loading='lazy'; p.appendChild(img); p.appendChild(document.createTextNode(' ')); }
+      p.appendChild(document.createTextNode(t.name + (t.on ? ' ✓' : '')));
+      pr.appendChild(p);
+    });
     const tg = document.createElement('button'); tg.type='button'; tg.className='pills-toggle'; tg.textContent='Afficher tout';
     tg.onclick = () => { const c = pr.classList.toggle('collapsed'); tg.textContent = c ? 'Afficher tout' : 'Réduire'; };
     pl.appendChild(tg);
@@ -1538,7 +1739,7 @@ async function checkFull() {
     if (currentState.goog) center.appendChild(makeCard({ id:'google', iconHtml:GG_SVG, iconBg:'gg-clr', title:'Google Workspace', sub:'OpenID Connect & MX Records', badge:'5 champs', badgeCls:'gg-b', selCls:'sel-google', onClick: () => openPanel('google', '🔵 Google Workspace', buildGooglePanel(currentState.goog)) }));
     if (currentState.host) {
       const logo = hostLogo(currentState.host.hostName);
-      center.appendChild(makeCard({ id:'host', iconHtml:logo.html, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }));
+      center.appendChild(makeCard({ id:'host', iconEl:logo.el, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }));
     }
     const dnsRowCount = [currentState.dns?.mx?.length, currentState.dns?.spf, currentState.dns?.detectedProviders?.length, currentState.dns?.txt?.length].filter(Boolean).length;
     if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconHtml:'<img src="DNS.png" width="20" height="20" alt="DNS" style="object-fit:contain;">', iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
