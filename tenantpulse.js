@@ -2,7 +2,7 @@
   (function () {
     const favicon = document.getElementById('favicon');
     const mql = window.matchMedia('(prefers-color-scheme: dark)');
-    const apply = (isDark) => { favicon.href = isDark ? 'TP.png' : 'DarkTP.png'; };
+    const apply = (isDark) => { favicon.href = isDark ? 'assets/TP.png' : 'assets/DarkTP.png'; };
     apply(mql.matches);
     mql.addEventListener('change', (e) => apply(e.matches));
   })();
@@ -197,7 +197,7 @@ function renderHistory() {
     row.addEventListener('click', () => loadFromHistory(item.domain));
 
     const iconSpan = document.createElement('span'); iconSpan.className = 'history-item-icon';
-    const iconImg = document.createElement('img'); iconImg.src = 'Microsoft.png'; iconImg.width = 14; iconImg.height = 14; iconImg.alt = 'Microsoft'; iconImg.style.cssText = 'display:inline-block;vertical-align:middle;flex-shrink:0;';
+    const iconImg = document.createElement('img'); iconImg.src = 'assets/Microsoft.png'; iconImg.width = 14; iconImg.height = 14; iconImg.alt = 'Microsoft'; iconImg.style.cssText = 'display:inline-block;vertical-align:middle;flex-shrink:0;';
     iconSpan.appendChild(iconImg);
 
     const textWrap = document.createElement('div'); textWrap.style.cssText = 'flex:1;min-width:0';
@@ -623,28 +623,28 @@ async function checkHealth(domain) {
 async function checkOtherTenants(domain, dns) {
   const t  = [], ms = (dns.mx || []).join(' ').toLowerCase(), ss = (dns.spf || '').toLowerCase(), ts = (dns.txt || []).join(' ').toLowerCase();
 
-  t.push({ name:'Google Workspace', imgSrc:'google.png',          on: ms.includes('google.com') || ms.includes('googlemail.com') });
-  t.push({ name:'Mailinblack',      imgSrc:'mailinblack.jpeg',    on: ms.includes('mailinblack') || ss.includes('mailinblack') });
-  t.push({ name:'Mimecast',         imgSrc:'Mimecast.png',        on: ms.includes('mimecast') || ss.includes('mimecast') });
-  t.push({ name:'Proofpoint',       imgSrc:'Proofpoint.png',      on: ms.includes('pphosted') || ms.includes('proofpoint') || ss.includes('proofpoint') });
-  t.push({ name:'Vade Secure',      imgSrc:'Vade.png',            on: ms.includes('vadecloud') || ms.includes('vadesecure') || ss.includes('vadecloud') });
-  t.push({ name:'Barracuda',        imgSrc:'Barracuda.png',       on: ms.includes('barracudanetworks') || ss.includes('barracudanetworks') });
-  t.push({ name:'Hornetsecurity',   imgSrc:'Hornetsecurity.png',  on: ms.includes('hornetsecurity') || ss.includes('hornetsecurity') });
-  t.push({ name:'Brevo',            imgSrc:'Brevo.jpeg',          on: ss.includes('brevo') || ss.includes('sendinblue') || ms.includes('sendinblue') });
-  t.push({ name:'Mailjet',          imgSrc:'Mailjet.png',         on: ss.includes('mailjet') || (await dnsQuery(`mailjet._domainkey.${domain}`, 'TXT')).length > 0 });
-  t.push({ name:'SendGrid',         imgSrc:'SendGrid.png',        on: ss.includes('sendgrid') || (await dnsQuery(`s1._domainkey.${domain}`, 'CNAME')).length > 0 });
-  t.push({ name:'Postmark',         imgSrc:'Postmark.png',        on: ss.includes('spf.mtasv') || ss.includes('postmarkapp') });
+  t.push({ name:'Google Workspace', imgSrc:'assets/google.png',          on: ms.includes('google.com') || ms.includes('googlemail.com') });
+  t.push({ name:'Mailinblack',      imgSrc:'assets/mailinblack.jpeg',    on: ms.includes('mailinblack') || ss.includes('mailinblack') });
+  t.push({ name:'Mimecast',         imgSrc:'assets/Mimecast.png',        on: ms.includes('mimecast') || ss.includes('mimecast') });
+  t.push({ name:'Proofpoint',       imgSrc:'assets/Proofpoint.png',      on: ms.includes('pphosted') || ms.includes('proofpoint') || ss.includes('proofpoint') });
+  t.push({ name:'Vade Secure',      imgSrc:'assets/Vade.png',            on: ms.includes('vadecloud') || ms.includes('vadesecure') || ss.includes('vadecloud') });
+  t.push({ name:'Barracuda',        imgSrc:'assets/Barracuda.png',       on: ms.includes('barracudanetworks') || ss.includes('barracudanetworks') });
+  t.push({ name:'Hornetsecurity',   imgSrc:'assets/Hornetsecurity.png',  on: ms.includes('hornetsecurity') || ss.includes('hornetsecurity') });
+  t.push({ name:'Brevo',            imgSrc:'assets/Brevo.jpeg',          on: ss.includes('brevo') || ss.includes('sendinblue') || ms.includes('sendinblue') });
+  t.push({ name:'Mailjet',          imgSrc:'assets/Mailjet.png',         on: ss.includes('mailjet') || (await dnsQuery(`mailjet._domainkey.${domain}`, 'TXT')).length > 0 });
+  t.push({ name:'SendGrid',         imgSrc:'assets/SendGrid.png',        on: ss.includes('sendgrid') || (await dnsQuery(`s1._domainkey.${domain}`, 'CNAME')).length > 0 });
+  t.push({ name:'Postmark',         imgSrc:'assets/Postmark.png',        on: ss.includes('spf.mtasv') || ss.includes('postmarkapp') });
 
   const odoo = ts.includes('odoo') || ss.includes('odoo') || ms.includes('odoo') || (await dnsQuery(`odoo.${domain}`, 'CNAME')).length > 0;
-  t.push({ name:'Odoo',             imgSrc:'Odoo.png',            on: odoo });
-  t.push({ name:'Salesforce',       imgSrc:'Salesforce.png',      on: ts.includes('salesforce') || ss.includes('salesforce') });
+  t.push({ name:'Odoo',             imgSrc:'assets/Odoo.png',            on: odoo });
+  t.push({ name:'Salesforce',       imgSrc:'assets/Salesforce.png',      on: ts.includes('salesforce') || ss.includes('salesforce') });
   const hs = ts.includes('hubspot') || ss.includes('hubspot') || (await dnsQuery(`hs1._domainkey.${domain}`, 'CNAME')).length > 0;
-  t.push({ name:'HubSpot',          imgSrc:'HubSpot.png',         on: hs });
-  t.push({ name:'Zendesk',          imgSrc:'Zendesk.png',         on: ts.includes('zendesk') || ss.includes('zendesk') });
-  t.push({ name:'Slack',            imgSrc:'Slack.png',           on: ts.includes('slack') || ss.includes('slack-mail') });
+  t.push({ name:'HubSpot',          imgSrc:'assets/HubSpot.png',         on: hs });
+  t.push({ name:'Zendesk',          imgSrc:'assets/Zendesk.png',         on: ts.includes('zendesk') || ss.includes('zendesk') });
+  t.push({ name:'Slack',            imgSrc:'assets/Slack.png',           on: ts.includes('slack') || ss.includes('slack-mail') });
   const atl = ts.includes('atlassian') || !!(dns.txt || []).find(x => x.toLowerCase().includes('atlassian-domain-verification'));
-  t.push({ name:'Atlassian',        imgSrc:'Atlassian.png',       on: atl });
-  t.push({ name:'Amazon SES',       imgSrc:'Amazon.png',          on: ss.includes('amazonses') || ms.includes('amazonses') });
+  t.push({ name:'Atlassian',        imgSrc:'assets/Atlassian.png',       on: atl });
+  t.push({ name:'Amazon SES',       imgSrc:'assets/Amazon.png',          on: ss.includes('amazonses') || ms.includes('amazonses') });
   return t;
 }
 
@@ -922,7 +922,7 @@ function makeCard({ id, iconEl, iconBg, title, sub, badge, badgeCls, selCls, onC
 // ── Hero renderer ──
 function renderHero(ms, domain, confidence) {
   const hero = document.createElement('div'); hero.className = 'tenant-hero';
-  const msLogoEl = () => { const i = document.createElement('img'); i.src='Microsoft.png'; i.width=14; i.height=14; i.alt='Microsoft'; i.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;opacity:.85;'; return i; };
+  const msLogoEl = () => { const i = document.createElement('img'); i.src='assets/Microsoft.png'; i.width=14; i.height=14; i.alt='Microsoft'; i.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;opacity:.85;'; return i; };
 
   const mkLabel = (text) => {
     const d = document.createElement('div'); d.className = 'hero-label';
@@ -975,7 +975,7 @@ function renderHero(ms, domain, confidence) {
     if (ms.tenantId && ms.tenantValid) {
       const a = document.createElement('a');
       a.className = 'hero-partner-btn'; a.href = `https://partner.microsoft.com/dashboard/v2/customers/${encodeURIComponent(ms.tenantId)}/servicemanagementpage`; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      const img = document.createElement('img'); img.src='Redirect.png'; img.width=11; img.height=11; img.alt=''; img.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;';
+      const img = document.createElement('img'); img.src='assets/Redirect.png'; img.width=11; img.height=11; img.alt=''; img.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;';
       a.appendChild(img); a.appendChild(document.createTextNode('Ouvrir Partner Center'));
       const actions = document.createElement('div'); actions.className = 'hero-actions'; actions.appendChild(a);
       hero.appendChild(actions);
@@ -1224,18 +1224,18 @@ async function checkFast() {
     // FIX #1 : iconEl reçoit un élément DOM créé via makeImgIcon (plus de MS_SVG / innerHTML)
     if (currentState.ms?.tenantValid) {
       const rows = msRows(currentState.ms);
-      center.appendChild(makeCard({ id:'ms', iconEl:makeImgIcon('Microsoft.png','Microsoft',22), iconBg:'ms-clr', title:'Microsoft 365 / Entra ID', sub:'Endpoints & informations tenant', badge: rows.length + ' champs', badgeCls:'ms-b', selCls:'selected', onClick: () => openPanel('ms', 'Microsoft 365 / Entra ID', buildMsPanel(currentState.ms)) }));
+      center.appendChild(makeCard({ id:'ms', iconEl:makeImgIcon('assets/Microsoft.png','Microsoft',22), iconBg:'ms-clr', title:'Microsoft 365 / Entra ID', sub:'Endpoints & informations tenant', badge: rows.length + ' champs', badgeCls:'ms-b', selCls:'selected', onClick: () => openPanel('ms', 'Microsoft 365 / Entra ID', buildMsPanel(currentState.ms)) }));
     }
     // FIX #1 : makeGoogleSvgIcon() remplace GG_SVG (chaîne SVG) — création DOM sûre
     if (currentState.goog) center.appendChild(makeCard({ id:'google', iconEl:makeGoogleSvgIcon(), iconBg:'gg-clr', title:'Google Workspace', sub:'OpenID Connect & MX Records', badge:'5 champs', badgeCls:'gg-b', selCls:'sel-google', onClick: () => openPanel('google', '🔵 Google Workspace', buildGooglePanel(currentState.goog)) }));
     const dnsRowCount = [currentState.dns?.mx?.length, currentState.dns?.spf, currentState.dns?.detectedProviders?.length, currentState.dns?.txt?.length].filter(Boolean).length;
-    // FIX #1 : makeImgIcon remplace la chaîne '<img src="DNS.png" ...>' passée en innerHTML
-    if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconEl:makeImgIcon('DNS.png','DNS',20), iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
+    // FIX #1 : makeImgIcon remplace la chaîne '<img src="assets/DNS.png" ...>' passée en innerHTML
+    if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconEl:makeImgIcon('assets/DNS.png','DNS',20), iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
     const ctaBtn = document.createElement('button'); ctaBtn.className = 'btn-trigger-full'; ctaBtn.id = 'btnTriggerFull';
     (() => {
       ctaBtn.textContent = '';
       const lbl = document.createElement('span'); lbl.id = 'stfLabel';
-      const img = document.createElement('img'); img.src='Analyse.png'; img.width=14; img.height=14; img.alt=''; img.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;';
+      const img = document.createElement('img'); img.src='assets/Analyse.png'; img.width=14; img.height=14; img.alt=''; img.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;';
       lbl.appendChild(img); lbl.appendChild(document.createTextNode("Lancer l'analyse complète"));
       const spinner = document.createElement('span'); spinner.className = 'stf-spinner';
       const hint = document.createElement('span'); hint.style.cssText='font-size:10px;opacity:.65;margin-left:4px'; hint.textContent='WHOIS · sécurité DNS';
@@ -1302,16 +1302,16 @@ async function runFullFromState(raw, domain, ctaBtn) {
       const logo = hostLogo(currentState.host.hostName);
       center.insertBefore(makeCard({ id:'host', iconEl:logo.el, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }), ctaBtn);
     }
-    // FIX #1 : makeImgIcon remplace la chaîne '<img src="Santé.png" ...>' passée en innerHTML
+    // FIX #1 : makeImgIcon remplace la chaîne '<img src="assets/Santé.png" ...>' passée en innerHTML
     if (currentState.health) {
-      center.insertBefore(makeCard({ id:'health', iconEl:makeImgIcon('Santé.png','Santé',20), iconBg:'hl-clr', title:'Santé du domaine', sub: healthSubLbl(currentState.health), badge: healthScoreLbl(currentState.health), badgeCls:'hl-b', selCls:'sel-health', onClick: () => openPanel('health', '🛡️ Santé du domaine', buildHealthPanel(currentState.health, domain)) }), ctaBtn);
+      center.insertBefore(makeCard({ id:'health', iconEl:makeImgIcon('assets/Santé.png','Santé',20), iconBg:'hl-clr', title:'Santé du domaine', sub: healthSubLbl(currentState.health), badge: healthScoreLbl(currentState.health), badgeCls:'hl-b', selCls:'sel-health', onClick: () => openPanel('health', '🛡️ Santé du domaine', buildHealthPanel(currentState.health, domain)) }), ctaBtn);
     }
     ctaBtn.classList.remove('running'); ctaBtn.classList.add('done'); ctaBtn.textContent = '✅ Analyse complète effectuée'; ctaBtn.onclick = null;
   } catch (err) {
     ctaBtn.classList.remove('running');
     ctaBtn.textContent = '';
     const lbl2 = document.createElement('span'); lbl2.id = 'stfLabel';
-    const img2 = document.createElement('img'); img2.src='Analyse.png'; img2.width=14; img2.height=14; img2.alt=''; img2.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;';
+    const img2 = document.createElement('img'); img2.src='assets/Analyse.png'; img2.width=14; img2.height=14; img2.alt=''; img2.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;';
     lbl2.appendChild(img2); lbl2.appendChild(document.createTextNode("Lancer l'analyse complète"));
     const hint2 = document.createElement('span'); hint2.style.cssText='font-size:10px;opacity:.65;margin-left:4px'; hint2.textContent='WHOIS · sécurité DNS';
     ctaBtn.appendChild(lbl2); ctaBtn.appendChild(hint2);
@@ -1363,7 +1363,7 @@ async function checkFull() {
     // FIX #1 : tous les appels makeCard utilisent maintenant iconEl (createElement), pas iconHtml
     if (currentState.ms?.tenantValid) {
       const rows = msRows(currentState.ms);
-      center.appendChild(makeCard({ id:'ms', iconEl:makeImgIcon('Microsoft.png','Microsoft',22), iconBg:'ms-clr', title:'Microsoft 365 / Entra ID', sub:'Endpoints & informations tenant', badge: rows.length + ' champs', badgeCls:'ms-b', selCls:'selected', onClick: () => openPanel('ms', 'Microsoft 365 / Entra ID', buildMsPanel(currentState.ms)) }));
+      center.appendChild(makeCard({ id:'ms', iconEl:makeImgIcon('assets/Microsoft.png','Microsoft',22), iconBg:'ms-clr', title:'Microsoft 365 / Entra ID', sub:'Endpoints & informations tenant', badge: rows.length + ' champs', badgeCls:'ms-b', selCls:'selected', onClick: () => openPanel('ms', 'Microsoft 365 / Entra ID', buildMsPanel(currentState.ms)) }));
     }
     if (currentState.goog) center.appendChild(makeCard({ id:'google', iconEl:makeGoogleSvgIcon(), iconBg:'gg-clr', title:'Google Workspace', sub:'OpenID Connect & MX Records', badge:'5 champs', badgeCls:'gg-b', selCls:'sel-google', onClick: () => openPanel('google', '🔵 Google Workspace', buildGooglePanel(currentState.goog)) }));
     if (currentState.host) {
@@ -1371,8 +1371,8 @@ async function checkFull() {
       center.appendChild(makeCard({ id:'host', iconEl:logo.el, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }));
     }
     const dnsRowCount = [currentState.dns?.mx?.length, currentState.dns?.spf, currentState.dns?.detectedProviders?.length, currentState.dns?.txt?.length].filter(Boolean).length;
-    if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconEl:makeImgIcon('DNS.png','DNS',20), iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
-    center.appendChild(makeCard({ id:'health', iconEl:makeImgIcon('Santé.png','Santé',20), iconBg:'hl-clr', title:'Santé du domaine', sub: healthSubLbl(currentState.health), badge: healthScoreLbl(currentState.health), badgeCls:'hl-b', selCls:'sel-health', onClick: () => openPanel('health', '🛡️ Santé du domaine', buildHealthPanel(currentState.health, domain)) }));
+    if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconEl:makeImgIcon('assets/DNS.png','DNS',20), iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
+    center.appendChild(makeCard({ id:'health', iconEl:makeImgIcon('assets/Santé.png','Santé',20), iconBg:'hl-clr', title:'Santé du domaine', sub: healthSubLbl(currentState.health), badge: healthScoreLbl(currentState.health), badgeCls:'hl-b', selCls:'sel-health', onClick: () => openPanel('health', '🛡️ Santé du domaine', buildHealthPanel(currentState.health, domain)) }));
   } catch (err) { document.getElementById('progList').style.display = 'none'; showError('⚠ Erreur : ' + err.message); }
   finally { unlockButtons(); setFullLoading(false); }
 }
