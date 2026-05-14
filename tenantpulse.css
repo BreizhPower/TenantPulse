@@ -116,7 +116,7 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .ep-preview .domain{color:#8b80f8}
 
 .btn-row{display:flex;gap:8px;margin-bottom:0}
-.btn-go{flex:1;padding:11px 0px;background:var(--blue);border:none;border-radius:9px;font-family:var(--font);font-size:var(--text-sm);font-weight:500;color:#fff;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(75,63,190,.35)}
+.btn-go{flex:1;padding:11px 0px;background:var(--blue);border:none;border-radius:9px;font-family:var(--font);font-size:var(--text-sm);font-weight:500;color:#fff;cursor:pointer;transition:background .2s,transform .1s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:6px;line-height:1;box-shadow:0 4px 14px rgba(75,63,190,.35)}
 .btn-go:hover{background:var(--blue-dark);box-shadow:0 6px 20px rgba(75,63,190,.45)}
 .btn-go:active{transform:scale(.99)}
 .btn-go:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
