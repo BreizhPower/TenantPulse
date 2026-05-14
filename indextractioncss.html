@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  CSP : 'unsafe-inline' supprimé — le JS est externalisé dans tenantpulse.js.
+  script-src 'self' est actif : seuls les scripts chargés depuis la même origine sont autorisés.
+-->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self';
+  style-src 'self';
+  img-src 'self' https://www.google.com data:;
+  connect-src 'self'
+    https://dns.google
+    https://login.microsoftonline.com
+    https://accounts.google.com
+    https://rdap.org
+    https://rdap.publicinterestregistry.org
+    https://rdap.verisign.com
+    https://rdap.nominet.uk
+    https://rdap.nic.fr
+    https://rdap.denic.de
+    https://rdap.dns.be
+    https://rdap.sidn.nl
+    https://rdap.switch.ch
+    https://rdap.nic.ch
+    https://rdap.nic.it
+    https://rdap.nic.es
+    https://rdap.eu
+    https://rdap.cira.ca
+    https://rdap.auda.org.au
+    https://rdap.centralnic.com
+    https://rdap.donuts.co
+    https://rdap.afilias.net
+    https://rdap.identitydigital.services
+    https://rdap.arin.net
+    https://rdap.apnic.net
+    https://rdap.lacnic.net
+    https://rdap.afrinic.net
+    https://rdap.ripe.net
+    https://lookup.icann.org;
+  font-src 'self';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'none';
+">
+<title>TenantPulse — v0.6</title>
+<link rel="icon" type="image/png" href="assets/TP.png" id="favicon">
+
+<link rel="stylesheet" href="assets/tenantpulse.css">
+<body>
+
+<div class="confirm-modal-overlay" id="deleteConfirmModal">
+  <div class="confirm-modal">
+    <div class="confirm-modal-title">Désactiver l'historique</div>
+    <div class="confirm-modal-desc">Des entrées sont présentes dans le cache local. Souhaitez-vous les supprimer ?</div>
+    <div class="confirm-modal-actions">
+      <button class="confirm-btn-delete" id="btnDisableDelete">🗑 Désactiver et supprimer les données</button>
+      <button class="confirm-btn-keep"   id="btnDisableKeep">Désactiver sans supprimer</button>
+      <button class="confirm-btn-cancel" id="btnDisableCancel">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<div class="cache-clear-bar" id="cacheClearBar"><div class="cache-clear-bar-fill" id="cacheClearFill"></div></div>
+<div class="topbar">Analyse instantanée &nbsp;|&nbsp; Décisions immédiates</div>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="assets/TP.png" class="nav-logo-icon" style="height:18px;">
+    TenantPulse
+  </a>
+  <div class="nav-right">
+    <div class="cache-indicator state-inactive" id="cacheIndicator">
+      <span class="cache-dot"></span>
+      <span id="cacheIndicatorLabel">Cache inactif</span>
+    </div>
+    <div class="nav-badge">v0.6</div>
+    <div class="nav-dropdown" id="mainDropdown">
+      <button class="nav-drop-btn" id="mainDropBtn">
+        <img src="assets/option.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;"> Paramètres & Confidentialité <span class="drop-arrow">▾</span>
+      </button>
+      <div class="drop-menu" id="dropMenu">
+
+        <!-- Apparence -->
+        <button class="drop-section-btn open" data-drop-section>
+          <span>🎨 Apparence</span><span class="ds-arrow">▾</span>
+        </button>
+        <div class="drop-section-body open">
+          <div class="drop-toggle" id="toggleDarkBtn">
+            <div class="drop-toggle-left">
+              <span class="drop-toggle-icon">🎨</span>
+              <span class="drop-toggle-label" id="darkLabel">Mode sombre</span>
+            </div>
+            <div class="drop-toggle-switch" id="darkSwitch"></div>
+          </div>
+        </div>
+
+        <!-- Données -->
+        <button class="drop-section-btn open" data-drop-section>
+          <span>💾 Données</span><span class="ds-arrow">▾</span>
+        </button>
+        <div class="drop-section-body open">
+          <div class="drop-toggle" id="toggleHistoryBtn">
+            <div class="drop-toggle-left">
+              <span class="drop-toggle-icon">🕐</span>
+              <span class="drop-toggle-label">Historique des Tenant ID</span>
+            </div>
+            <div class="drop-toggle-switch" id="historyOptSwitch"></div>
+          </div>
+          <div class="drop-info-row">
+            <span>ℹ️</span>
+            <span>L'historique utilise le stockage local (localStorage) de votre navigateur. Aucune donnée n'est transmise à un serveur.</span>
+          </div>
+        </div>
+
+        <!-- Indicateur de cache -->
+        <button class="drop-section-btn" data-drop-section>
+          <span>🔵 Indicateur de cache</span><span class="ds-arrow">▾</span>
+        </button>
+        <div class="drop-section-body">
+          <div class="cache-legend">
+            <div class="cache-legend-row"><span class="cache-legend-dot active"></span><span class="cache-legend-label"><strong>X entrée(s) en cache</strong> — historique activé et données présentes</span></div>
+            <div class="cache-legend-row"><span class="cache-legend-dot inactive"></span><span class="cache-legend-label"><strong>Cache vide</strong> — activé, aucune entrée</span></div>
+            <div class="cache-legend-row"><span class="cache-legend-dot inactive"></span><span class="cache-legend-label"><strong>Cache désactivé</strong> — désactivé, données encore présentes</span></div>
+            <div class="cache-legend-row"><span class="cache-legend-dot inactive"></span><span class="cache-legend-label"><strong>Cache inactif</strong> — désactivé et aucune donnée</span></div>
+            <div class="cache-legend-row"><span class="cache-legend-dot clearing"></span><span class="cache-legend-label"><strong>Suppression…</strong> — vidage en cours</span></div>
+          </div>
+        </div>
+
+        <!-- APIs utilisées -->
+        <button class="drop-section-btn" data-drop-section>
+          <span>🌐 APIs utilisées</span><span class="ds-arrow">▾</span>
+        </button>
+        <div class="drop-section-body">
+          <div class="proxy-row" data-proxy-key="dnsgoogle"><span class="proxy-row-icon">🌐</span><span class="proxy-row-title">dns.google</span><span class="proxy-row-chev">›</span></div>
+          <div class="proxy-row" data-proxy-key="rdap"><span class="proxy-row-icon">🌐</span><span class="proxy-row-title">rdap.org</span><span class="proxy-row-chev">›</span></div>
+          <div class="proxy-row" data-proxy-key="mslogin"><span class="proxy-row-icon">🔍</span><span class="proxy-row-title">login.microsoftonline.com</span><span class="proxy-row-chev">›</span></div>
+          <div class="proxy-row" data-proxy-key="googleaccounts"><span class="proxy-row-icon">🔵</span><span class="proxy-row-title">accounts.google.com</span><span class="proxy-row-chev">›</span></div>
+          <div class="drop-info-row"><span>✅</span><span>Requêtes directes vers APIs officielles Microsoft, Google DNS, Google Accounts et RDAP. Aucun proxy tiers. Aucune donnée stockée côté serveur.</span></div>
+        </div>
+
+        <!-- Stockage local -->
+        <button class="drop-section-btn" data-drop-section>
+          <span>🗄️ Stockage local</span><span class="ds-arrow">▾</span>
+        </button>
+        <div class="drop-section-body">
+          <div class="proxy-row" id="btnShowStorage">
+            <span class="proxy-row-icon">💾</span>
+            <span class="proxy-row-title">Inspecter les données stockées</span>
+            <span class="proxy-row-chev">›</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="proxy-detail-overlay" id="proxyOverlay">
+      <div class="proxy-detail-panel" id="proxyDetailPanel">
+        <div class="proxy-detail-back" id="proxyDetailBack">‹ Retour</div>
+        <div class="proxy-detail-title" id="pdTitle"></div>
+        <div class="proxy-detail-desc" id="pdDesc"></div>
+        <div class="proxy-detail-url" id="pdUrl"></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Storage inspector modal -->
+<div class="confirm-modal-overlay" id="storageModal">
+  <div class="confirm-modal storage-modal" id="storageModalInner">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div class="confirm-modal-title" style="margin:0">💾 Données stockées localement</div>
+      <button class="panel-close" id="btnStorageClose">✕</button>
+    </div>
+    <div id="storageInspectorBody" style="display:flex;flex-direction:column;gap:8px;max-height:380px;overflow-y:auto"></div>
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;gap:8px">
+      <button class="confirm-btn-delete" style="flex:1" id="btnClearAllStorage">🗑 Tout vider</button>
+      <button class="confirm-btn-keep"   style="flex:1" id="btnStorageCloseFooter">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-head">
+      <h1>Diagnostic <span>Microsoft 365</span></h1>
+      <p>Interface de diagnostic M365 et hygiène DNS, avec traitement local des données.</p>
+    </div>
+    <div class="sb-body">
+      <label class="flabel">Adresse e-mail ou domaine</label>
+      <div class="input-wrap">
+        <input type="text" id="emailInput" placeholder="user@domaine.com ou domaine.com" autocomplete="off"/>
+      </div>
+      <p class="sb-privacy-note">Seuls le domaine ou l'adresse saisis sont utilisés pour interroger des endpoints publics.*</p>
+      <label class="flabel">Endpoint OpenID Microsoft 365</label>
+      <div class="ep-preview" id="endpointPreview">https://login.microsoftonline.com/<span class="domain">domaine.com</span>/.well-known/openid-configuration</div>
+      <div class="btn-row">
+        <button class="btn-go" id="checkBtnFast">
+          <span id="btnFastText"><img src="assets/LOUPE.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Tenant ID</span>
+          <div class="spinner" id="spinnerFast"></div>
+        </button>
+        <button class="btn-full-analysis" id="checkBtnFull">
+          <span id="btnFullText"><img src="assets/Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Analyse complète</span>
+          <div class="spinner-blue" id="spinnerFull"></div>
+        </button>
+      </div>
+      <div class="btn-hints">
+        <div class="btn-hint">Rapide — ID MS + DNS de base</div>
+        <div class="btn-hint">Complet — WHOIS · sécurité DNS</div>
+      </div>
+      <button class="btn-export" id="exportBtn">📋 Copier le rapport</button>
+      <div class="prog-list" id="progList">
+        <div class="p-step" id="step-ms"><span class="p-step-icon"><img src="assets/Microsoft.png" width="14" height="14" alt="Microsoft" style="display:inline-block;vertical-align:middle;flex-shrink:0;"></span><span class="p-step-label">Microsoft 365…</span><button class="p-step-cancel" data-step="ms">✕ Annuler</button><button class="p-step-retry" data-step="ms">↺ Relancer</button></div>
+        <div class="p-step" id="step-google"><span class="p-step-icon">🔵</span><span class="p-step-label">Google Workspace…</span><button class="p-step-cancel" data-step="google">✕ Annuler</button><button class="p-step-retry" data-step="google">↺ Relancer</button></div>
+        <div class="p-step" id="step-dns"><span class="p-step-icon">🌐</span><span class="p-step-label">DNS…</span><button class="p-step-cancel" data-step="dns">✕ Annuler</button><button class="p-step-retry" data-step="dns">↺ Relancer</button></div>
+        <div class="p-step" id="step-health"><span class="p-step-icon">🛡️</span><span class="p-step-label">Sécurité…</span><button class="p-step-cancel" data-step="health">✕ Annuler</button><button class="p-step-retry" data-step="health">↺ Relancer</button></div>
+        <div class="p-step" id="step-others"><span class="p-step-icon">🔍</span><span class="p-step-label">Autres services…</span><button class="p-step-cancel" data-step="others">✕ Annuler</button><button class="p-step-retry" data-step="others">↺ Relancer</button></div>
+        <div class="p-step" id="step-host"><span class="p-step-icon">🏠</span><span class="p-step-label">Hébergeur…</span><button class="p-step-cancel" data-step="host">✕ Annuler</button><button class="p-step-retry" data-step="host">↺ Relancer</button></div>
+      </div>
+      <div class="err-box" id="errBox"></div>
+
+      <div class="msa-check-block" style="margin-top:0">
+        <button class="collapsible-btn" id="btnHistoryToggle">
+          <span>🕐 Historique des Tenant ID</span>
+          <span class="coll-arrow" id="historyArrow">▾</span>
+        </button>
+        <div class="collapsible-body" id="historyBody">
+          <div id="historyList"><div class="history-empty">Aucune analyse effectuée</div></div>
+          <button class="btn-clear-history" id="btnClearHistory">🗑 Effacer l'historique</button>
+        </div>
+      </div>
+
+      <div class="privacy-block">
+        <button class="collapsible-btn" id="btnPrivacyToggle">
+          <span>🔒 Confidentialité</span>
+          <span class="coll-arrow" id="privacyArrow">▾</span>
+        </button>
+        <div class="collapsible-body" id="privacyBody">
+          <div class="privacy-body">
+            <p class="privacy-intro">Cet outil effectue des requêtes <strong>directement depuis votre navigateur</strong> vers des APIs publiques. Aucun serveur intermédiaire ne reçoit ou ne conserve vos données.</p>
+            <div>
+              <div class="privacy-section-lbl">APIs contactées lors d'une analyse</div>
+              <div class="privacy-api-list">
+                <div class="privacy-api-item"><span class="privacy-api-item-icon">🌐</span><span class="privacy-api-item-name">dns.google</span><span class="privacy-api-item-tag">DNS</span></div>
+                <div class="privacy-api-item"><span class="privacy-api-item-icon">🔍</span><span class="privacy-api-item-name">login.microsoftonline.com</span><span class="privacy-api-item-tag">Microsoft</span></div>
+                <div class="privacy-api-item"><span class="privacy-api-item-icon">🔵</span><span class="privacy-api-item-name">accounts.google.com</span><span class="privacy-api-item-tag">Google</span></div>
+                <div class="privacy-api-item"><span class="privacy-api-item-icon">🌐</span><span class="privacy-api-item-name">rdap.org</span><span class="privacy-api-item-tag">WHOIS</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="privacy-section-lbl">Ressources chargées lors d'une analyse</div>
+              <div class="privacy-api-list">
+                <div class="privacy-api-item"><span class="privacy-api-item-icon">🖼️</span><span class="privacy-api-item-name">google.com/s2/favicons</span><span class="privacy-api-item-tag">Icônes</span></div>
+              </div>
+            </div>
+            <div class="privacy-storage-row">
+              <span class="privacy-storage-icon">💾</span>
+              <span>Aucun stockage par défaut. L'historique (optionnel) utilise uniquement le <strong>localStorage</strong> de votre navigateur — jamais transmis.</span>
+            </div>
+            <button class="privacy-cta" id="btnPrivacyCta">
+              ⚙️ Détail de chaque connexion dans Paramètres & Confidentialité
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="center" id="centerCol">
+    <div class="col-header">
+      <span class="col-header-icon">📊</span>
+      <span class="col-header-title">Résultats</span>
+    </div>
+    <div class="empty-state">
+      <div class="empty-state-icon">🔍</div>
+      <div class="empty-state-title">Aucune analyse en cours</div>
+      <div class="empty-state-sub">Saisissez un domaine ou un e-mail</div>
+    </div>
+  </main>
+
+  <aside class="detail-panel" id="detailPanel">
+    <div class="panel-head">
+      <span class="panel-title" id="panelTitle">Détails</span>
+      <button class="panel-close" id="btnPanelClose">✕</button>
+    </div>
+    <div class="panel-body" id="panelBody"></div>
+  </aside>
+</div>
+
+<footer><div class="powered">Prototype <span> Interne</span> RUNMW N1</div></footer>
+
+<!--
+  Le JS est externalisé dans tenantpulse.js — script-src 'self' est actif.
+-->
+<script src="tenantpulse.js" defer></script>
+<div class="conf-tooltip" id="confTooltip"></div>
+</body>
+</html>
