@@ -171,13 +171,12 @@
 <div class="confirm-modal-overlay" id="storageModal">
   <div class="confirm-modal storage-modal" id="storageModalInner">
     <div>
-      <div class="confirm-modal-title">💾 Données stockées localement</div>
-      <button class="panel-close" id="btnStorageClose">✕</button>
+      <div class="confirm-modal-title">💾 Données stockées localement</div><button class="panel-close" id="btnStorageClose">✕</button>
     </div>
-    <div id="storageInspectorBody" style="display:flex;flex-direction:column;gap:8px;max-height:380px;overflow-y:auto"></div>
-    <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;gap:8px">
-      <button class="confirm-btn-delete" style="flex:1" id="btnClearAllStorage">🗑 Tout vider</button>
-      <button class="confirm-btn-keep"   style="flex:1" id="btnStorageCloseFooter">Fermer</button>
+    <div id="storageInspectorBody"></div>
+    <div>
+      <button class="confirm-btn-delete" id="btnClearAllStorage">🗑 Tout vider</button>
+      <button class="confirm-btn-keep" id="btnStorageCloseFooter">Fermer</button>
     </div>
   </div>
 </div>
@@ -198,11 +197,11 @@
       <div class="ep-preview" id="endpointPreview">https://login.microsoftonline.com/<span class="domain">domaine.com</span>/.well-known/openid-configuration</div>
       <div class="btn-row">
         <button class="btn-go" id="checkBtnFast">
-          <span id="btnFastText"><img src="assets/LOUPE.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Tenant ID</span>
+          <span id="btnFastText"><img src="assets/LOUPE.png" width="14" height="14" alt="">Tenant ID</span>
           <div class="spinner" id="spinnerFast"></div>
         </button>
         <button class="btn-full-analysis" id="checkBtnFull">
-          <span id="btnFullText"><img src="assets/Analyse.png" width="14" height="14" alt="" style="display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:4px;">Analyse complète</span>
+          <span id="btnFullText"><img src="assets/Analyse.png" width="14" height="14" alt="">Analyse complète</span>
           <div class="spinner-blue" id="spinnerFull"></div>
         </button>
       </div>
@@ -212,7 +211,7 @@
       </div>
       <button class="btn-export" id="exportBtn">📋 Copier le rapport</button>
       <div class="prog-list" id="progList">
-        <div class="p-step" id="step-ms"><span class="p-step-icon"><img src="assets/Microsoft.png" width="14" height="14" alt="Microsoft" style="display:inline-block;vertical-align:middle;flex-shrink:0;"></span><span class="p-step-label">Microsoft 365…</span><button class="p-step-cancel" data-step="ms">✕ Annuler</button><button class="p-step-retry" data-step="ms">↺ Relancer</button></div>
+        <div class="p-step" id="step-ms"><span class="p-step-icon"><img src="assets/Microsoft.png" width="14" height="14" alt="Microsoft"></span><span class="p-step-label">Microsoft 365…</span><button class="p-step-cancel" data-step="ms">✕ Annuler</button><button class="p-step-retry" data-step="ms">↺ Relancer</button></div>
         <div class="p-step" id="step-google"><span class="p-step-icon">🔵</span><span class="p-step-label">Google Workspace…</span><button class="p-step-cancel" data-step="google">✕ Annuler</button><button class="p-step-retry" data-step="google">↺ Relancer</button></div>
         <div class="p-step" id="step-dns"><span class="p-step-icon">🌐</span><span class="p-step-label">DNS…</span><button class="p-step-cancel" data-step="dns">✕ Annuler</button><button class="p-step-retry" data-step="dns">↺ Relancer</button></div>
         <div class="p-step" id="step-health"><span class="p-step-icon">🛡️</span><span class="p-step-label">Sécurité…</span><button class="p-step-cancel" data-step="health">✕ Annuler</button><button class="p-step-retry" data-step="health">↺ Relancer</button></div>
@@ -221,7 +220,7 @@
       </div>
       <div class="err-box" id="errBox"></div>
 
-      <div class="msa-check-block" style="margin-top:0">
+      <div class="msa-check-block">
         <button class="collapsible-btn" id="btnHistoryToggle">
           <span>🕐 Historique des Tenant ID</span>
           <span class="coll-arrow" id="historyArrow">▾</span>
