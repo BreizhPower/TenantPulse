@@ -6,6 +6,7 @@
 <!--
   CSP : 'unsafe-inline' supprimé — le JS est externalisé dans tenantpulse.js.
   script-src 'self' est actif : seuls les scripts chargés depuis la même origine sont autorisés.
+  Les endpoints rdap.* sont nécessaires : rdap.org peut rediriger vers le registre national du TLD (rdap.nic.fr, rdap.denic.de…).
 -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -17,6 +18,29 @@
     https://login.microsoftonline.com
     https://accounts.google.com
     https://rdap.org
+    https://rdap.publicinterestregistry.org
+    https://rdap.verisign.com
+    https://rdap.nominet.uk
+    https://rdap.nic.fr
+    https://rdap.denic.de
+    https://rdap.dns.be
+    https://rdap.sidn.nl
+    https://rdap.switch.ch
+    https://rdap.nic.ch
+    https://rdap.nic.it
+    https://rdap.nic.es
+    https://rdap.eu
+    https://rdap.cira.ca
+    https://rdap.auda.org.au
+    https://rdap.centralnic.com
+    https://rdap.donuts.co
+    https://rdap.afilias.net
+    https://rdap.identitydigital.services
+    https://rdap.arin.net
+    https://rdap.apnic.net
+    https://rdap.lacnic.net
+    https://rdap.afrinic.net
+    https://rdap.ripe.net
     https://lookup.icann.org;
   font-src 'self';
   object-src 'none';
@@ -166,12 +190,12 @@
       <p>Interface de diagnostic M365 et hygiène DNS, avec traitement local des données.</p>
     </div>
     <div class="sb-body">
-      <label class="flabel">Adresse e-mail ou domaine</label>
+      <label class="flabel" for="emailInput">Adresse e-mail ou domaine</label>
       <div class="input-wrap">
         <input type="text" id="emailInput" placeholder="user@domaine.com ou domaine.com" autocomplete="off"/>
       </div>
       <p class="sb-privacy-note">Seuls le domaine ou l'adresse saisis sont utilisés pour interroger des endpoints publics.*</p>
-      <label class="flabel">Endpoint OpenID Microsoft 365</label>
+      <div class="flabel">Endpoint OpenID Microsoft 365</div>
       <div class="ep-preview" id="endpointPreview">https://login.microsoftonline.com/<span class="domain">domaine.com</span>/.well-known/openid-configuration</div>
       <div class="btn-row">
         <button class="btn-go" id="checkBtnFast">
@@ -179,7 +203,7 @@
           <div class="spinner" id="spinnerFast"></div>
         </button>
         <button class="btn-full-analysis" id="checkBtnFull">
-          <span id="btnFullText"><img src="assets/Analyse.png" width="14" height="14" alt="">Analyse complète</span>
+          <span id="btnFullText"><img src="assets/Analyse.png" width="14" height="14" alt="">Analyse</span>
           <div class="spinner-blue" id="spinnerFull"></div>
         </button>
       </div>
