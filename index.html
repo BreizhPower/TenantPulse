@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
   CSP : 'unsafe-inline' supprimé — le JS est externalisé dans tenantpulse.js.
-  script-src 'self' est actif : seuls les scripts chargés depuis la même origine sont autorisés. "https://rdap..." non intéroger à supprimer
+  script-src 'self' est actif : seuls les scripts chargés depuis la même origine sont autorisés.
 -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -17,29 +17,6 @@
     https://login.microsoftonline.com
     https://accounts.google.com
     https://rdap.org
-    https://rdap.publicinterestregistry.org
-    https://rdap.verisign.com
-    https://rdap.nominet.uk
-    https://rdap.nic.fr
-    https://rdap.denic.de
-    https://rdap.dns.be
-    https://rdap.sidn.nl
-    https://rdap.switch.ch
-    https://rdap.nic.ch
-    https://rdap.nic.it
-    https://rdap.nic.es
-    https://rdap.eu
-    https://rdap.cira.ca
-    https://rdap.auda.org.au
-    https://rdap.centralnic.com
-    https://rdap.donuts.co
-    https://rdap.afilias.net
-    https://rdap.identitydigital.services
-    https://rdap.arin.net
-    https://rdap.apnic.net
-    https://rdap.lacnic.net
-    https://rdap.afrinic.net
-    https://rdap.ripe.net
     https://lookup.icann.org;
   font-src 'self';
   object-src 'none';
@@ -170,11 +147,12 @@
 <!-- Storage inspector modal -->
 <div class="confirm-modal-overlay" id="storageModal">
   <div class="confirm-modal storage-modal" id="storageModalInner">
-    <div>
-      <div class="confirm-modal-title">💾 Données stockées localement</div><button class="panel-close" id="btnStorageClose">✕</button>
+    <div class="storage-modal-header">
+      <div class="confirm-modal-title">💾 Données stockées localement</div>
+      <button class="panel-close" id="btnStorageClose">✕</button>
     </div>
     <div id="storageInspectorBody"></div>
-    <div>
+    <div class="confirm-modal-actions">
       <button class="confirm-btn-delete" id="btnClearAllStorage">🗑 Tout vider</button>
       <button class="confirm-btn-keep" id="btnStorageCloseFooter">Fermer</button>
     </div>
