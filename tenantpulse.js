@@ -287,7 +287,7 @@ function openPanel(id, title, buildFn) {
   const card = document.getElementById('card-' + id);
   if (card) card.classList.add(card.dataset.selClass || 'selected');
   titleEl.textContent = title;
-  body.innerHTML = '';
+  body.replaceChildren(); // FIX 2a : remplacé body.innerHTML = ''
   buildFn(body);
   panel.classList.add('open');
 }
@@ -403,7 +403,7 @@ function showConfTooltip(e, confidence, ms) {
     { label: 'Issuer présent',         val: ms?.issuer       ? '+15 pts ✓' : '0 pts —', earned: !!ms?.issuer },
     { label: 'Token endpoint',         val: ms?.tokenEndpoint? '+10 pts ✓' : '0 pts —', earned: !!ms?.tokenEndpoint },
   ];
-  tip.innerHTML = '';
+  tip.replaceChildren(); // FIX 2b : remplacé tip.innerHTML = ''
   const title = document.createElement('div'); title.className = 'conf-tooltip-title'; title.textContent = 'Indice de confiance — ' + confidence + '%';
   tip.appendChild(title);
   rows.forEach(r => {
@@ -498,6 +498,19 @@ function computeConfidence(ms) {
 }
 
 // ── Core checks ──
+
+/**
+ * Interroge les endpoints publics Microsoft pour identifier le tenant.
+ * Usage interne uniquement — ne pas exposer comme API publique.
+ * Appels : OIDC endpoint + federation metadata (lecture seule, pas d'auth).
+ * @param {string} domain - Domaine à analyser (ex: contoso.com)
+ */
+/**
+ * Interroge les endpoints publics Microsoft pour identifier le tenant.
+ * Usage interne uniquement — ne pas exposer comme API publique.
+ * Appels : OIDC endpoint + federation metadata (lecture seule, pas d'auth).
+ * @param {string} domain - Domaine à analyser (ex: contoso.com)
+ */
 async function checkMicrosoft(domain) {
   let tenantId = null, realmData = null, oidcData = null, tenantValid = false;
   // FIX : userrealm supprimé — bloqué par CORS navigateur, redondant avec l'endpoint OIDC
@@ -978,7 +991,6 @@ function exportReport() {
   if (!lastReport) return;
   const r   = lastReport;
   const HR  = '_'.repeat(36);
-  const NL  = '\n';
   const dateStr = new Date(r.analysedAt).toLocaleDateString('fr-FR', {
     day: '2-digit', month: '2-digit', year: 'numeric'
   });
@@ -1009,38 +1021,29 @@ function exportReport() {
   if (r.health) {
     const mapCheck = (c) => {
       const t = c.title;
-      // MX
       if (t.includes('MX Records pr\u00e9sents'))       return 'MX Records: OK';
       if (t.includes('MX Records manquants'))             return 'MX Records: MANQUANT';
-      // SPF
       if (t.includes('SPF strict'))                       return 'SPF: OK';
       if (t.includes('SPF (softfail'))                    return 'SPF: OK (softfail \u2014 ~all)';
       if (t.includes('SPF manquant'))                     return 'SPF: MANQUANT';
-      // DMARC
       if (t.includes('DMARC p=reject'))                   return 'DMARC: OK (p=reject)';
       if (t.includes('DMARC p=quarantine'))               return 'DMARC: OK (p=quarantine \u2b50)';
       if (t.includes('DMARC p=none'))                     return 'DMARC: KO (p=none)';
       if (t.includes('DMARC manquant'))                   return 'DMARC: MANQUANT';
-      // DKIM
       if (t.includes('DKIM actif')) {
         const m = t.match(/DKIM actif \((.+)\)/);
         return 'DKIM: OK' + (m ? ' (' + m[1] + ')' : '');
       }
       if (t.includes('DKIM non d\u00e9tect\u00e9'))      return 'DKIM: MANQUANT';
-      // WWW
       if (t.includes('CNAME www'))                        return 'www via CNAME: OK';
       if (t.includes('www via A record'))                 return 'www via A record: [i]';
       if (t.includes('www non r\u00e9solu'))              return 'www: KO';
-      // DNSSEC
       if (t.includes('DNSSEC activ\u00e9'))               return 'DNSSEC: OK';
       if (t.includes('DNSSEC non'))                       return 'DNSSEC: KO';
-      // MTA-STS
       if (t.includes('MTA-STS activ\u00e9'))              return 'MTA-STS: OK';
       if (t.includes('MTA-STS non'))                      return 'MTA-STS: KO';
-      // BIMI
       if (t.includes('BIMI configur\u00e9'))              return 'BIMI: OK';
       if (t.includes('BIMI absent'))                      return 'BIMI: KO';
-      // Fallback
       const status = c.type === 'ok' ? 'OK' : c.type === 'warn' ? 'KO' : c.type === 'error' ? 'MANQUANT' : '[i]';
       return t + ': ' + status;
     };
@@ -1130,7 +1133,7 @@ function exportReport() {
     }
   }
 
-  // ── Detected Services (compact) ─────────────
+  // ── Detected Services ────────────────────────
   const active = (r.otherServices || []).filter(s => s.on);
   if (active.length) {
     lines.push('DETECTED SERVICES:');
@@ -1143,7 +1146,6 @@ function exportReport() {
   // ── Footer ───────────────────────────────────
   lines.push('TenantPulse \u2014 Internal RUN MW Platform \u2014 v0.6 in development');
 
-  // ── Copy to clipboard ────────────────────────
   const text = lines.join('\n');
   const btn  = document.getElementById('exportBtn');
   navigator.clipboard.writeText(text).then(() => {
@@ -1154,7 +1156,6 @@ function exportReport() {
     setTimeout(() => { btn.textContent = '\ud83d\udccb Copier le rapport'; }, 3000);
   });
 }
-
 // ── Common panel builders ──
 function buildMsPanel(ms) {
   return b => [
