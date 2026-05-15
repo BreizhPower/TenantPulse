@@ -500,9 +500,7 @@ function computeConfidence(ms) {
 // ── Core checks ──
 async function checkMicrosoft(domain) {
   let tenantId = null, realmData = null, oidcData = null, tenantValid = false;
-  const realm = await fetchJsonC(`https://login.microsoftonline.com/common/userrealm/?user=check@${domain}&api-version=2.1`, 'ms', 8000);
-  if (realm?.account_type && realm.account_type !== 'Unknown') realmData = realm;
-  if (realmData?.NameSpaceType === 'Consumer' || realmData?.account_type?.toLowerCase() === 'consumer') return null;
+  // FIX : userrealm supprimé — bloqué par CORS navigateur, redondant avec l'endpoint OIDC
   const direct = await fetchJsonC(`https://login.microsoftonline.com/${domain}/.well-known/openid-configuration`, 'ms', 8000);
   if (direct) {
     const c = extractGuid(direct.issuer) || extractGuid(direct.token_endpoint) || extractGuid(direct.authorization_endpoint);
@@ -515,8 +513,7 @@ async function checkMicrosoft(domain) {
     } catch {}
   }
   if (tenantId && !tenantValid) { tenantValid = await validateTenantGuid(tenantId); if (!tenantValid) tenantId = null; }
-  const isPro = realmData && realmData.NameSpaceType !== 'Consumer' && realmData.account_type?.toLowerCase() !== 'consumer';
-  if (tenantId || isPro) return { tenantId, tenantValid, namespaceType: realmData?.NameSpaceType || null, federationType: realmData?.federation_protocol || null, cloudInstance: realmData?.cloud_instance_name || 'microsoftonline.com', issuer: oidcData?.issuer || null, tokenEndpoint: oidcData?.token_endpoint || null, authorizationEndpoint: oidcData?.authorization_endpoint || null, userInfoEndpoint: oidcData?.userinfo_endpoint || null };
+  if (tenantId) return { tenantId, tenantValid, namespaceType: realmData?.NameSpaceType || null, federationType: realmData?.federation_protocol || null, cloudInstance: realmData?.cloud_instance_name || 'microsoftonline.com', issuer: oidcData?.issuer || null, tokenEndpoint: oidcData?.token_endpoint || null, authorizationEndpoint: oidcData?.authorization_endpoint || null, userInfoEndpoint: oidcData?.userinfo_endpoint || null };
   return null;
 }
 
@@ -662,7 +659,19 @@ async function checkHost(domain) {
     const updated = events.find(e => e.eventAction === 'last changed')?.eventDate;
     return { registrar, ns, status: r.status || [], created, expires, updated, hostName: detectHostFromNS(ns.join(' ').toLowerCase(), registrar || '') };
   }
-  try { const r = await fetchJsonC(`https://rdap.org/domain/${domain}`, 'host', 12000); if (r) return parseRdap(r); } catch {}
+  try {
+    const ctrl = new AbortController();
+    stepControllers['host'] = ctrl;
+    const tid = setTimeout(() => ctrl.abort(), 12000);
+    // FIX : redirect:'manual' — empêche le navigateur de suivre les redirects de rdap.org
+    // vers des serveurs RDAP tiers (rdap.nic.tv, rdap.nic.io…) non listés dans le CSP.
+    // Si rdap.org redirige → réponse opaqueredirect → on retourne null silencieusement.
+    const resp = await fetch(`https://rdap.org/domain/${domain}`, { signal: ctrl.signal, redirect: 'manual' });
+    clearTimeout(tid); delete stepControllers['host'];
+    if (!resp.ok || resp.type === 'opaqueredirect') return null;
+    const r = await resp.json();
+    return parseRdap(r);
+  } catch {}
   return null;
 }
 
@@ -786,9 +795,6 @@ function hostLogo(hostName) {
   return { el: _hostInitial(hostName[0]?.toUpperCase() || '?', '#6b7280') };
 }
 
-// ── FIX #1 : helpers DOM sûrs — remplacent MS_SVG / GG_SVG (innerHTML supprimé) ──
-// Avant : const MS_SVG = `<img ...>`  puis  iconWrap.innerHTML = iconHtml
-// Après : fonctions createElement — aucun parsing HTML, aucun risque XSS
 function makeImgIcon(src, alt, size) {
   const img = document.createElement('img');
   img.src = src; img.alt = alt;
@@ -836,7 +842,7 @@ function addSectionTitle(b, title) {
 function showError(msg) { const b = document.getElementById('errBox'); b.textContent = msg; b.style.display = 'block'; }
 function copyVal(id, btn) {
   const el = document.getElementById(id);
-  if (!el) return; // guard : l'élément peut avoir quitté le DOM (panel fermé)
+  if (!el) return;
   navigator.clipboard.writeText(el.innerText).then(() => { btn.textContent = '✓ Copié'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 1500); });
 }
 function lockButtons()     { document.getElementById('checkBtnFast').disabled = true;  document.getElementById('checkBtnFull').disabled = true; }
@@ -894,16 +900,12 @@ function buildDkimBlock(b, dkimResults, hasSel1, hasSel2) {
   }
 }
 
-// ── FIX #1 : makeCard — paramètre iconHtml supprimé, seul iconEl (élément DOM) est accepté ──
-// Avant : { id, iconHtml, iconEl, ... }  avec  iconWrap.innerHTML = iconHtml  comme fallback
-// Après : { id, iconEl, ... }  —  iconWrap.appendChild(iconEl) uniquement
 function makeCard({ id, iconEl, iconBg, title, sub, badge, badgeCls, selCls, onClick }) {
   const card = document.createElement('div');
   card.className = 'result-card'; card.id = 'card-' + id; card.dataset.selClass = selCls;
   const row = document.createElement('div'); row.className = 'card-row';
   const left = document.createElement('div'); left.className = 'card-left';
   const iconWrap = document.createElement('div'); iconWrap.className = 'card-icon-wrap ' + iconBg;
-  // FIX #1 : appendChild au lieu de innerHTML — aucun parsing HTML
   if (iconEl) iconWrap.appendChild(iconEl);
   const textWrap = document.createElement('div');
   const titleEl = document.createElement('div'); titleEl.className = 'card-title'; titleEl.textContent = title;
@@ -963,7 +965,6 @@ function renderHero(ms, domain, confidence) {
       badge.textContent = confidence + '% — ' + confLabel;
       const infoBtn = document.createElement('button'); infoBtn.className = 'conf-info-btn'; infoBtn.textContent = 'i'; infoBtn.setAttribute('aria-label', 'Détail de l\'indice de confiance');
       infoBtn.addEventListener('mousedown', (e) => { e.preventDefault(); showConfTooltip(e, confidence, ms); });
-      // mouseup global déjà bindé ligne 430 — pas de listener supplémentaire ici
       badge.appendChild(infoBtn);
       guid.appendChild(sp); guid.appendChild(copyBtn); guid.appendChild(badge);
       hero.appendChild(guid);
@@ -1221,15 +1222,12 @@ async function checkFast() {
       currentState.dns.detectedProviders.forEach(name => { const p = document.createElement('div'); p.className = 'pill on'; p.textContent = '✓ ' + name; pr.appendChild(p); });
       pb.appendChild(pl); pb.appendChild(pr); center.appendChild(pb);
     }
-    // FIX #1 : iconEl reçoit un élément DOM créé via makeImgIcon (plus de MS_SVG / innerHTML)
     if (currentState.ms?.tenantValid) {
       const rows = msRows(currentState.ms);
       center.appendChild(makeCard({ id:'ms', iconEl:makeImgIcon('assets/Microsoft.png','Microsoft',22), iconBg:'ms-clr', title:'Microsoft 365 / Entra ID', sub:'Endpoints & informations tenant', badge: rows.length + ' champs', badgeCls:'ms-b', selCls:'selected', onClick: () => openPanel('ms', 'Microsoft 365 / Entra ID', buildMsPanel(currentState.ms)) }));
     }
-    // FIX #1 : makeGoogleSvgIcon() remplace GG_SVG (chaîne SVG) — création DOM sûre
     if (currentState.goog) center.appendChild(makeCard({ id:'google', iconEl:makeGoogleSvgIcon(), iconBg:'gg-clr', title:'Google Workspace', sub:'OpenID Connect & MX Records', badge:'5 champs', badgeCls:'gg-b', selCls:'sel-google', onClick: () => openPanel('google', '🔵 Google Workspace', buildGooglePanel(currentState.goog)) }));
     const dnsRowCount = [currentState.dns?.mx?.length, currentState.dns?.spf, currentState.dns?.detectedProviders?.length, currentState.dns?.txt?.length].filter(Boolean).length;
-    // FIX #1 : makeImgIcon remplace la chaîne '<img src="assets/DNS.png" ...>' passée en innerHTML
     if (dnsRowCount) center.appendChild(makeCard({ id:'dns', iconEl:makeImgIcon('assets/DNS.png','DNS',20), iconBg:'dn-clr', title:'Enregistrements DNS', sub:'MX · SPF · TXT', badge: dnsRowCount + ' entrées', badgeCls:'dn-b', selCls:'sel-dns', onClick: () => openPanel('dns', '🌐 Enregistrements DNS', buildDnsPanel(currentState.dns)) }));
     const ctaBtn = document.createElement('button'); ctaBtn.className = 'btn-trigger-full'; ctaBtn.id = 'btnTriggerFull';
     (() => {
@@ -1302,7 +1300,6 @@ async function runFullFromState(raw, domain, ctaBtn) {
       const logo = hostLogo(currentState.host.hostName);
       center.insertBefore(makeCard({ id:'host', iconEl:logo.el, iconBg:'hs-clr', title:'Hébergeur & Registrar', sub:'WHOIS / RDAP — ' + (currentState.host.hostName || 'Inconnu'), badge: currentState.host.hostName || 'Inconnu', badgeCls:'hs-b', selCls:'sel-host', onClick: () => openPanel('host', '🏠 Hébergeur & Registrar', buildHostPanel(currentState.host, domain)) }), ctaBtn);
     }
-    // FIX #1 : makeImgIcon remplace la chaîne '<img src="assets/Santé.png" ...>' passée en innerHTML
     if (currentState.health) {
       center.insertBefore(makeCard({ id:'health', iconEl:makeImgIcon('assets/Santé.png','Santé',20), iconBg:'hl-clr', title:'Santé du domaine', sub: healthSubLbl(currentState.health), badge: healthScoreLbl(currentState.health), badgeCls:'hl-b', selCls:'sel-health', onClick: () => openPanel('health', '🛡️ Santé du domaine', buildHealthPanel(currentState.health, domain)) }), ctaBtn);
     }
@@ -1360,7 +1357,6 @@ async function checkFull() {
     pl.appendChild(tg);
     pb.appendChild(pl); pb.appendChild(pr); center.appendChild(pb);
 
-    // FIX #1 : tous les appels makeCard utilisent maintenant iconEl (createElement), pas iconHtml
     if (currentState.ms?.tenantValid) {
       const rows = msRows(currentState.ms);
       center.appendChild(makeCard({ id:'ms', iconEl:makeImgIcon('assets/Microsoft.png','Microsoft',22), iconBg:'ms-clr', title:'Microsoft 365 / Entra ID', sub:'Endpoints & informations tenant', badge: rows.length + ' champs', badgeCls:'ms-b', selCls:'selected', onClick: () => openPanel('ms', 'Microsoft 365 / Entra ID', buildMsPanel(currentState.ms)) }));
