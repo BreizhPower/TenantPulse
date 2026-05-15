@@ -976,94 +976,144 @@ function renderHero(ms, domain, confidence) {
 // ── Export ──
 function exportReport() {
   if (!lastReport) return;
-  const r       = lastReport;
-  const W       = 52;
-  const pad     = (l, v) => l + ': ' + v;
-  const hr      = (char = '\u2500') => char.repeat(W);
-  const section = t => '\n' + t.toUpperCase() + '\n' + hr();
-  const dateStr = new Date(r.analysedAt).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
-  const lines   = [];
+  const r   = lastReport;
+  const HR  = '_'.repeat(36);
+  const NL  = '\n';
+  const dateStr = new Date(r.analysedAt).toLocaleDateString('fr-FR', {
+    day: '2-digit', month: '2-digit', year: 'numeric'
+  });
+  const lines = [];
 
-  lines.push('  TENANTPULSE  \u2014  SECURITY SUMMARY REPORT');
-  lines.push('  ' + r.domain + '   \u00b7   ' + dateStr);
-  lines.push(hr());
+  // ── Header ──────────────────────────────────
+  lines.push('TENANTPULSE \u2014 SECURITY SUMMARY REPORT');
+  lines.push(r.domain + '  ' + dateStr);
+  lines.push(HR);
+  lines.push('');
 
-  lines.push(section('Overall Status'));
-  if (r.health) {
-    const s       = r.health.score;
-    const posture = s >= 80 ? 'HIGH' : s >= 50 ? 'MEDIUM' : 'LOW';
-    const grade   = s >= 80 ? '[OK]' : s >= 50 ? '[WARN]' : '[CRIT]';
-    const hasSpf  = r.health.checks.some(c => c.title.includes('SPF')       && (c.type === 'ok' || c.type === 'warn'));
-    const hasDkim = r.health.checks.some(c => c.title.includes('DKIM actif'));
-    const hasDmarc= r.health.checks.some(c => c.title.includes('DMARC')     && (c.type === 'ok' || c.type === 'warn'));
-    const mailProt = (hasSpf && hasDkim && hasDmarc) ? 'FULL' : (hasSpf || hasDmarc) ? 'PARTIAL' : 'NONE';
-    lines.push(pad('Health Score',     s + '%  ' + grade));
-    lines.push(pad('Security Posture', posture));
-    lines.push(pad('Mail Protection',  mailProt));
+  // ── Tenant MS365 ────────────────────────────
+  if (r.microsoft?.tenantId && r.microsoft.tenantValid) {
+    lines.push('MS365 Tenant: Valid\u00e9');
+    lines.push('Tenant ID: ' + r.microsoft.tenantId);
+  } else if (r.microsoft?.tenantId && !r.microsoft.tenantValid) {
+    lines.push('MS365 Tenant: GUID invalide');
+    lines.push('Tenant ID: ' + r.microsoft.tenantId + ' (non valid\u00e9)');
   } else {
-    lines.push(pad('Health Score', 'N/A  (fast scan only)'));
+    lines.push('MS365 Tenant: Non d\u00e9tect\u00e9');
   }
-  if (r.microsoft?.tenantId && r.microsoft.tenantValid)
-    lines.push(pad('MS365 Tenant',   'Detected'));
-  else if (!r.microsoft)
-    lines.push(pad('MS365 Tenant',   'Not found'));
+  lines.push(HR);
+  lines.push('');
 
+  // ── Security Checks ─────────────────────────
+  lines.push('SECURITY CHECKS:');
+  lines.push('');
   if (r.health) {
-    lines.push(section('Security Checks'));
-    const sym = { ok:' [+]', warn:' [!]', error:' [-]', info:' [i]' };
-    r.health.checks.forEach(c => lines.push(sym[c.type] + '  ' + c.title));
+    const mapCheck = (c) => {
+      const t = c.title;
+      // MX
+      if (t.includes('MX Records pr\u00e9sents'))       return 'MX Records: OK';
+      if (t.includes('MX Records manquants'))             return 'MX Records: MANQUANT';
+      // SPF
+      if (t.includes('SPF strict'))                       return 'SPF: OK';
+      if (t.includes('SPF (softfail'))                    return 'SPF: OK (softfail \u2014 ~all)';
+      if (t.includes('SPF manquant'))                     return 'SPF: MANQUANT';
+      // DMARC
+      if (t.includes('DMARC p=reject'))                   return 'DMARC: OK (p=reject)';
+      if (t.includes('DMARC p=quarantine'))               return 'DMARC: OK (p=quarantine \u2b50)';
+      if (t.includes('DMARC p=none'))                     return 'DMARC: KO (p=none)';
+      if (t.includes('DMARC manquant'))                   return 'DMARC: MANQUANT';
+      // DKIM
+      if (t.includes('DKIM actif')) {
+        const m = t.match(/DKIM actif \((.+)\)/);
+        return 'DKIM: OK' + (m ? ' (' + m[1] + ')' : '');
+      }
+      if (t.includes('DKIM non d\u00e9tect\u00e9'))      return 'DKIM: MANQUANT';
+      // WWW
+      if (t.includes('CNAME www'))                        return 'www via CNAME: OK';
+      if (t.includes('www via A record'))                 return 'www via A record: [i]';
+      if (t.includes('www non r\u00e9solu'))              return 'www: KO';
+      // DNSSEC
+      if (t.includes('DNSSEC activ\u00e9'))               return 'DNSSEC: OK';
+      if (t.includes('DNSSEC non'))                       return 'DNSSEC: KO';
+      // MTA-STS
+      if (t.includes('MTA-STS activ\u00e9'))              return 'MTA-STS: OK';
+      if (t.includes('MTA-STS non'))                      return 'MTA-STS: KO';
+      // BIMI
+      if (t.includes('BIMI configur\u00e9'))              return 'BIMI: OK';
+      if (t.includes('BIMI absent'))                      return 'BIMI: KO';
+      // Fallback
+      const status = c.type === 'ok' ? 'OK' : c.type === 'warn' ? 'KO' : c.type === 'error' ? 'MANQUANT' : '[i]';
+      return t + ': ' + status;
+    };
+    r.health.checks.forEach(c => lines.push(mapCheck(c)));
+  } else {
+    lines.push('(Analyse rapide \u2014 s\u00e9curit\u00e9 non v\u00e9rifi\u00e9e)');
+    lines.push('Lancez l\u2019analyse compl\u00e8te pour voir SPF, DMARC, DKIM\u2026');
   }
+  lines.push(HR);
+  lines.push('');
 
-  lines.push(section('Infrastructure'));
-  const cloud = r.microsoft ? 'Microsoft 365' : r.google ? 'Google Workspace' : r.dns?.detectedProviders?.[0] || '\u2014';
-  if (r.host?.hostName)  lines.push(pad('Provider',      r.host.hostName));
-  lines.push(pad('Cloud Platform',  cloud));
-  if (r.host?.registrar) lines.push(pad('Registrar',     r.host.registrar));
-  if (r.microsoft?.tenantId && r.microsoft.tenantValid)
-                         lines.push(pad('Tenant ID',     r.microsoft.tenantId));
-  if (r.microsoft?.cloudInstance)
-                         lines.push(pad('Cloud Instance',r.microsoft.cloudInstance));
-  if (r.host?.created)   lines.push(pad('Domain Since',  new Date(r.host.created).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })));
-  if (r.host?.expires)   lines.push(pad('Expires',       new Date(r.host.expires).toLocaleDateString('en-GB',  { day:'2-digit', month:'short', year:'numeric' })));
-  if (r.dns?.mx?.length) lines.push(pad('MX',            r.dns.mx[0] + (r.dns.mx.length > 1 ? ' (+' + (r.dns.mx.length - 1) + ')' : '')));
+  // ── Infrastructure ──────────────────────────
+  lines.push('INFRASTRUCTURE:');
+  lines.push('');
+  const cloud = r.microsoft
+    ? 'Microsoft 365'
+    : r.google
+      ? 'Google Workspace'
+      : r.dns?.detectedProviders?.[0] || '\u2014';
+  if (r.host?.hostName)              lines.push('Provider: '       + r.host.hostName);
+  lines.push(                                    'Cloud Platform: ' + cloud);
+  if (r.host?.registrar)             lines.push('Registrar: '      + r.host.registrar);
+  if (r.microsoft?.cloudInstance)    lines.push('Cloud Instance: ' + r.microsoft.cloudInstance);
+  if (r.host?.created)               lines.push('Domain Since: '   + new Date(r.host.created).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }));
+  if (r.host?.expires)               lines.push('Expires: '        + new Date(r.host.expires).toLocaleDateString('en-GB',  { day:'2-digit', month:'short', year:'numeric' }));
+  if (r.dns?.mx?.length)             lines.push('MX: '             + r.dns.mx[0] + (r.dns.mx.length > 1 ? ' (+' + (r.dns.mx.length - 1) + ')' : ''));
+  lines.push(HR);
+  lines.push('');
 
+  // ── Key Risks ───────────────────────────────
   if (r.health) {
     const RISK_MAP = [
-      ['SPF manquant',        'Outbound mail spoofing risk'],
-      ['SPF (softfail',       'SPF softfail \u2014 spoofing partially possible'],
-      ['DKIM non',            'Weak email authentication posture'],
-      ['DMARC manquant',      'No DMARC policy \u2014 phishing risk'],
-      ['DMARC p=none',        'DMARC monitor-only \u2014 no enforcement'],
-      ['DNSSEC non',          'No DNSSEC integrity validation'],
-      ['MX Records manquants','No mail server configured'],
+      { match: t => t.includes('MX Records manquants'),                  msg: 'No MX records: mail server not configured' },
+      { match: t => t.includes('SPF manquant'),                          msg: 'No SPF: spoofing risk' },
+      { match: t => t.includes('SPF (softfail'),                         msg: 'SPF softfail: spoofing partially possible' },
+      { match: t => t.includes('DMARC manquant'),                        msg: 'No DMARC: phishing risk' },
+      { match: t => t.includes('DMARC p=none'),                          msg: 'DMARC p=none: no enforcement' },
+      { match: t => t.includes('DKIM non d\u00e9tect\u00e9'),            msg: 'No DKIM: weak email authentication' },
+      { match: t => t.includes('DNSSEC non'),                            msg: 'No DNSSEC: integrity validation' },
     ];
     const risks = [];
     r.health.checks.forEach(c => {
       if (c.type !== 'error' && c.type !== 'warn') return;
-      for (const [key, msg] of RISK_MAP) {
-        if (c.title.includes(key.split(' ')[0]) && c.title.toLowerCase().includes((key.split(' ')[1] || '').toLowerCase())) {
-          if (!risks.includes(msg)) risks.push(msg);
-          return;
+      for (const rule of RISK_MAP) {
+        if (rule.match(c.title) && !risks.includes(rule.msg)) {
+          risks.push(rule.msg);
+          break;
         }
       }
     });
     if (risks.length) {
-      lines.push(section('Key Risks'));
-      risks.forEach(risk => lines.push('  \u25b8  ' + risk));
+      lines.push('KEY RISKS:');
+      lines.push('');
+      risks.forEach(r => lines.push('-' + r));
+      lines.push(HR);
+      lines.push('');
     }
+  }
 
+  // ── Recommended Actions ─────────────────────
+  if (r.health) {
     const actions = [];
     r.health.checks.forEach(c => {
       if (c.type === 'error') {
         if (c.title.includes('DKIM'))  actions.push('Enable and configure DKIM signing');
-        if (c.title.includes('SPF'))   actions.push('Add a valid SPF record');
+        if (c.title.includes('SPF'))   actions.push('Add a valid SPF record (-all)');
         if (c.title.includes('DMARC')) actions.push('Deploy a DMARC policy (p=quarantine minimum)');
         if (c.title.includes('MX'))    actions.push('Configure MX records');
       }
       if (c.type === 'warn') {
-        if (c.title.includes('DMARC') && c.title.includes('none')) actions.push('Enforce DMARC \u2014 move to p=quarantine or p=reject');
+        if (c.title.includes('DMARC') && c.title.includes('none'))     actions.push('Enforce DMARC \u2014 move to p=quarantine or p=reject');
         if (c.title.includes('SPF')   && c.title.includes('softfail')) actions.push('Harden SPF \u2014 replace ~all with -all');
-        if (c.title.includes('DNSSEC')) actions.push('Activate DNSSEC on your registrar');
+        if (c.title.includes('DNSSEC'))                                 actions.push('Activate DNSSEC on your registrar');
       }
       if (c.type === 'info') {
         if (c.title.includes('MTA-STS')) actions.push('Configure MTA-STS for inbound mail security');
@@ -1072,29 +1122,36 @@ function exportReport() {
     });
     const unique = [...new Set(actions)];
     if (unique.length) {
-      lines.push(section('Recommended Actions'));
-      unique.forEach((a, i) => lines.push('  ' + (i + 1) + '.  ' + a));
+      lines.push('RECOMMENDED ACTIONS:');
+      lines.push('');
+      unique.forEach((a, i) => lines.push(' ' + (i + 1) + '.  ' + a));
+      lines.push(HR);
+      lines.push('');
     }
   }
 
+  // ── Detected Services (compact) ─────────────
   const active = (r.otherServices || []).filter(s => s.on);
   if (active.length) {
-    lines.push(section('Detected Services'));
-    active.forEach(s => lines.push('  [+]  ' + s.name));
+    lines.push('DETECTED SERVICES:');
+    lines.push('');
+    lines.push(active.map(s => s.name).join(' \u00b7 '));
+    lines.push(HR);
+    lines.push('');
   }
 
-  lines.push('');
-  lines.push(hr());
-  lines.push('  TenantPulse  \u2014  Internal RUN MW Platform');
-  lines.push(hr());
+  // ── Footer ───────────────────────────────────
+  lines.push('TenantPulse \u2014 Internal RUN MW Platform \u2014 v0.6 in development');
 
-  const text = lines.join('\n'), btn = document.getElementById('exportBtn');
+  // ── Copy to clipboard ────────────────────────
+  const text = lines.join('\n');
+  const btn  = document.getElementById('exportBtn');
   navigator.clipboard.writeText(text).then(() => {
-    btn.textContent = '✅ Rapport copié !';
-    setTimeout(() => { btn.textContent = '📋 Copier le rapport'; }, 2000);
+    btn.textContent = '\u2705 Rapport copi\u00e9 !';
+    setTimeout(() => { btn.textContent = '\ud83d\udccb Copier le rapport'; }, 2000);
   }).catch(() => {
-    btn.textContent = '⚠ Copiez manuellement';
-    setTimeout(() => { btn.textContent = '📋 Copier le rapport'; }, 3000);
+    btn.textContent = '\u26a0 Copiez manuellement';
+    setTimeout(() => { btn.textContent = '\ud83d\udccb Copier le rapport'; }, 3000);
   });
 }
 
