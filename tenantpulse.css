@@ -169,19 +169,26 @@ input::placeholder{color:var(--muted);font-weight:500}
 .err-box{margin-top:10px;background:#fff1f2;border:1.5px solid #fecdd3;border-radius:7px;padding:9px 12px;font-size:var(--text-sm);font-weight:500;color:#dc2626;display:none}
 [data-theme="dark"] .err-box{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
 
-.hero-partner-btn{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:8px;color:rgba(255,255,255,.85);font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:9px 12px;cursor:pointer;text-decoration:none;transition:all .15s;min-width:0}
+.hero-partner-btn{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:8px;color:rgba(255,255,255,.85);font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:9px 12px;cursor:pointer;text-decoration:none;transition:all .15s;min-width:0;position:relative}
+.hero-partner-btn.recommended{border-color:rgba(134,239,172,.45);background:rgba(22,163,74,.08)}
+.hero-partner-btn.recommended:hover{border-color:rgba(134,239,172,.75);background:rgba(22,163,74,.18)}
+.hero-partner-btn-ribbon{position:absolute;top:-8px;right:8px;display:inline-flex;align-items:center;gap:4px;background:#15803d;color:#fff;border-radius:999px;padding:2px 6px 2px 8px;font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1.2;box-shadow:0 1px 6px rgba(0,0,0,.45);white-space:nowrap}
+.hero-partner-btn-ribbon-label{pointer-events:none}
+.hero-partner-btn-ribbon-info{display:inline-flex;align-items:center;justify-content:center;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.28);color:#fff;font-style:italic;font-family:Georgia,serif;font-size:9px;font-weight:700;cursor:help;line-height:1}
+.hero-partner-btn-ribbon-info:hover{background:rgba(255,255,255,.45)}
 .hero-partner-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
 .hero-partner-btn-icon{width:20px;height:20px;object-fit:contain;flex-shrink:0}
 .hero-partner-btn-text{display:flex;flex-direction:column;gap:1px;min-width:0}
 .hero-partner-btn-label{font-size:var(--text-xs);font-weight:700;color:#fff;white-space:nowrap}
 .hero-partner-btn-sub{font-size:9px;font-weight:400;color:rgba(255,255,255,.45);white-space:nowrap}
 .hero-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
-.profiles-modal{position:fixed;top:68px;right:24px;z-index:900;background:var(--surface);border:1.5px solid var(--border);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);width:340px;max-width:calc(100vw - 32px);animation:dropIn .18s ease}
+.profiles-modal{position:fixed;top:68px;right:24px;z-index:900;background:var(--surface);border:1.5px solid var(--border);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22);width:480px;max-width:calc(100vw - 32px);animation:dropIn .18s ease}
 .profiles-modal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;border-bottom:1px solid var(--border)}
 .profiles-modal-title{display:flex;align-items:center;gap:7px;font-size:var(--text-sm);font-weight:700;color:var(--text)}
 .profiles-modal-close{background:none;border:none;cursor:pointer;font-size:var(--text-base);color:var(--muted);padding:2px 6px;border-radius:5px;transition:background .15s}
 .profiles-modal-close:hover{background:var(--row)}
-.profiles-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:10px 12px}
+.profiles-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:10px 12px}
+.profiles-grid .profile-item.locked{grid-column:1/-1}
 .profile-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:8px;border:1.5px solid var(--border);background:var(--row);cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
 .profile-item:hover{border-color:var(--blue);background:var(--acc-hover)}
 .profile-item-left{display:flex;align-items:center;gap:7px;min-width:0}
