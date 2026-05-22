@@ -297,8 +297,14 @@ function bindEvents() {
   document.getElementById('btnPanelClose').addEventListener('click', closePanel);
   document.getElementById('btnOpenProfiles').addEventListener('click', openProfilesModal);
   document.getElementById('btnProfilesClose').addEventListener('click', closeProfilesModal);
-  document.getElementById('profilesModal').addEventListener('click', closeProfilesModal);
-  document.getElementById('profilesModalInner').addEventListener('click', e => e.stopPropagation());
+  document.addEventListener('click', e => {
+    const modal = document.getElementById('profilesModal');
+    const btn   = document.getElementById('btnOpenProfiles');
+    if (modal.classList.contains('open') && !modal.contains(e.target) && !btn.contains(e.target)) {
+      closeProfilesModal();
+    }
+  });
+  document.getElementById('profilesModal').addEventListener('click', e => e.stopPropagation());
   document.getElementById('btnProfilesSave').addEventListener('click', saveProfilesModal);
   document.getElementById('btnProfilesSelectAll').addEventListener('click', () => {
     document.querySelectorAll('.profile-item-switch').forEach(sw => sw.classList.add('on'));
@@ -313,22 +319,22 @@ function openProfilesModal() {
   const profile = loadProfile();
   const list = document.getElementById('profilesToggleList');
   list.replaceChildren();
+  const grid = document.createElement('div'); grid.className = 'profiles-grid';
   REDIRECT_BUTTONS.forEach(btn => {
-    const row = document.createElement('div'); row.className = 'profile-toggle-row';
-    const left = document.createElement('div'); left.className = 'profile-toggle-left';
-    const icon = document.createElement('img'); icon.src = btn.icon; icon.alt = btn.label; icon.className = 'profile-toggle-icon';
-    const info = document.createElement('div');
-    const name = document.createElement('div'); name.className = 'profile-toggle-name'; name.textContent = btn.label;
-    const sub  = document.createElement('div'); sub.className  = 'profile-toggle-sub';  sub.textContent  = btn.sub;
-    info.appendChild(name); info.appendChild(sub);
-    left.appendChild(icon); left.appendChild(info);
+    const item = document.createElement('div'); item.className = 'profile-item';
+    item.addEventListener('click', () => sw.classList.toggle('on'));
+    const left = document.createElement('div'); left.className = 'profile-item-left';
+    const icon = document.createElement('img'); icon.src = btn.icon; icon.alt = btn.label; icon.className = 'profile-item-icon';
+    const name = document.createElement('span'); name.className = 'profile-item-name'; name.textContent = btn.label;
+    left.appendChild(icon); left.appendChild(name);
     const sw = document.createElement('div');
     sw.className = 'drop-toggle-switch profile-item-switch' + (profile[btn.key] !== false ? ' on' : '');
     sw.dataset.key = btn.key;
-    sw.addEventListener('click', () => sw.classList.toggle('on'));
-    row.appendChild(left); row.appendChild(sw);
-    list.appendChild(row);
+    sw.style.flexShrink = '0';
+    item.appendChild(left); item.appendChild(sw);
+    grid.appendChild(item);
   });
+  list.appendChild(grid);
   document.getElementById('profilesModal').classList.add('open');
 }
 function closeProfilesModal() {
