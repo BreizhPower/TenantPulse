@@ -1341,7 +1341,7 @@ async function checkFast() {
   const raw = emailInput.value.trim(); if (!raw) { showError('Veuillez entrer une adresse e-mail ou un domaine.'); return; }
   const domain = extractDomain(raw); if (!domain || !domain.includes('.')) { showError('Domaine invalide.'); return; }
   const center = document.getElementById('centerCol'), exportBtn = document.getElementById('exportBtn'), errBox = document.getElementById('errBox');
-  errBox.style.display = 'none'; center.innerHTML = ''; closePanel();
+  errBox.style.display = 'none'; center.replaceChildren(); closePanel();
   exportBtn.classList.remove('visible'); lastReport = null;
   currentState = { domain, ms:null, dns:null, goog:null, health:null, others:null, host:null, fullDone:false };
   showSteps(['ms', 'google', 'dns']);
@@ -1474,7 +1474,7 @@ async function checkFull() {
   const raw = emailInput.value.trim(); if (!raw) { showError('Veuillez entrer une adresse e-mail ou un domaine.'); return; }
   const domain = extractDomain(raw); if (!domain || !domain.includes('.')) { showError('Domaine invalide.'); return; }
   const center = document.getElementById('centerCol'), exportBtn = document.getElementById('exportBtn'), errBox = document.getElementById('errBox');
-  errBox.style.display = 'none'; center.innerHTML = ''; closePanel();
+  errBox.style.display = 'none'; center.replaceChildren(); closePanel();
   exportBtn.classList.remove('visible'); lastReport = null;
   currentState = { domain, ms:null, dns:null, goog:null, health:null, others:null, host:null, fullDone:false };
   lockButtons(); setFullLoading(true);
