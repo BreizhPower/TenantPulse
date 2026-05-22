@@ -1090,7 +1090,7 @@ function renderHero(ms, domain, confidence) {
         const actions = document.createElement('div'); actions.className = 'hero-actions';
         enabled.forEach(btn => {
           const a = document.createElement('a');
-          a.className = 'hero-partner-btn';
+          a.className = 'hero-partner-btn' + (btn.key === 'partnerCenter' ? ' recommended' : '');
           a.href = btn.href(ms.tenantId, domain);
           a.target = '_blank'; a.rel = 'noopener noreferrer';
           const icon = document.createElement('img'); icon.src = btn.icon; icon.alt = btn.label; icon.className = 'hero-partner-btn-icon';
@@ -1099,6 +1099,16 @@ function renderHero(ms, domain, confidence) {
           const sub = document.createElement('span'); sub.className = 'hero-partner-btn-sub'; sub.textContent = btn.sub;
           text.appendChild(label); text.appendChild(sub);
           a.appendChild(icon); a.appendChild(text);
+          if (btn.key === 'partnerCenter') {
+            const ribbon = document.createElement('span'); ribbon.className = 'hero-partner-btn-ribbon';
+            const rLabel = document.createElement('span'); rLabel.className = 'hero-partner-btn-ribbon-label'; rLabel.textContent = 'Recommandé';
+            const rInfo = document.createElement('span'); rInfo.className = 'hero-partner-btn-ribbon-info'; rInfo.textContent = 'i';
+            rInfo.title = 'Le Partner Center permet de s’assurer que le tenant est bien présent dans votre base de données clients.';
+            rInfo.setAttribute('aria-label', 'Information');
+            rInfo.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); });
+            ribbon.appendChild(rLabel); ribbon.appendChild(rInfo);
+            a.appendChild(ribbon);
+          }
           actions.appendChild(a);
         });
         hero.appendChild(actions);
