@@ -264,8 +264,8 @@ input::placeholder{color:var(--muted);font-weight:500}
 [data-theme="dark"] .card-icon-wrap.hl-clr{background:#0d1f0d}
 [data-theme="dark"] .card-icon-wrap.hs-clr{background:#1f0d14}
 [data-theme="dark"] .card-icon-wrap.dn-clr{background:var(--row)}
-.card-title{font-size:var(--text-base);font-weight:700;color:var(--text)}
-.card-sub{font-size:var(--text-xs);font-weight:400;color:var(--soft);margin-top:1px}
+.card-title{font-size:var(--text-base);font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-sub{font-size:var(--text-xs);font-weight:400;color:var(--soft);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card-badge{font-size:var(--text-xs);font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
 .card-badge.ms-b{background:#e0e7ff;color:var(--blue)}
 .card-badge.gg-b{background:#fef3c7;color:#b45309}
