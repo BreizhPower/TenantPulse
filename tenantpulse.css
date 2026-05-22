@@ -168,9 +168,19 @@ input::placeholder{color:var(--muted);font-weight:500}
 .err-box{margin-top:10px;background:#fff1f2;border:1.5px solid #fecdd3;border-radius:7px;padding:9px 12px;font-size:var(--text-sm);font-weight:500;color:#dc2626;display:none}
 [data-theme="dark"] .err-box{background:#2d1515;border-color:#7f1d1d;color:#fca5a5}
 
-.hero-partner-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.28);border-radius:6px;color:rgba(255,255,255,.85);font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:4px 11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;margin-top:8px}
-.hero-partner-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff}
-.hero-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.hero-partner-btn{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:8px;color:rgba(255,255,255,.85);font-size:var(--text-xs);font-weight:500;font-family:var(--font);padding:9px 12px;cursor:pointer;text-decoration:none;transition:all .15s;min-width:0}
+.hero-partner-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);color:#fff}
+.hero-partner-btn-icon{width:20px;height:20px;object-fit:contain;flex-shrink:0}
+.hero-partner-btn-text{display:flex;flex-direction:column;gap:1px;min-width:0}
+.hero-partner-btn-label{font-size:var(--text-xs);font-weight:700;color:#fff;white-space:nowrap}
+.hero-partner-btn-sub{font-size:9px;font-weight:400;color:rgba(255,255,255,.45);white-space:nowrap}
+.hero-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.profiles-modal{width:380px;max-width:95vw}
+.profile-toggle-row{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:7px;border:1.5px solid var(--border);background:var(--row);margin-bottom:6px}
+.profile-toggle-left{display:flex;align-items:center;gap:9px}
+.profile-toggle-icon{width:18px;height:18px;object-fit:contain;flex-shrink:0}
+.profile-toggle-name{font-size:var(--text-sm);font-weight:700;color:var(--text)}
+.profile-toggle-sub{font-size:var(--text-xs);font-weight:400;color:var(--muted)}
 
 .center{flex:1;padding:20px 18px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;height:calc(100vh - 52px);min-width:0}
 .empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:.3;padding:60px 0}
