@@ -1001,7 +1001,7 @@ function makeCard({ id, iconEl, iconBg, title, sub, badge, badgeCls, selCls, onC
   const left = document.createElement('div'); left.className = 'card-left';
   const iconWrap = document.createElement('div'); iconWrap.className = 'card-icon-wrap ' + iconBg;
   if (iconEl) iconWrap.appendChild(iconEl);
-  const textWrap = document.createElement('div');
+  const textWrap = document.createElement('div'); textWrap.style.cssText = 'flex:1;min-width:0;overflow:hidden';
   const titleEl = document.createElement('div'); titleEl.className = 'card-title'; titleEl.textContent = title;
   const subEl   = document.createElement('div'); subEl.className   = 'card-sub';   subEl.textContent   = sub;
   textWrap.appendChild(titleEl); textWrap.appendChild(subEl);
