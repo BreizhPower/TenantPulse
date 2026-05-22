@@ -409,6 +409,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:10px
   .sidebar{width:100%;height:auto;position:static;border-right:none;border-bottom:1px solid var(--border);}
   .center{padding:16px 12px;gap:10px;height:auto;min-height:50vh}
   .detail-panel{width:100%!important;height:auto;position:static;border-left:none;border-top:1px solid var(--border);}
+  .detail-panel:not(.open){display:none}
   .detail-panel.open{display:flex;flex-direction:column;width:100%!important}
   .tenant-hero{padding:18px 16px 14px}
   .hero-guid{font-size:var(--text-lg)}
