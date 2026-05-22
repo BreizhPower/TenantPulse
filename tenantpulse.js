@@ -975,11 +975,29 @@ function renderHero(ms, domain, confidence) {
     }
     hero.appendChild(mkDomain());
     if (ms.tenantId && ms.tenantValid) {
-      const a = document.createElement('a');
-      a.className = 'hero-partner-btn'; a.href = `https://partner.microsoft.com/dashboard/v2/customers/${encodeURIComponent(ms.tenantId)}/servicemanagementpage`; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      const img = document.createElement('img'); img.src='assets/Redirect.png'; img.width=11; img.height=11; img.alt=''; img.style.cssText='display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;';
-      a.appendChild(img); a.appendChild(document.createTextNode('Ouvrir Partner Center'));
-      const actions = document.createElement('div'); actions.className = 'hero-actions'; actions.appendChild(a);
+      const mkBtn = (href, iconSrc, label) => {
+        const a = document.createElement('a');
+        a.className = 'hero-partner-btn'; a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+        const img = document.createElement('img'); img.src = iconSrc; img.width = 11; img.height = 11; img.alt = ''; img.style.cssText = 'display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;';
+        a.appendChild(img); a.appendChild(document.createTextNode(label));
+        return a;
+      };
+      const actions = document.createElement('div'); actions.className = 'hero-actions';
+      actions.appendChild(mkBtn(
+        `https://partner.microsoft.com/dashboard/v2/customers/${encodeURIComponent(ms.tenantId)}/servicemanagementpage`,
+        'assets/Redirect.png',
+        'Partner Center'
+      ));
+      actions.appendChild(mkBtn(
+        `https://entra.microsoft.com/${encodeURIComponent(ms.tenantId)}`,
+        'assets/MicrosoftEntraID.png',
+        'Entra ID'
+      ));
+      actions.appendChild(mkBtn(
+        'https://admin.microsoft.com/',
+        'assets/Microsoft365Admin.png',
+        'Admin M365'
+      ));
       hero.appendChild(actions);
     }
   }
