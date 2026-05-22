@@ -31,14 +31,18 @@ const REDIRECT_BUTTONS = [
 const PROFILE_KEY = 'tenantpulse_profile_v1';
 
 function loadProfile() {
+  let profile = null;
   try {
     const raw = localStorage.getItem(PROFILE_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) profile = JSON.parse(raw);
   } catch {}
-  // Default: all enabled
-  const def = {};
-  REDIRECT_BUTTONS.forEach(b => def[b.key] = true);
-  return def;
+  if (!profile) {
+    profile = {};
+    REDIRECT_BUTTONS.forEach(b => profile[b.key] = true);
+  }
+  // Partner Center is always enabled (locked recommandé)
+  profile.partnerCenter = true;
+  return profile;
 }
 function saveProfile(profile) {
   try { localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); } catch {}
@@ -321,16 +325,27 @@ function openProfilesModal() {
   list.replaceChildren();
   const grid = document.createElement('div'); grid.className = 'profiles-grid';
   REDIRECT_BUTTONS.forEach(btn => {
-    const item = document.createElement('div'); item.className = 'profile-item';
-    item.addEventListener('click', () => sw.classList.toggle('on'));
+    const locked = btn.key === 'partnerCenter';
+    const item = document.createElement('div'); item.className = 'profile-item' + (locked ? ' locked' : '');
     const left = document.createElement('div'); left.className = 'profile-item-left';
     const icon = document.createElement('img'); icon.src = btn.icon; icon.alt = btn.label; icon.className = 'profile-item-icon';
     const name = document.createElement('span'); name.className = 'profile-item-name'; name.textContent = btn.label;
     left.appendChild(icon); left.appendChild(name);
+    if (locked) {
+      const badge = document.createElement('span'); badge.className = 'profile-item-badge'; badge.textContent = 'Recommandé';
+      const info = document.createElement('span'); info.className = 'profile-item-info'; info.textContent = 'i';
+      info.setAttribute('aria-label', 'Information');
+      info.setAttribute('tabindex', '0');
+      info.title = 'Le Partner Center permet de s’assurer que le tenant est bien présent dans votre base de données clients.';
+      left.appendChild(badge); left.appendChild(info);
+    }
     const sw = document.createElement('div');
-    sw.className = 'drop-toggle-switch profile-item-switch' + (profile[btn.key] !== false ? ' on' : '');
+    sw.className = 'drop-toggle-switch profile-item-switch' + (profile[btn.key] !== false ? ' on' : '') + (locked ? ' locked' : '');
     sw.dataset.key = btn.key;
     sw.style.flexShrink = '0';
+    if (!locked) {
+      item.addEventListener('click', () => sw.classList.toggle('on'));
+    }
     item.appendChild(left); item.appendChild(sw);
     grid.appendChild(item);
   });
@@ -345,6 +360,7 @@ function saveProfilesModal() {
   document.querySelectorAll('.profile-item-switch').forEach(sw => {
     profile[sw.dataset.key] = sw.classList.contains('on');
   });
+  profile.partnerCenter = true;
   saveProfile(profile);
   closeProfilesModal();
   // Re-render hero instantanément si une analyse est affichée
