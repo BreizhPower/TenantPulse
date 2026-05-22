@@ -66,6 +66,23 @@
   </div>
 </div>
 
+<!-- Profiles modal -->
+<div class="confirm-modal-overlay" id="profilesModal">
+  <div class="confirm-modal profiles-modal" id="profilesModalInner">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div class="confirm-modal-title">👤 Profils — Raccourcis affichés</div>
+      <button class="panel-close" id="btnProfilesClose">✕</button>
+    </div>
+    <p style="font-size:var(--text-xs);color:var(--soft);margin-bottom:14px;line-height:1.5">Choisissez les boutons de redirection affichés dans le hero après une analyse.</p>
+    <div id="profilesToggleList"></div>
+    <div style="margin-top:14px;display:flex;gap:8px">
+      <button class="confirm-btn-keep" id="btnProfilesSelectAll">Tout activer</button>
+      <button class="confirm-btn-keep" id="btnProfilesNone">Tout désactiver</button>
+      <button class="confirm-btn-delete" style="background:var(--blue)" id="btnProfilesSave">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
 <div class="cache-clear-bar" id="cacheClearBar"><div class="cache-clear-bar-fill" id="cacheClearFill"></div></div>
 <div class="topbar">Analyse instantanée &nbsp;|&nbsp; Décisions immédiates</div>
 
@@ -80,6 +97,9 @@
       <span id="cacheIndicatorLabel">Cache inactif</span>
     </div>
     <div class="nav-badge">v0.6</div>
+    <button class="nav-drop-btn" id="btnOpenProfiles">
+      👤 Profils <span class="drop-arrow">▾</span>
+    </button>
     <div class="nav-dropdown" id="mainDropdown">
       <button class="nav-drop-btn" id="mainDropBtn">
         <img src="assets/option.png" width="14" height="14" alt="" > Paramètres & Confidentialité <span class="drop-arrow">▾</span>
