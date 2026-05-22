@@ -192,7 +192,7 @@ input::placeholder{color:var(--muted);font-weight:500}
 .profiles-save-btn{padding:7px 14px;background:var(--blue);border:none;border-radius:7px;font-family:var(--font);font-size:var(--text-xs);font-weight:700;color:#fff;cursor:pointer;transition:background .15s;white-space:nowrap}
 .profiles-save-btn:hover{background:var(--blue-dark)}
 
-.center{flex:1;padding:20px 18px;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:14px;height:calc(100vh - 52px);min-width:0;scroll-behavior:smooth}
+.center{flex:1;padding:20px 18px;overflow-y:scroll;overflow-x:hidden;display:flex;flex-direction:column;gap:14px;height:calc(100vh - 52px);min-width:0;scroll-behavior:smooth;scrollbar-gutter:stable}
 .empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:.3;padding:60px 0}
 .empty-state-icon{font-size:44px}
 .empty-state-title{font-size:var(--text-lg);font-weight:500;color:var(--text)}
