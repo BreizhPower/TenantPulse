@@ -15,7 +15,39 @@ const PROXY_DATA = {
   googleaccounts: {title:'accounts.google.com', desc:'Endpoint public officiel Google. Utilisé pour détecter Google Workspace via OpenID Connect (issuer, token & authorization endpoints). Lecture seule.', url:'https://accounts.google.com/.well-known/openid-configuration'},
 };
 
-// ── Drop section toggle ──
+// ── Redirect buttons config ──
+const REDIRECT_BUTTONS = [
+  { key:'partnerCenter', label:'Partner Center',  sub:'Clients & licences CSP',       icon:'assets/Redirect.png',           href: id => `https://partner.microsoft.com/dashboard/v2/customers/${encodeURIComponent(id)}/servicemanagementpage` },
+  { key:'entraId',       label:'Entra ID',         sub:'Identités & accès',             icon:'assets/MicrosoftEntraID.png',   href: id => `https://entra.microsoft.com/${encodeURIComponent(id)}` },
+  { key:'m365Admin',     label:'M365 Admin',       sub:'Administration Microsoft 365',  icon:'assets/Microsoft365Admin.png',  href: ()  => 'https://admin.microsoft.com/' },
+  { key:'exchange',      label:'Exchange',          sub:'Messagerie & calendriers',      icon:'assets/Exchange.png',           href: ()  => 'https://admin.exchange.microsoft.com/' },
+  { key:'intune',        label:'Intune',            sub:'Gestion des appareils',         icon:'assets/Intune.png',             href: ()  => 'https://intune.microsoft.com/' },
+  { key:'teams',         label:'Teams',             sub:'Collaboration & réunions',      icon:'assets/Teams.png',              href: ()  => 'https://admin.teams.microsoft.com/' },
+  { key:'sharepoint',    label:'SharePoint',        sub:'Sites & documents',             icon:'assets/SharePoint.png',         href: ()  => 'https://admin.microsoft.com/sharepoint' },
+  { key:'azure',         label:'Azure',             sub:'Ressources cloud',              icon:'assets/Azure.png',              href: ()  => 'https://portal.azure.com/' },
+  { key:'defender',      label:'Defender',          sub:'Sécurité & menaces',            icon:'assets/Defender.png',           href: ()  => 'https://security.microsoft.com/' },
+];
+
+const PROFILE_KEY = 'tenantpulse_profile_v1';
+
+function loadProfile() {
+  try {
+    const raw = localStorage.getItem(PROFILE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  // Default: all enabled
+  const def = {};
+  REDIRECT_BUTTONS.forEach(b => def[b.key] = true);
+  return def;
+}
+function saveProfile(profile) {
+  try { localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); } catch {}
+}
+function isButtonEnabled(key) {
+  return loadProfile()[key] !== false;
+}
+
+
 function toggleDropSection(btn) {
   btn.classList.toggle('open');
   const body = btn.nextElementSibling;
@@ -263,6 +295,52 @@ function bindEvents() {
     toggleCollapsible('privacyBody', 'privacyArrow');
   });
   document.getElementById('btnPanelClose').addEventListener('click', closePanel);
+  document.getElementById('btnOpenProfiles').addEventListener('click', openProfilesModal);
+  document.getElementById('btnProfilesClose').addEventListener('click', closeProfilesModal);
+  document.getElementById('profilesModal').addEventListener('click', closeProfilesModal);
+  document.getElementById('profilesModalInner').addEventListener('click', e => e.stopPropagation());
+  document.getElementById('btnProfilesSave').addEventListener('click', saveProfilesModal);
+  document.getElementById('btnProfilesSelectAll').addEventListener('click', () => {
+    document.querySelectorAll('.profile-item-switch').forEach(sw => sw.classList.add('on'));
+  });
+  document.getElementById('btnProfilesNone').addEventListener('click', () => {
+    document.querySelectorAll('.profile-item-switch').forEach(sw => sw.classList.remove('on'));
+  });
+}
+
+// ── Profiles modal ──
+function openProfilesModal() {
+  const profile = loadProfile();
+  const list = document.getElementById('profilesToggleList');
+  list.replaceChildren();
+  REDIRECT_BUTTONS.forEach(btn => {
+    const row = document.createElement('div'); row.className = 'profile-toggle-row';
+    const left = document.createElement('div'); left.className = 'profile-toggle-left';
+    const icon = document.createElement('img'); icon.src = btn.icon; icon.alt = btn.label; icon.className = 'profile-toggle-icon';
+    const info = document.createElement('div');
+    const name = document.createElement('div'); name.className = 'profile-toggle-name'; name.textContent = btn.label;
+    const sub  = document.createElement('div'); sub.className  = 'profile-toggle-sub';  sub.textContent  = btn.sub;
+    info.appendChild(name); info.appendChild(sub);
+    left.appendChild(icon); left.appendChild(info);
+    const sw = document.createElement('div');
+    sw.className = 'drop-toggle-switch profile-item-switch' + (profile[btn.key] !== false ? ' on' : '');
+    sw.dataset.key = btn.key;
+    sw.addEventListener('click', () => sw.classList.toggle('on'));
+    row.appendChild(left); row.appendChild(sw);
+    list.appendChild(row);
+  });
+  document.getElementById('profilesModal').classList.add('open');
+}
+function closeProfilesModal() {
+  document.getElementById('profilesModal').classList.remove('open');
+}
+function saveProfilesModal() {
+  const profile = {};
+  document.querySelectorAll('.profile-item-switch').forEach(sw => {
+    profile[sw.dataset.key] = sw.classList.contains('on');
+  });
+  saveProfile(profile);
+  closeProfilesModal();
 }
 
 window.addEventListener('load', () => {
@@ -975,30 +1053,25 @@ function renderHero(ms, domain, confidence) {
     }
     hero.appendChild(mkDomain());
     if (ms.tenantId && ms.tenantValid) {
-      const mkBtn = (href, iconSrc, label) => {
-        const a = document.createElement('a');
-        a.className = 'hero-partner-btn'; a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
-        const img = document.createElement('img'); img.src = iconSrc; img.width = 11; img.height = 11; img.alt = ''; img.style.cssText = 'display:inline-block;vertical-align:middle;flex-shrink:0;margin-right:5px;';
-        a.appendChild(img); a.appendChild(document.createTextNode(label));
-        return a;
-      };
-      const actions = document.createElement('div'); actions.className = 'hero-actions';
-      actions.appendChild(mkBtn(
-        `https://partner.microsoft.com/dashboard/v2/customers/${encodeURIComponent(ms.tenantId)}/servicemanagementpage`,
-        'assets/Redirect.png',
-        'Partner Center'
-      ));
-      actions.appendChild(mkBtn(
-        `https://entra.microsoft.com/${encodeURIComponent(ms.tenantId)}`,
-        'assets/MicrosoftEntraID.png',
-        'Entra ID'
-      ));
-      actions.appendChild(mkBtn(
-        'https://admin.microsoft.com/',
-        'assets/Microsoft365Admin.png',
-        'Admin M365'
-      ));
-      hero.appendChild(actions);
+      const profile = loadProfile();
+      const enabled = REDIRECT_BUTTONS.filter(b => profile[b.key] !== false);
+      if (enabled.length > 0) {
+        const actions = document.createElement('div'); actions.className = 'hero-actions';
+        enabled.forEach(btn => {
+          const a = document.createElement('a');
+          a.className = 'hero-partner-btn';
+          a.href = btn.href(ms.tenantId);
+          a.target = '_blank'; a.rel = 'noopener noreferrer';
+          const icon = document.createElement('img'); icon.src = btn.icon; icon.alt = btn.label; icon.className = 'hero-partner-btn-icon';
+          const text = document.createElement('div'); text.className = 'hero-partner-btn-text';
+          const label = document.createElement('span'); label.className = 'hero-partner-btn-label'; label.textContent = btn.label;
+          const sub = document.createElement('span'); sub.className = 'hero-partner-btn-sub'; sub.textContent = btn.sub;
+          text.appendChild(label); text.appendChild(sub);
+          a.appendChild(icon); a.appendChild(text);
+          actions.appendChild(a);
+        });
+        hero.appendChild(actions);
+      }
     }
   }
   return hero;
